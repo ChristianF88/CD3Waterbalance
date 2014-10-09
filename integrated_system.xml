@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <citydrain version="1.0">
-    <pluginpath path="nodes"/>
-    <pythonmodule module="C:/Users/Acer/Documents/GitHub/CD3Waterbalance/Module/catchment.py"/>
-    <pythonmodule module="C:/Users/Acer/Documents/GitHub/CD3Waterbalance/Module/Groundwater.py"/>
-    <pythonmodule module="C:/Users/Acer/Documents/GitHub/CD3Waterbalance/Module/Household.py"/>
-    <pythonmodule module="C:/Users/Acer/Documents/GitHub/CD3Waterbalance/Module/PotableWaterResorvior.py"/>
-    <pythonmodule module="C:/Users/Acer/Documents/GitHub/CD3Waterbalance/Module/rain_tank.py"/>
-    <pythonmodule module="C:/Users/Acer/Documents/GitHub/CD3Waterbalance/Module/Sewer2.py"/>
-    <pythonmodule module="C:/Users/Acer/Documents/GitHub/CD3Waterbalance/Module/Stormwaterpipe.py"/>
+    <pluginpath path="/Users/curich/Documents/CityDrain3/build/debug/nodes"/>
+    <pythonmodule module="Module/catchment.py"/>
+    <pythonmodule module="Module/Groundwater.py"/>
+    <pythonmodule module="Module/Household.py"/>
+    <pythonmodule module="Module/PotableWaterResorvior.py"/>
+    <pythonmodule module="Module/rain_tank.py"/>
+    <pythonmodule module="Module/Sewer2.py"/>
+    <pythonmodule module="Module/Stormwaterpipe.py"/>
     <simulation class="DefaultSimulation">
         <time start="2000-Jan-01 00:00:00" stop="2000-Jan-08 00:00:00" dt="360">
             <flowdefinition>
@@ -21,87 +21,87 @@
     </simulation>
     <model>
         <nodelist>
-            <node id="FileOut_5" class="FileOut">
-                <parameter name="out_file_name" type="string" value="sewer.txt"/>
+            <node id="IxxRainRead_v2_0" class="IxxRainRead_v2">
+                <parameter name="rain_file" type="string" value="rain.ixx"/>
             </node>
-            <node id="FileOut_4" class="FileOut">
-                <parameter name="out_file_name" type="string" value="PWR.txt"/>
-            </node>
-            <node id="FileOut_2" class="FileOut">
-                <parameter name="out_file_name" type="string" value="stormwater.txt"/>
-            </node>
-            <node id="FileOut_1" class="FileOut">
-                <parameter name="out_file_name" type="string" value="groundwater.txt"/>
-            </node>
+            <node id="PWR_0" class="PWR"/>
             <node id="FileOut_3" class="FileOut">
                 <parameter name="out_file_name" type="string" value="greywater.txt"/>
             </node>
-            <node id="Household_0" class="Household">
-                <parameter name="dishwasher [mÂ³/s]" type="double" value="9.2599999999999995e-008"/>
-                <parameter name="shower [mÂ³/s]" type="double" value="4.6260000000000003e-007"/>
-                <parameter name="tab [mÂ³/s]" type="double" value="2.4299999999999999e-007"/>
-                <parameter name="toilet [mÂ³/s]" type="double" value="2.2569999999999999e-007"/>
-                <parameter name="washing_machine [mÂ³/s]" type="double" value="8.1849999999999998e-007"/>
-            </node>
-            <node id="Stormwaterpipe_0" class="Stormwaterpipe"/>
-            <node id="Groundwater_0" class="Groundwater">
-                <parameter name="area_property" type="double" value="1"/>
-                <parameter name="evapotr [mm/(6 min)]" type="double" value="0.021129999999999999"/>
-            </node>
-            <node id="Sewer2_0" class="Sewer2"/>
             <node id="Raintank_0" class="Raintank">
                 <parameter name="storage_v" type="double" value="5"/>
             </node>
-            <node id="FileOut_0" class="FileOut">
-                <parameter name="out_file_name" type="string" value="raintank.txt"/>
-            </node>
-            <node id="PWR_0" class="PWR"/>
+            <node id="Stormwaterpipe_0" class="Stormwaterpipe"/>
             <node id="Catchment_0" class="Catchment">
                 <parameter name="area_property" type="double" value="1"/>
                 <parameter name="imp_floor" type="double" value="0.40000000000000002"/>
                 <parameter name="perv_area" type="double" value="0.40000000000000002"/>
                 <parameter name="roof_area" type="double" value="0.20000000000000001"/>
             </node>
-            <node id="IxxRainRead_0" class="IxxRainRead">
-                <parameter name="rain_file" type="string" value="rain.ixx"/>
+            <node id="Groundwater_0" class="Groundwater">
+                <parameter name="area_property" type="double" value="1"/>
+                <parameter name="evapotr [mm/(6 min)]" type="double" value="0.021129999999999999"/>
+            </node>
+            <node id="FileOut_4" class="FileOut">
+                <parameter name="out_file_name" type="string" value="PWR.txt"/>
+            </node>
+            <node id="FileOut_1" class="FileOut">
+                <parameter name="out_file_name" type="string" value="groundwater.txt"/>
+            </node>
+            <node id="FileOut_5" class="FileOut">
+                <parameter name="out_file_name" type="string" value="sewer.txt"/>
+            </node>
+            <node id="FileOut_2" class="FileOut">
+                <parameter name="out_file_name" type="string" value="stormwater.txt"/>
+            </node>
+            <node id="Sewer2_0" class="Sewer2"/>
+            <node id="Household_0" class="Household">
+                <parameter name="dishwasher [mÂ³/s]" type="double" value="9.2599999999999995e-08"/>
+                <parameter name="shower [mÂ³/s]" type="double" value="4.6260000000000003e-07"/>
+                <parameter name="tab [mÂ³/s]" type="double" value="2.4299999999999999e-07"/>
+                <parameter name="toilet [mÂ³/s]" type="double" value="2.2569999999999999e-07"/>
+                <parameter name="washing_machine [mÂ³/s]" type="double" value="8.1849999999999998e-07"/>
+            </node>
+            <node id="FileOut_0" class="FileOut">
+                <parameter name="out_file_name" type="string" value="raintank.txt"/>
             </node>
         </nodelist>
         <connectionlist>
             <connection id="0">
-                <source node="Sewer2_0" port="discharged_V"/>
-                <sink node="FileOut_5" port="in"/>
+                <source node="Catchment_0" port="groundw_in"/>
+                <sink node="Groundwater_0" port="groundw_in"/>
             </connection>
             <connection id="1">
-                <source node="Household_0" port="grey_w"/>
-                <sink node="FileOut_3" port="in"/>
+                <source node="Catchment_0" port="col_w"/>
+                <sink node="Raintank_0" port="collected_w"/>
             </connection>
             <connection id="2">
-                <source node="Stormwaterpipe_0" port="discharged_V"/>
-                <sink node="FileOut_2" port="in"/>
-            </connection>
-            <connection id="3">
-                <source node="Raintank_0" port="check_storage"/>
-                <sink node="FileOut_0" port="in"/>
-            </connection>
-            <connection id="4">
-                <source node="Household_0" port="pot_w"/>
-                <sink node="PWR_0" port="pot_w"/>
-            </connection>
-            <connection id="5">
-                <source node="Raintank_0" port="non_pot_out"/>
-                <sink node="PWR_0" port="nonpot_w"/>
-            </connection>
-            <connection id="6">
                 <source node="Household_0" port="nonpot_w"/>
                 <sink node="Raintank_0" port="non_pot_in"/>
             </connection>
+            <connection id="3">
+                <source node="Household_0" port="black_w"/>
+                <sink node="Sewer2_0" port="black_w"/>
+            </connection>
+            <connection id="4">
+                <source node="Groundwater_0" port="check_storage"/>
+                <sink node="FileOut_1" port="in"/>
+            </connection>
+            <connection id="5">
+                <source node="Sewer2_0" port="discharged_V"/>
+                <sink node="FileOut_5" port="in"/>
+            </connection>
+            <connection id="6">
+                <source node="Raintank_0" port="check_storage"/>
+                <sink node="FileOut_0" port="in"/>
+            </connection>
             <connection id="7">
-                <source node="Groundwater_0" port="outdoor_use"/>
-                <sink node="Household_0" port="outdoor_use"/>
+                <source node="Household_0" port="pot_w"/>
+                <sink node="PWR_0" port="pot_w"/>
             </connection>
             <connection id="8">
-                <source node="Raintank_0" port="overflow"/>
-                <sink node="Stormwaterpipe_0" port="overflow"/>
+                <source node="Groundwater_0" port="outdoor_use"/>
+                <sink node="Household_0" port="outdoor_use"/>
             </connection>
             <connection id="9">
                 <source node="Catchment_0" port="runoff"/>
@@ -112,41 +112,41 @@
                 <sink node="FileOut_4" port="in"/>
             </connection>
             <connection id="11">
-                <source node="Household_0" port="black_w"/>
-                <sink node="Sewer2_0" port="black_w"/>
+                <source node="Raintank_0" port="non_pot_out"/>
+                <sink node="PWR_0" port="nonpot_w"/>
             </connection>
             <connection id="12">
-                <source node="Catchment_0" port="groundw_in"/>
-                <sink node="Groundwater_0" port="groundw_in"/>
+                <source node="Raintank_0" port="overflow"/>
+                <sink node="Stormwaterpipe_0" port="overflow"/>
             </connection>
             <connection id="13">
-                <source node="Groundwater_0" port="check_storage"/>
-                <sink node="FileOut_1" port="in"/>
+                <source node="IxxRainRead_v2_0" port="out"/>
+                <sink node="Catchment_0" port="rain"/>
             </connection>
             <connection id="14">
-                <source node="Catchment_0" port="col_w"/>
-                <sink node="Raintank_0" port="collected_w"/>
+                <source node="Household_0" port="grey_w"/>
+                <sink node="FileOut_3" port="in"/>
             </connection>
             <connection id="15">
-                <source node="IxxRainRead_0" port="out"/>
-                <sink node="Catchment_0" port="rain"/>
+                <source node="Stormwaterpipe_0" port="discharged_V"/>
+                <sink node="FileOut_2" port="in"/>
             </connection>
         </connectionlist>
     </model>
     <gui>
-        <nodeposition id="Catchment_0" x="-951" y="-40"/>
-        <nodeposition id="FileOut_0" x="-1146" y="86"/>
-        <nodeposition id="FileOut_1" x="-980" y="93"/>
-        <nodeposition id="FileOut_2" x="-783" y="161"/>
-        <nodeposition id="FileOut_3" x="-74" y="-97"/>
-        <nodeposition id="FileOut_4" x="-84" y="5"/>
-        <nodeposition id="FileOut_5" x="-124" y="114"/>
-        <nodeposition id="Groundwater_0" x="-656" y="-6"/>
-        <nodeposition id="Household_0" x="-340" y="-102"/>
-        <nodeposition id="IxxRainRead_0" x="-1197" y="-42"/>
-        <nodeposition id="PWR_0" x="-323" y="31"/>
-        <nodeposition id="Raintank_0" x="-641" y="-104"/>
-        <nodeposition id="Sewer2_0" x="-335" y="111"/>
-        <nodeposition id="Stormwaterpipe_0" x="-673" y="81"/>
+        <nodeposition id="Catchment_0" x="-2869.49" y="-602.733"/>
+        <nodeposition id="FileOut_0" x="-914.72" y="-344.4"/>
+        <nodeposition id="FileOut_1" x="-1570.71" y="-1155.99"/>
+        <nodeposition id="FileOut_2" x="-61.52" y="222.56"/>
+        <nodeposition id="FileOut_3" x="255.76" y="-400.84"/>
+        <nodeposition id="FileOut_4" x="788.64" y="74.12"/>
+        <nodeposition id="FileOut_5" x="894.44" y="-188.2"/>
+        <nodeposition id="Groundwater_0" x="-2262.73" y="-776.653"/>
+        <nodeposition id="Household_0" x="-1834.75" y="-605.328"/>
+        <nodeposition id="IxxRainRead_v2_0" x="-3334.96" y="-803.229"/>
+        <nodeposition id="PWR_0" x="323.56" y="28.12"/>
+        <nodeposition id="Raintank_0" x="-1350" y="-172"/>
+        <nodeposition id="Sewer2_0" x="304" y="-218"/>
+        <nodeposition id="Stormwaterpipe_0" x="-886" y="-13"/>
     </gui>
 </citydrain>
