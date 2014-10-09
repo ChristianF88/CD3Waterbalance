@@ -86,7 +86,7 @@ class Groundwater(pycd3.Node):
         return dt
     
     def getClassName(self):
-        print "getClassName"
+        #print "getClassName"
         return "Groundwater"
 
 def register(nr):

@@ -27,9 +27,9 @@ class NodeFactory(pycd3.INodeFactory):
         
     def getSource(self):
         print "NodeFactory.getSource"
-        return "Practice.py"
+        return "rain_tank.py"
 
-class RainTank(pycd3.Node):
+class Raintank(pycd3.Node):
     def __init__(self):
         pycd3.Node.__init__(self)
         self.collected_w = pycd3.Flow()
@@ -83,7 +83,7 @@ class RainTank(pycd3.Node):
         return dt
     
     def getClassName(self):
-        print "getClassName"
+        #print "getClassName"
         return "Raintank"
 
 def register(nr):

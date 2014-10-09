@@ -65,7 +65,6 @@ class Household(pycd3.Node):
         return True
         
     def f(self, current, dt):
-        
         self.pot_w[0] = (self.shower+self.dishwasher+self.tab)*360
         self.nonpot_w[0] = (self.toilet+self.washing_machine)*360+self.outdoor_use[0]
         self.black_w[0] = (self.toilet)*360
@@ -75,7 +74,7 @@ class Household(pycd3.Node):
         return dt
     
     def getClassName(self):
-        print "getClassName"
+        #print "getClassName"
         return "Household"
 
 def register(nr):

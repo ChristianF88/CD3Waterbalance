@@ -62,7 +62,7 @@ class Stormwaterpipe(pycd3.Node):
         return dt
     
     def getClassName(self):
-        print "getClassName"
+        #print "getClassName"
         return "Stormwaterpipe"
 
 def register(nr):
