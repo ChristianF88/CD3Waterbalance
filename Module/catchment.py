@@ -78,7 +78,7 @@ class Catchment(pycd3.Node):
         return dt
     
     def getClassName(self):
-        print "getClassName"
+        #print "getClassName"
         return "Catchment"
 
 def register(nr):

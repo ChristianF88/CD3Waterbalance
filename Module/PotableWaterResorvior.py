@@ -30,7 +30,7 @@ class NodeFactory(pycd3.INodeFactory):
         print "NodeFactory.getSource"
         return "Practice.py"
 
-class PotableWaterResorvior(pycd3.Node):
+class PWR(pycd3.Node):
     def __init__(self):
         pycd3.Node.__init__(self)
         self.pot_w = pycd3.Flow()
