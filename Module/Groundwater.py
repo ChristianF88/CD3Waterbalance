@@ -48,8 +48,8 @@ class Groundwater(pycd3.Node):
         
         self.area_property = pycd3.Double(1.0)
         self.addParameter("area_property", self.area_property)
-        self.evapotr = pycd3.Double(0.02113)
-        self.addParameter("evapotr [mm/(6 min)]", self.evapotr)
+        self.evapotr = pycd3.Double(0.00002113)
+        self.addParameter("evapotr [m/(6 min)]", self.evapotr)
         
         #self.water_content = pycd3.Double(0.4)
         #self.addParameter("initial_w_content", self.water_content)

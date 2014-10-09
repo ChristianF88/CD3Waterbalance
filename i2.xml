@@ -8,7 +8,6 @@
     <pythonmodule module="C:/Users/Acer/Documents/GitHub/CD3Waterbalance/Module/rain_tank.py"/>
     <pythonmodule module="C:/Users/Acer/Documents/GitHub/CD3Waterbalance/Module/Sewer2.py"/>
     <pythonmodule module="C:/Users/Acer/Documents/GitHub/CD3Waterbalance/Module/Stormwaterpipe.py"/>
-
     <simulation class="DefaultSimulation">
         <time start="2000-Jan-01 00:00:00" stop="2000-Jan-08 00:00:00" dt="360">
             <flowdefinition>
@@ -22,49 +21,49 @@
     </simulation>
     <model>
         <nodelist>
-            <node id="IxxRainRead_v2_0" class="IxxRainRead_v2">
-                <parameter name="rain_file" type="string" value="rain.ixx"/>
+            <node id="FileOut_0" class="FileOut">
+                <parameter name="out_file_name" type="string" value="raintank.txt"/>
             </node>
-            <node id="PWR_0" class="PWR"/>
-            <node id="FileOut_3" class="FileOut">
-                <parameter name="out_file_name" type="string" value="greywater.txt"/>
+            <node id="Sewer2_0" class="Sewer2"/>
+            <node id="FileOut_5" class="FileOut">
+                <parameter name="out_file_name" type="string" value="sewer.txt"/>
             </node>
-            <node id="Raintank_0" class="Raintank">
-                <parameter name="storage_v" type="double" value="5"/>
+            <node id="FileOut_1" class="FileOut">
+                <parameter name="out_file_name" type="string" value="groundwater.txt"/>
             </node>
-            <node id="Stormwaterpipe_0" class="Stormwaterpipe"/>
+            <node id="FileOut_4" class="FileOut">
+                <parameter name="out_file_name" type="string" value="PWR.txt"/>
+            </node>
+            <node id="Groundwater_0" class="Groundwater">
+                <parameter name="area_property" type="double" value="1"/>
+                <parameter name="evapotr [m/(6 min)]" type="double" value="2.1129999999999999e-005"/>
+            </node>
             <node id="Catchment_0" class="Catchment">
                 <parameter name="area_property" type="double" value="1"/>
                 <parameter name="imp_floor" type="double" value="0.40000000000000002"/>
                 <parameter name="perv_area" type="double" value="0.40000000000000002"/>
                 <parameter name="roof_area" type="double" value="0.20000000000000001"/>
             </node>
-            <node id="Groundwater_0" class="Groundwater">
-                <parameter name="area_property" type="double" value="1"/>
-                <parameter name="evapotr [m/(6 min)]" type="double" value="2.1129999999999999e-005"/>
-            </node>
-            <node id="FileOut_4" class="FileOut">
-                <parameter name="out_file_name" type="string" value="PWR.txt"/>
-            </node>
-            <node id="FileOut_1" class="FileOut">
-                <parameter name="out_file_name" type="string" value="groundwater.txt"/>
-            </node>
-            <node id="FileOut_5" class="FileOut">
-                <parameter name="out_file_name" type="string" value="sewer.txt"/>
-            </node>
             <node id="FileOut_2" class="FileOut">
                 <parameter name="out_file_name" type="string" value="stormwater.txt"/>
             </node>
-            <node id="Sewer2_0" class="Sewer2"/>
-            <node id="Household_0" class="Household">
-                <parameter name="dishwasher [mÂ³/s]" type="double" value="9.2599999999999995e-08"/>
-                <parameter name="shower [mÂ³/s]" type="double" value="4.6260000000000003e-07"/>
-                <parameter name="tab [mÂ³/s]" type="double" value="2.4299999999999999e-07"/>
-                <parameter name="toilet [mÂ³/s]" type="double" value="2.2569999999999999e-07"/>
-                <parameter name="washing_machine [mÂ³/s]" type="double" value="8.1849999999999998e-07"/>
+            <node id="Stormwaterpipe_0" class="Stormwaterpipe"/>
+            <node id="Raintank_0" class="Raintank">
+                <parameter name="storage_v" type="double" value="5"/>
             </node>
-            <node id="FileOut_0" class="FileOut">
-                <parameter name="out_file_name" type="string" value="raintank.txt"/>
+            <node id="PWR_0" class="PWR"/>
+            <node id="Household_0" class="Household">
+                <parameter name="dishwasher [mÂ³/s]" type="double" value="9.2599999999999995e-008"/>
+                <parameter name="shower [mÂ³/s]" type="double" value="4.6260000000000003e-007"/>
+                <parameter name="tab [mÂ³/s]" type="double" value="2.4299999999999999e-007"/>
+                <parameter name="toilet [mÂ³/s]" type="double" value="2.2569999999999999e-007"/>
+                <parameter name="washing_machine [mÂ³/s]" type="double" value="8.1849999999999998e-007"/>
+            </node>
+            <node id="FileOut_3" class="FileOut">
+                <parameter name="out_file_name" type="string" value="greywater.txt"/>
+            </node>
+            <node id="IxxRainRead_v2_0" class="IxxRainRead_v2">
+                <parameter name="rain_file" type="string" value="rain.ixx"/>
             </node>
         </nodelist>
         <connectionlist>
