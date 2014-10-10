@@ -7,6 +7,7 @@ Created on Thu Oct 02 08:41:08 2014
 
 import sys
 import pycd3
+import math
 
 class NodeFactory(pycd3.INodeFactory):
     def __init__(self, node):
@@ -34,28 +35,53 @@ class Catchment(pycd3.Node):
         pycd3.Node.__init__(self)
         self.rain = pycd3.Flow()
         self.collected_w = pycd3.Flow()
-        self.runoff_w = pycd3.Flow()
-        self.groundw_in = pycd3.Flow()
+        self.runoff = pycd3.Flow()
+        self.evapo = pycd3.Flow()
+        self.possible_infiltr = pycd3.Flow()
+        self.actuall_infiltr = pycd3.Flow()
+        self.outdoor_use = pycd3.Flow()
+        
         #dir (self.inf)
         print "init node"
         self.addInPort("rain", self.rain)
-        self.addOutPort("col_w", self.collected_w)
-        self.addOutPort("runoff", self.runoff_w)
-        self.addOutPort("groundw_in", self.groundw_in)
-        
-        self.perv_area = pycd3.Double(0.4)
-        self.addParameter("perv_area", self.perv_area)
-        
-        self.imp_floor = pycd3.Double(0.4)
-        self.addParameter("imp_floor", self.imp_floor)
-        
-        self.roof_area = pycd3.Double(0.2)
-        self.addParameter("roof_area", self.roof_area)
+        self.addInPort("evapo", self.evapo)
+        self.addOutPort("possible_infiltr", self.possible_infiltr)
+        self.addOutPort("actuall_infiltr", self.actuall_infiltr)
+        self.addOutPort("runoff", self.runoff)
+        self.addOutPort("collected_w", self.collected_w)
+        self.addOutPort("outdoor_use", self.outdoor_use)
         
         self.area_property = pycd3.Double(1)
-        self.addParameter("area_property", self.area_property)
-        #self.addOutPort("gw", self.gw)
-        #self.addInPort("in", self.inf)
+        self.addParameter("area_property [m*m]", self.area_property)
+        
+        self.perv_area = pycd3.Double(0.4)
+        self.addParameter("perv_area [-]", self.perv_area)
+        
+        self.imp_area_runoff = pycd3.Double(0.4)
+        self.addParameter("imp_area_runoff [-]", self.imp_area_runoff)
+        
+        self.imp_area_raintank = pycd3.Double(0.2)
+        self.addParameter("imp_area_raintank [-]", self.imp_area_raintank)
+        
+        self.Horton_initial_cap = pycd3.Double(0.9)                             #default values for Gras (Wikipedia)
+        self.addParameter("Horton_initial_cap [m/h]", self.Horton_initial_cap)
+        
+        self.Horton_final_cap = pycd3.Double(0.29)                              #default values for Gras (Wikipedia)
+        self.addParameter("Horton_final_cap [m/h]", self.Horton_final_cap)
+        
+        self.Horton_decay_constant = pycd3.Double(2.0)                          #default values for Gras (Wikipedia)
+        self.addParameter("Horton_decay_constant [1/min]", self.Horton_decay_constant)
+        
+        self.depression_loss = pycd3.Double(1.5)                                #Exponentialansatz einfügen, default values for suburbs (scrip Prof. Krebs)
+        self.addParameter("depression_capacitiy [mm]", self.depression_loss)
+        
+        self.initial_loss = pycd3.Double(0.4)                                   #Exponentialansatz einfügen, default values for (scrip Prof. Krebs)
+        self.addParameter("initial_loss [mm]", self.initial_loss)
+        
+        self.current_effective_rain_height = 0.0
+        self.rain_storage_imp = 0.0
+        self.continious_rain_time = -1.0                                        #Bodenversickerungskapazität erhöht sich viel schneller als normal
+        self.rain_storage_perv = 0.0
         
     def init(self, start, stop, dt):
         print start
@@ -64,17 +90,78 @@ class Catchment(pycd3.Node):
         return True
         
     def f(self, current, dt):
-        #Q
-        #self.ww[0] = 6.
-        #Ntot
-        #self.gw[0] = 20.
-        #d = 5
-        #d = d+ 1 //6
-        self.collected_w[0] = self.rain[0]*self.roof_area*self.area_property/1000
-        self.runoff_w[0] = self.rain[0]*self.imp_floor*self.area_property/1000
-        self.groundw_in[0] = self.rain[0]*self.perv_area*self.area_property/1000
-        #print self.V
-
+        
+        self.current_effective_rain_height= self.rain[0]-self.evapo[0]
+      
+        
+        if self.current_effective_rain_height < 0.0:
+            
+            self.collected_w[0] = 0.0
+            self.runoff[0] = 0.0
+            self.actuall_infiltr[0] =0.0
+            self.outdoor_use[0] = self.evapo[0]                                 #Bewääserung > Evapo
+            
+            if self.rain_storage_perv > 0:
+                self.rain_storage_perv -= self.evapo[0]
+            else:
+                self.rain_storage_perv = 0.0
+                self.continious_rain_time = -1.0
+            
+            if self.rain_storage_imp > 0:
+                self.rain_storage_imp -= self.evapo[0]
+            else:
+                self.rain_storage_imp = 0.0
+        
+        elif self.current_effective_rain_height > 0.0:
+            
+            self.rain_storage_imp += self.rain[0]-self.evapo[0]
+            self.rain_storage_perv += self.rain[0]-self.evapo[0]
+            self.continious_rain_time += 1.0
+            self.possible_infiltr[0] = self.Horton_final_cap/10 + (self.Horton_initial_cap/10 - self.Horton_final_cap/10) * math.exp(-1*self.Horton_decay_constant * 6 * self.continious_rain_time)
+            
+            if self.rain_storage_perv - self.initial_loss <= 0.0:
+                    
+                self.runoff[0] = 0.0
+                self.actuall_infiltr[0] =0.0
+                self.outdoor_use[0] = 0.0
+                
+            else:
+                
+                if self.possible_infiltr[0] * 1000 >= self.current_effective_rain_height:
+                    
+                    self.actuall_infiltr[0] = self.current_effective_rain_height / 1000 * self.perv_area * self.area_property
+                    self.runoff[0] = 0.0
+                    self.outdoor_use[0] = 0.0
+                
+                else:
+                    
+                    self.actuall_infiltr[0] = self.possible_infiltr[0] * self.perv_area * self.area_property
+                    self.runoff[0] = (self.current_effective_rain_height - self.possible_infiltr[0] * 1000) / 1000 * self.perv_area * self.area_property
+                    self.outdoor_use[0] = 0.0
+                
+                
+                
+                self.rain_storage_per = self.initial_loss + 0.000000000001
+            
+            
+            if self.rain_storage_imp - self.initial_loss - self.depression_loss <= 0.0:
+                
+                self.collected_w[0] = 0.0
+                
+            else:
+                
+                self.collected_w[0] = (self.rain[0]-self.evapo[0]) * self.imp_area_raintank * self.area_property / 1000
+                self.runoff[0] = (self.rain[0]-self.evapo[0]) * self.imp_area_runoff * self.area_property / 1000 + (self.current_effective_rain_height - self.possible_infiltr[0] * 1000) / 1000 * self.perv_area * self.area_property
+                self.rain_storage_imp = self.initial_loss + self.depression_loss + 0.00000000000001
+                         
+        else:
+            
+            self.collected_w[0] = 0.0
+            self.runoff[0] = 0.0
+            self.actuall_infiltr[0] =0.0
+            self.outdoor_use[0] = 0.0
+           
+           
         return dt
     
     def getClassName(self):

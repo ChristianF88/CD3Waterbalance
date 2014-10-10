@@ -56,7 +56,7 @@ class Horton(pycd3.Node):
         self.addParameter("decay_constant[1/min]", self.decay_constant)
         
         
-        self.time=0.0
+        self.time=-1.0
         
     def init(self, start, stop, dt):
         print start
