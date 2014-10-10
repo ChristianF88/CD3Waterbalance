@@ -38,7 +38,7 @@ class Catchment(pycd3.Node):
         self.runoff = pycd3.Flow()
         self.evapo = pycd3.Flow()
         self.possible_infiltr = pycd3.Flow()
-        self.actuall_infiltr = pycd3.Flow()
+        self.actual_infiltr = pycd3.Flow()
         self.outdoor_use = pycd3.Flow()
         
         #dir (self.inf)
@@ -46,7 +46,7 @@ class Catchment(pycd3.Node):
         self.addInPort("rain", self.rain)
         self.addInPort("evapo", self.evapo)
         self.addOutPort("possible_infiltr", self.possible_infiltr)
-        self.addOutPort("actuall_infiltr", self.actuall_infiltr)
+        self.addOutPort("actual_infiltr", self.actual_infiltr)
         self.addOutPort("runoff", self.runoff)
         self.addOutPort("collected_w", self.collected_w)
         self.addOutPort("outdoor_use", self.outdoor_use)
@@ -98,7 +98,7 @@ class Catchment(pycd3.Node):
             
             self.collected_w[0] = 0.0
             self.runoff[0] = 0.0
-            self.actuall_infiltr[0] =0.0
+            self.actual_infiltr[0] =0.0
             self.outdoor_use[0] = self.evapo[0]                                 #Bewääserung > Evapo
             
             if self.rain_storage_perv > 0:
@@ -122,20 +122,20 @@ class Catchment(pycd3.Node):
             if self.rain_storage_perv - self.initial_loss <= 0.0:
                     
                 self.runoff[0] = 0.0
-                self.actuall_infiltr[0] =0.0
+                self.actual_infiltr[0] =0.0
                 self.outdoor_use[0] = 0.0
                 
             else:
                 
                 if self.possible_infiltr[0] * 1000 >= self.current_effective_rain_height:
                     
-                    self.actuall_infiltr[0] = self.current_effective_rain_height / 1000 * self.perv_area * self.area_property
+                    self.actual_infiltr[0] = self.current_effective_rain_height / 1000 * self.perv_area * self.area_property
                     self.runoff[0] = 0.0
                     self.outdoor_use[0] = 0.0
                 
                 else:
                     
-                    self.actuall_infiltr[0] = self.possible_infiltr[0] * self.perv_area * self.area_property
+                    self.actual_infiltr[0] = self.possible_infiltr[0] * self.perv_area * self.area_property
                     self.runoff[0] = (self.current_effective_rain_height - self.possible_infiltr[0] * 1000) / 1000 * self.perv_area * self.area_property
                     self.outdoor_use[0] = 0.0
                 
@@ -158,7 +158,7 @@ class Catchment(pycd3.Node):
             
             self.collected_w[0] = 0.0
             self.runoff[0] = 0.0
-            self.actuall_infiltr[0] =0.0
+            self.actual_infiltr[0] =0.0
             self.outdoor_use[0] = 0.0
            
            
