@@ -32,7 +32,7 @@
                 <parameter name="out_file_name" type="string" value="actual_inf.txt"/>
             </node>
             <node id="IxxRainRead_1" class="IxxRainRead">
-                <parameter name="rain_file" type="string" value="Evapotranspiration.ixx"/>
+                <parameter name="rain_file" type="string" value="evapotranspiration_one_week.ixx"/>
             </node>
             <node id="IxxRainRead_0" class="IxxRainRead">
                 <parameter name="rain_file" type="string" value="rain.ixx"/>
@@ -67,7 +67,7 @@
                 <sink node="FileOut_1" port="in"/>
             </connection>
             <connection id="4">
-                <source node="Catchment_0" port="actuall_infiltr"/>
+                <source node="Catchment_0" port="actual_infiltr"/>
                 <sink node="FileOut_0" port="in"/>
             </connection>
             <connection id="5">

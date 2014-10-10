@@ -82,6 +82,7 @@ class Catchment(pycd3.Node):
         self.rain_storage_imp = 0.0
         self.continious_rain_time = -1.0                                        #Bodenversickerungskapazität erhöht sich viel schneller als normal
         self.rain_storage_perv = 0.0
+        self.possible_infiltr[0] = self.Horton_initial_cap/10
         
     def init(self, start, stop, dt):
         print start
@@ -99,7 +100,7 @@ class Catchment(pycd3.Node):
             self.collected_w[0] = 0.0
             self.runoff[0] = 0.0
             self.actual_infiltr[0] =0.0
-            self.outdoor_use[0] = self.evapo[0]                                 #Bewääserung > Evapo
+            self.outdoor_use[0] = self.evapo[0] / 1000 * self.area_property * self.perv_area                                 #Bewääserung > Evapo
             
             if self.rain_storage_perv > 0:
                 self.rain_storage_perv -= self.evapo[0]
@@ -111,6 +112,7 @@ class Catchment(pycd3.Node):
                 self.rain_storage_imp -= self.evapo[0]
             else:
                 self.rain_storage_imp = 0.0
+                self.possible_infiltr[0] = self.Horton_initial_cap/10
         
         elif self.current_effective_rain_height > 0.0:
             
@@ -118,42 +120,53 @@ class Catchment(pycd3.Node):
             self.rain_storage_perv += self.rain[0]-self.evapo[0]
             self.continious_rain_time += 1.0
             self.possible_infiltr[0] = self.Horton_final_cap/10 + (self.Horton_initial_cap/10 - self.Horton_final_cap/10) * math.exp(-1*self.Horton_decay_constant * 6 * self.continious_rain_time)
-            
-            if self.rain_storage_perv - self.initial_loss <= 0.0:
-                    
-                self.runoff[0] = 0.0
-                self.actual_infiltr[0] =0.0
-                self.outdoor_use[0] = 0.0
+        
+            if self.rain_storage_imp - self.initial_loss - self.depression_loss <= 0.0:
                 
+                if self.rain_storage_perv - self.initial_loss <= 0.0:
+                
+                    self.collected_w[0] = 0.0
+                    self.runoff[0] = 0.0
+                    self.actual_infiltr[0] =0.0
+                    self.outdoor_use[0] = 0.0
+                
+                else:
+                
+                    if self.possible_infiltr[0] * 1000 >= self.current_effective_rain_height:
+                    
+                        self.collected_w[0] = (self.rain[0]-self.evapo[0]) * self.imp_area_raintank * self.area_property / 1000
+                        self.actual_infiltr[0] = self.current_effective_rain_height / 1000 * self.perv_area * self.area_property
+                        self.runoff[0] = 0.0
+                        self.outdoor_use[0] = 0.0
+                
+                    else:
+                    
+                        self.collected_w[0] = (self.rain[0]-self.evapo[0]) * self.imp_area_raintank * self.area_property / 1000
+                        self.actual_infiltr[0] = self.possible_infiltr[0] * self.perv_area * self.area_property
+                        self.runoff[0] = self.runoff[0] = (self.current_effective_rain_height - self.possible_infiltr[0] * 1000) / 1000 * self.perv_area * self.area_property
+                        self.outdoor_use[0] = 0.0
+                        
+                    self.rain_storage_per = self.initial_loss + 0.000000000001
+                               
             else:
                 
                 if self.possible_infiltr[0] * 1000 >= self.current_effective_rain_height:
                     
+                    self.collected_w[0] = (self.rain[0]-self.evapo[0]) * self.imp_area_raintank * self.area_property / 1000
                     self.actual_infiltr[0] = self.current_effective_rain_height / 1000 * self.perv_area * self.area_property
-                    self.runoff[0] = 0.0
+                    self.runoff[0] = self.runoff[0] = (self.rain[0]-self.evapo[0]) * self.imp_area_runoff * self.area_property / 1000
                     self.outdoor_use[0] = 0.0
-                
+                    
                 else:
                     
+                    self.collected_w[0] = (self.rain[0]-self.evapo[0]) * self.imp_area_raintank * self.area_property / 1000
                     self.actual_infiltr[0] = self.possible_infiltr[0] * self.perv_area * self.area_property
-                    self.runoff[0] = (self.current_effective_rain_height - self.possible_infiltr[0] * 1000) / 1000 * self.perv_area * self.area_property
+                    self.runoff[0] = self.runoff[0] = (self.rain[0]-self.evapo[0]) * self.imp_area_runoff * self.area_property / 1000 + (self.current_effective_rain_height - self.possible_infiltr[0] * 1000) / 1000 * self.perv_area * self.area_property
                     self.outdoor_use[0] = 0.0
-                
-                
-                
+                    
                 self.rain_storage_per = self.initial_loss + 0.000000000001
-            
-            
-            if self.rain_storage_imp - self.initial_loss - self.depression_loss <= 0.0:
-                
-                self.collected_w[0] = 0.0
-                
-            else:
-                
-                self.collected_w[0] = (self.rain[0]-self.evapo[0]) * self.imp_area_raintank * self.area_property / 1000
-                self.runoff[0] = (self.rain[0]-self.evapo[0]) * self.imp_area_runoff * self.area_property / 1000 + (self.current_effective_rain_height - self.possible_infiltr[0] * 1000) / 1000 * self.perv_area * self.area_property
                 self.rain_storage_imp = self.initial_loss + self.depression_loss + 0.00000000000001
-                         
+              
         else:
             
             self.collected_w[0] = 0.0
