@@ -14,14 +14,14 @@ import os
 import numpy as np
 import pylab as pl
 
-file_names=os.listdir('C:\Users\Acer\Dropbox\cd3_casey\check')[0:]
+file_names=os.listdir('C:\Users\Acer\Documents\GitHub\CD3Waterbalance\check')[0:]
 list_csv=zeros((len(file_names),1)).tolist()
 final_list=zeros((len(file_names),1)).tolist()
 
 for i in range(len(file_names)): 
     file_name=file_names[i]
     
-    with open("C:\Users\Acer\Dropbox\cd3_casey\check\%s" % file_name) as csvfile:
+    with open("C:\Users\Acer\Documents\GitHub\CD3Waterbalance\check\%s" % file_name) as csvfile:
         data=csv.reader(csvfile, delimiter=',', quotechar='$')     
         
         global list_csv
@@ -47,18 +47,18 @@ c=np.asarray(date_2_num[2])
 d=np.asarray(date_2_num[3])
 e=np.asarray(date_2_num[4])
 f=np.asarray(date_2_num[5])
-#g=np.asarray(date_2_num[6])
+g=np.asarray(date_2_num[6])
 
 pl.figure(figsize=(18, 10), dpi=80)
-#pl.xlim(-4.0, 4.0)
-#pl.ylim(-.005, 0.02)
+#pl.xlim(730120, 0.5+730120)
+#pl.ylim(0.0, 0.0007)
 pl.plot(a[:,0],a[:,1], color="blue", linewidth=2.5, linestyle="-", label=file_names[0])
 pl.plot(b[:,0],b[:,1], color="green", linewidth=3.5, linestyle="--", label=file_names[1])
 pl.plot(c[:,0],c[:,1], color="red", linewidth=2.5, linestyle="-", label=file_names[2])
-pl.plot(d[:,0],d[:,1], color="black", linewidth=2.5, linestyle="-", label=file_names[3])
+pl.plot(d[:,0],d[:,1], color="yellow", linewidth=2.5, linestyle="--", label=file_names[3])
 pl.plot(e[:,0],e[:,1], color="magenta", linewidth=2.5, linestyle="--", label=file_names[4])
-pl.plot(f[:,0],f[:,1], color="yellow", linewidth=2.5, linestyle="--", label=file_names[5])
-#pl.plot(g[:,0],f[:,1], color="cyan", linewidth=2.5, linestyle="--", label=file_names[6])
+pl.plot(f[:,0],f[:,1], color="black", linewidth=3.5, linestyle="-", label=file_names[5])
+pl.plot(g[:,0],g[:,1], color="cyan", linewidth=2.5, linestyle="--", label=file_names[6])
 pl.legend(loc='upper left')
 pl.show()
 

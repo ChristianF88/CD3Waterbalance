@@ -30,7 +30,7 @@ class NodeFactory(pycd3.INodeFactory):
         print "NodeFactory.getSource"
         return "Practice.py"
 
-class Catchment(pycd3.Node):
+class Catchment_v2(pycd3.Node):
     def __init__(self):
         pycd3.Node.__init__(self)
         self.rain = pycd3.Flow()
@@ -119,7 +119,7 @@ class Catchment(pycd3.Node):
             self.rain_storage_imp += self.rain[0]-self.evapo[0]
             self.rain_storage_perv += self.rain[0]-self.evapo[0]
             self.continious_rain_time += 1.0
-            self.possible_infiltr[0] = self.Horton_final_cap/10 + (self.Horton_initial_cap/10 - self.Horton_final_cap/10) * math.exp(-1*self.Horton_decay_constant * 6 * self.continious_rain_time)
+            self.possible_infiltr[0] = self.Horton_final_cap/10 + (self.Horton_initial_cap/10 - self.Horton_final_cap/10) * math.exp(-1*self.Horton_decay_constant * .06 * self.continious_rain_time)
         
             if self.rain_storage_imp - self.initial_loss - self.depression_loss <= 0.0:
                 
@@ -179,7 +179,7 @@ class Catchment(pycd3.Node):
     
     def getClassName(self):
         #print "getClassName"
-        return "Catchment"
+        return "Catchment_v2"
 
 def register(nr):
     for c in pycd3.Node.__subclasses__():
