@@ -80,12 +80,13 @@ class Catchment(pycd3.Node):
         #storage and time values
         self.current_effective_rain_height = 0.0
         self.rain_storage_imp = 0.0
-        self.continuous_rain_time = -1.0
-        self.continuous_rain_time_2 = -1.0                                        
+        self.continuous_rain_time = 0.0
+        self.continuous_rain_time_2 = 0.0                                        
         self.rain_storage_perv = 0.0
-        self.k=1000
-        #self.possible_infiltr[0] = self.Horton_initial_cap/3600*360
-        #self.temp_cap = self.Horton_initial_cap/3600*360
+        
+        #variable to check Horten model (has got to be 1 for a real simulation)
+        self.k=1
+        
         
     def init(self, start, stop, dt):
         print start
@@ -107,11 +108,11 @@ class Catchment(pycd3.Node):
             if self.current_effective_rain_height <= 0:
                 pass
             else:
-                self.continuous_rain_time=-1.0
+                self.continuous_rain_time=0.0
         elif self.current_effective_rain_height > 0:
             self.current_effective_rain_height= self.rain[0]-self.evapo[0]
             if self.current_effective_rain_height <= 0:
-                self.continuous_rain_time_2=-1.0
+                self.continuous_rain_time_2=0.0
             else:
                 pass
         else:
@@ -140,10 +141,10 @@ class Catchment(pycd3.Node):
                 self.rain_storage_imp = 0.0
             
             #as well as calculating the possilbe infiltration rate the the Horton model in a state of "drying" (+ increasing the time step for the model)
-            self.continuous_rain_time_2 += 1.0
+            
             self.temp_cap = self.Horton_final_cap/3600*dt + (self.temp_cap_2 - self.Horton_final_cap/3600*dt) * math.exp(-1*self.Horton_decay_constant * dt / 60 * self.continuous_rain_time/self.k)
             self.possible_infiltr[0] = self.Horton_initial_cap/3600*dt - (self.Horton_initial_cap/3600*dt - self.temp_cap) * math.exp(-1*self.Horton_decay_constant * dt / 60 * self.continuous_rain_time_2/self.k)
-            
+            self.continuous_rain_time_2 += 1.0
            
                 
         #if the current effective rain height equals a value higher zero there will be infiltration, runoff and collected water
@@ -154,10 +155,10 @@ class Catchment(pycd3.Node):
             #as well as calculating the possilbe infiltration rate the the Horton model in a state of "wetting" (+ increasing the time step for the model)
             self.rain_storage_imp += self.rain[0]-self.evapo[0]
             self.rain_storage_perv += self.rain[0]-self.evapo[0]
-            self.continuous_rain_time += 1.0
+            
             self.temp_cap_2 = self.Horton_initial_cap/3600*dt - (self.Horton_initial_cap/3600*dt - self.temp_cap) * math.exp(-1*self.Horton_decay_constant * dt / 60 * self.continuous_rain_time_2/self.k)
             self.possible_infiltr[0] = self.Horton_final_cap/3600*dt + (self.temp_cap_2 - self.Horton_final_cap/3600*dt) * math.exp(-1*self.Horton_decay_constant * dt / 60 * self.continuous_rain_time/self.k)
-            
+            self.continuous_rain_time += 1.0
             #if the wetting loss and depression loss hasn't been overcome yet, there won't be any runoff from the impervious area
             #that contributes to stormwater
             if self.rain_storage_imp - self.initial_loss - self.depression_loss <= 0.0:
