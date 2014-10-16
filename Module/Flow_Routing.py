@@ -34,20 +34,15 @@ class Muskingum(pycd3.Node):
     def __init__(self):
         pycd3.Node.__init__(self)
         self.rain = pycd3.Flow()
-        self.evapo = pycd3.Flow()
         self.runoff = pycd3.Flow()
         self.inflow = pycd3.Flow()
-        self.control1 = pycd3.Flow()
-        self.control2 = pycd3.Flow()
+       
         #dir (self.inf)
         print "init node"
         self.addInPort("rain", self.rain)
         self.addInPort("inflow", self.inflow)
-        self.addInPort("evapo", self.evapo)
         self.addOutPort("runoff", self.runoff)
-        self.addOutPort("control1", self.control1)
-        self.addOutPort("control2", self.control2)
-        
+   
         #Catchment area + fraction info of pervious and impervious parts
         self.area_property = pycd3.Double(1000)
         self.addParameter("area_property [m*m]", self.area_property)
@@ -67,20 +62,20 @@ class Muskingum(pycd3.Node):
         self.addParameter("muskingum_K [s]", self.muskingum_K)
         self.muskingum_X = pycd3.Double(0.02)
         self.addParameter("muskingum_X [-]", self.muskingum_X)
-        
-        self.should_be_constant_after_rain= 0.0
-        self.time_step=0.0
-        
+            
     def init(self, start, stop, dt):
         print start
         print stop
         print dt
         
+        #calculating the K values for a single subreach
         self.muskingum_K_single_subreach = self.muskingum_K/self.amount_subareas
         
+        #calculating the Muskingum coefficients
         self.C_x=(dt/2-self.muskingum_K_single_subreach*self.muskingum_X)/(dt/2+self.muskingum_K_single_subreach*(1-self.muskingum_X))
         self.C_y=(1/(dt/2+self.muskingum_K_single_subreach*(1-self.muskingum_X)))
         
+        #preparing the storage coefficients for the stored Volume in each subreach
         self.Q_i_storage_1 = []
         self.Q_i_storage_2 = []
         for i in range(self.amount_subareas):
@@ -90,51 +85,28 @@ class Muskingum(pycd3.Node):
         return True
         
     def f(self, current, dt):
+        
         #dividing are in 'amout_subareas' parts (same size)
         self.subarea_size = self.area_property*self.imp_area_raintank/self.amount_subareas
-        self.time_step+=1
+        
+        #preparing the flow array 
         self.Q_i = []
         for i in range(self.amount_subareas):
             self.Q_i.append(0)
             
-            if self.time_step ==1:
-                if i==0:
-                    self.Q_i[i]=(self.inflow[0]*1000+self.rain[0]*self.subarea_size)*self.C_x+self.Q_i_storage_1[i]*self.C_y
-                    self.Q_i_storage_1[i]=self.Q_i[i]*(1-self.C_x)*dt
-                    #self.Q_i_storage_2[i]=self.Q_i[i]
-                else:
-                    self.Q_i[i]=(self.Q_i[i-1]+self.rain[0]*self.subarea_size)*self.C_x+self.Q_i_storage_1[i]*self.C_y
-                    self.Q_i_storage_1[i]=self.Q_i[i]*(1-self.C_x)*dt
-                    #self.Q_i_storage_2[i]=self.Q_i[i]
-                
-            elif self.time_step ==2:
-                
-                if i==0:
-                    self.Q_i[i]=(self.inflow[0]*1000+self.rain[0]*self.subarea_size)*self.C_x+self.Q_i_storage_1[i]*self.C_y
-                    self.Q_i_storage_2[i]=self.Q_i[i]*(1-self.C_x)*dt+self.Q_i_storage_1[i]*(1-self.C_y*dt)
-                    self.Q_i_storage_1[i]=self.Q_i_storage_2[i]
-                else:
-                    self.Q_i[i]=(self.Q_i[i-1]+self.rain[0]*self.subarea_size)*self.C_x+self.Q_i_storage_1[i]*self.C_y
-                    self.Q_i_storage_2[i]=self.Q_i[i]*(1-self.C_x)*dt+self.Q_i_storage_1[i]*(1-self.C_y*dt)
-                    self.Q_i_storage_1[i]=self.Q_i_storage_2[i]
+            #calculating the flow in for each subreach
+            if i==0:
+               self.Q_i[i]=(self.inflow[0]*1000+self.rain[0]*self.subarea_size)*self.C_x+self.Q_i_storage_2[i]*self.C_y
+               self.Q_i_storage_2[i]=self.Q_i[i]*(1-self.C_x)*dt+self.Q_i_storage_1[i]*(1-self.C_y*dt)
+               self.Q_i_storage_1[i]=self.Q_i_storage_2[i]
             else:
-                if i==0:
-                    self.Q_i[i]=(self.inflow[0]*1000+self.rain[0]*self.subarea_size)*self.C_x+self.Q_i_storage_2[i]*self.C_y
-                    self.Q_i_storage_2[i]=self.Q_i[i]*(1-self.C_x)*dt+self.Q_i_storage_1[i]*(1-self.C_y*dt)
-                    self.Q_i_storage_1[i]=self.Q_i_storage_2[i]
-                else:
-                    self.Q_i[i]=(self.Q_i[i-1]+self.rain[0]*self.subarea_size)*self.C_x+self.Q_i_storage_2[i]*self.C_y
-                    self.Q_i_storage_2[i]=self.Q_i[i]*(1-self.C_x)*dt+self.Q_i_storage_1[i]*(1-self.C_y*dt)
-                    self.Q_i_storage_1[i]=self.Q_i_storage_2[i]
+                self.Q_i[i]=(self.Q_i[i-1]+self.rain[0]*self.subarea_size)*self.C_x+self.Q_i_storage_2[i]*self.C_y
+                self.Q_i_storage_2[i]=self.Q_i[i]*(1-self.C_x)*dt+self.Q_i_storage_1[i]*(1-self.C_y*dt)
+                self.Q_i_storage_1[i]=self.Q_i_storage_2[i]
         
-        self.should_be_constant_after_rain +=self.Q_i[0]
-        
+        #represents the inflow in knot
         self.runoff[0]=self.Q_i[-1] /1000 
-        self.control1[0]=self.should_be_constant_after_rain
-        self.control2[0]=self.subarea_size
-        
-        
-        
+       
         
 
         return dt
