@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<citydrain version="1.0">
+    <pluginpath path="nodes"/>
+    <pythonmodule module="C:/Users/Acer/Documents/GitHub/CD3Waterbalance/Module/Flow_Routing.py"/>
+    <pythonmodule module="C:/Users/Acer/Documents/GitHub/CD3Waterbalance/Module/catchment with routing.py"/>
+    <simulation class="DefaultSimulation">
+        <time start="2000-Jan-01 00:00:00" stop="2000-Jan-15 00:00:00" dt="360">
+            <flowdefinition>
+                <flow name="Q"/>
+                <concentration name="BOD5"/>
+                <concentration name="COD"/>
+                <concentration name="Cu"/>
+                <concentration name="Ntot"/>
+            </flowdefinition>
+        </time>
+    </simulation>
+    <model>
+        <nodelist>
+            <node id="FileOut_0" class="FileOut">
+                <parameter name="out_file_name" type="string" value="actual_inf.txt"/>
+            </node>
+            <node id="IxxRainRead_0" class="IxxRainRead">
+                <parameter name="rain_file" type="string" value="rain.ixx"/>
+            </node>
+            <node id="FileOut_1" class="FileOut">
+                <parameter name="out_file_name" type="string" value="collected_w.txt"/>
+            </node>
+            <node id="FileOut_2" class="FileOut">
+                <parameter name="out_file_name" type="string" value="outdoor_use.txt"/>
+            </node>
+            <node id="Catchment_w_r_0" class="Catchment_w_r">
+                <parameter name="Horton_decay_constant [1/min]" type="double" value="2"/>
+                <parameter name="Horton_final_cap [m/h]" type="double" value="0.28999999999999998"/>
+                <parameter name="Horton_initial_cap [m/h]" type="double" value="0.90000000000000002"/>
+                <parameter name="amount_subareas [-]" type="double" value="1"/>
+                <parameter name="area_property [m*m]" type="double" value="1000"/>
+                <parameter name="depression_capacitiy [mm]" type="double" value="1.5"/>
+                <parameter name="imp_area_raintank [-]" type="double" value="0.20000000000000001"/>
+                <parameter name="imp_area_stormwater [-]" type="double" value="0.40000000000000002"/>
+                <parameter name="initial_loss [mm]" type="double" value="0.40000000000000002"/>
+                <parameter name="muskingum_coll_K [s]" type="double" value="400"/>
+                <parameter name="muskingum_coll_X [-]" type="double" value="0.050000000000000003"/>
+                <parameter name="muskingum_runoff_K [s]" type="double" value="600"/>
+                <parameter name="muskingum_runoff_X [-]" type="double" value="0.050000000000000003"/>
+                <parameter name="muskingum_runoff_perv_K [s]" type="double" value="900"/>
+                <parameter name="muskingum_runoff_perv_X [-]" type="double" value="0.050000000000000003"/>
+                <parameter name="perv_area [-]" type="double" value="0.40000000000000002"/>
+            </node>
+            <node id="FileOut_4" class="FileOut">
+                <parameter name="out_file_name" type="string" value="runoff.txt"/>
+            </node>
+            <node id="FileOut_3" class="FileOut">
+                <parameter name="out_file_name" type="string" value="possible_inf.txt"/>
+            </node>
+            <node id="IxxRainRead_1" class="IxxRainRead">
+                <parameter name="rain_file" type="string" value="evapotranspiration_two_weeks.ixx"/>
+            </node>
+        </nodelist>
+        <connectionlist>
+            <connection id="0">
+                <source node="IxxRainRead_0" port="out"/>
+                <sink node="Catchment_w_r_0" port="rain"/>
+            </connection>
+            <connection id="1">
+                <source node="IxxRainRead_1" port="out"/>
+                <sink node="Catchment_w_r_0" port="evapo"/>
+            </connection>
+            <connection id="2">
+                <source node="Catchment_w_r_0" port="runoff"/>
+                <sink node="FileOut_4" port="in"/>
+            </connection>
+            <connection id="3">
+                <source node="Catchment_w_r_0" port="outdoor_use"/>
+                <sink node="FileOut_2" port="in"/>
+            </connection>
+            <connection id="4">
+                <source node="Catchment_w_r_0" port="collected_w"/>
+                <sink node="FileOut_1" port="in"/>
+            </connection>
+            <connection id="5">
+                <source node="Catchment_w_r_0" port="possible_infiltr"/>
+                <sink node="FileOut_3" port="in"/>
+            </connection>
+            <connection id="6">
+                <source node="Catchment_w_r_0" port="actual_infiltr"/>
+                <sink node="FileOut_0" port="in"/>
+            </connection>
+        </connectionlist>
+    </model>
+    <gui>
+        <nodeposition id="Catchment_w_r_0" x="-807" y="-103"/>
+        <nodeposition id="FileOut_0" x="-275" y="-270.56"/>
+        <nodeposition id="FileOut_1" x="-280.44" y="-167.08"/>
+        <nodeposition id="FileOut_2" x="-283.16" y="-72.52"/>
+        <nodeposition id="FileOut_3" x="-284.36" y="26"/>
+        <nodeposition id="FileOut_4" x="-282.04" y="120.04"/>
+        <nodeposition id="IxxRainRead_0" x="-1071.08" y="-36.68"/>
+        <nodeposition id="IxxRainRead_1" x="-1066.64" y="-220.36"/>
+    </gui>
+</citydrain>
