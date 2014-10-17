@@ -54,8 +54,10 @@ class Catchment_w_r(pycd3.Node):
         self.addOutPort("outdoor_use", self.outdoor_use)
         
         #Catchment area + fraction info of pervious and impervious parts
-        self.area_property = pycd3.Double(1000)
-        self.addParameter("area_property [m*m]", self.area_property)
+        self.area_width = pycd3.Double(10)
+        self.addParameter("area_width [m]", self.area_width)
+        self.area_length = pycd3.Double(100)
+        self.addParameter("area_length [m]", self.area_length)
         self.perv_area = pycd3.Double(0.4)
         self.addParameter("perv_area [-]", self.perv_area)
         self.imp_area_stormwater = pycd3.Double(0.4)
@@ -85,16 +87,16 @@ class Catchment_w_r(pycd3.Node):
         
         #Muskingum parameters K flowtime for entire catchment
         #divided by surface Area
-        self.muskingum_coll_K = pycd3.Double(400)
-        self.addParameter("muskingum_coll_K [s]", self.muskingum_coll_K)
+        self.rain_veloc_coll = pycd3.Double(0.4)
+        self.addParameter("rain_veloc_coll [m/s]", self.rain_veloc_coll)
         self.muskingum_coll_X = pycd3.Double(0.05)
         self.addParameter("muskingum_coll_X [-]", self.muskingum_coll_X)
-        self.muskingum_runoff_K = pycd3.Double(600)
-        self.addParameter("muskingum_runoff_K [s]", self.muskingum_runoff_K)
+        self.rain_veloc_runoff = pycd3.Double(0.7)
+        self.addParameter("rain_veloc_runoff [m/s]", self.rain_veloc_runoff)
         self.muskingum_runoff_X = pycd3.Double(0.05)
         self.addParameter("muskingum_runoff_X [-]", self.muskingum_runoff_X)
-        self.muskingum_runoff_perv_K = pycd3.Double(900)
-        self.addParameter("muskingum_runoff_perv_K [s]", self.muskingum_runoff_perv_K)
+        self.rain_veloc_runoff_perv = pycd3.Double(0.9)
+        self.addParameter("rain_veloc_runoff_perv [m/s]", self.rain_veloc_runoff_perv)
         self.muskingum_runoff_perv_X = pycd3.Double(0.05)
         self.addParameter("muskingum_runoff_perv_X [-]", self.muskingum_runoff_perv_X)
         
@@ -112,21 +114,23 @@ class Catchment_w_r(pycd3.Node):
         self.collected_w_raw = 0.0
         self.runoff_raw = 0.0
         self.runoff_perv_raw=0.0
-        
+
     def init(self, start, stop, dt):
         print start
         print stop
         print dt
         
+        self.area_property = self.area_width*self.area_length
+        
         #starting values for Horton Model
-        self.possible_infiltr[0] = self.Horton_initial_cap/3600*dt
+        self.possible_infiltr_raw = self.Horton_initial_cap/3600*dt
         self.temp_cap = self.Horton_initial_cap/3600*dt
         self.temp_cap_2 = self.Horton_initial_cap/3600*dt
         
         #calculating the K values for a single subreach
-        self.muskingum_K_single_subreach_coll = self.muskingum_coll_K/self.amount_subareas
-        self.muskingum_K_single_subreach_runoff = self.muskingum_runoff_K/self.amount_subareas
-        self.muskingum_K_single_subreach_runoff_perv = self.muskingum_runoff_perv_K/self.amount_subareas
+        self.muskingum_K_single_subreach_coll = (self.area_length/self.amount_subareas)/self.rain_veloc_coll
+        self.muskingum_K_single_subreach_runoff = (self.area_length/self.amount_subareas)/self.rain_veloc_runoff
+        self.muskingum_K_single_subreach_runoff_perv = (self.area_length/self.amount_subareas)/self.rain_veloc_runoff_perv
         
         #calculating the Muskingum coefficients
         self.C_coll_x=(dt/2-self.muskingum_K_single_subreach_coll*self.muskingum_coll_X)/(dt/2+self.muskingum_K_single_subreach_coll*(1-self.muskingum_coll_X))
@@ -198,7 +202,7 @@ class Catchment_w_r(pycd3.Node):
             #as well as calculating the possilbe infiltration rate the the Horton model in a state of "drying" (+ increasing the time step for the model)
             
             self.temp_cap = self.Horton_final_cap/3600*dt + (self.temp_cap_2 - self.Horton_final_cap/3600*dt) * math.exp(-1*self.Horton_decay_constant * dt / 60 * self.continuous_rain_time/self.k)
-            self.possible_infiltr[0] = self.Horton_initial_cap/3600*dt - (self.Horton_initial_cap/3600*dt - self.temp_cap) * math.exp(-1*self.Horton_decay_constant * dt / 60 * self.continuous_rain_time_2/self.k)
+            self.possible_infiltr_raw = self.Horton_initial_cap/3600*dt - (self.Horton_initial_cap/3600*dt - self.temp_cap) * math.exp(-1*self.Horton_decay_constant * dt / 60 * self.continuous_rain_time_2/self.k)
             self.continuous_rain_time_2 += 1.0
            
                 
@@ -212,7 +216,7 @@ class Catchment_w_r(pycd3.Node):
             self.rain_storage_perv += self.rain[0]-self.evapo[0]
             
             self.temp_cap_2 = self.Horton_initial_cap/3600*dt - (self.Horton_initial_cap/3600*dt - self.temp_cap) * math.exp(-1*self.Horton_decay_constant * dt / 60 * self.continuous_rain_time_2/self.k)
-            self.possible_infiltr[0] = self.Horton_final_cap/3600*dt + (self.temp_cap_2 - self.Horton_final_cap/3600*dt) * math.exp(-1*self.Horton_decay_constant * dt / 60 * self.continuous_rain_time/self.k)
+            self.possible_infiltr_raw = self.Horton_final_cap/3600*dt + (self.temp_cap_2 - self.Horton_final_cap/3600*dt) * math.exp(-1*self.Horton_decay_constant * dt / 60 * self.continuous_rain_time/self.k)
             self.continuous_rain_time += 1.0
             #if the wetting loss and depression loss hasn't been overcome yet, there won't be any runoff from the impervious area
             #that contributes to stormwater
@@ -231,7 +235,7 @@ class Catchment_w_r(pycd3.Node):
                 #depending on the soil runoff might be produced if the infiltration rate is very slow
                 else:
                 
-                    if self.possible_infiltr[0] * 1000 >= self.current_effective_rain_height:
+                    if self.possible_infiltr_raw * 1000 >= self.current_effective_rain_height:
                     
                         self.collected_w_raw = (self.rain[0]-self.evapo[0]) * self.imp_area_raintank * self.area_property / 1000
                         self.actual_infiltr[0] = self.current_effective_rain_height / 1000 * self.perv_area * self.area_property
@@ -242,8 +246,8 @@ class Catchment_w_r(pycd3.Node):
                     else:
                     
                         self.collected_w_raw = (self.rain[0]-self.evapo[0]) * self.imp_area_raintank * self.area_property / 1000
-                        self.actual_infiltr[0] = self.possible_infiltr[0] * self.perv_area * self.area_property
-                        self.runoff_perv_raw = (self.current_effective_rain_height - self.possible_infiltr[0] * 1000) / 1000 * self.perv_area * self.area_property
+                        self.actual_infiltr[0] = self.possible_infiltr_raw * self.perv_area * self.area_property
+                        self.runoff_perv_raw = (self.current_effective_rain_height - self.possible_infiltr_raw * 1000) / 1000 * self.perv_area * self.area_property
                         self.runoff_raw = 0.0
                         self.outdoor_use[0] = 0.0
                     
@@ -254,7 +258,7 @@ class Catchment_w_r(pycd3.Node):
             else:
                 
                 #if more water can be infiltrated than rain is falling all rain will be infiltrated
-                if self.possible_infiltr[0] * 1000 >= self.current_effective_rain_height:
+                if self.possible_infiltr_raw * 1000 >= self.current_effective_rain_height:
                     
                     self.collected_w_raw = (self.rain[0]-self.evapo[0]) * self.imp_area_raintank * self.area_property / 1000
                     self.actual_infiltr[0] = self.current_effective_rain_height / 1000 * self.perv_area * self.area_property
@@ -266,8 +270,8 @@ class Catchment_w_r(pycd3.Node):
                 else:
                     
                     self.collected_w_raw = (self.rain[0]-self.evapo[0]) * self.imp_area_raintank * self.area_property / 1000
-                    self.actual_infiltr[0] = self.possible_infiltr[0] * self.perv_area * self.area_property
-                    self.runoff_perv_raw = (self.current_effective_rain_height - self.possible_infiltr[0] * 1000) / 1000 * self.perv_area * self.area_property
+                    self.actual_infiltr[0] = self.possible_infiltr_raw * self.perv_area * self.area_property
+                    self.runoff_perv_raw = (self.current_effective_rain_height - self.possible_infiltr_raw * 1000) / 1000 * self.perv_area * self.area_property
                     self.runoff_raw = self.runoff[0] = (self.rain[0]-self.evapo[0]) * self.imp_area_stormwater * self.area_property / 1000 
                     self.outdoor_use[0] = 0.0
                  
@@ -284,6 +288,9 @@ class Catchment_w_r(pycd3.Node):
             self.actual_infiltr[0] =0.0
             self.outdoor_use[0] = 0.0
             self.runoff_perv_raw = 0.0
+        
+        # returning the possible inflitration [m³/dt]
+        self.possible_infiltr[0]=self.possible_infiltr_raw*self.area_property*self.perv_area
         
         #Muskingum model for folw dynamics (slower fow on gras and faster on roof)
         
@@ -325,7 +332,8 @@ class Catchment_w_r(pycd3.Node):
         #outflow of catchment
         self.collected_w[0]=self.Q_coll_i[-1] /1000 
         self.runoff[0] =(self.Q_runoff_perv_i[-1]+self.Q_runoff_i[-1])/1000
-           
+        
+        
         return dt
     
     def getClassName(self):

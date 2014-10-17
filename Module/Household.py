@@ -45,6 +45,9 @@ class Household(pycd3.Node):
         self.addOutPort("pot_w", self.pot_w)
         self.addOutPort("nonpot_w", self.nonpot_w)
         self.addInPort("outdoor_use", self.outdoor_use)
+        self.addInPort("indoor_use [l/h]", self.outdoor_use)
+        
+        #indoor use -file format- [date         time        bath       shower         toilet      tap      washing machine      dishwasher]
         
         self.toilet = pycd3.Double(0.0000002257)
         self.addParameter("toilet [m³/s]", self.toilet)       

@@ -43,9 +43,12 @@ class Muskingum(pycd3.Node):
         self.addInPort("inflow", self.inflow)
         self.addOutPort("runoff", self.runoff)
    
+   
         #Catchment area + fraction info of pervious and impervious parts
-        self.area_property = pycd3.Double(1000)
-        self.addParameter("area_property [m*m]", self.area_property)
+        self.area_width = pycd3.Double(10)
+        self.addParameter("area_width [m]", self.area_width)
+        self.area_length = pycd3.Double(100)
+        self.addParameter("area_length [m]", self.area_length)
         self.perv_area = pycd3.Double(0.4)
         self.addParameter("perv_area [-]", self.perv_area)
         self.imp_area_stormwater = pycd3.Double(0.4)
@@ -58,9 +61,9 @@ class Muskingum(pycd3.Node):
         self.addParameter("amount_subareas [-]", self.amount_subareas)
         
         #Muskingum parameters K flowtime for entire catchment
-        self.muskingum_K = pycd3.Double(361)
-        self.addParameter("muskingum_K [s]", self.muskingum_K)
-        self.muskingum_X = pycd3.Double(0.02)
+        self.muskingum_veloc = pycd3.Double(0.4)
+        self.addParameter("muskingum_vel [m/s]", self.muskingum_veloc)
+        self.muskingum_X = pycd3.Double(0.07)
         self.addParameter("muskingum_X [-]", self.muskingum_X)
             
     def init(self, start, stop, dt):
@@ -68,8 +71,11 @@ class Muskingum(pycd3.Node):
         print stop
         print dt
         
+        #calculation catchment area
+        self.area_property = self.area_length * self.area_width
+        
         #calculating the K values for a single subreach
-        self.muskingum_K_single_subreach = self.muskingum_K/self.amount_subareas
+        self.muskingum_K_single_subreach = (self.area_length/self.amount_subareas)/self.muskingum_veloc
         
         #calculating the Muskingum coefficients
         self.C_x=(dt/2-self.muskingum_K_single_subreach*self.muskingum_X)/(dt/2+self.muskingum_K_single_subreach*(1-self.muskingum_X))
