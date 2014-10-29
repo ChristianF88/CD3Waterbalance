@@ -14,13 +14,13 @@ General description
 
 - asdfasf
 
---asdfasf
+-- asdfasf
 
----asdfasf
+--- asdfasf
 
-[]-asdfasf
+[] - asdfasf
 
-[x] -asdfasf
+[x] - asdfasf
 
 https://help.github.com/articles/github-flavored-markdown/
 
