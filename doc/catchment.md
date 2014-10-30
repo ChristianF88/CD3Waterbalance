@@ -71,7 +71,7 @@ Basic features:
 
 The Block is solving the general water balance equation for each time step.
 
->![equation](http://www.sciweavers.org/tex2img.php?eq=P%3DR%20%2B%20ET%20%2B%20%20%5Ctriangle%20S&bc=White&fc=Black&im=jpg&fs=12&ff=arev&edit=0)
+>![img](http://www.sciweavers.org/tex2img.php?eq=P%3DR%20%2B%20ET%20%2B%20%20%5Ctriangle%20S&bc=White&fc=Black&im=jpg&fs=12&ff=arev&edit=0[/img])
 
 Runoff _R_ is being produced by rain and other inflows e.g. from another Catchment. It can either be discharged into the stormwater drainage system or partly be collected in a reservoir. The Quantities of Water being diverted to either system can be regulated with the input parameters `Fraction of Impervious Area to Reservoir` and `Fraction of Impervious Area to Stormwater Drain`. Runoff contributing to discharged stormwater can also be produced on the pervious Area, if the rain intensity is higher than the infiltration rate.
 
@@ -95,38 +95,38 @@ Due to the different retention properties of those areas three flow routing algo
 
 Used formulas:
 
->	![equation](http://www.sciweavers.org/tex2img.php?eq=Q_%7Bi%7D%5E%7B%20j%2B1%7D%20%3D%20C_X%20%2A%20Q_%7Bi%7D%5E%7Bj%7D%20%2B%20C_Y%20%2A%20V_%7B%20i-1%7D%5E%7Bj%7D&bc=White&fc=Black&im=jpg&fs=12&ff=arev&edit=0)
+>	![img](http://www.sciweavers.org/tex2img.php?eq=Q_%7Bi%7D%5E%7B%20j%2B1%7D%20%3D%20C_X%20%2A%20Q_%7Bi%7D%5E%7Bj%7D%20%2B%20C_Y%20%2A%20V_%7B%20i-1%7D%5E%7Bj%7D&bc=White&fc=Black&im=jpg&fs=12&ff=arev&edit=0[/img])
  
->	![equation](http://www.sciweavers.org/tex2img.php?eq=V_%7Bi%7D%5E%7B%20j%7D%20%3D%28%201%20-%20C_X%20%29%20%2A%20Q_%7Bi%7D%5E%7Bj%7D%20%2A%20%20%5Ctriangle%20t%20%2B%28%201%20-%20%20C_Y%20%2A%20%20%5Ctriangle%20t%29%20%2A%20V_%7B%20i-1%7D%5E%7Bj%7D&bc=White&fc=Black&im=jpg&fs=12&ff=arev&edit=0)
+>	![img](http://www.sciweavers.org/tex2img.php?eq=V_%7Bi%7D%5E%7B%20j%7D%20%3D%28%201%20-%20C_X%20%29%20%2A%20Q_%7Bi%7D%5E%7Bj%7D%20%2A%20%20%5Ctriangle%20t%20%2B%28%201%20-%20%20C_Y%20%2A%20%20%5Ctriangle%20t%29%20%2A%20V_%7B%20i-1%7D%5E%7Bj%7D&bc=White&fc=Black&im=jpg&fs=12&ff=arev&edit=0[/img])
  
->	![equation](http://www.sciweavers.org/tex2img.php?eq=C_X%20%3D%20%20%5Cfrac%7B%20%5Cfrac%7B%20%5Ctriangle%20t%7D%7B2%7D%20-%20%20%5Cfrac%7BX%2AK%7D%7BN%7D%20%7D%7B%20%5Cfrac%7B%20%5Ctriangle%20t%7D%7B2%7D%20%2B%20%20%5Cfrac%7B%281-X%29%2AK%7D%7BN%7D%7D&bc=White&fc=Black&im=jpg&fs=12&ff=arev&edit=0)
+>	![img](http://www.sciweavers.org/tex2img.php?eq=C_X%20%3D%20%20%5Cfrac%7B%20%5Cfrac%7B%20%5Ctriangle%20t%7D%7B2%7D%20-%20%20%5Cfrac%7BX%2AK%7D%7BN%7D%20%7D%7B%20%5Cfrac%7B%20%5Ctriangle%20t%7D%7B2%7D%20%2B%20%20%5Cfrac%7B%281-X%29%2AK%7D%7BN%7D%7D&bc=White&fc=Black&im=jpg&fs=12&ff=arev&edit=0[/img])
  
->	![equation](http://www.sciweavers.org/tex2img.php?eq=C_Y%20%3D%20%20%5Cfrac%7B%201%7D%7B%20%5Cfrac%7B%20%5Ctriangle%20t%7D%7B2%7D%20%2B%20%20%5Cfrac%7B%281-X%29%2AK%7D%7BN%7D%7D&bc=White&fc=Black&im=jpg&fs=12&ff=arev&edit=0)
+>	![img](http://www.sciweavers.org/tex2img.php?eq=C_Y%20%3D%20%20%5Cfrac%7B%201%7D%7B%20%5Cfrac%7B%20%5Ctriangle%20t%7D%7B2%7D%20%2B%20%20%5Cfrac%7B%281-X%29%2AK%7D%7BN%7D%7D&bc=White&fc=Black&im=jpg&fs=12&ff=arev&edit=0[/img])
  
->	![equation](http://www.sciweavers.org/tex2img.php?eq=K%3D%20%5Cfrac%7BL%7D%7Bv_R%7D&bc=White&fc=Black&im=jpg&fs=12&ff=arev&edit=0) 
+>	![img](http://www.sciweavers.org/tex2img.php?eq=K%3D%20%5Cfrac%7BL%7D%7Bv_R%7D&bc=White&fc=Black&im=jpg&fs=12&ff=arev&edit=0[/img]) 
 # 
 
-![equation](http://www.sciweavers.org/tex2img.php?eq=i&bc=White&fc=Black&im=jpg&fs=12&ff=arev&edit=0) ... time index [-]
+![img](http://www.sciweavers.org/tex2img.php?eq=i&bc=White&fc=Black&im=jpg&fs=12&ff=arev&edit=0[/img]) ... time index [-]
 
-![equation](http://www.sciweavers.org/tex2img.php?eq=j&bc=White&fc=Black&im=jpg&fs=12&ff=arev&edit=0) ... space index [-]
+![img](http://www.sciweavers.org/tex2img.php?eq=j&bc=White&fc=Black&im=jpg&fs=12&ff=arev&edit=0[/img]) ... space index [-]
 
-![equation](http://www.sciweavers.org/tex2img.php?eq=Q%5E%7Bj%7D_%7Bi%7D&bc=White&fc=Black&im=jpg&fs=12&ff=arev&edit=0) ... discharge [L³/T]
+![img](http://www.sciweavers.org/tex2img.php?eq=Q%5E%7Bj%7D_%7Bi%7D&bc=White&fc=Black&im=jpg&fs=12&ff=arev&edit=0[/img]) ... discharge [L³/T]
 
-![equation](http://www.sciweavers.org/tex2img.php?eq=V%5E%7Bj%7D_%7Bi%7D&bc=White&fc=Black&im=jpg&fs=12&ff=arev&edit=0) ... stored volume [L³]
+![img](http://www.sciweavers.org/tex2img.php?eq=V%5E%7Bj%7D_%7Bi%7D&bc=White&fc=Black&im=jpg&fs=12&ff=arev&edit=0[/img]) ... stored volume [L³]
 
-![equation](http://www.sciweavers.org/tex2img.php?eq=v_R&bc=White&fc=Black&im=jpg&fs=12&ff=arev&edit=0) ... runoff velocity [L/T]
+![img](http://www.sciweavers.org/tex2img.php?eq=v_R&bc=White&fc=Black&im=jpg&fs=12&ff=arev&edit=0[/img]) ... runoff velocity [L/T]
 
-![equation](http://www.sciweavers.org/tex2img.php?eq=C_X&bc=White&fc=Black&im=jpg&fs=12&ff=arev&edit=0) ... muskingum coefficient [-]
+![img](http://www.sciweavers.org/tex2img.php?eq=C_X&bc=White&fc=Black&im=jpg&fs=12&ff=arev&edit=0[/img]) ... muskingum coefficient [-]
 
-![equation](http://www.sciweavers.org/tex2img.php?eq=C_Y&bc=White&fc=Black&im=jpg&fs=12&ff=arev&edit=0) ... muskingum coefficient [1/T]
+![img](http://www.sciweavers.org/tex2img.php?eq=C_Y&bc=White&fc=Black&im=jpg&fs=12&ff=arev&edit=0[/img]) ... muskingum coefficient [1/T]
 
-![equation](http://www.sciweavers.org/tex2img.php?eq=K&bc=White&fc=Black&im=jpg&fs=12&ff=arev&edit=0) ... muskingum Parameter (representing delay time) [T]
+![img](http://www.sciweavers.org/tex2img.php?eq=K&bc=White&fc=Black&im=jpg&fs=12&ff=arev&edit=0[/img]) ... muskingum Parameter (representing delay time) [T]
 
-![equation](http://www.sciweavers.org/tex2img.php?eq=X&bc=White&fc=Black&im=jpg&fs=12&ff=arev&edit=0) ... muskingum Parameter (representing held back water) [-]
+![img](http://www.sciweavers.org/tex2img.php?eq=X&bc=White&fc=Black&im=jpg&fs=12&ff=arev&edit=0[/img]) ... muskingum Parameter (representing held back water) [-]
 
-![equation](http://www.sciweavers.org/tex2img.php?eq=L&bc=White&fc=Black&im=jpg&fs=12&ff=arev&edit=0) ... length the water travels [L]
+![img](http://www.sciweavers.org/tex2img.php?eq=L&bc=White&fc=Black&im=jpg&fs=12&ff=arev&edit=0[/img]) ... length the water travels [L]
 
-![equation](http://www.sciweavers.org/tex2img.php?eq=N&bc=White&fc=Black&im=jpg&fs=12&ff=arev&edit=0) ... number of subareas [-]
+![img](http://www.sciweavers.org/tex2img.php?eq=N&bc=White&fc=Black&im=jpg&fs=12&ff=arev&edit=0[/img]) ... number of subareas [-]
 
 <br>
 
@@ -134,28 +134,28 @@ Used formulas:
 
 For estimating the soils infiltration capacity the [Horton Method](http://www.trentu.ca/iws/documents/WBA22_app-f.pdf) was used. Thereby the actual infiltration rate is limited by the possible infiltration rate. If precipitation is greater than evapotranspiration it is decreasing continuously. Whereas it is increasing when _ET_ is greater. The process of drying is simulated by the reversed Horton method.
 
-When there's a switch of drying and wetting state the parameter ![equation](http://www.sciweavers.org/tex2img.php?eq=f_t&bc=White&fc=Black&im=jpg&fs=12&ff=arev&edit=0) allows for a smooth transition. The parameter takes the value of the possible infiltration calculated in the previous time step (![equation](http://www.sciweavers.org/tex2img.php?eq=f_t%20%3Df_%7Bi-1%7D&bc=White&fc=Black&im=jpg&fs=12&ff=arev&edit=0)) and stays constant until the next switch.
+When there's a switch of drying and wetting state the parameter ![img](http://www.sciweavers.org/tex2img.php?eq=f_t&bc=White&fc=Black&im=jpg&fs=12&ff=arev&edit=0[/img]) allows for a smooth transition. The parameter takes the value of the possible infiltration calculated in the previous time step (![img](http://www.sciweavers.org/tex2img.php?eq=f_t%20%3Df_%7Bi-1%7D&bc=White&fc=Black&im=jpg&fs=12&ff=arev&edit=0[/img])) and stays constant until the next switch.
 
 Used formulas:
 
->![equation](http://www.sciweavers.org/tex2img.php?eq=%20f_i%20%3D%5Cbegin%7Bcases%7Df_%20%20%5Cinfty%20%20%2B%20%28%20f_t%20%2B%20f_%20%5Cinfty%20%29%20%2A%20%20e%5E%7B-k%20%2A%20i%7D%20%26%20P%20%3E%20ET%5C%5Cf_t%20%26%20P%20%3D%20ET%20%5C%5Cf_%200%20-%20%28f_0%20-%20f_t%29%20%2A%20e%5E%7B-k%2Ai%7D%20%26%20P%20%3C%20ET%5Cend%7Bcases%7D%20&bc=White&fc=Black&im=jpg&fs=12&ff=arev&edit=0)
+>![img](http://www.sciweavers.org/tex2img.php?eq=%20f_i%20%3D%5Cbegin%7Bcases%7Df_%20%20%5Cinfty%20%20%2B%20%28%20f_t%20%2B%20f_%20%5Cinfty%20%29%20%2A%20%20e%5E%7B-k%20%2A%20i%7D%20%26%20P%20%3E%20ET%5C%5Cf_t%20%26%20P%20%3D%20ET%20%5C%5Cf_%200%20-%20%28f_0%20-%20f_t%29%20%2A%20e%5E%7B-k%2Ai%7D%20%26%20P%20%3C%20ET%5Cend%7Bcases%7D%20&bc=White&fc=Black&im=jpg&fs=12&ff=arev&edit=0[/img])
 
->![equation](http://www.sciweavers.org/tex2img.php?eq=f_t%20%28i%3D0%29%20%3Df_0&bc=White&fc=Black&im=jpg&fs=12&ff=arev&edit=0) 
+>![img](http://www.sciweavers.org/tex2img.php?eq=f_t%20%28i%3D0%29%20%3Df_0&bc=White&fc=Black&im=jpg&fs=12&ff=arev&edit=0[/img]) 
 
->![equation](http://www.sciweavers.org/tex2img.php?eq=f_t%20%20%20%5Cepsilon%20%20%5D%20f_%20%5Cinfty%20%2C%20f_0%20%5D&bc=White&fc=Black&im=jpg&fs=12&ff=arev&edit=0) 
+>![img](http://www.sciweavers.org/tex2img.php?eq=f_t%20%20%20%5Cepsilon%20%20%5D%20f_%20%5Cinfty%20%2C%20f_0%20%5D&bc=White&fc=Black&im=jpg&fs=12&ff=arev&edit=0[/img]) 
 # 
 
-![equation](http://www.sciweavers.org/tex2img.php?eq=i&bc=White&fc=Black&im=jpg&fs=12&ff=arev&edit=0)  ... time index [-]
+![img](http://www.sciweavers.org/tex2img.php?eq=i&bc=White&fc=Black&im=jpg&fs=12&ff=arev&edit=0)  ... time index [-]
 
-![equation](http://www.sciweavers.org/tex2img.php?eq=f_i&bc=White&fc=Black&im=jpg&fs=12&ff=arev&edit=0) ... possible infiltrtation rate [L/T]
+![img](http://www.sciweavers.org/tex2img.php?eq=f_i&bc=White&fc=Black&im=jpg&fs=12&ff=arev&edit=0[/img]) ... possible infiltrtation rate [L/T]
 
-![equation](http://www.sciweavers.org/tex2img.php?eq=f_0&bc=White&fc=Black&im=jpg&fs=12&ff=arev&edit=0) ... initial infiltration rate [L/T]
+![img](http://www.sciweavers.org/tex2img.php?eq=f_0&bc=White&fc=Black&im=jpg&fs=12&ff=arev&edit=0[/img]) ... initial infiltration rate [L/T]
 
-![equation](http://www.sciweavers.org/tex2img.php?eq=f_%5Cinfty&bc=White&fc=Black&im=jpg&fs=12&ff=arev&edit=0) ... final infiltration rate [L/T]
+![img](http://www.sciweavers.org/tex2img.php?eq=f_%5Cinfty&bc=White&fc=Black&im=jpg&fs=12&ff=arev&edit=0[/img]) ... final infiltration rate [L/T]
 
-![equation](http://www.sciweavers.org/tex2img.php?eq=f_t&bc=White&fc=Black&im=jpg&fs=12&ff=arev&edit=0) ... possible infiltration rate for certain time [L/T]
+![img](http://www.sciweavers.org/tex2img.php?eq=f_t&bc=White&fc=Black&im=jpg&fs=12&ff=arev&edit=0[/img]) ... possible infiltration rate for certain time [L/T]
 
-![equation](http://www.sciweavers.org/tex2img.php?eq=k&bc=White&fc=Black&im=jpg&fs=12&ff=arev&edit=0) ... decay constant [1/T]
+![img](http://www.sciweavers.org/tex2img.php?eq=k&bc=White&fc=Black&im=jpg&fs=12&ff=arev&edit=0[/img]) ... decay constant [1/T]
 
 should be 6
 
