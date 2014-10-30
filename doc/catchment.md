@@ -134,7 +134,7 @@ Used formulas:
 
 For estimating the soils infiltration capacity the [Horton Method](http://www.trentu.ca/iws/documents/WBA22_app-f.pdf) was used. Thereby the actual infiltration rate is limited by the possible infiltration rate. If precipitation is greater than evapotranspiration it is decreasing continuously. Whereas it is increasing when _ET_ is greater. The process of drying is simulated by the reversed Horton method.
 
-When there's a switch of drying and wetting state the parameter <img src="http://www.sciweavers.org/tex2img.php?eq=f_t%20&bc=White&fc=Black&im=jpg&fs=12&ff=arev&edit=0" align="center" border="0" alt="f_t " width="17" height="19" /> allows for a smooth transition. The parameter takes the value of the possible infiltration calculated in the previous time step (<img src="http://www.sciweavers.org/tex2img.php?eq=%20f_t%20%3Df_%7Bi-1%7D&bc=White&fc=Black&im=jpg&fs=12&ff=arev&edit=0" align="center" border="0" alt=" f_t =f_{i-1}" width="65" height="19" />) and stays constant until the next switch.
+When there's a switch of drying and wetting state the parameter ![equation](http://www.sciweavers.org/tex2img.php?eq=f_t&bc=White&fc=Black&im=jpg&fs=12&ff=arev&edit=0) allows for a smooth transition. The parameter takes the value of the possible infiltration calculated in the previous time step (![equation](http://www.sciweavers.org/tex2img.php?eq=f_t%20%3Df_%7Bi-1%7D&bc=White&fc=Black&im=jpg&fs=12&ff=arev&edit=0)) and stays constant until the next switch.
 
 Used formulas:
 
@@ -156,6 +156,20 @@ Used formulas:
 ![equation](http://www.sciweavers.org/tex2img.php?eq=f_t&bc=White&fc=Black&im=jpg&fs=12&ff=arev&edit=0) ... possible infiltration rate for certain time [L/T]
 
 ![equation](http://www.sciweavers.org/tex2img.php?eq=k&bc=White&fc=Black&im=jpg&fs=12&ff=arev&edit=0) ... decay constant [1/T]
+
+should be 6
+
+<img src="http://www.sciweavers.org/tex2img.php?eq=P%3DR%2BET%2B%20%5Ctriangle%20S&bc=White&fc=Black&im=png&fs=12&ff=arev&edit=0" align="center" border="0" alt="P=R+ET+ \triangle S" width="139" height="19" />
+
+<img src="http://www.sciweavers.org/download/Tex2Img_1414648090.png">
+
+<img src="http://www.sciweavers.org/tex2img.php?eq=P%3DR%2BET%2B%20%5Ctriangle%20S&bc=White&fc=Black&im=png&fs=12&ff=arev&edit=0">
+
+![img](http://www.sciweavers.org/tex2img.php?eq=P%3DR%2BET%2B%20%5Ctriangle%20S&bc=White&fc=Black&im=png&fs=12&ff=arev&edit=0[/img])
+
+![alt text](http://www.sciweavers.org/tex2img.php?eq=P%3DR%2BET%2B%20%5Ctriangle%20S&bc=White&fc=Black&im=png&fs=12&ff=arev&edit=0)
+
+![alt text](https://raw.githubusercontent.com/ChristianF88/CD3Waterbalance/master/doc/Formulas/water%20balance%20equation.png "water balance equation")
 
 <br>
 
