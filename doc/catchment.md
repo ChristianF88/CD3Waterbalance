@@ -71,7 +71,7 @@ Basic features:
 
 The Block is solving the general water balance equation for each time step.
 
->![img](http://www.sciweavers.org/tex2img.php?eq=P%3DR%20%2B%20ET%20%2B%20%20%5Ctriangle%20S&bc=White&fc=Black&im=jpg&fs=12&ff=arev&edit=0[/img])
+>![alt text](https://raw.githubusercontent.com/ChristianF88/CD3Waterbalance/master/doc/Formulas/water%20balance%20equation.png?raw=true)
 
 Runoff _R_ is being produced by rain and other inflows e.g. from another Catchment. It can either be discharged into the stormwater drainage system or partly be collected in a reservoir. The Quantities of Water being diverted to either system can be regulated with the input parameters `Fraction of Impervious Area to Reservoir` and `Fraction of Impervious Area to Stormwater Drain`. Runoff contributing to discharged stormwater can also be produced on the pervious Area, if the rain intensity is higher than the infiltration rate.
 
@@ -95,38 +95,38 @@ Due to the different retention properties of those areas three flow routing algo
 
 Used formulas:
 
->	![img](http://www.sciweavers.org/tex2img.php?eq=Q_%7Bi%7D%5E%7B%20j%2B1%7D%20%3D%20C_X%20%2A%20Q_%7Bi%7D%5E%7Bj%7D%20%2B%20C_Y%20%2A%20V_%7B%20i-1%7D%5E%7Bj%7D&bc=White&fc=Black&im=jpg&fs=12&ff=arev&edit=0[/img])
+>	![alt text](https://raw.githubusercontent.com/ChristianF88/CD3Waterbalance/master/doc/Formulas/discrete%20Muskingum%20equation%201.png?raw=true)
  
->	![img](http://www.sciweavers.org/tex2img.php?eq=V_%7Bi%7D%5E%7B%20j%7D%20%3D%28%201%20-%20C_X%20%29%20%2A%20Q_%7Bi%7D%5E%7Bj%7D%20%2A%20%20%5Ctriangle%20t%20%2B%28%201%20-%20%20C_Y%20%2A%20%20%5Ctriangle%20t%29%20%2A%20V_%7B%20i-1%7D%5E%7Bj%7D&bc=White&fc=Black&im=jpg&fs=12&ff=arev&edit=0[/img])
+>	![alt text](https://raw.githubusercontent.com/ChristianF88/CD3Waterbalance/master/doc/Formulas/discrete%20Muskingum%20equation%202.png?raw=true)
  
->	![img](http://www.sciweavers.org/tex2img.php?eq=C_X%20%3D%20%20%5Cfrac%7B%20%5Cfrac%7B%20%5Ctriangle%20t%7D%7B2%7D%20-%20%20%5Cfrac%7BX%2AK%7D%7BN%7D%20%7D%7B%20%5Cfrac%7B%20%5Ctriangle%20t%7D%7B2%7D%20%2B%20%20%5Cfrac%7B%281-X%29%2AK%7D%7BN%7D%7D&bc=White&fc=Black&im=jpg&fs=12&ff=arev&edit=0[/img])
+>	![alt text](https://raw.githubusercontent.com/ChristianF88/CD3Waterbalance/master/doc/Formulas/discrete%20Muskingum%20coefficient%20equation%201.png?raw=true)
  
->	![img](http://www.sciweavers.org/tex2img.php?eq=C_Y%20%3D%20%20%5Cfrac%7B%201%7D%7B%20%5Cfrac%7B%20%5Ctriangle%20t%7D%7B2%7D%20%2B%20%20%5Cfrac%7B%281-X%29%2AK%7D%7BN%7D%7D&bc=White&fc=Black&im=jpg&fs=12&ff=arev&edit=0[/img])
+>	![alt text](https://raw.githubusercontent.com/ChristianF88/CD3Waterbalance/master/doc/Formulas/discrete%20Muskingum%20coefficient%20equation%202.png?raw=true) 
  
->	![img](http://www.sciweavers.org/tex2img.php?eq=K%3D%20%5Cfrac%7BL%7D%7Bv_R%7D&bc=White&fc=Black&im=jpg&fs=12&ff=arev&edit=0[/img]) 
+>	![alt text](https://raw.githubusercontent.com/ChristianF88/CD3Waterbalance/master/doc/Formulas/Muskingum%20parameter%20equation.png?raw=true) 
 # 
 
-![img](http://www.sciweavers.org/tex2img.php?eq=i&bc=White&fc=Black&im=jpg&fs=12&ff=arev&edit=0[/img]) ... time index [-]
+![alt text](https://raw.githubusercontent.com/ChristianF88/CD3Waterbalance/master/doc/Formulas/time%20index.png?raw=true) ... time index [-]
 
-![img](http://www.sciweavers.org/tex2img.php?eq=j&bc=White&fc=Black&im=jpg&fs=12&ff=arev&edit=0[/img]) ... space index [-]
+![alt text](https://raw.githubusercontent.com/ChristianF88/CD3Waterbalance/master/doc/Formulas/space%20index.png?raw=true) ... space index [-]
 
-![img](http://www.sciweavers.org/tex2img.php?eq=Q%5E%7Bj%7D_%7Bi%7D&bc=White&fc=Black&im=jpg&fs=12&ff=arev&edit=0[/img]) ... discharge [L³/T]
+![alt text](https://raw.githubusercontent.com/ChristianF88/CD3Waterbalance/master/doc/Formulas/discharge.png?raw=true) ... discharge [L³/T]
 
-![img](http://www.sciweavers.org/tex2img.php?eq=V%5E%7Bj%7D_%7Bi%7D&bc=White&fc=Black&im=jpg&fs=12&ff=arev&edit=0[/img]) ... stored volume [L³]
+![alt text](https://raw.githubusercontent.com/ChristianF88/CD3Waterbalance/master/doc/Formulas/stored%20volume.png?raw=true) ... stored volume [L³]
 
-![img](http://www.sciweavers.org/tex2img.php?eq=v_R&bc=White&fc=Black&im=jpg&fs=12&ff=arev&edit=0[/img]) ... runoff velocity [L/T]
+![alt text](https://raw.githubusercontent.com/ChristianF88/CD3Waterbalance/master/doc/Formulas/runoff%20velocity.png?raw=true) ... runoff velocity [L/T]
 
-![img](http://www.sciweavers.org/tex2img.php?eq=C_X&bc=White&fc=Black&im=jpg&fs=12&ff=arev&edit=0[/img]) ... muskingum coefficient [-]
+![alt text](https://raw.githubusercontent.com/ChristianF88/CD3Waterbalance/master/doc/Formulas/Muskingum%20coefficient%201.png?raw=true) ... muskingum coefficient [-]
 
-![img](http://www.sciweavers.org/tex2img.php?eq=C_Y&bc=White&fc=Black&im=jpg&fs=12&ff=arev&edit=0[/img]) ... muskingum coefficient [1/T]
+![alt text](https://raw.githubusercontent.com/ChristianF88/CD3Waterbalance/master/doc/Formulas/Muskingum%20coefficient%202.png?raw=true) ... muskingum coefficient [1/T]
 
-![img](http://www.sciweavers.org/tex2img.php?eq=K&bc=White&fc=Black&im=jpg&fs=12&ff=arev&edit=0[/img]) ... muskingum Parameter (representing delay time) [T]
+![alt text](https://raw.githubusercontent.com/ChristianF88/CD3Waterbalance/master/doc/Formulas/Muskingum%20parameter%201.png?raw=true) ... muskingum Parameter (representing delay time) [T]
 
-![img](http://www.sciweavers.org/tex2img.php?eq=X&bc=White&fc=Black&im=jpg&fs=12&ff=arev&edit=0[/img]) ... muskingum Parameter (representing held back water) [-]
+![alt text](https://raw.githubusercontent.com/ChristianF88/CD3Waterbalance/master/doc/Formulas/Muskingum%20parameter%202.png?raw=true) ... muskingum Parameter (representing held back water) [-]
 
-![img](http://www.sciweavers.org/tex2img.php?eq=L&bc=White&fc=Black&im=jpg&fs=12&ff=arev&edit=0[/img]) ... length the water travels [L]
+![alt text](https://raw.githubusercontent.com/ChristianF88/CD3Waterbalance/master/doc/Formulas/length.png?raw=true) ... length the water travels [L]
 
-![img](http://www.sciweavers.org/tex2img.php?eq=N&bc=White&fc=Black&im=jpg&fs=12&ff=arev&edit=0[/img]) ... number of subareas [-]
+![alt text](https://raw.githubusercontent.com/ChristianF88/CD3Waterbalance/master/doc/Formulas/Number%20of%20subareas.png?raw=true) ... number of subareas [-]
 
 <br>
 
@@ -134,42 +134,30 @@ Used formulas:
 
 For estimating the soils infiltration capacity the [Horton Method](http://www.trentu.ca/iws/documents/WBA22_app-f.pdf) was used. Thereby the actual infiltration rate is limited by the possible infiltration rate. If precipitation is greater than evapotranspiration it is decreasing continuously. Whereas it is increasing when _ET_ is greater. The process of drying is simulated by the reversed Horton method.
 
-When there's a switch of drying and wetting state the parameter ![img](http://www.sciweavers.org/tex2img.php?eq=f_t&bc=White&fc=Black&im=jpg&fs=12&ff=arev&edit=0[/img]) allows for a smooth transition. The parameter takes the value of the possible infiltration calculated in the previous time step (![img](http://www.sciweavers.org/tex2img.php?eq=f_t%20%3Df_%7Bi-1%7D&bc=White&fc=Black&im=jpg&fs=12&ff=arev&edit=0[/img])) and stays constant until the next switch.
+When there's a switch of drying and wetting state the parameter ![alt text](https://raw.githubusercontent.com/ChristianF88/CD3Waterbalance/master/doc/Formulas/possible%20infiltration%20rate%20for%20certain%20time.png?raw=true) allows for a smooth transition. The parameter takes the value of the possible infiltration calculated in the previous time step (![alt text](https://raw.githubusercontent.com/ChristianF88/CD3Waterbalance/master/doc/Formulas/switcht%20dry%20and%20wet.png?raw=true)) and stays constant until the next switch.
 
 Used formulas:
 
->![img](http://www.sciweavers.org/tex2img.php?eq=%20f_i%20%3D%5Cbegin%7Bcases%7Df_%20%20%5Cinfty%20%20%2B%20%28%20f_t%20%2B%20f_%20%5Cinfty%20%29%20%2A%20%20e%5E%7B-k%20%2A%20i%7D%20%26%20P%20%3E%20ET%5C%5Cf_t%20%26%20P%20%3D%20ET%20%5C%5Cf_%200%20-%20%28f_0%20-%20f_t%29%20%2A%20e%5E%7B-k%2Ai%7D%20%26%20P%20%3C%20ET%5Cend%7Bcases%7D%20&bc=White&fc=Black&im=jpg&fs=12&ff=arev&edit=0[/img])
+>![alt text](https://raw.githubusercontent.com/ChristianF88/CD3Waterbalance/master/doc/Formulas/Horton%20equation.png?raw=true)
 
->![img](http://www.sciweavers.org/tex2img.php?eq=f_t%20%28i%3D0%29%20%3Df_0&bc=White&fc=Black&im=jpg&fs=12&ff=arev&edit=0[/img]) 
+>![alt text](https://raw.githubusercontent.com/ChristianF88/CD3Waterbalance/master/doc/Formulas/f_t%20start.png?raw=true) 
 
->![img](http://www.sciweavers.org/tex2img.php?eq=f_t%20%20%20%5Cepsilon%20%20%5D%20f_%20%5Cinfty%20%2C%20f_0%20%5D&bc=White&fc=Black&im=jpg&fs=12&ff=arev&edit=0[/img]) 
+>![alt text](https://raw.githubusercontent.com/ChristianF88/CD3Waterbalance/master/doc/Formulas/range%20f_t.png?raw=true) 
 # 
 
-![img](http://www.sciweavers.org/tex2img.php?eq=i&bc=White&fc=Black&im=jpg&fs=12&ff=arev&edit=0)  ... time index [-]
+![alt text](https://raw.githubusercontent.com/ChristianF88/CD3Waterbalance/master/doc/Formulas/time%20index.png?raw=true)  ... time index [-]
 
-![img](http://www.sciweavers.org/tex2img.php?eq=f_i&bc=White&fc=Black&im=jpg&fs=12&ff=arev&edit=0[/img]) ... possible infiltrtation rate [L/T]
+![alt text](https://raw.githubusercontent.com/ChristianF88/CD3Waterbalance/master/doc/Formulas/possible%20infiltration%20rate.png?raw=true) ... possible infiltrtation rate [L/T]
 
-![img](http://www.sciweavers.org/tex2img.php?eq=f_0&bc=White&fc=Black&im=jpg&fs=12&ff=arev&edit=0[/img]) ... initial infiltration rate [L/T]
+![alt text](https://raw.githubusercontent.com/ChristianF88/CD3Waterbalance/master/doc/Formulas/initial%20infiltration%20rate.png?raw=true) ... initial infiltration rate [L/T]
 
-![img](http://www.sciweavers.org/tex2img.php?eq=f_%5Cinfty&bc=White&fc=Black&im=jpg&fs=12&ff=arev&edit=0[/img]) ... final infiltration rate [L/T]
+![alt text](https://raw.githubusercontent.com/ChristianF88/CD3Waterbalance/master/doc/Formulas/final%20infiltration%20rate.png?raw=true) ... final infiltration rate [L/T]
 
-![img](http://www.sciweavers.org/tex2img.php?eq=f_t&bc=White&fc=Black&im=jpg&fs=12&ff=arev&edit=0[/img]) ... possible infiltration rate for certain time [L/T]
+![alt text](https://raw.githubusercontent.com/ChristianF88/CD3Waterbalance/master/doc/Formulas/possible%20infiltration%20rate%20for%20certain%20time.png?raw=true) ... possible infiltration rate for certain time [L/T]
 
-![img](http://www.sciweavers.org/tex2img.php?eq=k&bc=White&fc=Black&im=jpg&fs=12&ff=arev&edit=0[/img]) ... decay constant [1/T]
+![alt text](https://raw.githubusercontent.com/ChristianF88/CD3Waterbalance/master/doc/Formulas/decay%20constant.png?raw=true) ... decay constant [1/T]
 
-should be 6
 
-<img src="http://www.sciweavers.org/tex2img.php?eq=P%3DR%2BET%2B%20%5Ctriangle%20S&bc=White&fc=Black&im=png&fs=12&ff=arev&edit=0" align="center" border="0" alt="P=R+ET+ \triangle S" width="139" height="19" />
-
-<img src="http://www.sciweavers.org/download/Tex2Img_1414648090.png">
-
-<img src="http://www.sciweavers.org/tex2img.php?eq=P%3DR%2BET%2B%20%5Ctriangle%20S&bc=White&fc=Black&im=png&fs=12&ff=arev&edit=0">
-
-![img](http://www.sciweavers.org/tex2img.php?eq=P%3DR%2BET%2B%20%5Ctriangle%20S&bc=White&fc=Black&im=png&fs=12&ff=arev&edit=0[/img])
-
-![alt text](http://www.sciweavers.org/tex2img.php?eq=P%3DR%2BET%2B%20%5Ctriangle%20S&bc=White&fc=Black&im=png&fs=12&ff=arev&edit=0)
-
-![alt text](https://raw.githubusercontent.com/ChristianF88/CD3Waterbalance/master/doc/Formulas/water%20balance%20equation.png "water balance equation")
 
 <br>
 
