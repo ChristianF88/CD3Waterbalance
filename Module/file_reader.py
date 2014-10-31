@@ -9,7 +9,10 @@ import sys
 import pycd3
 import csv
 from datetime import datetime
+from matplotlib.dates import date2num
 from scipy.interpolate import interp1d
+from numpy.core.fromnumeric import around
+#from numpy import linspace
 
 class NodeFactory(pycd3.INodeFactory):
     def __init__(self, node):
@@ -39,110 +42,71 @@ class Inflow_Reader(pycd3.Node):
         self.out = pycd3.Flow()
         
         print "init node"
-        self.intern_addParameter("", self.inflow)
+        self.addParameter("", self.inflow)
         self.addOutPort("out", self.out)
         
         self.growing_t = 0.0
-        self.row_to_get = 0.0
-        self.interp_counter = 0.0
-        self.line_counter = 0.0
-        self.flow_vector = []
+        self.row_to_get = 0
+        self.interp_counter = 0
+        
         
     def init(self, start, stop, dt):
         print start
         print stop
         print dt
-        self.list_csv=[]
-        with open(self.inflow) as csvfile:
-            self.data = csv.reader(csvfile, delimiter=' ')  
+        
+        csv_file = open(str(self.inflow), "r")       
+        self.data = csv.reader(csv_file, delimiter='\t')  
             #list alles aus oder?!
-            self.list = list(self.data) 
-            
-        #get dt
-        self.dt_read = abs(date2num(datetime.strptime(self.list[1][0].split[0]+" "+ self.list[1][0].split[1],"%d.%m.%Y %H:%M:%S")) - date2num(datetime.strptime(self.list[0][0].split[0]+" "+ self.list[0][0].split[1],"%d.%m.%Y %H:%M:%S")))
+        self.mylist = list(self.data) 
+       
+        self.dt_read = abs(date2num(datetime.strptime(self.mylist[1][0]+" "+ self.mylist[1][1],"%d.%m.%Y %H:%M:%S")) - date2num(datetime.strptime(self.mylist[0][0]+" "+ self.mylist[0][1],"%d.%m.%Y %H:%M:%S")))
+        print 'The files time step is ' + str(int(around(self.dt_read*10*24*360))) +' seconds.'
+        print self.row_to_get
         return True
         
     def f(self, current, dt):
         
         #The set time step is equal to the one of the file
-        if float(repr(self.dt_read))[:11] == float(repr(dt/24./3600.))[:11]:
+        if float(repr(self.dt_read)[:11]) == float(repr(dt/24./3600.)[:11]):
             
-            #flow format- [date(dd.mm.yyyy)         time(hh:mm:ss)        bath(l/h)       shower(l/h)         toilet(l/h)      tap((l/h)      washing machine(l/h)      dishwasher(l/h)]
-            #flow vector output [bath(l/h)       shower(l/h)         toilet(l/h)      tap((l/h)      washing machine(l/h)      dishwasher(l/h)]
-            self.out[0] = [self.list[0+self.row_to_get][0].split[2], self.list[0+self.row_to_get][0].split[3], self.list[0+self.row_to_get][0].split[4], self.list[0+self.row_to_get][0].split[5], self.list[0+self.row_to_get][0].split[6], self.list[0+self.row_to_get][0].split[7]]
             self.row_to_get += 1
+            self.out[0] = float(self.mylist[int(0+self.row_to_get)][2])
         
         #The set time step is smaller than the files
-        elif float(repr(self.dt_read))[:11] > float(repr(dt/24./3600.))[:11]:
+        elif float(repr(self.dt_read)[:11]) > float(repr(dt/24./3600.)[:11]):
             
             #initial time step and interpolation
             if self.row_to_get == 0:
                 
-                self.date_vector = [ date2num(datetime.strptime(self.list[0][0].split[0]+" "+ self.list[0][0].split[1],"%d.%m.%Y %H:%M:%S")) , date2num(datetime.strptime(self.list[1][0].split[0]+" "+ self.list[1][0].split[1],"%d.%m.%Y %H:%M:%S"))]
-                self.bath = [self.list[0][0].split[2], self.list[1][0].split[2] ]
-                self.shower = [self.list[0][0].split[3], self.list[1][0].split[3] ]
-                self.toilet = [self.list[0][0].split[4], self.list[1][0].split[4] ]
-                self.tap = [self.list[0][0].split[5], self.list[1][0].split[5] ]
-                self.washing_m = [self.list[0][0].split[6], self.list[1][0].split[6] ]
-                self.dishwasher = [self.list[0][0].split[7], self.list[1][0].split[7] ]
-    
-                self.bath_int = interp1d(self.date_vector, self.bath)
-                self.shower_int = interp1d(self.date_vector, self.shower)
-                self.toilet_int = interp1d(self.date_vector, self.toilet)
-                self.tap_int = interp1d(self.date_vector, self.tap)
-                self.washing_m_int = interp1d(self.date_vector, self.washing_m)
-                self.dishwasher_int = interp1d(self.date_vector, self.dishwasher)
-
-                self.spacing=linspace(self.date_vector[0],self.date_vector[1],24*10+1)
-
-                self.bath_int=self.bath_int(self.spacing)
-                self.shower_int = self.shower_int(self.spacing)
-                self.toilet_int = self.toilet_int(self.spacing)
-                self.tap_int = self.tap_int(self.spacing)
-                self.washing_m_int = self.washing_m_int(self.spacing)
-                self.dishwasher_int =self.dishwasher_int(self.spacing)
-
-                
                 self.row_to_get += 1
-                self.growing_t = date2num(datetime.strptime(self.list[0][0].split[0]+" "+ self.list[0][0].split[1],"%d.%m.%Y %H:%M:%S"))
+                self.growing_t = date2num(datetime.strptime(self.mylist[0][0]+" "+ self.mylist[0][1],"%d.%m.%Y %H:%M:%S")) + dt/24./3600.
+                
+                self.date_vector = [date2num(datetime.strptime(self.mylist[0][0]+" "+ self.mylist[0][1],"%d.%m.%Y %H:%M:%S")) , date2num(datetime.strptime(self.mylist[1][0]+" "+ self.mylist[1][1],"%d.%m.%Y %H:%M:%S"))]
+                self.flow = [self.mylist[0][2], self.mylist[1][2]]
+             
+                self.flow_int = interp1d(self.date_vector, self.flow)
+                #self.spacing=linspace(self.date_vector[0],self.date_vector[1],24*10+1)
+                self.flow_int=self.flow_int(self.growing_t)
+              
+                #self.row_to_get += 1
+                #self.growing_t = date2num(datetime.strptime(self.mylist[0][0]+" "+ self.mylist[0][1],"%d.%m.%Y %H:%M:%S"))
                 
             #if the overall time is out of the last interpolation range the next to rows will be interpolated    
-            elif self.growing_t > date2num(datetime.strptime(self.list[1+self.interp_counter][0].split[0]+" "+ self.list[1+self.interp_counter][0].split[1],"%d.%m.%Y %H:%M:%S")):
+            elif self.growing_t > date2num(datetime.strptime(self.mylist[1+self.interp_counter][0]+" "+ self.mylist[1+self.interp_counter][1],"%d.%m.%Y %H:%M:%S")):
                 
                 self.interp_counter += 1
-                self.line_counter = 1.0
-                self.date_vector = [ date2num(datetime.strptime(self.list[0+self.interp_counter][0].split[0]+" "+ self.list[0+self.interp_counter][0].split[1],"%d.%m.%Y %H:%M:%S")) , date2num(datetime.strptime(self.list[1+self.interp_counter][0].split[0]+" "+ self.list[1+self.interp_counter][0].split[1],"%d.%m.%Y %H:%M:%S"))]
-                self.bath = [self.list[0+self.interp_counter][0].split[2], self.list[1+self.interp_counter][0].split[2] ]
-                self.shower = [self.list[0+self.interp_counter][0].split[3], self.list[1+self.interp_counter][0].split[3] ]
-                self.toilet = [self.list[0+self.interp_counter][0].split[4], self.list[1+self.interp_counter][0].split[4] ]
-                self.tap = [self.list[0+self.interp_counter][0].split[5], self.list[1+self.interp_counter][0].split[5] ]
-                self.washing_m = [self.list[0+self.interp_counter][0].split[6], self.list[1+self.interp_counter][0].split[6] ]
-                self.dishwasher = [self.list[0+self.interp_counter][0].split[7], self.list[1+self.interp_counter][0].split[7] ]
-    
-                self.bath_int = interp1d(self.date_vector, self.bath)
-                self.shower_int = interp1d(self.date_vector, self.shower)
-                self.toilet_int = interp1d(self.date_vector, self.toilet)
-                self.tap_int = interp1d(self.date_vector, self.tap)
-                self.washing_m_int = interp1d(self.date_vector, self.washing_m)
-                self.dishwasher_int = interp1d(self.date_vector, self.dishwasher)
-
-                self.spacing=linspace(self.date_vector[0],self.date_vector[1],24*10+1)
-
-                self.bath_int=self.bath_int(self.spacing)
-                self.shower_int = self.shower_int(self.spacing)
-                self.toilet_int = self.toilet_int(self.spacing)
-                self.tap_int = self.tap_int(self.spacing)
-                self.washing_m_int = self.washing_m_int(self.spacing)
-                self.dishwasher_int =self.dishwasher_int(self.spacing)
                 
+                self.date_vector = [ date2num(datetime.strptime(self.mylist[int(0+self.interp_counter)][0]+" "+ self.mylist[int(0+self.interp_counter)][1],"%d.%m.%Y %H:%M:%S")) , date2num(datetime.strptime(self.mylist[int(1+self.interp_counter)][0]+" "+ self.mylist[int(1+self.interp_counter)][1],"%d.%m.%Y %H:%M:%S"))]
+                self.flow = [self.mylist[int(0+self.interp_counter)][2], self.mylist[int(1+self.interp_counter)][2] ]
                 
-            #returning flow vector 
-            #flow vector output [bath(l/h)       shower(l/h)         toilet(l/h)      tap((l/h)      washing machine(l/h)      dishwasher(l/h)]
+                self.flow_int = interp1d(self.date_vector, self.flow)
+                #self.spacing=linspace(self.date_vector[0],self.date_vector[1],24*10+1)
+                self.flow_int=self.flow_int(self.growing_t)
+                
+            #print self.flow_int   
             self.growing_t += dt/24./3600.
-            self.flow_vector.append([self.bath_int[self.line_counter][1], self.shower_int[self.line_counter][1], self.toilet_int[self.line_counter][1], self.tap_int[self.line_counter][1], self.washing_m_int[self.line_counter][1], self.dishwasher_int[self.line_counter][1]])
-            self.out[0] = self.flow_vector[-1]
-            self.line_counter += 1
-            
+            self.out[0] = float(self.flow_int)
             
             
         return dt
@@ -157,10 +121,3 @@ def register(nr):
         nf.__disown__()
         nr.addNodeFactory(nf)
         
-# def test():
-#     nr = pycd3.NodeRegistry()
-#     nf = NodeFactory(Household).__disown__()
-#     nr.addNodeFactory(nf)
-#     node = nr.createNode("Household")
-    
-#test()
