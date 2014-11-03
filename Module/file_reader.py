@@ -12,7 +12,8 @@ from datetime import datetime
 from matplotlib.dates import date2num
 from scipy.interpolate import interp1d
 from numpy.core.fromnumeric import around
-#from numpy import linspace
+from numpy import floor, ceil, arange
+
 
 class NodeFactory(pycd3.INodeFactory):
     def __init__(self, node):
@@ -35,14 +36,16 @@ class NodeFactory(pycd3.INodeFactory):
         print "NodeFactory.getSource"
         return "Practice.py"
 
-class Inflow_Reader(pycd3.Node):
+class file_reader (pycd3.Node):
     def __init__(self):
         pycd3.Node.__init__(self)
         self.inflow = pycd3.String("")
+        self.decision = pycd3.String("V")
         self.out = pycd3.Flow()
         
         print "init node"
         self.addParameter("", self.inflow)
+        self.addParameter("Type V for volume [mm] or F for flow [l/h]", self.decision)
         self.addOutPort("out", self.out)
         
         self.growing_t = 0.0
@@ -55,14 +58,18 @@ class Inflow_Reader(pycd3.Node):
         print stop
         print dt
         
+        #reading the file
         csv_file = open(str(self.inflow), "r")       
         self.data = csv.reader(csv_file, delimiter='\t')  
-            #list alles aus oder?!
         self.mylist = list(self.data) 
-       
+        
+        #getting the files time step and setting the models starting time
         self.dt_read = abs(date2num(datetime.strptime(self.mylist[1][0]+" "+ self.mylist[1][1],"%d.%m.%Y %H:%M:%S")) - date2num(datetime.strptime(self.mylist[0][0]+" "+ self.mylist[0][1],"%d.%m.%Y %H:%M:%S")))
+        self.growing_t = date2num(datetime.strptime(self.mylist[0][0]+" "+ self.mylist[0][1],"%d.%m.%Y %H:%M:%S"))
+        
+        #printing the files time step
         print 'The files time step is ' + str(int(around(self.dt_read*10*24*360))) +' seconds.'
-        print self.row_to_get
+        
         return True
         
     def f(self, current, dt):
@@ -72,48 +79,165 @@ class Inflow_Reader(pycd3.Node):
             
             self.row_to_get += 1
             self.out[0] = float(self.mylist[int(0+self.row_to_get)][2])
-        
-        #The set time step is smaller than the files
-        elif float(repr(self.dt_read)[:11]) > float(repr(dt/24./3600.)[:11]):
             
-            #initial time step and interpolation
-            if self.row_to_get == 0:
-                
-                self.row_to_get += 1
-                self.growing_t = date2num(datetime.strptime(self.mylist[0][0]+" "+ self.mylist[0][1],"%d.%m.%Y %H:%M:%S")) + dt/24./3600.
-                
-                self.date_vector = [date2num(datetime.strptime(self.mylist[0][0]+" "+ self.mylist[0][1],"%d.%m.%Y %H:%M:%S")) , date2num(datetime.strptime(self.mylist[1][0]+" "+ self.mylist[1][1],"%d.%m.%Y %H:%M:%S"))]
-                self.flow = [self.mylist[0][2], self.mylist[1][2]]
-             
-                self.flow_int = interp1d(self.date_vector, self.flow)
-                #self.spacing=linspace(self.date_vector[0],self.date_vector[1],24*10+1)
-                self.flow_int=self.flow_int(self.growing_t)
-              
-                #self.row_to_get += 1
-                #self.growing_t = date2num(datetime.strptime(self.mylist[0][0]+" "+ self.mylist[0][1],"%d.%m.%Y %H:%M:%S"))
-                
-            #if the overall time is out of the last interpolation range the next to rows will be interpolated    
-            elif self.growing_t > date2num(datetime.strptime(self.mylist[1+self.interp_counter][0]+" "+ self.mylist[1+self.interp_counter][1],"%d.%m.%Y %H:%M:%S")):
-                
-                self.interp_counter += 1
-                
-                self.date_vector = [ date2num(datetime.strptime(self.mylist[int(0+self.interp_counter)][0]+" "+ self.mylist[int(0+self.interp_counter)][1],"%d.%m.%Y %H:%M:%S")) , date2num(datetime.strptime(self.mylist[int(1+self.interp_counter)][0]+" "+ self.mylist[int(1+self.interp_counter)][1],"%d.%m.%Y %H:%M:%S"))]
-                self.flow = [self.mylist[int(0+self.interp_counter)][2], self.mylist[int(1+self.interp_counter)][2] ]
-                
-                self.flow_int = interp1d(self.date_vector, self.flow)
-                #self.spacing=linspace(self.date_vector[0],self.date_vector[1],24*10+1)
-                self.flow_int=self.flow_int(self.growing_t)
-                
-            #print self.flow_int   
-            self.growing_t += dt/24./3600.
-            self.out[0] = float(self.flow_int)
+        #There's a difference between the interpolation or extrapolating of a absolute value and a value refering to time. 'F' explesses a fLow rate...
+        if str(self.decision)=='F':
             
+            #The set time step is smaller than the files
+            if float(repr(self.dt_read)[:11]) > float(repr(dt/24./3600.)[:11]):
             
+                self.growing_t += dt/24./3600.
+                
+                #initial time step and interpolation
+                if self.row_to_get == 0:
+                    
+                    self.row_to_get += 1
+                    
+                    #interpolation vectors
+                    self.date_vector = [date2num(datetime.strptime(self.mylist[0][0]+" "+ self.mylist[0][1],"%d.%m.%Y %H:%M:%S")) , date2num(datetime.strptime(self.mylist[1][0]+" "+ self.mylist[1][1],"%d.%m.%Y %H:%M:%S"))]
+                    self.flow = [self.mylist[0][2], self.mylist[1][2]]
+                    
+                    #interpolation
+                    self.flow_int = interp1d(self.date_vector, self.flow)
+                          
+                #if the overall time is out of the last interpolation range the next to rows will be interpolated    
+                elif self.growing_t > date2num(datetime.strptime(self.mylist[1+self.interp_counter][0]+" "+ self.mylist[1+self.interp_counter][1],"%d.%m.%Y %H:%M:%S")):
+                    
+                    #passing through rows
+                    self.interp_counter += 1
+                    
+                    #interpolation vectors
+                    self.date_vector = [ date2num(datetime.strptime(self.mylist[int(0+self.interp_counter)][0]+" "+ self.mylist[int(0+self.interp_counter)][1],"%d.%m.%Y %H:%M:%S")) , date2num(datetime.strptime(self.mylist[int(1+self.interp_counter)][0]+" "+ self.mylist[int(1+self.interp_counter)][1],"%d.%m.%Y %H:%M:%S"))]
+                    self.flow = [self.mylist[int(0+self.interp_counter)][2], self.mylist[int(1+self.interp_counter)][2] ]
+                    
+                    #interpolation
+                    self.flow_int = interp1d(self.date_vector, self.flow)
+                    
+                #value output at needed time
+                self.out[0] = float(self.flow_int(self.growing_t)) 
+                
+            #The set time step is larger than the files
+            else:
+                self.growing_t += dt/24./3600.
+                #calculating the need line of input-file
+                self.myline = (self.growing_t - date2num(datetime.strptime(self.mylist[0][0]+" "+ self.mylist[0][1],"%d.%m.%Y %H:%M:%S"))) / self.dt_read
+                
+                #prevents index out of boundry error
+                if self.myline <= len(self.mylist)-1:
+                    
+                    #interpolation vectors
+                    self.date_vector = [ date2num(datetime.strptime(self.mylist[int(floor(self.myline))][0]+" "+ self.mylist[int(floor(self.myline))][1],"%d.%m.%Y %H:%M:%S")) , date2num(datetime.strptime(self.mylist[int(ceil(self.myline))][0]+" "+ self.mylist[int(ceil(self.myline))][1],"%d.%m.%Y %H:%M:%S"))]
+                    self.flow = [self.mylist[int(floor(self.myline))][2], self.mylist[int(ceil(self.myline))][2] ]
+                    
+                    #interpolation
+                    self.flow_int = interp1d(self.date_vector, self.flow)
+                    
+                    # takes care of the rounding issues... otherwise encountering interpolation errors
+                    #if the needet time is very close to one thats listed in input - file it will be given out
+                    if around((self.growing_t- date2num(datetime.strptime(self.mylist[0][0]+" "+ self.mylist[0][1],"%d.%m.%Y %H:%M:%S")))/(self.date_vector[0]- date2num(datetime.strptime(self.mylist[0][0]+" "+ self.mylist[0][1],"%d.%m.%Y %H:%M:%S"))), decimals= 6) == 1:
+                    
+                        self.out[0] = float(self.flow[0])
+                        
+                    elif around((self.growing_t- date2num(datetime.strptime(self.mylist[0][0]+" "+ self.mylist[0][1],"%d.%m.%Y %H:%M:%S")))/(self.date_vector[0]- date2num(datetime.strptime(self.mylist[0][0]+" "+ self.mylist[0][1],"%d.%m.%Y %H:%M:%S"))), decimals= 6) == 1:
+                    
+                        self.out[0] = float(self.flow[1])
+                        
+                    else:
+                        self.out[0] = float(self.flow_int(self.growing_t))
+                        
+                #last value of file will be given out, becos last time step length can be different from others
+                else:
+ 
+                    self.out[0] = float(self.mylist[-1][2])
+                    
+        #There's a difference between the interpolation or extrapolating of a absolute value and a value refering to time. 'V' explesses a volume...           
+        elif str(self.decision)=='V':
+            
+            #The set time step is smaller than the files
+            if float(repr(self.dt_read)[:11]) > float(repr(dt/24./3600.)[:11]):
+            
+                #initial time step and interpolation
+                if self.row_to_get == 0:
+                
+                    self.row_to_get += 1
+                    
+                    #gives height thats valid for first time step
+                    self.flow = float(self.mylist[1][2])
+                    self.flow_int = 0.0
+                           
+                #if the overall time (volume) is out of the last intervall range the next to rows will be summed up   
+                elif self.growing_t > date2num(datetime.strptime(self.mylist[1+self.interp_counter][0]+" "+ self.mylist[1+self.interp_counter][1],"%d.%m.%Y %H:%M:%S")):
+                
+                    self.interp_counter += 1
+                    
+                    #gives height (volume) thats valid for first time step
+                    self.flow = float(self.mylist[int(1+self.interp_counter)][2])
+                    self.flow_int=0.0
+                    
+                #divided the cumulated volume by new interval length
+                self.flow_int= self.flow / (float(self.dt_read)/(dt/24./3600.))
+                
+                #adds time step and output of volume
+                self.growing_t += dt/24./3600.
+                self.out[0] = float(self.flow_int) 
+                
+            #The set time step is larger than the files
+            else:
+                
+                #calculates the percantage of incomplete time steps
+                self.sum_decimals += float(repr(((dt/24./3600.)/self.dt_read))[1:])
+                self.decimals = float(repr(self.sum_decimals-floor(self.sum_decimals))[1:])
+                
+                #calculating the need line of input-file
+                self.myline = (self.growing_t - date2num(datetime.strptime(self.mylist[0][0]+" "+ self.mylist[0][1],"%d.%m.%Y %H:%M:%S"))) / self.dt_read
+            
+                if self.myline <= len(self.mylist)-1:
+                    
+                    #resets flow and gets indexes prepared
+                    self.flow_int = 0.0
+                    self.indexes = [ int(floor(self.remember_line)), int(ceil(self.myline)) ]
+                    
+                    #cumulates volumes for needed time interval
+                    for i in arange(self.indexes[0]+1, self.indexes[1]):
+                        self.flow_int += float(self.mylist[i][2])
+                    
+                    #adds height(volume) of incomplete time step of current step and rest of earlier time step, output value
+                    self.flow_int += self.decimals * float(self.mylist[int(ceil(self.myline))][2])+self.rest
+                    self.growing_t += dt/24./3600.
+                    self.out[0] = self.flow_int
+                    
+                    #calculates rest of current time step and remembers upper index for next time step
+                    self.rest = (1-self.decimals)* float(self.mylist[int(ceil(self.myline))][2])
+                    self.remember_line = self.myline+1
+                
+                #last timestep, takes care of out of index error
+                else:
+                    
+                    #resets flow and gets indexes prepared
+                    self.flow_int = 0.0
+                    self.indexes = [ int(floor(self.remember_line)), len(self.mylist)-1 ]
+                    
+                    #cumulates volumes for needed time interval up to the last value
+                    for i in arange(self.indexes[0], self.indexes[1]):
+                        self.flow_int += float(self.mylist[i][2])
+                    
+                    #adds last rest, output value
+                    self.flow_int += self.rest
+                    self.growing_t += dt/24./3600.
+                    self.out[0] = self.flow_int
+                    
+        #if wrong letter is typed in and timestep is differs from input files message will occur and output will be set zero        
+        else:
+            
+            print 'Error: The input file has to be a time - volume - series (V) [DD.MM.YYYY HH:MM:SS mm] or a time - flow - series (F) [DD.MM.YYYY HH:MM:SS l/h]'
+            print 'The default setting is volume'
+            self.out[0] = 0.0       
+                    
         return dt
     
     def getClassName(self):
         print "getClassName"
-        return "Inflow_Reader"
+        return "file_reader"
 
 def register(nr):
     for c in pycd3.Node.__subclasses__():
