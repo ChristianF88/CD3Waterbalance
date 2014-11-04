@@ -9,5 +9,10 @@
 
 -	trying to open project
 
+![alt text](https://raw.githubusercontent.com/ChristianF88/CD3Waterbalance/master/doc/error%20pics/trying%20to%20open%20project.png?raw=true)
+
+<br>
 
 -	trying to open project second time, also accured connecting 2 blocks, zooming in or out and moving a block
+
+![alt text](https://raw.githubusercontent.com/ChristianF88/CD3Waterbalance/master/doc/error%20pics/trying%20to%20open%20project%20second%20time,%20also%20accured%20connecting%202%20blocks,%20zoom%20in%20out%20and%20moving%20a%20block.png?raw=true)
