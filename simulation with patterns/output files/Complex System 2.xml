@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<citydrain version="1.0">
+    <pluginpath path="nodes"/>
+    <pythonmodule module="C:/Users/Acer/Documents/GitHub/CD3Waterbalance/Module/Raintank.py"/>
+    <pythonmodule module="C:/Users/Acer/Documents/GitHub/CD3Waterbalance/Module/Potable_Water_Resorvior.py"/>
+    <pythonmodule module="C:/Users/Acer/Documents/GitHub/CD3Waterbalance/Module/Household.py"/>
+    <pythonmodule module="C:/Users/Acer/Documents/GitHub/CD3Waterbalance/Module/File_Reader.py"/>
+    <pythonmodule module="C:/Users/Acer/Documents/GitHub/CD3Waterbalance/Module/Distributor.py"/>
+    <pythonmodule module="C:/Users/Acer/Documents/GitHub/CD3Waterbalance/Module/Catchment_with_Routing.py"/>
+    <pythonmodule module="C:/Users/Acer/Documents/GitHub/CD3Waterbalance/Module/Sewer2.py"/>
+    <pythonmodule module="C:/Users/Acer/Documents/GitHub/CD3Waterbalance/Module/Stormwaterpipe.py"/>
+    <simulation class="DefaultSimulation">
+        <time start="2000-Jan-01 00:00:00" stop="2001-Jan-01 00:00:00" dt="360">
+            <flowdefinition>
+                <flow name="Q"/>
+                <concentration name="BOD5"/>
+                <concentration name="COD"/>
+                <concentration name="Cu"/>
+                <concentration name="Ntot"/>
+            </flowdefinition>
+        </time>
+    </simulation>
+    <model>
+        <nodelist>
+            <node id="Catchment_w_Routing_0" class="Catchment_w_Routing">
+                <parameter name="Catchment Length [m]" type="double" value="10"/>
+                <parameter name="Catchment Width [m]" type="double" value="10"/>
+                <parameter name="Decay Constant [1/min]" type="double" value="2"/>
+                <parameter name="Depression Loss [mm]" type="double" value="1.5"/>
+                <parameter name="Final Infiltration Capacity [m/h]" type="double" value="0.28999999999999998"/>
+                <parameter name="Fraktion of Impervious Area to Reservoir (iAR) [-]" type="double" value="0.20000000000000001"/>
+                <parameter name="Fraktion of Impervious Area to Stormwater Drain (iASD) [-]" type="double" value="0.69999999999999996"/>
+                <parameter name="Fraktion of Pervious Area (pA) [-]" type="double" value="0.10000000000000001"/>
+                <parameter name="Initial Infiltration Capacity [m/h]" type="double" value="0.90000000000000002"/>
+                <parameter name="Number of Subareas [-]" type="double" value="1"/>
+                <parameter name="Runoff Velocity iAR [m/s]" type="double" value="0.90000000000000002"/>
+                <parameter name="Runoff Velocity iASD [m/s]" type="double" value="0.69999999999999996"/>
+                <parameter name="Runoff Velocity pA [m/s]" type="double" value="0.40000000000000002"/>
+                <parameter name="Weighting Coefficient iAR [-]" type="double" value="0.029999999999999999"/>
+                <parameter name="Weighting Coefficient iASD [-]" type="double" value="0.050000000000000003"/>
+                <parameter name="Weighting Coefficient pA [-]" type="double" value="0.070000000000000007"/>
+                <parameter name="Wetting Loss [mm]" type="double" value="0.39999999999999991"/>
+            </node>
+            <node id="Distributor_1" class="Distributor">
+                <parameter name="outports" type="int" value="5"/>
+            </node>
+            <node id="File_Reader_1" class="File_Reader">
+                <parameter name="" type="string" value="../input files/evapo.ixx"/>
+                <parameter name="Type V for volume [mm] or F for flow [l/h]" type="string" value="V"/>
+            </node>
+            <node id="Catchment_w_Routing_1" class="Catchment_w_Routing">
+                <parameter name="Catchment Length [m]" type="double" value="100"/>
+                <parameter name="Catchment Width [m]" type="double" value="10"/>
+                <parameter name="Decay Constant [1/min]" type="double" value="2"/>
+                <parameter name="Depression Loss [mm]" type="double" value="1.5"/>
+                <parameter name="Final Infiltration Capacity [m/h]" type="double" value="0.28999999999999998"/>
+                <parameter name="Fraktion of Impervious Area to Reservoir (iAR) [-]" type="double" value="0.20000000000000001"/>
+                <parameter name="Fraktion of Impervious Area to Stormwater Drain (iASD) [-]" type="double" value="0.40000000000000002"/>
+                <parameter name="Fraktion of Pervious Area (pA) [-]" type="double" value="0.40000000000000002"/>
+                <parameter name="Initial Infiltration Capacity [m/h]" type="double" value="0.90000000000000002"/>
+                <parameter name="Number of Subareas [-]" type="double" value="1"/>
+                <parameter name="Runoff Velocity iAR [m/s]" type="double" value="0.80000000000000004"/>
+                <parameter name="Runoff Velocity iASD [m/s]" type="double" value="0.59999999999999998"/>
+                <parameter name="Runoff Velocity pA [m/s]" type="double" value="0.38"/>
+                <parameter name="Weighting Coefficient iAR [-]" type="double" value="0.040000000000000001"/>
+                <parameter name="Weighting Coefficient iASD [-]" type="double" value="0.050000000000000003"/>
+                <parameter name="Weighting Coefficient pA [-]" type="double" value="0.059999999999999998"/>
+                <parameter name="Wetting Loss [mm]" type="double" value="0.40000000000000002"/>
+            </node>
+            <node id="Distributor_0" class="Distributor">
+                <parameter name="outports" type="int" value="5"/>
+            </node>
+            <node id="File_Reader_0" class="File_Reader">
+                <parameter name="" type="string" value="../input files/rain.ixx"/>
+                <parameter name="Type V for volume [mm] or F for flow [l/h]" type="string" value="V"/>
+            </node>
+        </nodelist>
+        <connectionlist>
+            <connection id="0">
+                <source node="File_Reader_1" port="out"/>
+                <sink node="Distributor_1" port="In"/>
+            </connection>
+            <connection id="1">
+                <source node="File_Reader_0" port="out"/>
+                <sink node="Distributor_0" port="In"/>
+            </connection>
+        </connectionlist>
+    </model>
+    <gui>
+        <nodeposition id="Catchment_w_Routing_0" x="-1036" y="-604"/>
+        <nodeposition id="Catchment_w_Routing_1" x="-1033" y="-474"/>
+        <nodeposition id="Distributor_0" x="-1397" y="-449"/>
+        <nodeposition id="Distributor_1" x="-1396" y="-297"/>
+        <nodeposition id="File_Reader_0" x="-1606" y="-462"/>
+        <nodeposition id="File_Reader_1" x="-1609" y="-311"/>
+    </gui>
+</citydrain>

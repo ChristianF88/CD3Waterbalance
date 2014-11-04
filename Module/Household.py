@@ -32,35 +32,32 @@ class NodeFactory(pycd3.INodeFactory):
 class Household(pycd3.Node):
     def __init__(self):
         pycd3.Node.__init__(self)
+        
         self.black_w = pycd3.Flow()
         self.grey_w = pycd3.Flow()
         self.pot_w = pycd3.Flow()
         self.nonpot_w = pycd3.Flow()
         self.outdoor_use = pycd3.Flow()
-        self.indoor_use = pycd3.Flow()
+        self.bath_tub = pycd3.Flow()
+        self.shower = pycd3.Flow()
+        self.toilet = pycd3.Flow()
+        self.tap = pycd3.Flow()
+        self.washing_machine = pycd3.Flow()
+        self.dishwasher = pycd3.Flow() 
         
-        #dir (self.inf)
-        print "init node"
         self.addOutPort("black_w", self.black_w)
         self.addOutPort("grey_w", self.grey_w)
         self.addOutPort("pot_w", self.pot_w)
         self.addOutPort("nonpot_w", self.nonpot_w)
         self.addInPort("outdoor_use", self.outdoor_use)
-        self.addInPort("indoor_use", self.indoor_use)
+        self.addInPort("bath_tub [l/h]", self.bath_tub)
+        self.addInPort("shower [l/h]", self.shower)
+        self.addInPort("toilet [l/h]", self.toilet)
+        self.addInPort("tap [l/h]", self.tap)
+        self.addInPort("washing_machine [l/h]", self.washing_machine)
+        self.addInPort("dishwasher [l/h]", self.dishwasher)
         
-        #indoor use -file format- [bath(l/h)       shower(l/h)         toilet(l/h)      tap((l/h)      washing machine(l/h)      dishwasher(l/h)]
-        
-        #self.toilet = pycd3.Double(0.0000002257)
-        #self.addParameter("toilet [m³/s]", self.toilet)       
-        #self.tab = pycd3.Double(0.000000243)
-        #self.addParameter("tab [m³/s]", self.tab)
-        #self.shower = pycd3.Double(0.0000004626)
-        #self.addParameter("shower [m³/s]", self.shower)
-        #self.washing_machine = pycd3.Double(0.0000008185)
-        #self.addParameter("washing_machine [m³/s]", self.washing_machine)
-        #self.dishwasher = pycd3.Double(0.0000000926)
-        #self.addParameter("dishwasher [m³/s]", self.dishwasher)
-        
+        print "init node"
         
     def init(self, start, stop, dt):
         print start
@@ -69,11 +66,11 @@ class Household(pycd3.Node):
         return True
         
     def f(self, current, dt):
-        self.pot_w[0] = (self.indoor_use[0][0]+self.indoor_use[0][1]+self.indoor_use[0][3]+self.indoor_use[0][5])/3600*dt
-        self.nonpot_w[0] = (self.indoor_use[0][2]+self.indoor_use[0][4])/3600*dt+self.outdoor_use[0]
-        self.black_w[0] = (self.indoor_use[0][2])/3600*dt
-        self.grey_w[0] = (self.indoor_use[0][0]+self.indoor_use[0][1]+self.indoor_use[0][3]+self.indoor_use[0][4]+self.indoor_use[0][5])/3600*dt
-       
+        
+        self.pot_w[0] = (self.bath_tub[0]+self.shower[0]+self.tap[0]+self.dishwasher[0])/3600/1000*dt
+        self.nonpot_w[0] = (self.toilet[0]+self.washing_machine[0])/3600/1000*dt+self.outdoor_use[0]
+        self.black_w[0] = (self.toilet[0])/3600/1000*dt
+        self.grey_w[0] = (self.bath_tub[0]+self.shower[0]+self.tap[0]+self.washing_machine[0]+self.dishwasher[0])/3600/1000*dt
 
         return dt
     

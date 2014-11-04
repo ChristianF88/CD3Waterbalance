@@ -30,7 +30,7 @@ class NodeFactory(pycd3.INodeFactory):
         print "NodeFactory.getSource"
         return "Practice.py"
 
-class Catchment_w_r(pycd3.Node):
+class Catchment_w_Routing(pycd3.Node):
     def __init__(self):
         pycd3.Node.__init__(self)
         self.rain = pycd3.Flow()
@@ -65,7 +65,7 @@ class Catchment_w_r(pycd3.Node):
         self.imp_area_raintank = pycd3.Double(0.2)
         self.addParameter("Fraktion of Impervious Area to Reservoir (iAR) [-]", self.imp_area_raintank)
         
-        #default values for Gras (Wikipedia)
+        #default values for gras (Wikipedia)
         self.Horton_initial_cap = pycd3.Double(0.9)                             
         self.addParameter("Initial Infiltration Capacity [m/h]", self.Horton_initial_cap)
         self.Horton_final_cap = pycd3.Double(0.29)                              
@@ -87,17 +87,17 @@ class Catchment_w_r(pycd3.Node):
         
         #Muskingum parameters K flowtime for entire catchment
         #divided by surface Area
-        self.rain_veloc_coll = pycd3.Double(0.4)
+        self.rain_veloc_coll = pycd3.Double(0.9)
         self.addParameter("Runoff Velocity iAR [m/s]", self.rain_veloc_coll)
-        self.muskingum_coll_X = pycd3.Double(0.05)
+        self.muskingum_coll_X = pycd3.Double(0.04)
         self.addParameter("Weighting Coefficient iAR [-]", self.muskingum_coll_X)
         self.rain_veloc_runoff = pycd3.Double(0.7)
         self.addParameter("Runoff Velocity iASD [m/s]", self.rain_veloc_runoff)
         self.muskingum_runoff_X = pycd3.Double(0.05)
         self.addParameter("Weighting Coefficient iASD [-]", self.muskingum_runoff_X)
-        self.rain_veloc_runoff_perv = pycd3.Double(0.9)
+        self.rain_veloc_runoff_perv = pycd3.Double(0.04)
         self.addParameter("Runoff Velocity pA [m/s]", self.rain_veloc_runoff_perv)
-        self.muskingum_runoff_perv_X = pycd3.Double(0.05)
+        self.muskingum_runoff_perv_X = pycd3.Double(0.06)
         self.addParameter("Weighting Coefficient pA [-]", self.muskingum_runoff_perv_X)
         
         #storage and time values
@@ -122,7 +122,7 @@ class Catchment_w_r(pycd3.Node):
         
         self.area_property = self.area_width*self.area_length
         
-        #starting values for Horton Model
+        #starting values for Horton model
         self.possible_infiltr_raw = self.Horton_initial_cap/3600*dt
         self.temp_cap = self.Horton_initial_cap/3600*dt
         self.temp_cap_2 = self.Horton_initial_cap/3600*dt
@@ -200,7 +200,6 @@ class Catchment_w_r(pycd3.Node):
                 self.rain_storage_imp = 0.0
             
             #calculating the possilbe infiltration rate the the Horton model in a state of "drying" (+ increasing the time step for the model)
-            
             self.temp_cap = self.Horton_final_cap/3600*dt + (self.temp_cap_2 - self.Horton_final_cap/3600*dt) * math.exp(-1*self.Horton_decay_constant * dt / 60 * self.continuous_rain_time/self.k)
             self.possible_infiltr_raw = self.Horton_initial_cap/3600*dt - (self.Horton_initial_cap/3600*dt - self.temp_cap) * math.exp(-1*self.Horton_decay_constant * dt / 60 * self.continuous_rain_time_2/self.k)
             self.continuous_rain_time_2 += 1.0
@@ -218,6 +217,7 @@ class Catchment_w_r(pycd3.Node):
             self.temp_cap_2 = self.Horton_initial_cap/3600*dt - (self.Horton_initial_cap/3600*dt - self.temp_cap) * math.exp(-1*self.Horton_decay_constant * dt / 60 * self.continuous_rain_time_2/self.k)
             self.possible_infiltr_raw = self.Horton_final_cap/3600*dt + (self.temp_cap_2 - self.Horton_final_cap/3600*dt) * math.exp(-1*self.Horton_decay_constant * dt / 60 * self.continuous_rain_time/self.k)
             self.continuous_rain_time += 1.0
+            
             #if the wetting loss and depression loss hasn't been overcome yet, there won't be any runoff from the impervious area
             #that contributes to stormwater
             if self.rain_storage_imp - self.initial_loss - self.depression_loss <= 0.0:
@@ -338,7 +338,7 @@ class Catchment_w_r(pycd3.Node):
     
     def getClassName(self):
         #print "getClassName"
-        return "Catchment_w_r"
+        return "Catchment_w_Routing"
 
 def register(nr):
     for c in pycd3.Node.__subclasses__():

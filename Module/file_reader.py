@@ -36,7 +36,7 @@ class NodeFactory(pycd3.INodeFactory):
         print "NodeFactory.getSource"
         return "Practice.py"
 
-class file_reader (pycd3.Node):
+class File_Reader (pycd3.Node):
     def __init__(self):
         pycd3.Node.__init__(self)
         self.inflow = pycd3.String("")
@@ -237,7 +237,7 @@ class file_reader (pycd3.Node):
     
     def getClassName(self):
         print "getClassName"
-        return "file_reader"
+        return "File_Reader"
 
 def register(nr):
     for c in pycd3.Node.__subclasses__():
