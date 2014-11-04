@@ -28,7 +28,7 @@ class NodeFactory(pycd3.INodeFactory):
         
     def getSource(self):
         print "NodeFactory.getSource"
-        return "Practice.py"
+        return "Addons.py"
 
 class PWR(pycd3.Node):
     def __init__(self):

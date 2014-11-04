@@ -34,7 +34,7 @@ class NodeFactory(pycd3.INodeFactory):
         
     def getSource(self):
         print "NodeFactory.getSource"
-        return "Practice.py"
+        return "Addons.py"
 
 class File_Reader (pycd3.Node):
     def __init__(self):
@@ -51,7 +51,10 @@ class File_Reader (pycd3.Node):
         self.growing_t = 0.0
         self.row_to_get = 0
         self.interp_counter = 0
-        
+        self.remember_line = 0.0
+        self.decimals = 0.0
+        self.rest = 0.0
+        self.sum_decimals = 0.0
         
     def init(self, start, stop, dt):
         print start
@@ -185,11 +188,11 @@ class File_Reader (pycd3.Node):
             else:
                 
                 #calculates the percantage of incomplete time steps
-                self.sum_decimals += float(repr(((dt/24./3600.)/self.dt_read))[1:])
-                self.decimals = float(repr(self.sum_decimals-floor(self.sum_decimals))[1:])
+                self.sum_decimals += float(repr(((dt/24./3600.)/self.dt_read)-floor(((dt/24./3600.)/self.dt_read)))[1:])
+                self.mydecimals = float(repr(self.sum_decimals-floor(self.sum_decimals))[1:])
                 
                 #calculating the need line of input-file
-                self.myline = (self.growing_t - date2num(datetime.strptime(self.mylist[0][0]+" "+ self.mylist[0][1],"%d.%m.%Y %H:%M:%S"))) / self.dt_read
+                self.myline = (self.growing_t + dt/24./3600. - date2num(datetime.strptime(self.mylist[0][0]+" "+ self.mylist[0][1],"%d.%m.%Y %H:%M:%S"))) / self.dt_read
             
                 if self.myline <= len(self.mylist)-1:
                     
@@ -202,12 +205,12 @@ class File_Reader (pycd3.Node):
                         self.flow_int += float(self.mylist[i][2])
                     
                     #adds height(volume) of incomplete time step of current step and rest of earlier time step, output value
-                    self.flow_int += self.decimals * float(self.mylist[int(ceil(self.myline))][2])+self.rest
+                    self.flow_int += self.mydecimals * float(self.mylist[int(ceil(self.myline))][2])+self.rest
                     self.growing_t += dt/24./3600.
                     self.out[0] = self.flow_int
                     
                     #calculates rest of current time step and remembers upper index for next time step
-                    self.rest = (1-self.decimals)* float(self.mylist[int(ceil(self.myline))][2])
+                    self.rest = (1-self.mydecimals)* float(self.mylist[int(ceil(self.myline))][2])
                     self.remember_line = self.myline+1
                 
                 #last timestep, takes care of out of index error
@@ -230,7 +233,7 @@ class File_Reader (pycd3.Node):
         else:
             
             print 'Error: The input file has to be a time - volume - series (V) [DD.MM.YYYY HH:MM:SS mm] or a time - flow - series (F) [DD.MM.YYYY HH:MM:SS l/h]'
-            print 'The default setting is volume'
+            print 'The default setting is volume (V)'
             self.out[0] = 0.0       
                     
         return dt
