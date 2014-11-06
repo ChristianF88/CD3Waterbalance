@@ -2,8 +2,8 @@
 
 Basic features:
 
- - simulates houshold water demand by combining indoor and outdoor demand
- - differs between black water and grey water as well as potabel and nonpotable water
+ - simulates household water demand by combining indoor and outdoor demand
+ - differs between black water and grey water as well as potable and non potable water
  
 <br>
 
@@ -25,8 +25,8 @@ Basic features:
 
 |Output  | Type  |  Unit  |
 | :------------ |:---------------:| :-----:|
-|    Potable Water Demand   | Time Series |  [m³/dt]
-|    Nonpotable Water Demand   |    Time Series     |  [m³/dt]  |
+|    Potable Water  | Time Series |  [m³/dt]
+|    Non Potable Water |    Time Series     |  [m³/dt]  |
 |    Black Water   | Time Series |  [m³/dt]
 |    Grey Water    |    Time Series     |  [m³/dt]  |
 
@@ -36,17 +36,17 @@ Basic features:
 
 ## Description 
 
-This Block uses the implemented indoor demand time series and the outdoor demand given by the catchment block to estimate the Water needed by the household as well as the wastewater produced. Furthermore the block distinguishes between potabel and nonpotable water demand as well as between produced grey water and black water.
+This Block uses the implemented indoor demand time series and the outdoor demand given by the catchment block to estimate the Water needed by the household as well as the waste water produced. Furthermore the block distinguishes between potable and non potable water demand as well as between produced grey water and black water.
 
 The individual stream are calculated by simple balances:
 
-- potable water demand consits out of Bathtub, Shower, Tap, Washing Machine, Dishwasher 
-- nonpotable water demand is 
+- potable water demand consist out of Bathtub, Shower, Tap, Washing Machine, Dishwasher 
+- non potable water demand is 
 
 |Output Parameter  | Calculation  | 
 | :------------ |:---------------:| 
-|    Potable Water Demand   | Bathtub + Shower + Tap + Washing Machine + Dishwasher | 
-|    Nonpotable Water Demand   |    Toilet + Outdoor Demand     | 
+|    Potable Water    | Bathtub + Shower + Tap + Washing Machine + Dishwasher | 
+|    Non Potable Water   |    Toilet + Outdoor Demand     | 
 |    Black Water   | Toilet |  
 |    Grey Water    |    Bathtub + Shower + Tap + Washing Machine + Dishwasher     | 
 

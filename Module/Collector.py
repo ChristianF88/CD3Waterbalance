@@ -29,12 +29,12 @@ class NodeFactory(pycd3.INodeFactory):
         print "NodeFactory.getSource"
         return "Addons.py"
 
-class Distributor(pycd3.Node):
+class Collector(pycd3.Node):
     def __init__(self):
         pycd3.Node.__init__(self)
-        self.inflow = pycd3.Flow()
-        self.numberof_out_ports = pycd3.Integer(2)
-        self.addParameter("Number of Outports", self.numberof_out_ports)            
+        self.outflow = pycd3.Flow()
+        self.numberof_in_ports = pycd3.Integer(2)
+        self.addParameter("Number of Inports", self.numberof_in_ports)            
         
     def init(self, start, stop, dt):
         print start
@@ -42,24 +42,28 @@ class Distributor(pycd3.Node):
         print dt
         print "init node"
         
-        self.addInPort("Inport", self.inflow)
-
-        for i in range(self.numberof_out_ports):
-            exec 'self.Out'+str(i+1)+'=pycd3.Flow()'
-            exec 'self.addOutPort("Outport'+str(i+1)+'", self.Out'+str(i+1)+')'        
-         
+        for i in range(self.numberof_in_ports):
+            exec 'self.Inport'+str(i+1)+'=pycd3.Flow()'
+            exec 'self.addInPort("Inport'+str(i+1)+'", self.Inport'+str(i+1)+')'        
+        
+        self.addOutPort("Outport", self.outflow)
+        
         return True
         
     def f(self, current, dt):
-              
-        for i in range(self.numberof_out_ports):
-            exec 'self.Out'+str(i+1)+'[0]=self.inflow[0]'
+        
+        self.memory = 0.0     
+        
+        for i in range(self.numberof_in_ports):
+            exec 'self.memory += self.Inport'+str(i+1)+'[0]'
           
+        self.outflow[0] = self.memory
+        
         return dt
     
     def getClassName(self):
         print "getClassName"
-        return "Distributor"
+        return "Collector"
 
 def register(nr):
     for c in pycd3.Node.__subclasses__():

@@ -45,17 +45,17 @@ class Household(pycd3.Node):
         self.washing_machine = pycd3.Flow()
         self.dishwasher = pycd3.Flow() 
         
-        self.addOutPort("black_w", self.black_w)
-        self.addOutPort("grey_w", self.grey_w)
-        self.addOutPort("pot_w", self.pot_w)
-        self.addOutPort("nonpot_w", self.nonpot_w)
-        self.addInPort("outdoor_demand", self.outdoor_demand)
-        self.addInPort("bath_tub [l/h]", self.bath_tub)
-        self.addInPort("shower [l/h]", self.shower)
-        self.addInPort("toilet [l/h]", self.toilet)
-        self.addInPort("tap [l/h]", self.tap)
-        self.addInPort("washing_machine [l/h]", self.washing_machine)
-        self.addInPort("dishwasher [l/h]", self.dishwasher)
+        self.addOutPort("Black Water", self.black_w)
+        self.addOutPort("Grey Water", self.grey_w)
+        self.addOutPort("Potable Water", self.pot_w)
+        self.addOutPort("Non Potable Water", self.nonpot_w)
+        self.addInPort("Outdoor Demand", self.outdoor_demand)
+        self.addInPort("Bathtub [l/h]", self.bath_tub)
+        self.addInPort("Shower [l/h]", self.shower)
+        self.addInPort("Toilet [l/h]", self.toilet)
+        self.addInPort("Tap [l/h]", self.tap)
+        self.addInPort("Washing_Machine [l/h]", self.washing_machine)
+        self.addInPort("Dishwasher [l/h]", self.dishwasher)
         
         print "init node"
         

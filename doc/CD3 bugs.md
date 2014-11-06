@@ -4,6 +4,7 @@
 -	distributor addon - outputs cant be reduced
 -	i accidentially pulled over the practice.py (get source thingi) and the gui crashed
 -	bad file descriptor error if u want to print something in every time step
+- 	ixxrain block summarizes rainheights incorrectly
 
 ##specific with pictures
 

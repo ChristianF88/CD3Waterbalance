@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<citydrain version="1.0">
+    <pluginpath path="nodes"/>
+    <pythonmodule module="C:/Users/Acer/Documents/GitHub/CD3Waterbalance/Module/Collector.py"/>
+    <simulation class="DefaultSimulation">
+        <time start="2000-Jan-01 00:00:00" stop="2000-Jan-15 00:00:00" dt="360">
+            <flowdefinition>
+                <flow name="Q"/>
+                <concentration name="BOD5"/>
+                <concentration name="COD"/>
+                <concentration name="Cu"/>
+                <concentration name="Ntot"/>
+            </flowdefinition>
+        </time>
+    </simulation>
+    <model>
+        <nodelist>
+            <node id="IxxRainRead_2" class="IxxRainRead">
+                <parameter name="rain_file" type="string" value="rain.ixx"/>
+            </node>
+            <node id="IxxRainRead_1" class="IxxRainRead">
+                <parameter name="rain_file" type="string" value="rain.ixx"/>
+            </node>
+            <node id="IxxRainRead_0" class="IxxRainRead">
+                <parameter name="rain_file" type="string" value="rain.ixx"/>
+            </node>
+        </nodelist>
+        <connectionlist/>
+    </model>
+    <gui>
+        <nodeposition id="IxxRainRead_0" x="-999" y="-252"/>
+        <nodeposition id="IxxRainRead_1" x="-999" y="-171"/>
+        <nodeposition id="IxxRainRead_2" x="-987" y="-72"/>
+    </gui>
+</citydrain>
