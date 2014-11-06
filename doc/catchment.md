@@ -26,33 +26,33 @@ Basic features:
 
 |Catchment Attributes  | Type  |  Unit  |
 | :------------ |:---------------:| :-----:|
-|    Catchment Width   | Scalar |  [m]
-|    Catchment Length   |    Scalar     |  [m]  |
-| Fraction of Pervious Area (pA) |   Scalar  |  [-]   |
-|   Fraction of Impervious Area to Reservoir (iAR)| Scalar |  [-]
-|    Fraction of Impervious Area to Stormwater Drain (iASD)  |    Scalar     |  [-]  |
-| Number of Subareas |   Scalar  |  [-]   |
-| Wetting Loss |   Scalar  |  [mm]   |
-| Depression Loss |   Scalar  |  [mm]   |
+|    Catchment Width   | Double |  [m]
+|    Catchment Length   |    Double     |  [m]  |
+| Fraction of Pervious Area (pA) |   Double  |  [-]   |
+|   Fraction of Impervious Area to Reservoir (iAR)| Double |  [-]
+|    Fraction of Impervious Area to Stormwater Drain (iASD)  |    Double     |  [-]  |
+| Number of Subareas |   Double  |  [-]   |
+| Wetting Loss |   Double  |  [mm]   |
+| Depression Loss |   Double  |  [mm]   |
 
 # 
 
 |Horton Method  | Type  |  Unit  |
 | :------------ |:---------------:| :-----:|
-|    Initial Infiltration Capacity (Horton)   | Scalar |  [m/h]
-|    Final Infiltration Capacity (Horton)   |    Scalar     |  [m/h]  |
-| Decay Constant (Horton) |   Scalar  |  [1/min]   |
+|    Initial Infiltration Capacity (Horton)   | Double |  [m/h]
+|    Final Infiltration Capacity (Horton)   |    Double     |  [m/h]  |
+| Decay Constant (Horton) |   Double  |  [1/min]   |
 
 # 
 
 |Muskingum Method  | Type  |  Unit  |
 | :------------ |:---------------:| :-----:|
-| Runoff Velocity (pA)  |   Scalar  |  [m/s]   |
-| Weighting Coefficient (pA) |   Scalar  |  [-]   |
-| Runoff Velocity  (iAR) |   Scalar  |  [m/s]   |
-| Weighting Coefficient (iAR)|   Scalar  |  [-]   |
-| Runoff Velocity  (iASD) |   Scalar  |  [m/s]   |
-| Weighting Coefficient (iASD)|   Scalar  |  [-]   |
+| Runoff Velocity (pA)  |   Double  |  [m/s]   |
+| Weighting Coefficient (pA) |   Double  |  [-]   |
+| Runoff Velocity  (iAR) |   Double  |  [m/s]   |
+| Weighting Coefficient (iAR)|   Double  |  [-]   |
+| Runoff Velocity  (iASD) |   Double  |  [m/s]   |
+| Weighting Coefficient (iASD)|   Double  |  [-]   |
 
 ### Output 
 
