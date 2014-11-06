@@ -1,4 +1,4 @@
-# Catchment
+# File Reader
 
 Basic features:
 
@@ -13,7 +13,7 @@ Basic features:
 | Input  | Type  |  Unit  |
 | :------------ |:---------------:| :-----:|	
 | File      | time series | [DD.MM.YYYY HH:MM:SS value(see below)] |
-| 	Filecontent | String  |  "H" for Height [mm] or "F" for Flow [l/h] |
+| 	Filecontent | Letter  |  "H" for Height [mm] or "F" for Flow [l/h] |
 
 # 
 
@@ -32,6 +32,8 @@ This file reader is able to adjust the files time step automatically to any need
 ### Flow
 
 Linear interpolation was used to calculate the new values.
+
+# 
 
 Used formulas:
 
@@ -56,6 +58,8 @@ Used formulas:
 ###Height
 
 For the simulation time step being larger than the files, the heights between 2 time steps are being summed up. The other way around the height will be divided by a factor consisting of the time steps relation to one another.
+
+# 
 
 Used formulas for 
 ![alt text](https://raw.githubusercontent.com/ChristianF88/CD3Waterbalance/master/doc/Formulas/file_reader_ts_gr_tf.png?raw=true):

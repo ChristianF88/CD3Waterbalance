@@ -37,7 +37,7 @@ class Household(pycd3.Node):
         self.grey_w = pycd3.Flow()
         self.pot_w = pycd3.Flow()
         self.nonpot_w = pycd3.Flow()
-        self.outdoor_use = pycd3.Flow()
+        self.outdoor_demand = pycd3.Flow()
         self.bath_tub = pycd3.Flow()
         self.shower = pycd3.Flow()
         self.toilet = pycd3.Flow()
@@ -49,7 +49,7 @@ class Household(pycd3.Node):
         self.addOutPort("grey_w", self.grey_w)
         self.addOutPort("pot_w", self.pot_w)
         self.addOutPort("nonpot_w", self.nonpot_w)
-        self.addInPort("outdoor_use", self.outdoor_use)
+        self.addInPort("outdoor_demand", self.outdoor_demand)
         self.addInPort("bath_tub [l/h]", self.bath_tub)
         self.addInPort("shower [l/h]", self.shower)
         self.addInPort("toilet [l/h]", self.toilet)
@@ -67,8 +67,8 @@ class Household(pycd3.Node):
         
     def f(self, current, dt):
         
-        self.pot_w[0] = (self.bath_tub[0]+self.shower[0]+self.tap[0]+self.dishwasher[0])/3600/1000*dt
-        self.nonpot_w[0] = (self.toilet[0]+self.washing_machine[0])/3600/1000*dt+self.outdoor_use[0]
+        self.pot_w[0] = (self.bath_tub[0]+self.shower[0]+self.tap[0]+self.dishwasher[0]+self.washing_machine[0])/3600/1000*dt
+        self.nonpot_w[0] = (self.toilet[0])/3600/1000*dt+self.outdoor_demand[0]
         self.black_w[0] = (self.toilet[0])/3600/1000*dt
         self.grey_w[0] = (self.bath_tub[0]+self.shower[0]+self.tap[0]+self.washing_machine[0]+self.dishwasher[0])/3600/1000*dt
 

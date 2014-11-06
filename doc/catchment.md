@@ -26,33 +26,33 @@ Basic features:
 
 |Catchment Attributes  | Type  |  Unit  |
 | :------------ |:---------------:| :-----:|
-|    Catchment Width   | Double |  [m]
-|    Catchment Length   |    Double     |  [m]  |
-| Fraction of Pervious Area (pA) |   Double  |  [-]   |
-|   Fraction of Impervious Area to Reservoir (iAR)| Double |  [-]
-|    Fraction of Impervious Area to Stormwater Drain (iASD)  |    Double     |  [-]  |
-| Number of Subareas |   Double  |  [-]   |
-| Wetting Loss |   Double  |  [mm]   |
-| Depression Loss |   Double  |  [mm]   |
+|    Catchment Width   | Constant |  [m]
+|    Catchment Length   |    Constant     |  [m]  |
+| Fraction of Pervious Area (pA) |   Constant  |  [-]   |
+|   Fraction of Impervious Area to Reservoir (iAR)| Constant |  [-]
+|    Fraction of Impervious Area to Stormwater Drain (iASD)  |    Constant     |  [-]  |
+| Number of Subareas |   Constant  |  [-]   |
+| Wetting Loss |   Constant  |  [mm]   |
+| Depression Loss |   Constant  |  [mm]   |
 
 # 
 
 |Horton Method  | Type  |  Unit  |
 | :------------ |:---------------:| :-----:|
-|    Initial Infiltration Capacity (Horton)   | Double |  [m/h]
-|    Final Infiltration Capacity (Horton)   |    Double     |  [m/h]  |
-| Decay Constant (Horton) |   Double  |  [1/min]   |
+|    Initial Infiltration Capacity (Horton)   | Constant |  [m/h]
+|    Final Infiltration Capacity (Horton)   |    Constant     |  [m/h]  |
+| Decay Constant (Horton) |   Constant  |  [1/min]   |
 
 # 
 
 |Muskingum Method  | Type  |  Unit  |
 | :------------ |:---------------:| :-----:|
-| Runoff Velocity (pA)  |   Double  |  [m/s]   |
-| Weighting Coefficient (pA) |   Double  |  [-]   |
-| Runoff Velocity  (iAR) |   Double  |  [m/s]   |
-| Weighting Coefficient (iAR)|   Double  |  [-]   |
-| Runoff Velocity  (iASD) |   Double  |  [m/s]   |
-| Weighting Coefficient (iASD)|   Double  |  [-]   |
+| Runoff Velocity (pA)  |   Constant  |  [m/s]   |
+| Weighting Coefficient (pA) |   Constant  |  [-]   |
+| Runoff Velocity  (iAR) |   Constant  |  [m/s]   |
+| Weighting Coefficient (iAR)|   Constant  |  [-]   |
+| Runoff Velocity  (iASD) |   Constant  |  [m/s]   |
+| Weighting Coefficient (iASD)|   Constant  |  [-]   |
 
 ### Output 
 
@@ -162,3 +162,6 @@ Used formulas:
 <br>
 
 ##Recommended Improvements
+
+- add additional outdoor use (washing car, swimming pool,...)
+- create dynamics for garden use
