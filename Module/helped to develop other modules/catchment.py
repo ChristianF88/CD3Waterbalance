@@ -108,11 +108,11 @@ class Catchment(pycd3.Node):
             if self.current_effective_rain_height <= 0:
                 pass
             else:
-                self.continuous_rain_time=0.0
+                self.continuous_rain_time=1.0
         elif self.current_effective_rain_height > 0:
             self.current_effective_rain_height= self.rain[0]-self.evapo[0]
             if self.current_effective_rain_height <= 0:
-                self.continuous_rain_time_2=0.0
+                self.continuous_rain_time_2=1.0
             else:
                 pass
         else:

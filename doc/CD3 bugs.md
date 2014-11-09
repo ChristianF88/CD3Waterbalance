@@ -1,12 +1,14 @@
-#CD3 bugs
+# CD3 bugs
 ## In general
 -	storage variables need to be set to 0 at the end of run
 -	distributor addon - outputs cant be reduced
 -	i accidentially pulled over the practice.py (get source thingi) and the gui crashed
 -	bad file descriptor error if u want to print something in every time step
 - 	ixxrain block summarizes rainheights incorrectly
+- 	if a project and u press open project the old one is closed before u have selected a new one
+-	names of outports arent shown correctly
 
-##specific with pictures
+## specific with pictures
 
 -	trying to open project
 

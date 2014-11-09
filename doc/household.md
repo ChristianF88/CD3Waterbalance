@@ -53,7 +53,7 @@ The individual stream are calculated by simple balances:
 
 <br>
 
-##Recommended Improvements
+## Recommended Improvements
 
 - differ between kitchen tap and bathroom tap (at the moment all tap water = grey water)
 - take into account additional water losses for drinking and food preperation,...

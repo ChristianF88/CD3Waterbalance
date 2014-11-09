@@ -13,13 +13,13 @@ Basic features:
 | Input  | Type  |  Unit  |
 | :------------ |:---------------:| :-----:|	
 | File      | time series | [DD.MM.YYYY HH:MM:SS value(see below)] |
-| 	Filecontent | Letter  |  "H" for Height [mm] or "F" for Flow [l/h] |
+| 	Filecontent | Letter  |  "H" for Height [ _any_ ] or "F" for Flow [ _any_ ] |
 
 # 
 
 |Output   | Type  |  Unit  |
 | :------------ |:---------------:| :-----:|
-|  Inputdata with adjusted time step  |   time series  |  [mm] or [l/h]  |
+|  Inputdata with adjusted time step  |   time series  |  _same as input_  |
 
 <br>
 
@@ -55,7 +55,7 @@ Used formulas:
 
 <br>
 
-###Height
+### Height
 
 For the simulation time step being larger than the files, the heights between 2 time steps are being summed up. The other way around the height will be divided by a factor consisting of the time steps relation to one another.
 
@@ -119,6 +119,6 @@ Used formulas for
 
 <br>
 
-##Recommended Improvements
+## Recommended Improvements
 
 -	I could create the option to choose an interpolation method

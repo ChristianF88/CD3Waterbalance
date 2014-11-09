@@ -161,7 +161,7 @@ Used formulas:
 
 <br>
 
-##Recommended Improvements
+## Recommended Improvements
 
 - add additional outdoor use (washing car, swimming pool,...)
 - create dynamics for garden use
