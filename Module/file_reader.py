@@ -15,7 +15,7 @@ from numpy.core.fromnumeric import around
 from numpy import floor, ceil, arange
 
 
-class NodeFactory(pycd3.INodeFactory):
+class NodeFactoryFilereader(pycd3.INodeFactory):
     def __init__(self, node):
         pycd3.INodeFactory.__init__(self)
         self.node = node
@@ -45,8 +45,8 @@ class File_Reader (pycd3.Node):
         
         print "init node"
         self.addParameter("", self.inflow)
-        self.addParameter("Type H for height [mm] or F for flow [l/h]", self.decision)
-        self.addOutPort("out", self.out)
+        self.addParameter("Type_H_for_height_[mm]_or_F_for_flow_[l/h]", self.decision)
+        self.addOutPort("Outport", self.out)
         
         self.growing_t = 0.0
         self.row_to_get = 0
@@ -251,7 +251,7 @@ class File_Reader (pycd3.Node):
 
 def register(nr):
     for c in pycd3.Node.__subclasses__():
-        nf = NodeFactory(c)
+        nf = NodeFactoryFilereader(c)
         nf.__disown__()
         nr.addNodeFactory(nf)
         

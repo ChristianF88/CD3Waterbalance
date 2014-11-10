@@ -8,7 +8,7 @@ Created on Thu Oct 02 08:41:08 2014
 import sys
 import pycd3
 
-class NodeFactory(pycd3.INodeFactory):
+class NodeFactoryStormpipe(pycd3.INodeFactory):
     def __init__(self, node):
         pycd3.INodeFactory.__init__(self)
         self.node = node
@@ -67,7 +67,7 @@ class Stormwaterpipe(pycd3.Node):
 
 def register(nr):
     for c in pycd3.Node.__subclasses__():
-        nf = NodeFactory(c)
+        nf = NodeFactoryStormpipe(c)
         nf.__disown__()
         nr.addNodeFactory(nf)
         

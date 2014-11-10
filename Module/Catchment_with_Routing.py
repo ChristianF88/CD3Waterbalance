@@ -9,26 +9,26 @@ import sys
 import pycd3
 import math
 
-class NodeFactory(pycd3.INodeFactory):
-    def __init__(self, node):
-        pycd3.INodeFactory.__init__(self)
-        self.node = node
-        print "NodeFactory.__init__"
-        
-    def getNodeName(self):
-        print "NodeFactory.getName"
-        return self.node.__name__
-        
-    def createNode(self):
-        print "NodeFactory.createNode"
-        n = self.node()
-        n.__disown__()
-        print "NodeFactory.disowned"
-        return n
-        
-    def getSource(self):
-        print "NodeFactory.getSource"
-        return "Addons.py"
+#class NodeFactoryCatchmentwithRouting(pycd3.INodeFactory):
+#    def __init__(self, node):
+#        pycd3.INodeFactory.__init__(self)
+#        self.node = node
+#        print "NodeFactory.__init__"
+#        
+#    def getNodeName(self):
+#        print "NodeFactory.getName"
+#        return self.node.__name__
+#        
+#    def createNode(self):
+#        print "NodeFactory.createNode"
+#        n = self.node()
+#        n.__disown__()
+#        print "NodeFactory.disowned"
+#        return n
+#        
+#    def getSource(self):
+#        print "NodeFactory.getSource"
+#        return "Addons.py"
 
 class Catchment_w_Routing(pycd3.Node):
     def __init__(self):
@@ -47,58 +47,58 @@ class Catchment_w_Routing(pycd3.Node):
         self.addInPort("Rain", self.rain)
         self.addInPort("Evapotranspiration", self.evapo)
         self.addInPort("Inflow", self.inflow)
-        self.addOutPort("Possible Infiltration", self.possible_infiltr)
-        self.addOutPort("Actual Infiltration", self.actual_infiltr)
+        self.addOutPort("Possible_Infiltration", self.possible_infiltr)
+        self.addOutPort("Actual_Infiltration", self.actual_infiltr)
         self.addOutPort("Runoff", self.runoff)
-        self.addOutPort("Collected Water", self.collected_w)
-        self.addOutPort("Outdoor Demand", self.outdoor_use)
+        self.addOutPort("Collected_Water", self.collected_w)
+        self.addOutPort("Outdoor_Demand", self.outdoor_use)
         
         #Catchment area + fraction info of pervious and impervious parts
         self.area_width = pycd3.Double(10)
-        self.addParameter("Catchment Width [m]", self.area_width)
+        self.addParameter("Catchment_Width_[m]", self.area_width)
         self.area_length = pycd3.Double(100)
-        self.addParameter("Catchment Length [m]", self.area_length)
+        self.addParameter("Catchment_Length_[m]", self.area_length)
         self.perv_area = pycd3.Double(0.4)
-        self.addParameter("Fraktion of Pervious Area (pA) [-]", self.perv_area)
+        self.addParameter("Fraktion_of_Pervious_Area_(pA)_[-]", self.perv_area)
         self.imp_area_stormwater = pycd3.Double(0.4)
-        self.addParameter("Fraktion of Impervious Area to Stormwater Drain (iASD) [-]", self.imp_area_stormwater)
+        self.addParameter("Fraktion_of_Impervious_Area_to_Stormwater_Drain_(iASD)_[-]", self.imp_area_stormwater)
         self.imp_area_raintank = pycd3.Double(0.2)
-        self.addParameter("Fraktion of Impervious Area to Reservoir (iAR) [-]", self.imp_area_raintank)
+        self.addParameter("Fraktion_of_Impervious_Area_to_Reservoir_(iAR)_[-]", self.imp_area_raintank)
         
         #default values for gras (Wikipedia)
         self.Horton_initial_cap = pycd3.Double(0.9)                             
-        self.addParameter("Initial Infiltration Capacity [m/h]", self.Horton_initial_cap)
+        self.addParameter("Initial_Infiltration_Capacity_[m/h]", self.Horton_initial_cap)
         self.Horton_final_cap = pycd3.Double(0.29)                              
-        self.addParameter("Final Infiltration Capacity [m/h]", self.Horton_final_cap)
+        self.addParameter("Final_Infiltration_Capacity_[m/h]", self.Horton_final_cap)
         self.Horton_decay_constant = pycd3.Double(2.0)                          
-        self.addParameter("Decay Constant [1/min]", self.Horton_decay_constant)
+        self.addParameter("Decay_Constant_[1/min]", self.Horton_decay_constant)
         
         #default values for suburbs (scrip Prof. Krebs)
         self.depression_loss = pycd3.Double(1.5)                                
-        self.addParameter("Depression Loss [mm]", self.depression_loss)
+        self.addParameter("Depression_Loss_[mm]", self.depression_loss)
         
         #default values for (scrip Prof. Krebs)
         self.initial_loss = pycd3.Double(0.4)                                   
-        self.addParameter("Wetting Loss [mm]", self.initial_loss)
+        self.addParameter("Wetting_Loss_[mm]", self.initial_loss)
         
         #number of subareas for flowconcentration
         self.amount_subareas = pycd3.Double(1)
-        self.addParameter("Number of Subareas [-]", self.amount_subareas)
+        self.addParameter("Number_of-Subareas_[-]", self.amount_subareas)
         
         #Muskingum parameters K flowtime for entire catchment
         #divided by surface Area
         self.rain_veloc_coll = pycd3.Double(0.9)
-        self.addParameter("Runoff Velocity iAR [m/s]", self.rain_veloc_coll)
+        self.addParameter("Runoff_Velocity_iAR_[m/s]", self.rain_veloc_coll)
         self.muskingum_coll_X = pycd3.Double(0.04)
-        self.addParameter("Weighting Coefficient iAR [-]", self.muskingum_coll_X)
+        self.addParameter("Weighting_Coefficient_iAR_[-]", self.muskingum_coll_X)
         self.rain_veloc_runoff = pycd3.Double(0.7)
-        self.addParameter("Runoff Velocity iASD [m/s]", self.rain_veloc_runoff)
+        self.addParameter("Runoff_Velocity_iASD_[m/s]", self.rain_veloc_runoff)
         self.muskingum_runoff_X = pycd3.Double(0.05)
-        self.addParameter("Weighting Coefficient iASD [-]", self.muskingum_runoff_X)
+        self.addParameter("Weighting_Coefficient_iASD_[-]", self.muskingum_runoff_X)
         self.rain_veloc_runoff_perv = pycd3.Double(0.04)
-        self.addParameter("Runoff Velocity pA [m/s]", self.rain_veloc_runoff_perv)
+        self.addParameter("Runoff_Velocity_pA_[m/s]", self.rain_veloc_runoff_perv)
         self.muskingum_runoff_perv_X = pycd3.Double(0.06)
-        self.addParameter("Weighting Coefficient pA [-]", self.muskingum_runoff_perv_X)
+        self.addParameter("Weighting_Coefficient_pA_[-]", self.muskingum_runoff_perv_X)
         
         #storage and time values
         self.current_effective_rain_height = 0.0
@@ -342,11 +342,11 @@ class Catchment_w_Routing(pycd3.Node):
         #print "getClassName"
         return "Catchment_w_Routing"
 
-def register(nr):
-    for c in pycd3.Node.__subclasses__():
-        nf = NodeFactory(c)
-        nf.__disown__()
-        nr.addNodeFactory(nf)
+#def register(nr):
+#    for c in pycd3.Node.__subclasses__():
+#        nf = NodeFactoryCatchmentwithRouting(c)
+#        nf.__disown__()
+#        nr.addNodeFactory(nf)
         
 # def test():
 #     nr = pycd3.NodeRegistry()

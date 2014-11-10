@@ -8,7 +8,7 @@ Created on Thu Oct 02 08:41:08 2014
 import sys
 import pycd3
 
-class NodeFactory(pycd3.INodeFactory):
+class NodeFactoryCollector(pycd3.INodeFactory):
     def __init__(self, node):
         pycd3.INodeFactory.__init__(self)
         self.node = node
@@ -34,7 +34,7 @@ class Collector(pycd3.Node):
         pycd3.Node.__init__(self)
         self.outflow = pycd3.Flow()
         self.numberof_in_ports = pycd3.Integer(2)
-        self.addParameter("Number of Inports", self.numberof_in_ports)            
+        self.addParameter("Number_of_Inports", self.numberof_in_ports)            
         
     def init(self, start, stop, dt):
         print start
@@ -44,7 +44,7 @@ class Collector(pycd3.Node):
         
         for i in range(self.numberof_in_ports):
             exec 'self.Inport'+str(i+1)+'=pycd3.Flow()'
-            exec 'self.addInPort("Inport'+str(i+1)+'", self.Inport'+str(i+1)+')'        
+            exec 'self.addInPort("Inport_'+str(i+1)+'", self.Inport'+str(i+1)+')'        
         
         self.addOutPort("Outport", self.outflow)
         
@@ -67,7 +67,7 @@ class Collector(pycd3.Node):
 
 def register(nr):
     for c in pycd3.Node.__subclasses__():
-        nf = NodeFactory(c)
+        nf = NodeFactoryCollector(c)
         nf.__disown__()
         nr.addNodeFactory(nf)
         

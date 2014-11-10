@@ -9,7 +9,7 @@ import sys
 import pycd3
 from numpy import floor
 
-class NodeFactory(pycd3.INodeFactory):
+class NodeFactoryPatternImplementer(pycd3.INodeFactory):
     def __init__(self, node):
         pycd3.INodeFactory.__init__(self)
         self.node = node
@@ -36,8 +36,8 @@ class Pattern_Impl(pycd3.Node):
         self.input = pycd3.Flow()
         self.output = pycd3.Flow()
         print "init node"
-        self.addInPort("input", self.input)
-        self.addOutPort("output", self.output)
+        self.addInPort("Inport", self.input)
+        self.addOutPort("Outport", self.output)
         
         
         
@@ -71,7 +71,7 @@ class Pattern_Impl(pycd3.Node):
 
 def register(nr):
     for c in pycd3.Node.__subclasses__():
-        nf = NodeFactory(c)
+        nf = NodeFactoryPatternImplementer(c)
         nf.__disown__()
         nr.addNodeFactory(nf)
         

@@ -9,28 +9,28 @@ Created on Thu Oct 02 08:41:08 2014
 import sys
 import pycd3
 
-class NodeFactory(pycd3.INodeFactory):
-    def __init__(self, node):
-        pycd3.INodeFactory.__init__(self)
-        self.node = node
-        print "NodeFactory.__init__"
-        
-    def getNodeName(self):
-        print "NodeFactory.getName"
-        return self.node.__name__
-        
-    def createNode(self):
-        print "NodeFactory.createNode"
-        n = self.node()
-        n.__disown__()
-        print "NodeFactory.disowned"
-        return n
-        
-    def getSource(self):
-        print "NodeFactory.getSource"
-        return "Addons.py"
+#class NodeFactoryPWR(pycd3.INodeFactory):
+#    def __init__(self, node):
+#        pycd3.INodeFactory.__init__(self)
+#        self.node = node
+#        print "NodeFactory.__init__"
+#        
+#    def getNodeName(self):
+#        print "NodeFactory.getName"
+#        return self.node.__name__
+#        
+#    def createNode(self):
+#        print "NodeFactory.createNode"
+#        n = self.node()
+#        n.__disown__()
+#        print "NodeFactory.disowned"
+#        return n
+#        
+#    def getSource(self):
+#        print "NodeFactory.getSource"
+#        return "Addons.py"
 
-class PWR(pycd3.Node):
+class Potable_Water_Resorvoir(pycd3.Node):
     def __init__(self):
         pycd3.Node.__init__(self)
         self.pot_w = pycd3.Flow()
@@ -64,13 +64,13 @@ class PWR(pycd3.Node):
     
     def getClassName(self):
         print "getClassName"
-        return "PWR"
+        return "Potable_Water_Resorvoir"
 
-def register(nr):
-    for c in pycd3.Node.__subclasses__():
-        nf = NodeFactory(c)
-        nf.__disown__()
-        nr.addNodeFactory(nf)
+#def register(nr):
+#    for c in pycd3.Node.__subclasses__():
+#        nf = NodeFactoryPWR(c)
+#        nf.__disown__()
+#        nr.addNodeFactory(nf)
         
 # def test():
 #     nr = pycd3.NodeRegistry()

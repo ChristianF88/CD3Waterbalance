@@ -8,26 +8,26 @@ Created on Thu Oct 02 08:41:08 2014
 import sys
 import pycd3
 
-class NodeFactory(pycd3.INodeFactory):
-    def __init__(self, node):
-        pycd3.INodeFactory.__init__(self)
-        self.node = node
-        print "NodeFactory.__init__"
-        
-    def getNodeName(self):
-        print "NodeFactory.getName"
-        return self.node.__name__
-        
-    def createNode(self):
-        print "NodeFactory.createNode"
-        n = self.node()
-        n.__disown__()
-        print "NodeFactory.disowned"
-        return n
-        
-    def getSource(self):
-        print "NodeFactory.getSource"
-        return "Addons.py"
+#class NodeFactoryHousehold(pycd3.INodeFactory):
+#    def __init__(self, node):
+#        pycd3.INodeFactory.__init__(self)
+#        self.node = node
+#        print "NodeFactory.__init__"
+#        
+#    def getNodeName(self):
+#        print "NodeFactory.getName"
+#        return self.node.__name__
+#        
+#    def createNode(self):
+#        print "NodeFactory.createNode"
+#        n = self.node()
+#        n.__disown__()
+#        print "NodeFactory.disowned"
+#        return n
+#        
+#    def getSource(self):
+#        print "NodeFactory.getSource"
+#        return "Addons.py"
 
 class Household(pycd3.Node):
     def __init__(self):
@@ -44,18 +44,21 @@ class Household(pycd3.Node):
         self.tap = pycd3.Flow()
         self.washing_machine = pycd3.Flow()
         self.dishwasher = pycd3.Flow() 
+        #self.decision = pycd3.String("")
         
-        self.addOutPort("Black Water", self.black_w)
-        self.addOutPort("Grey Water", self.grey_w)
-        self.addOutPort("Potable Water", self.pot_w)
-        self.addOutPort("Non Potable Water", self.nonpot_w)
-        self.addInPort("Outdoor Demand", self.outdoor_demand)
-        self.addInPort("Bathtub [l/h]", self.bath_tub)
-        self.addInPort("Shower [l/h]", self.shower)
-        self.addInPort("Toilet [l/h]", self.toilet)
-        self.addInPort("Tap [l/h]", self.tap)
-        self.addInPort("Washing_Machine [l/h]", self.washing_machine)
-        self.addInPort("Dishwasher [l/h]", self.dishwasher)
+        self.addOutPort("Black_Water", self.black_w)
+        self.addOutPort("Grey_Water", self.grey_w)
+        self.addOutPort("Potable_Water", self.pot_w)
+        self.addOutPort("Non_Potable_Water", self.nonpot_w)
+        self.addInPort("Outdoor_Demand", self.outdoor_demand)
+        self.addInPort("Bathtub_[l/h]", self.bath_tub)
+        self.addInPort("Shower_[l/h]", self.shower)
+        self.addInPort("Toilet_[l/h]", self.toilet)
+        self.addInPort("Tap_[l/h]", self.tap)
+        self.addInPort("Washing_Machine_[l/h]", self.washing_machine)
+        self.addInPort("Dishwasher_[l/h]", self.dishwasher)
+        self.numberof_out_ports = pycd3.Integer(2)
+        self.addParameter("Number_of_Outports", self.numberof_out_ports)     
         
         print "init node"
         
@@ -78,12 +81,12 @@ class Household(pycd3.Node):
         #print "getClassName"
         return "Household"
 
-def register(nr):
-    for c in pycd3.Node.__subclasses__():
-        nf = NodeFactory(c)
-        nf.__disown__()
-        nr.addNodeFactory(nf)
-        
+#def register(nr):
+#    for c in pycd3.Node.__subclasses__():
+#        nf = NodeFactoryHousehold(c)
+#        nf.__disown__()
+#        nr.addNodeFactory(nf)
+#        
 # def test():
 #     nr = pycd3.NodeRegistry()
 #     nf = NodeFactory(Household).__disown__()
