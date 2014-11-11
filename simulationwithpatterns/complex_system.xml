@@ -62,9 +62,9 @@
                 <parameter name="Fraktion_of_Pervious_Area_(pA)_[-]" type="double" value="0.17999999999999999"/>
                 <parameter name="Initial_Infiltration_Capacity_[m/h]" type="double" value="0.59999999999999998"/>
                 <parameter name="Number_of-Subareas_[-]" type="double" value="2"/>
-                <parameter name="Runoff_Velocity_iAR_[m/s]" type="double" value="0.69999999999999996"/>
-                <parameter name="Runoff_Velocity_iASD_[m/s]" type="double" value="0.59999999999999998"/>
-                <parameter name="Runoff_Velocity_pA_[m/s]" type="double" value="0.40000000000000002"/>
+                <parameter name="Runoff_Velocity_iAR_[m/s]" type="double" value="0.04"/>
+                <parameter name="Runoff_Velocity_iASD_[m/s]" type="double" value="0.03"/>
+                <parameter name="Runoff_Velocity_pA_[m/s]" type="double" value="0.02"/>
                 <parameter name="Weighting_Coefficient_iAR_[-]" type="double" value="0.040000000000000001"/>
                 <parameter name="Weighting_Coefficient_iASD_[-]" type="double" value="0.050000000000000003"/>
                 <parameter name="Weighting_Coefficient_pA_[-]" type="double" value="0.059999999999999998"/>
@@ -81,9 +81,9 @@
                 <parameter name="Fraktion_of_Pervious_Area_(pA)_[-]" type="double" value="0.28"/>
                 <parameter name="Initial_Infiltration_Capacity_[m/h]" type="double" value="0.8"/>
                 <parameter name="Number_of-Subareas_[-]" type="double" value="1"/>
-                <parameter name="Runoff_Velocity_iAR_[m/s]" type="double" value="0.5"/>
-                <parameter name="Runoff_Velocity_iASD_[m/s]" type="double" value="0.6"/>
-                <parameter name="Runoff_Velocity_pA_[m/s]" type="double" value="0.40000000000000002"/>
+                <parameter name="Runoff_Velocity_iAR_[m/s]" type="double" value="0.07"/>
+                <parameter name="Runoff_Velocity_iASD_[m/s]" type="double" value="0.06"/>
+                <parameter name="Runoff_Velocity_pA_[m/s]" type="double" value="0.03"/>
                 <parameter name="Weighting_Coefficient_iAR_[-]" type="double" value="0.06"/>
                 <parameter name="Weighting_Coefficient_iASD_[-]" type="double" value="0.05"/>
                 <parameter name="Weighting_Coefficient_pA_[-]" type="double" value="0.06"/>
@@ -100,9 +100,9 @@
                 <parameter name="Fraktion_of_Pervious_Area_(pA)_[-]" type="double" value="0.10"/>
                 <parameter name="Initial_Infiltration_Capacity_[m/h]" type="double" value="0.59999999999999998"/>
                 <parameter name="Number_of-Subareas_[-]" type="double" value="2"/>
-                <parameter name="Runoff_Velocity_iAR_[m/s]" type="double" value="0.69999999999999996"/>
-                <parameter name="Runoff_Velocity_iASD_[m/s]" type="double" value="0.59999999999999998"/>
-                <parameter name="Runoff_Velocity_pA_[m/s]" type="double" value="0.40000000000000002"/>
+                <parameter name="Runoff_Velocity_iAR_[m/s]" type="double" value="0.06999999999999999"/>
+                <parameter name="Runoff_Velocity_iASD_[m/s]" type="double" value="0.05999999999999999"/>
+                <parameter name="Runoff_Velocity_pA_[m/s]" type="double" value="0.04000000000000000"/>
                 <parameter name="Weighting_Coefficient_iAR_[-]" type="double" value="0.040000000000000001"/>
                 <parameter name="Weighting_Coefficient_iASD_[-]" type="double" value="0.050000000000000003"/>
                 <parameter name="Weighting_Coefficient_pA_[-]" type="double" value="0.059999999999999998"/>
@@ -119,9 +119,9 @@
                 <parameter name="Fraktion_of_Pervious_Area_(pA)_[-]" type="double" value="0.46"/>
                 <parameter name="Initial_Infiltration_Capacity_[m/h]" type="double" value="0.59999999999999998"/>
                 <parameter name="Number_of-Subareas_[-]" type="double" value="1"/>
-                <parameter name="Runoff_Velocity_iAR_[m/s]" type="double" value="0.69999999999999996"/>
-                <parameter name="Runoff_Velocity_iASD_[m/s]" type="double" value="0.59999999999999998"/>
-                <parameter name="Runoff_Velocity_pA_[m/s]" type="double" value="0.40000000000000002"/>
+                <parameter name="Runoff_Velocity_iAR_[m/s]" type="double" value="0.08"/>
+                <parameter name="Runoff_Velocity_iASD_[m/s]" type="double" value="0.06"/>
+                <parameter name="Runoff_Velocity_pA_[m/s]" type="double" value="0.04"/>
                 <parameter name="Weighting_Coefficient_iAR_[-]" type="double" value="0.040000000000000001"/>
                 <parameter name="Weighting_Coefficient_iASD_[-]" type="double" value="0.050000000000000003"/>
                 <parameter name="Weighting_Coefficient_pA_[-]" type="double" value="0.059999999999999998"/>
@@ -138,9 +138,9 @@
                 <parameter name="Fraktion_of_Pervious_Area_(pA)_[-]" type="double" value="0.0"/>
                 <parameter name="Initial_Infiltration_Capacity_[m/h]" type="double" value="0.59999999999999998"/>
                 <parameter name="Number_of-Subareas_[-]" type="double" value="2"/>
-                <parameter name="Runoff_Velocity_iAR_[m/s]" type="double" value="0.69999999999999996"/>
-                <parameter name="Runoff_Velocity_iASD_[m/s]" type="double" value="0.59999999999999998"/>
-                <parameter name="Runoff_Velocity_pA_[m/s]" type="double" value="0.40000000000000002"/>
+                <parameter name="Runoff_Velocity_iAR_[m/s]" type="double" value="0.03"/>
+                <parameter name="Runoff_Velocity_iASD_[m/s]" type="double" value="0.021"/>
+                <parameter name="Runoff_Velocity_pA_[m/s]" type="double" value="0.008"/>
                 <parameter name="Weighting_Coefficient_iAR_[-]" type="double" value="0.040000000000000001"/>
                 <parameter name="Weighting_Coefficient_iASD_[-]" type="double" value="0.050000000000000003"/>
                 <parameter name="Weighting_Coefficient_pA_[-]" type="double" value="0.059999999999999998"/>

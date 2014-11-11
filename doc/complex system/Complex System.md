@@ -167,11 +167,11 @@ Included BLocks:
 |   Initial Infiltration Capacity [m/h]  |  0.6 | 
 |   Number of Subareas [-]  |  2 | 
 |   Wetting Loss [mm]  |  0.39 | 
-|   Runoff Velocity iAR [m/s]  |  0.7 | 
+|   Runoff Velocity iAR [m/s]  |  0.04 | 
 |   Weighting Coefficient iAR [-]  |  0.04 | 
-|   Runoff Velocity iASD [m/s]  |  0.6 | 
+|   Runoff Velocity iASD [m/s]  |  0.03 | 
 |   Weighting Coefficient iASD [-]  |  0.05 | 
-|   Runoff Velocity pA [m/s]  |  0.4 | 
+|   Runoff Velocity pA [m/s]  |  0.02 | 
 |   Weighting Coefficient pA [-]  |  0.06 | 
 
 #  
@@ -191,11 +191,11 @@ Included BLocks:
 |   Initial Infiltration Capacity [m/h]  |  0.8 | 
 |   Number of Subareas [-]  |  1 | 
 |   Wetting Loss [mm]  |  0.4 | 
-|   Runoff Velocity iAR [m/s]  |  0.5 | 
+|   Runoff Velocity iAR [m/s]  |  0.07 | 
 |   Weighting Coefficient iAR [-]  |  0.06 | 
-|   Runoff Velocity iASD [m/s]  |  0.6 | 
+|   Runoff Velocity iASD [m/s]  |  0.06 | 
 |   Weighting Coefficient iASD [-]  |  0.05 | 
-|   Runoff Velocity pA [m/s]  |  0.4 | 
+|   Runoff Velocity pA [m/s]  |  0.03 | 
 |   Weighting Coefficient pA [-]  |  0.06 | 
 
 #   
@@ -215,11 +215,11 @@ Included BLocks:
 |   Initial Infiltration Capacity [m/h]  |  0.6 | 
 |   Number of Subareas [-]  |  2 | 
 |   Wetting Loss [mm]  |  0.3 | 
-|   Runoff Velocity iAR [m/s]  |  0.7 | 
+|   Runoff Velocity iAR [m/s]  |  0.07 | 
 |   Weighting Coefficient iAR [-]  |  0.04 | 
-|   Runoff Velocity iASD [m/s]  |  0.6 | 
+|   Runoff Velocity iASD [m/s]  |  0.06 | 
 |   Weighting Coefficient iASD [-]  |  0.05 | 
-|   Runoff Velocity pA [m/s]  |  0.4 | 
+|   Runoff Velocity pA [m/s]  |  0.04 | 
 |   Weighting Coefficient pA [-]  |  0.06 |
 
 # 
@@ -239,11 +239,11 @@ Included BLocks:
 |   Initial Infiltration Capacity [m/h]  |  0.6 | 
 |   Number of Subareas [-]  |  1 | 
 |   Wetting Loss [mm]  |  0.39 | 
-|   Runoff Velocity iAR [m/s]  |  0.7 | 
+|   Runoff Velocity iAR [m/s]  |  0.08 | 
 |   Weighting Coefficient iAR [-]  |  0.04 | 
-|   Runoff Velocity iASD [m/s]  |  0.6 | 
+|   Runoff Velocity iASD [m/s]  |  0.06 | 
 |   Weighting Coefficient iASD [-]  |  0.05 | 
-|   Runoff Velocity pA [m/s]  |  0.4 | 
+|   Runoff Velocity pA [m/s]  |  0.04 | 
 |   Weighting Coefficient pA [-]  |  0.06 |
 
 # 
@@ -253,7 +253,7 @@ Included BLocks:
 | Variable  |  Value  |
 | :------------ |:---------------:|
 |   Length [m]   |  30 | 
-|   Width [m]   |  19 | 
+|   Width [m]   |  40 | 
 |   Decay Constant [1/min]   |  1.9 | 
 |   Depression Loss [mm]  |  1.5 | 
 |   Final Infiltration Capacity [m/h]   |  0.21 | 
@@ -263,11 +263,11 @@ Included BLocks:
 |   Initial Infiltration Capacity [m/h]  |  0.6 | 
 |   Number of Subareas [-]  |  2 | 
 |   Wetting Loss [mm]  |  0.39 | 
-|   Runoff Velocity iAR [m/s]  |  0.7 | 
+|   Runoff Velocity iAR [m/s]  |  0.03 | 
 |   Weighting Coefficient iAR [-]  |  0.04 | 
-|   Runoff Velocity iASD [m/s]  |  0.6 | 
+|   Runoff Velocity iASD [m/s]  |  0.021 | 
 |   Weighting Coefficient iASD [-]  |  0.05 | 
-|   Runoff Velocity pA [m/s]  |  0.4 | 
+|   Runoff Velocity pA [m/s]  |  0.008 | 
 |   Weighting Coefficient pA [-]  |  0.06 | 
 
 # 
