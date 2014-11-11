@@ -39,13 +39,13 @@ class Raintank(pycd3.Node):
         self.check_storage = pycd3.Flow()
         #dir (self.inf)
         print "init node"
-        self.addInPort("collected_w", self.collected_w)
-        self.addInPort("non_pot_in", self.non_pot_in)
-        self.addOutPort("overflow", self.overflow)
-        self.addOutPort("non_pot_out", self.non_pot_out)
-        self.addOutPort("check_storage", self.check_storage)
+        self.addInPort("Collected_Water", self.collected_w)
+        self.addInPort("Non_Potable_In", self.non_pot_in)
+        self.addOutPort("Overflow", self.overflow)
+        self.addOutPort("Additional_Demand", self.non_pot_out)
+        self.addOutPort("Check_Storage", self.check_storage)
         self.storage_v = pycd3.Double(20.0)
-        self.addParameter("storage_v", self.storage_v)
+        self.addParameter("Storage_Volume [m^3]", self.storage_v)
 
         self.current_volume = 0.0
 

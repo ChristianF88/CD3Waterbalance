@@ -8,7 +8,7 @@ Created on Thu Oct 02 08:41:08 2014
 import sys
 import pycd3
 
-#class NodeFactorySewer2(pycd3.INodeFactory):
+#class NodeFactoryRaintank(pycd3.INodeFactory):
 #    def __init__(self, node):
 #        pycd3.INodeFactory.__init__(self)
 #        self.node = node
@@ -29,17 +29,23 @@ import pycd3
 #        print "NodeFactory.getSource"
 #        return "Addons.py"
 
-class Sewer2(pycd3.Node):
+class Greywatertank(pycd3.Node):
     def __init__(self):
         pycd3.Node.__init__(self)
-        self.black_w = pycd3.Flow()
-        self.discharged_V = pycd3.Flow()
+        self.greywaterin = pycd3.Flow()
+        self.greywaterout = pycd3.Flow()
+        self.check_storage = pycd3.Flow()
+        self.non_pot_out = pycd3.Flow()
+        
         #dir (self.inf)
         print "init node"
-        self.addInPort("black_w", self.black_w)
-        self.addOutPort("discharged_V", self.discharged_V)
-        self.current_V=0.0
-               
+        self.addInPort("Grey_Water_In", self.greywaterin)
+        self.addInPort("Treated_Grey_Water_Out", self.greywaterout)
+        self.addOutPort("Current_Volume",self.check_storage)
+        self.addOutPort("Additional_Demand",self.non_pot_out)
+        self.myyield = pycd3.Double(0.9)
+        self.addParameter("Yield_of_Treatment [-]", self.myyield)
+
         
         #self.addOutPort("gw", self.gw)
         #self.addInPort("in", self.inf)
@@ -48,24 +54,33 @@ class Sewer2(pycd3.Node):
         print start
         print stop
         print dt
+        self.current_volume = 0.0
         return True
         
     def f(self, current, dt):
         
-        sewer_w = self.black_w[0]
-        self.current_V += sewer_w
-        self.discharged_V[0] = self.current_V
+        self.current_volume += self.greywaterin[0]*self.myyield - self.greywaterout[0]
+        
+        if self.current_volume >= 0:
+            self.non_pot_out[0] = 0.0
+            self.check_storage[0] = self.current_volume
+        else:
+            self.non_pot_out[0] = - self.non_pot_in[0]
+            self.current_volume = 0.0
+            self.check_storage[0] = self.current_volume
+            
        
-
+        
+      
         return dt
     
     def getClassName(self):
-        print "getClassName"
-        return "Sewer2"
+        #print "getClassName"
+        return "Greywatertank"
 
 #def register(nr):
 #    for c in pycd3.Node.__subclasses__():
-#        nf = NodeFactorySewer2(c)
+#        nf = NodeFactoryRaintank(c)
 #        nf.__disown__()
 #        nr.addNodeFactory(nf)
         

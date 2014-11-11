@@ -95,7 +95,7 @@ class Catchment_w_Routing(pycd3.Node):
         self.addParameter("Runoff_Velocity_iASD_[m/s]", self.rain_veloc_runoff)
         self.muskingum_runoff_X = pycd3.Double(0.05)
         self.addParameter("Weighting_Coefficient_iASD_[-]", self.muskingum_runoff_X)
-        self.rain_veloc_runoff_perv = pycd3.Double(0.04)
+        self.rain_veloc_runoff_perv = pycd3.Double(0.4)
         self.addParameter("Runoff_Velocity_pA_[m/s]", self.rain_veloc_runoff_perv)
         self.muskingum_runoff_perv_X = pycd3.Double(0.06)
         self.addParameter("Weighting_Coefficient_pA_[-]", self.muskingum_runoff_perv_X)

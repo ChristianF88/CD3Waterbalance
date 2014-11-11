@@ -31,6 +31,7 @@ import pycd3
 
 class Household(pycd3.Node):
     def __init__(self):
+        print "init start hh"
         pycd3.Node.__init__(self)
         
         self.black_w = pycd3.Flow()
@@ -57,8 +58,8 @@ class Household(pycd3.Node):
         self.addInPort("Tap_[l/h]", self.tap)
         self.addInPort("Washing_Machine_[l/h]", self.washing_machine)
         self.addInPort("Dishwasher_[l/h]", self.dishwasher)
-        self.numberof_out_ports = pycd3.Integer(2)
-        self.addParameter("Number_of_Outports", self.numberof_out_ports)     
+#        self.numberof_out_ports = pycd3.Integer(2)
+#        self.addParameter("Number_of_Outports", self.numberof_out_ports)     
         
         print "init node"
         

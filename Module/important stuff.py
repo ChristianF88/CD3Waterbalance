@@ -85,11 +85,21 @@ outflow = memory
         
 #Erweiterung Patternimplementer
 import numpy as np
+from numpy import arange, mean, asarray
 nu = 13/24.
 sigma = 2.5/24.
 t=arange(0,1-1/24,1/24.)
 y = 1/(sigma*np.sqrt(2*pi))*np.exp(-1/2.*((t-nu)/sigma)**2)
 f =y/mean(y)
 pattern=asarray([t,f]).transpose().tolist()
-pattern.append(pattern[0])
+pattern.append([1.0, pattern[0][1]])
 
+dt=360
+sundown=20.5
+zenith=13
+deviation = (sundown - zenith)/3./24.      
+xtime=arange(0,1.0-dt/24./3600.,dt/24./3600.)
+gauss_curve = 1/(deviation*np.sqrt(2*pi))*np.exp(-1/2.*((xtime-zenith/24.)/deviation)**2)
+factor =gauss_curve/mean(gauss_curve)
+pattern=asarray([xtime,factor]).transpose().tolist()
+pattern.append([1.0, pattern[0][1]])

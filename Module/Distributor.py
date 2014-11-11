@@ -8,26 +8,26 @@ Created on Thu Oct 02 08:41:08 2014
 import sys
 import pycd3
 
-class NodeFactoryDistributor(pycd3.INodeFactory):
-    def __init__(self, node):
-        pycd3.INodeFactory.__init__(self)
-        self.node = node
-        print "NodeFactory.__init__"
-        
-    def getNodeName(self):
-        print "NodeFactory.getName"
-        return self.node.__name__
-        
-    def createNode(self):
-        print "NodeFactory.createNode"
-        n = self.node()
-        n.__disown__()
-        print "NodeFactory.disowned"
-        return n
-        
-    def getSource(self):
-        print "NodeFactory.getSource"
-        return "Addons.py"
+#class NodeFactoryDistributor(pycd3.INodeFactory):
+#    def __init__(self, node):
+#        pycd3.INodeFactory.__init__(self)
+#        self.node = node
+#        print "NodeFactory.__init__"
+#        
+#    def getNodeName(self):
+#        print "NodeFactory.getName"
+#        return self.node.__name__
+#        
+#    def createNode(self):
+#        print "NodeFactory.createNode"
+#        n = self.node()
+#        n.__disown__()
+#        print "NodeFactory.disowned"
+#        return n
+#        
+#    def getSource(self):
+#        print "NodeFactory.getSource"
+#        return "Addons.py"
 
 class Distributor(pycd3.Node):
     def __init__(self):
@@ -61,9 +61,9 @@ class Distributor(pycd3.Node):
         print "getClassName"
         return "Distributor"
 
-def register(nr):
-    for c in pycd3.Node.__subclasses__():
-        nf = NodeFactoryDistributor(c)
-        nf.__disown__()
-        nr.addNodeFactory(nf)
-        
+#def register(nr):
+#    for c in pycd3.Node.__subclasses__():
+#        nf = NodeFactoryDistributor(c)
+#        nf.__disown__()
+#        nr.addNodeFactory(nf)
+#        
