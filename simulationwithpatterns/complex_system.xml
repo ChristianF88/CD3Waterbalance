@@ -25,27 +25,27 @@
             </node>
 			<node id="File_Reader_2" class="File_Reader">
                 <parameter name="" type="string" value="../inputfiles/bath.ixx"/>
-                <parameter name="Type_H_for_height_[mm]_or_F_for_flow_[l/h]" type="string" value="H"/>
+                <parameter name="Type_H_for_height_[mm]_or_F_for_flow_[l/h]" type="string" value="F"/>
             </node>
 			<node id="File_Reader_3" class="File_Reader">
                 <parameter name="" type="string" value="../inputfiles/dishwasher.ixx"/>
-                <parameter name="Type_H_for_height_[mm]_or_F_for_flow_[l/h]" type="string" value="H"/>
+                <parameter name="Type_H_for_height_[mm]_or_F_for_flow_[l/h]" type="string" value="F"/>
             </node>
 			<node id="File_Reader_4" class="File_Reader">
                 <parameter name="" type="string" value="../inputfiles/shower.ixx"/>
-                <parameter name="Type_H_for_height_[mm]_or_F_for_flow_[l/h]" type="string" value="H"/>
+                <parameter name="Type_H_for_height_[mm]_or_F_for_flow_[l/h]" type="string" value="F"/>
             </node>
 			<node id="File_Reader_5" class="File_Reader">
                 <parameter name="" type="string" value="../inputfiles/toilet.ixx"/>
-                <parameter name="Type_H_for_height_[mm]_or_F_for_flow_[l/h]" type="string" value="H"/>
+                <parameter name="Type_H_for_height_[mm]_or_F_for_flow_[l/h]" type="string" value="F"/>
             </node>
 			<node id="File_Reader_6" class="File_Reader">
                 <parameter name="" type="string" value="../inputfiles/tap.ixx"/>
-                <parameter name="Type_H_for_height_[mm]_or_F_for_flow_[l/h]" type="string" value="H"/>
+                <parameter name="Type_H_for_height_[mm]_or_F_for_flow_[l/h]" type="string" value="F"/>
             </node>
 			<node id="File_Reader_7" class="File_Reader">
                 <parameter name="" type="string" value="../inputfiles/washing_machine.ixx"/>
-                <parameter name="Type_H_for_height_[mm]_or_F_for_flow_[l/h]" type="string" value="H"/>
+                <parameter name="Type_H_for_height_[mm]_or_F_for_flow_[l/h]" type="string" value="F"/>
             </node>
 			<node id="Pattern_Impl_0" class="Pattern_Impl">
                 <parameter name="sun_zenith_[0-23h]" type="double" value="13"/>
@@ -212,6 +212,23 @@
             <node id="Sewer2_0" class="Sewer2"/>
 			<node id="Potable_Water_Resorvoir_0" class="Potable_Water_Resorvoir"/>
 			<node id="Greywatertank_0" class="Greywatertank">
+                <parameter name="Yield_of_Treatment [-]" type="double" value="0.90000000000000002"/>
+            </node>
+			<node id="FileOut_0" class="FileOut">
+                <parameter name="out_file_name" type="string" value="PotableWaterDemand.txt"/>
+            </node>
+			<node id="FileOut_1" class="FileOut">
+                <parameter name="out_file_name" type="string" value="GreyWaterTank.txt"/>
+            </node>
+			<node id="FileOut_2" class="FileOut">
+                <parameter name="out_file_name" type="string" value="Raintank1.txt"/>
+            </node>
+			<node id="FileOut_3" class="FileOut">
+                <parameter name="out_file_name" type="string" value="Raintank2.txt"/>
+            </node>
+			<node id="FileOut_4" class="FileOut">
+                <parameter name="out_file_name" type="string" value="Raintank2.txt"/>
+            </node>
 		</nodelist>
 		        <connectionlist>
 			<connection id="0">
@@ -610,6 +627,26 @@
                 <source node="Greywatertank_0" port="Additional_Demand"/>
                 <sink node="Potable_Water_Resorvoir_0" port="nonpot_w"/>
 			</connection>
+			<connection id="99">
+                <source node="Potable_Water_Resorvoir_0" port="demand"/>
+                <sink node="FileOut_0" port="in"/>
+			</connection>
+			<connection id="100">
+                <source node="Greywatertank_0" port="Current_Volume"/>
+                <sink node="FileOut_1" port="in"/>
+			</connection>
+			<connection id="101">
+                <source node="Raintank_0" port="Check_Storage"/>
+                <sink node="FileOut_1" port="in"/>
+			</connection>
+			<connection id="102">
+                <source node="Raintank_1" port="Check_Storage"/>
+                <sink node="FileOut_1" port="in"/>
+			</connection>
+			<connection id="103">
+                <source node="Raintank_2" port="Check_Storage"/>
+                <sink node="FileOut_1" port="in"/>
+			</connection>
         </connectionlist>
     </model>
     <gui>
@@ -642,6 +679,7 @@
 		<nodeposition id="Collector_4" x="-800" y="-375"/>
 		<nodeposition id="Collector_5" x="-800" y="-75"/>
 		<nodeposition id="Collector_6" x="-800" y="-225"/>
+		<nodeposition id="Collector_7" x="-800" y="600"/>
         <nodeposition id="Household_0" x="-1700" y="-475"/>
         <nodeposition id="Household_1" x="-1700" y="-275"/>
 		<nodeposition id="Household_2" x="-1700" y="-75"/>

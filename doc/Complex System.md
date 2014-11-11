@@ -2,7 +2,18 @@
 
 Included BLocks:
 
- - 
+ - 8 x File Reader
+ - 1 x Pattern Implementer
+ - 8 x Distributor
+ - 8 x Collector
+ - 5 x Catchment
+ - 5 x Household
+ - 3 x Raintank
+ - 1 x Grey Water Tank
+ - 1 x Stormwater Drain
+ - 1 x Sewer
+ - 1 x Potable Water Reservoir
+ - 5 x Fileout
  
 <br>
 
@@ -33,7 +44,7 @@ Included BLocks:
 | Variable  |  Value  |
 | :------------ |:---------------:|
 |   Inputfile   |  Bath | 
-|  Inputtype 	 |  H (Height) | 
+|  Inputtype 	 |  F (Flow) | 
 
 
 # 
@@ -43,16 +54,17 @@ Included BLocks:
 | Variable  |  Value  |
 | :------------ |:---------------:|
 |   Inputfile   |  Dishwasher | 
-|  Inputtype 	 |  H (Height) | 
+|  Inputtype 	 |  F (Flow)  | 
 
-# 
+#  
 
 #### File Reader #5
 
 | Variable  |  Value  |
 | :------------ |:---------------:|
 |   Inputfile   |  Shower | 
-|  Inputtype 	 |  H (Height) | 
+|  Inputtype 	 |  F (Flow)  | 
+
 # 
 
 #### File Reader #6
@@ -60,7 +72,7 @@ Included BLocks:
 | Variable  |  Value  |
 | :------------ |:---------------:|
 |   Inputfile   |  Toilet | 
-|  Inputtype 	 |  H (Height) | 
+|  Inputtype 	 |  F (Flow)  | 
 # 
 
 #### File Reader #7
@@ -68,7 +80,7 @@ Included BLocks:
 | Variable  |  Value  |
 | :------------ |:---------------:|
 |   Inputfile   |  Tap | 
-|  Inputtype 	 |  H (Height) | 
+|  Inputtype 	 |  F (Flow)  | 
 
 # 
 
@@ -77,7 +89,7 @@ Included BLocks:
 | Variable  |  Value  |
 | :------------ |:---------------:|
 |   Inputfile   |  Washing Machine | 
-|  Inputtype 	 |  H (Height) | 
+|  Inputtype 	 |  F (Flow)  | 
 
 
 # 
@@ -122,7 +134,7 @@ Included BLocks:
 | :------------ |:---------------:|
 |   Number of Inports   |  6 | 
 
-# 
+#  
 
 #### Collector #6
 
@@ -130,7 +142,7 @@ Included BLocks:
 | :------------ |:---------------:|
 |   Number of Inports   |  4 | 
 
-# 
+#  
 
 #### Collector #8
 
@@ -138,7 +150,7 @@ Included BLocks:
 | :------------ |:---------------:|
 |   Number of Inports   |  3 | 
 
-# 
+#  
 
 #### Catchment #1
 
@@ -162,7 +174,7 @@ Included BLocks:
 |   Runoff Velocity pA [m/s]  |  0.4 | 
 |   Weighting Coefficient pA [-]  |  0.06 | 
 
-# 
+#  
 
 #### Catchment #2
 
@@ -186,7 +198,7 @@ Included BLocks:
 |   Runoff Velocity pA [m/s]  |  0.4 | 
 |   Weighting Coefficient pA [-]  |  0.06 | 
 
-# 
+#   
 
 #### Catchment #3
 
@@ -210,7 +222,7 @@ Included BLocks:
 |   Runoff Velocity pA [m/s]  |  0.4 | 
 |   Weighting Coefficient pA [-]  |  0.06 |
 
-#
+# 
 
 #### Catchment #4
 
@@ -234,7 +246,7 @@ Included BLocks:
 |   Runoff Velocity pA [m/s]  |  0.4 | 
 |   Weighting Coefficient pA [-]  |  0.06 |
 
-#
+# 
 
 #### Catchment #5
 
@@ -245,9 +257,9 @@ Included BLocks:
 |   Decay Constant [1/min]   |  1.9 | 
 |   Depression Loss [mm]  |  1.5 | 
 |   Final Infiltration Capacity [m/h]   |  0.21 | 
-|   Fraction of Impervious Area to Reservoir (iAR) [-]  |  0.63 | 
-|   Fraction of Impervious Area to Stormwater Drain (iASD) [-]  |  0.19 | 
-|   Fraction of Pervious Area (pA) [-]  |  0.18 | 
+|   Fraction of Impervious Area to Reservoir (iAR) [-]  |  0.0 | 
+|   Fraction of Impervious Area to Stormwater Drain (iASD) [-]  |  1.0 | 
+|   Fraction of Pervious Area (pA) [-]  |  0.0 | 
 |   Initial Infiltration Capacity [m/h]  |  0.6 | 
 |   Number of Subareas [-]  |  2 | 
 |   Wetting Loss [mm]  |  0.39 | 
@@ -258,14 +270,14 @@ Included BLocks:
 |   Runoff Velocity pA [m/s]  |  0.4 | 
 |   Weighting Coefficient pA [-]  |  0.06 | 
 
-#
+# 
 #### Raintank #1
 
 | Variable  |  Value  |
 | :------------ |:---------------:|
 |   Storage Volume [m³]   |  5 | 
 
-# 
+#  
 
 #### Raintank #2
 
@@ -273,13 +285,21 @@ Included BLocks:
 | :------------ |:---------------:|
 |   Storage Volume [m³]   |  20 |
 
-# 
+#  
 
 #### Raintank #3
 
 | Variable  |  Value  |
 | :------------ |:---------------:|
 |   Storage Volume [m³]   |  10 |
+
+#  
+
+#### Greywatertank #1
+
+| Variable  |  Value  |
+| :------------ |:---------------:|
+|   Yield of Treatment [-]   |  0.9 |
 
 
 
@@ -288,16 +308,90 @@ Included BLocks:
 ## Layout Scheme
 
 
+>![alt text](https://raw.githubusercontent.com/ChristianF88/CD3Waterbalance/master/doc/complex%20system/path4459.png?raw=true)
 
+<br>
 
->![alt text](?raw=true)
+## Fileouts
 
+Connected to: 
 
+-	Raintanks
+-	Greywatertank
+- 	Potable Water Reservoir
+
+<br>
+
+## Ports
+
+| Block  | Number of Blocks | Connected [in, out] | Possible [in, out] |
+| :------------ |:---------------:|:---------------:|:---------------:|
+|     File Reader|8|  1 [0, 1] |  1 [0, 1] |
+|  Pattern Implementer|1|  2 [1, 1] |  2 [1, 1] |
+|  Distributor|8 | 6 [1, 5] |  6 [1, 5] |
+|  Catchment|5 | 5 [2, 3] |  8 [3, 5] |
+|  Collector| 8| a+1 [a, 1] |  a+1 [a, 1] | a(C1, C2, C3, C4, C5, C6, C7, C8) = {2, 2, 5, 6, 5, 4, 5, 3}
+| Household| 5| 11 [7, 4]|  11 [7, 4] | 
+|  Raintank|3 | 5 [2, 3] |  5 [2, 3] |
+|  Grey Water Tank|1 | 4 [2, 2] |  4 [2, 2] |
+|  Stormwater Drain| 1| 2 [2, 0] |  3 [2, 1] |
+|  Sewer| 1 |1 [1, 0] |  2 [1, 1] |
+| Potable Water Reservoir   | 1| 3 [2, 1] |  3 [2, 1] |
+| Fileout   | 5 | 1 [1, 0] |  2 [1, 1] |
+
+# 
+
+Number of Links = Connected (i) * Number of Blocks / 2 = 104 
+
+<br>
+
+## Thoughts
+
+- Check max time step for stability of muskingum
+- Greywatertank wastewater to sewer? at the moment its a sink 
 
 
 
 <br>
 
-##Thoughts
 
-- Check max time step for stability of muskingum
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
