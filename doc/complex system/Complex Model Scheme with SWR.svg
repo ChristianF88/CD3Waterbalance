@@ -14,7 +14,7 @@
    id="svg2"
    version="1.1"
    inkscape:version="0.48.4 r9939"
-   sodipodi:docname="Complex Model Scheme.svg">
+   sodipodi:docname="Complex Model Scheme with SWR.svg">
   <defs
      id="defs4" />
   <sodipodi:namedview
@@ -24,9 +24,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="1.4"
-     inkscape:cx="627.90439"
-     inkscape:cy="522.94723"
+     inkscape:zoom="0.7"
+     inkscape:cx="276.21242"
+     inkscape:cy="673.49153"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -43,7 +43,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title />
+        <dc:title></dc:title>
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -56,7 +56,7 @@
        d="m 37.601987,67.629565 0,34.143195 39.164266,0 0,-34.477935 z"
        id="path2985"
        inkscape:connector-curvature="0"
-       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\path4459.png"
+       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\withSWR.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200" />
     <path
@@ -64,15 +64,15 @@
        d="m 283.10511,166.72079 0,83.17743 34.83054,0 0,-83.17743 z"
        id="path2987"
        inkscape:connector-curvature="0"
-       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\path4459.png"
+       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\withSWR.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200" />
     <path
-       style="fill:none;stroke:#000000;stroke-width:0.94984645;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:1;stroke-opacity:1;stroke-dasharray:none"
-       d="m 553.94582,486.55962 0,54.28049 91.2121,0 0,-55.38825 -91.2121,0 z"
+       style="fill:none;stroke:#000000;stroke-width:0.88359183;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:1;stroke-opacity:1;stroke-dasharray:none"
+       d="m 561.76983,488.59208 0,50.49427 84.84979,0 0,-51.52476 -84.84979,0 z"
        id="path2989"
        inkscape:connector-curvature="0"
-       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\path4459.png"
+       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\withSWR.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200" />
     <text
@@ -82,7 +82,7 @@
        y="88.383286"
        id="text2991"
        sodipodi:linespacing="125%"
-       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\path4459.png"
+       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\withSWR.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200"><tspan
          sodipodi:role="line"
@@ -95,7 +95,7 @@
        d="m 40.951996,310.89628 0,34.1432 39.164267,0 0,-34.47794 z"
        id="path2985-1"
        inkscape:connector-curvature="0"
-       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\path4459.png"
+       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\withSWR.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200" />
     <text
@@ -105,7 +105,7 @@
        y="331.64999"
        id="text2991-7"
        sodipodi:linespacing="125%"
-       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\path4459.png"
+       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\withSWR.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200"><tspan
          sodipodi:role="line"
@@ -118,7 +118,7 @@
        d="m -186.33679,88.998419 0,34.143211 39.16426,0 0,-34.477951 z"
        id="path2985-0"
        inkscape:connector-curvature="0"
-       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\path4459.png"
+       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\withSWR.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200" />
     <text
@@ -128,7 +128,7 @@
        y="109.75211"
        id="text2991-9"
        sodipodi:linespacing="125%"
-       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\path4459.png"
+       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\withSWR.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200"><tspan
          sodipodi:role="line"
@@ -141,7 +141,7 @@
        d="m -186.18674,142.73895 0,34.14321 39.16427,0 0,-34.47794 z"
        id="path2985-8"
        inkscape:connector-curvature="0"
-       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\path4459.png"
+       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\withSWR.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200" />
     <text
@@ -151,7 +151,7 @@
        y="163.49265"
        id="text2991-2"
        sodipodi:linespacing="125%"
-       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\path4459.png"
+       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\withSWR.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200"><tspan
          sodipodi:role="line"
@@ -164,7 +164,7 @@
        d="m -185.68166,191.37379 0,34.1432 39.16427,0 0,-34.47794 z"
        id="path2985-5"
        inkscape:connector-curvature="0"
-       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\path4459.png"
+       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\withSWR.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200" />
     <text
@@ -174,7 +174,7 @@
        y="212.1275"
        id="text2991-1"
        sodipodi:linespacing="125%"
-       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\path4459.png"
+       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\withSWR.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200"><tspan
          sodipodi:role="line"
@@ -187,7 +187,7 @@
        d="m -184.71169,336.99297 0,34.1432 39.16427,0 0,-34.47794 z"
        id="path2985-11"
        inkscape:connector-curvature="0"
-       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\path4459.png"
+       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\withSWR.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200" />
     <text
@@ -197,7 +197,7 @@
        y="357.74667"
        id="text2991-5"
        sodipodi:linespacing="125%"
-       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\path4459.png"
+       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\withSWR.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200"><tspan
          sodipodi:role="line"
@@ -210,7 +210,7 @@
        d="m -185.2717,289.05342 0,34.14321 39.16428,0 0,-34.47795 z"
        id="path2985-7"
        inkscape:connector-curvature="0"
-       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\path4459.png"
+       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\withSWR.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200" />
     <text
@@ -220,7 +220,7 @@
        y="309.80713"
        id="text2991-6"
        sodipodi:linespacing="125%"
-       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\path4459.png"
+       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\withSWR.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200"><tspan
          sodipodi:role="line"
@@ -233,7 +233,7 @@
        d="m -185.88664,240.2136 0,34.1432 39.16427,0 0,-34.47793 z"
        id="path2985-4"
        inkscape:connector-curvature="0"
-       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\path4459.png"
+       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\withSWR.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200" />
     <text
@@ -243,7 +243,7 @@
        y="262.03241"
        id="text2991-23"
        sodipodi:linespacing="125%"
-       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\path4459.png"
+       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\withSWR.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200"><tspan
          sodipodi:role="line"
@@ -258,7 +258,7 @@
        y="211.42867"
        id="text3085"
        sodipodi:linespacing="125%"
-       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\path4459.png"
+       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\withSWR.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200"><tspan
          sodipodi:role="line"
@@ -271,7 +271,7 @@
        d="m 574.55066,143.3863 0,83.17744 34.83054,0 0,-83.17744 z"
        id="path2987-5"
        inkscape:connector-curvature="0"
-       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\path4459.png"
+       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\withSWR.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200" />
     <text
@@ -281,7 +281,7 @@
        y="188.09418"
        id="text3085-7"
        sodipodi:linespacing="125%"
-       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\path4459.png"
+       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\withSWR.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200"><tspan
          sodipodi:role="line"
@@ -290,34 +290,35 @@
          y="188.09418"
          style="font-size:15.43902397px">C2</tspan></text>
     <path
-       style="fill:none;stroke:#000000;stroke-width:0.91900003;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:1;stroke-opacity:1;stroke-dasharray:none"
-       d="m 508.2472,468.4222 0,83.17743 34.83054,0 0,-83.17743 z"
+       style="fill:none;stroke:#000000;stroke-width:0.98902595;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:1;stroke-opacity:1;stroke-dasharray:none"
+       d="m 508.79786,468.4222 0,83.17743 40.3408,0 0,-83.17743 z"
        id="path2987-18"
        inkscape:connector-curvature="0"
-       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\path4459.png"
+       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\withSWR.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200" />
     <text
        xml:space="preserve"
-       style="font-size:20.5853653px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
-       x="515.26532"
-       y="513.13007"
+       style="font-size:22.15392876px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       x="480.32639"
+       y="552.22955"
        id="text3085-9"
        sodipodi:linespacing="125%"
-       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\path4459.png"
+       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\withSWR.png"
        inkscape:export-xdpi="200"
-       inkscape:export-ydpi="200"><tspan
+       inkscape:export-ydpi="200"
+       transform="scale(1.076198,0.92919706)"><tspan
          sodipodi:role="line"
          id="tspan3087-2"
-         x="515.26532"
-         y="513.13007"
-         style="font-size:15.43902397px">C3</tspan></text>
+         x="480.32639"
+         y="552.22955"
+         style="font-size:16.61544609px">C3</tspan></text>
     <path
        style="fill:none;stroke:#000000;stroke-width:0.91900003;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:1;stroke-opacity:1;stroke-dasharray:none"
        d="m 726.87193,204.3098 0,83.17743 34.83054,0 0,-83.17743 z"
        id="path2987-7"
        inkscape:connector-curvature="0"
-       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\path4459.png"
+       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\withSWR.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200" />
     <text
@@ -327,7 +328,7 @@
        y="249.01765"
        id="text3085-95"
        sodipodi:linespacing="125%"
-       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\path4459.png"
+       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\withSWR.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200"><tspan
          sodipodi:role="line"
@@ -340,7 +341,7 @@
        d="m 94.206586,108.20217 0,83.17743 34.830534,0 0,-83.17743 z"
        id="path2987-3"
        inkscape:connector-curvature="0"
-       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\path4459.png"
+       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\withSWR.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200" />
     <text
@@ -350,7 +351,7 @@
        y="152.91003"
        id="text3085-1"
        sodipodi:linespacing="125%"
-       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\path4459.png"
+       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\withSWR.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200"><tspan
          sodipodi:role="line"
@@ -363,7 +364,7 @@
        d="m -121.76555,63.438568 0,83.177432 34.83053,0 0,-83.177432 z"
        id="path2987-3-3"
        inkscape:connector-curvature="0"
-       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\path4459.png"
+       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\withSWR.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200" />
     <text
@@ -373,7 +374,7 @@
        y="108.14642"
        id="text3085-1-4"
        sodipodi:linespacing="125%"
-       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\path4459.png"
+       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\withSWR.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200"><tspan
          sodipodi:role="line"
@@ -386,7 +387,7 @@
        d="m -69.742705,124.04771 0,83.17743 34.83054,0 0,-83.17743 z"
        id="path2987-3-1"
        inkscape:connector-curvature="0"
-       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\path4459.png"
+       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\withSWR.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200" />
     <text
@@ -396,7 +397,7 @@
        y="168.75558"
        id="text3085-1-3"
        sodipodi:linespacing="125%"
-       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\path4459.png"
+       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\withSWR.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200"><tspan
          sodipodi:role="line"
@@ -409,7 +410,7 @@
        d="m -122.7757,167.98935 0,83.17743 34.83054,0 0,-83.17743 z"
        id="path2987-3-7"
        inkscape:connector-curvature="0"
-       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\path4459.png"
+       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\withSWR.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200" />
     <text
@@ -419,7 +420,7 @@
        y="212.69724"
        id="text3085-1-42"
        sodipodi:linespacing="125%"
-       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\path4459.png"
+       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\withSWR.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200"><tspan
          sodipodi:role="line"
@@ -432,7 +433,7 @@
        d="m -120.7554,267.48938 0,83.17743 34.83054,0 0,-83.17743 z"
        id="path2987-3-79"
        inkscape:connector-curvature="0"
-       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\path4459.png"
+       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\withSWR.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200" />
     <text
@@ -442,7 +443,7 @@
        y="312.19727"
        id="text3085-1-31"
        sodipodi:linespacing="125%"
-       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\path4459.png"
+       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\withSWR.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200"><tspan
          sodipodi:role="line"
@@ -455,7 +456,7 @@
        d="m -68.227475,322.54269 0,83.17743 34.83054,0 0,-83.17743 z"
        id="path2987-3-8"
        inkscape:connector-curvature="0"
-       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\path4459.png"
+       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\withSWR.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200" />
     <text
@@ -465,7 +466,7 @@
        y="367.25055"
        id="text3085-1-6"
        sodipodi:linespacing="125%"
-       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\path4459.png"
+       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\withSWR.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200"><tspan
          sodipodi:role="line"
@@ -478,7 +479,7 @@
        d="m -69.237635,228.09343 0,83.17743 34.83054,0 0,-83.17743 z"
        id="path2987-3-0"
        inkscape:connector-curvature="0"
-       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\path4459.png"
+       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\withSWR.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200" />
     <text
@@ -488,7 +489,7 @@
        y="272.8013"
        id="text3085-1-2"
        sodipodi:linespacing="125%"
-       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\path4459.png"
+       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\withSWR.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200"><tspan
          sodipodi:role="line"
@@ -501,7 +502,7 @@
        d="m 93.196433,286.99917 0,83.17743 34.830537,0 0,-83.17743 z"
        id="path2987-3-02"
        inkscape:connector-curvature="0"
-       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\path4459.png"
+       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\withSWR.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200" />
     <text
@@ -511,7 +512,7 @@
        y="331.70703"
        id="text3085-1-48"
        sodipodi:linespacing="125%"
-       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\path4459.png"
+       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\withSWR.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200"><tspan
          sodipodi:role="line"
@@ -521,25 +522,25 @@
          style="font-size:15.43902396999999900px;stroke-width:0.919;stroke-miterlimit:1;stroke-dasharray:none">D2</tspan></text>
     <text
        xml:space="preserve"
-       style="font-size:30.50649261px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
-       x="563.34277"
-       y="519.11658"
+       style="font-size:28.37857437px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       x="570.51129"
+       y="518.87811"
        id="text3260"
        sodipodi:linespacing="125%"
-       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\path4459.png"
+       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\withSWR.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200"><tspan
          sodipodi:role="line"
          id="tspan3262"
-         x="563.34277"
-         y="519.11658"
-         style="font-size:22.87986946px">Sewer1</tspan></text>
+         x="570.51129"
+         y="518.87811"
+         style="font-size:21.28392982px">Sewer1</tspan></text>
     <path
        style="fill:none;stroke:#000000;stroke-width:0.919;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-miterlimit:1;stroke-dasharray:none"
        d="m 36.98641,131.37143 0,34.14319 39.164266,0 0,-34.47793 z"
        id="path2985-50"
        inkscape:connector-curvature="0"
-       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\path4459.png"
+       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\withSWR.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200" />
     <text
@@ -549,7 +550,7 @@
        y="152.12515"
        id="text2991-90"
        sodipodi:linespacing="125%"
-       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\path4459.png"
+       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\withSWR.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200"><tspan
          sodipodi:role="line"
@@ -562,7 +563,7 @@
        d="m 56.568543,101.80864 0,29.29442"
        id="path3288"
        inkscape:connector-curvature="0"
-       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\path4459.png"
+       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\withSWR.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200" />
     <path
@@ -570,7 +571,7 @@
        d="m 75.761441,148.27565 17.677669,0"
        id="path3290"
        inkscape:connector-curvature="0"
-       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\path4459.png"
+       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\withSWR.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200" />
     <path
@@ -578,7 +579,7 @@
        d="m 80.307127,328.58788 12.626907,0"
        id="path3292"
        inkscape:connector-curvature="0"
-       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\path4459.png"
+       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\withSWR.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200" />
     <path
@@ -586,7 +587,7 @@
        d="m 177.54753,74.749054 0,39.263096 65.9771,0 0,-40.064384 -65.9771,0 z"
        id="path2989-6"
        inkscape:connector-curvature="0"
-       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\path4459.png"
+       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\withSWR.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200" />
     <text
@@ -596,7 +597,7 @@
        y="99.283249"
        id="text3312"
        sodipodi:linespacing="125%"
-       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\path4459.png"
+       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\withSWR.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200"><tspan
          sodipodi:role="line"
@@ -609,7 +610,7 @@
        d="m 176.11303,150.76303 0,39.26309 65.9771,0 0,-40.06438 -65.9771,0 z"
        id="path2989-6-1"
        inkscape:connector-curvature="0"
-       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\path4459.png"
+       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\withSWR.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200" />
     <text
@@ -619,7 +620,7 @@
        y="175.29723"
        id="text3312-3"
        sodipodi:linespacing="125%"
-       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\path4459.png"
+       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\withSWR.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200"><tspan
          sodipodi:role="line"
@@ -632,7 +633,7 @@
        d="m 176.6181,223.49401 0,39.2631 65.9771,0 0,-40.06439 -65.9771,0 z"
        id="path2989-6-9"
        inkscape:connector-curvature="0"
-       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\path4459.png"
+       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\withSWR.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200" />
     <text
@@ -642,7 +643,7 @@
        y="248.02821"
        id="text3312-34"
        sodipodi:linespacing="125%"
-       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\path4459.png"
+       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\withSWR.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200"><tspan
          sodipodi:role="line"
@@ -655,7 +656,7 @@
        d="m 178.13333,295.21485 0,39.26309 65.9771,0 0,-40.06438 -65.9771,0 z"
        id="path2989-6-6"
        inkscape:connector-curvature="0"
-       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\path4459.png"
+       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\withSWR.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200" />
     <text
@@ -665,7 +666,7 @@
        y="319.74902"
        id="text3312-0"
        sodipodi:linespacing="125%"
-       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\path4459.png"
+       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\withSWR.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200"><tspan
          sodipodi:role="line"
@@ -678,7 +679,7 @@
        d="m 176.6181,366.93568 0,39.26309 65.9771,0 0,-40.06438 -65.9771,0 z"
        id="path2989-6-61"
        inkscape:connector-curvature="0"
-       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\path4459.png"
+       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\withSWR.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200" />
     <text
@@ -688,7 +689,7 @@
        y="391.46988"
        id="text3312-8"
        sodipodi:linespacing="125%"
-       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\path4459.png"
+       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\withSWR.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200"><tspan
          sodipodi:role="line"
@@ -701,7 +702,7 @@
        d="m 128.79445,115.95077 48.9924,-34.345184"
        id="path3373"
        inkscape:connector-curvature="0"
-       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\path4459.png"
+       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\withSWR.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200" />
     <path
@@ -709,7 +710,7 @@
        d="m 128.79445,127.06245 47.47717,30.80965"
        id="path3375"
        inkscape:connector-curvature="0"
-       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\path4459.png"
+       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\withSWR.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200" />
     <path
@@ -717,7 +718,7 @@
        d="m 128.28937,145.2452 48.48733,87.37819"
        id="path3377"
        inkscape:connector-curvature="0"
-       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\path4459.png"
+       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\withSWR.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200" />
     <path
@@ -725,7 +726,7 @@
        d="m 128.28938,167.97363 50.00255,133.84521"
        id="path3379"
        inkscape:connector-curvature="0"
-       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\path4459.png"
+       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\withSWR.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200" />
     <path
@@ -733,7 +734,7 @@
        d="M 128.28937,185.6513 176.7767,373.0346"
        id="path3381"
        inkscape:connector-curvature="0"
-       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\path4459.png"
+       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\withSWR.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200" />
     <path
@@ -741,7 +742,7 @@
        d="M 127.27922,294.2427 177.28177,95.747722"
        id="path3383"
        inkscape:connector-curvature="0"
-       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\path4459.png"
+       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\withSWR.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200" />
     <path
@@ -749,7 +750,7 @@
        d="M 128.28937,307.87976 175.76654,171.00409"
        id="path3385"
        inkscape:connector-curvature="0"
-       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\path4459.png"
+       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\withSWR.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200" />
     <path
@@ -757,7 +758,7 @@
        d="m 127.7843,327.07265 48.9924,-82.8325"
        id="path3387"
        inkscape:connector-curvature="0"
-       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\path4459.png"
+       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\withSWR.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200" />
     <path
@@ -765,7 +766,7 @@
        d="m 128.28937,343.74017 48.9924,-27.77919"
        id="path3389"
        inkscape:connector-curvature="0"
-       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\path4459.png"
+       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\withSWR.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200" />
     <path
@@ -773,7 +774,7 @@
        d="m 127.7843,358.89246 47.98224,28.78935"
        id="path3391"
        inkscape:connector-curvature="0"
-       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\path4459.png"
+       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\withSWR.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200" />
     <path
@@ -781,7 +782,7 @@
        d="m 643.43899,10.783301 0,34.14319 39.16427,0 0,-34.47793 z"
        id="path2985-6"
        inkscape:connector-curvature="0"
-       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\path4459.png"
+       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\withSWR.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200" />
     <text
@@ -791,7 +792,7 @@
        y="31.537016"
        id="text2991-3"
        sodipodi:linespacing="125%"
-       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\path4459.png"
+       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\withSWR.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200"><tspan
          sodipodi:role="line"
@@ -804,7 +805,7 @@
        d="m 644.62247,158.09842 0,34.14319 39.16427,0 0,-34.47793 z"
        id="path2985-6-8"
        inkscape:connector-curvature="0"
-       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\path4459.png"
+       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\withSWR.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200" />
     <text
@@ -814,7 +815,7 @@
        y="178.85213"
        id="text2991-3-2"
        sodipodi:linespacing="125%"
-       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\path4459.png"
+       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\withSWR.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200"><tspan
          sodipodi:role="line"
@@ -827,7 +828,7 @@
        d="m 646.01514,258.8178 0,34.14319 39.16427,0 0,-34.47793 z"
        id="path2985-6-1"
        inkscape:connector-curvature="0"
-       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\path4459.png"
+       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\withSWR.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200" />
     <text
@@ -837,7 +838,7 @@
        y="279.5715"
        id="text2991-3-3"
        sodipodi:linespacing="125%"
-       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\path4459.png"
+       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\withSWR.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200"><tspan
          sodipodi:role="line"
@@ -850,7 +851,7 @@
        d="M 244.31507,79.727129 643.37835,20.352059"
        id="path3452"
        inkscape:connector-curvature="0"
-       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\path4459.png"
+       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\withSWR.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200" />
     <path
@@ -858,7 +859,7 @@
        d="m 241.93153,160.39748 40.91118,18.68783"
        id="path3454"
        inkscape:connector-curvature="0"
-       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\path4459.png"
+       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\withSWR.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200" />
     <path
@@ -866,7 +867,7 @@
        d="m 242.43661,231.61324 39.90103,-7.57615"
        id="path3456"
        inkscape:connector-curvature="0"
-       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\path4459.png"
+       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\withSWR.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200" />
     <path
@@ -874,7 +875,7 @@
        d="M 245.26598,305.55547 645.29945,264.87844"
        id="path3460"
        inkscape:connector-curvature="0"
-       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\path4459.png"
+       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\withSWR.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200" />
     <path
@@ -882,7 +883,7 @@
        d="m 483.70448,57.32392 0,39.263092 65.9771,0 0,-40.06438 -65.9771,0 z"
        id="path2989-6-98"
        inkscape:connector-curvature="0"
-       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\path4459.png"
+       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\withSWR.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200" />
     <text
@@ -892,7 +893,7 @@
        y="81.858116"
        id="text3312-4"
        sodipodi:linespacing="125%"
-       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\path4459.png"
+       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\withSWR.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200"><tspan
          sodipodi:role="line"
@@ -905,7 +906,7 @@
        d="m 484.20955,131.57014 0,39.26309 65.9771,0 0,-40.06438 -65.9771,0 z"
        id="path2989-6-98-7"
        inkscape:connector-curvature="0"
-       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\path4459.png"
+       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\withSWR.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200" />
     <text
@@ -915,7 +916,7 @@
        y="156.10432"
        id="text3312-4-6"
        sodipodi:linespacing="125%"
-       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\path4459.png"
+       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\withSWR.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200"><tspan
          sodipodi:role="line"
@@ -928,7 +929,7 @@
        d="m 485.72478,204.30112 0,39.26309 65.9771,0 0,-40.06438 -65.9771,0 z"
        id="path2989-6-98-6"
        inkscape:connector-curvature="0"
-       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\path4459.png"
+       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\withSWR.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200" />
     <text
@@ -938,7 +939,7 @@
        y="228.83531"
        id="text3312-4-1"
        sodipodi:linespacing="125%"
-       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\path4459.png"
+       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\withSWR.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200"><tspan
          sodipodi:role="line"
@@ -951,7 +952,7 @@
        d="m 486.73494,286.12347 0,39.26309 65.9771,0 0,-40.06438 -65.9771,0 z"
        id="path2989-6-98-4"
        inkscape:connector-curvature="0"
-       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\path4459.png"
+       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\withSWR.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200" />
     <text
@@ -961,7 +962,7 @@
        y="311.16275"
        id="text3312-4-2"
        sodipodi:linespacing="125%"
-       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\path4459.png"
+       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\withSWR.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200"><tspan
          sodipodi:role="line"
@@ -974,7 +975,7 @@
        d="m 487.74509,367.94583 0,39.26309 65.9771,0 0,-40.06438 -65.9771,0 z"
        id="path2989-6-98-9"
        inkscape:connector-curvature="0"
-       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\path4459.png"
+       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\withSWR.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200" />
     <text
@@ -984,7 +985,7 @@
        y="392.48004"
        id="text3312-4-7"
        sodipodi:linespacing="125%"
-       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\path4459.png"
+       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\withSWR.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200"><tspan
          sodipodi:role="line"
@@ -997,7 +998,7 @@
        d="m -147.78684,105.02728 25.75889,0"
        id="path3553"
        inkscape:connector-curvature="0"
-       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\path4459.png"
+       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\withSWR.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200" />
     <path
@@ -1005,7 +1006,7 @@
        d="m -146.77669,159.07044 76.26652,0"
        id="path3555"
        inkscape:connector-curvature="0"
-       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\path4459.png"
+       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\withSWR.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200" />
     <path
@@ -1013,7 +1014,7 @@
        d="m -146.77669,208.06284 23.23351,0"
        id="path3557"
        inkscape:connector-curvature="0"
-       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\path4459.png"
+       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\withSWR.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200" />
     <path
@@ -1021,7 +1022,7 @@
        d="m -146.77669,257.05524 77.781745,0"
        id="path3559"
        inkscape:connector-curvature="0"
-       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\path4459.png"
+       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\withSWR.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200" />
     <path
@@ -1029,7 +1030,7 @@
        d="m -146.27161,306.04764 24.74873,0"
        id="path3561"
        inkscape:connector-curvature="0"
-       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\path4459.png"
+       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\withSWR.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200" />
     <path
@@ -1037,7 +1038,7 @@
        d="m -145.26146,354.53496 76.771585,0"
        id="path3563"
        inkscape:connector-curvature="0"
-       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\path4459.png"
+       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\withSWR.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200" />
     <path
@@ -1045,7 +1046,7 @@
        d="m -86.67261,138.36231 11.11168,0"
        id="path4363"
        inkscape:connector-curvature="0"
-       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\path4459.png"
+       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\withSWR.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200" />
     <path
@@ -1053,7 +1054,7 @@
        d="m -86.67261,123.21003 11.11168,0"
        id="path4363-2"
        inkscape:connector-curvature="0"
-       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\path4459.png"
+       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\withSWR.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200" />
     <path
@@ -1061,7 +1062,7 @@
        d="m -86.67261,107.04758 11.11168,0"
        id="path4363-6"
        inkscape:connector-curvature="0"
-       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\path4459.png"
+       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\withSWR.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200" />
     <path
@@ -1069,7 +1070,7 @@
        d="m -86.67262,92.905459 11.11168,0"
        id="path4363-0"
        inkscape:connector-curvature="0"
-       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\path4459.png"
+       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\withSWR.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200" />
     <path
@@ -1077,7 +1078,7 @@
        d="m -86.67261,78.763308 11.11168,0"
        id="path4363-1"
        inkscape:connector-curvature="0"
-       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\path4459.png"
+       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\withSWR.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200" />
     <text
@@ -1087,7 +1088,7 @@
        y="76.743011"
        id="text4404"
        sodipodi:linespacing="125%"
-       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\path4459.png"
+       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\withSWR.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200"><tspan
          sodipodi:role="line"
@@ -1102,7 +1103,7 @@
        y="90.71994"
        id="text4404-6"
        sodipodi:linespacing="125%"
-       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\path4459.png"
+       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\withSWR.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200"><tspan
          sodipodi:role="line"
@@ -1117,7 +1118,7 @@
        y="104.86205"
        id="text4404-7"
        sodipodi:linespacing="125%"
-       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\path4459.png"
+       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\withSWR.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200"><tspan
          sodipodi:role="line"
@@ -1132,7 +1133,7 @@
        y="121.02451"
        id="text4404-1"
        sodipodi:linespacing="125%"
-       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\path4459.png"
+       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\withSWR.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200"><tspan
          sodipodi:role="line"
@@ -1147,7 +1148,7 @@
        y="135.67169"
        id="text4404-0"
        sodipodi:linespacing="125%"
-       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\path4459.png"
+       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\withSWR.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200"><tspan
          sodipodi:role="line"
@@ -1160,7 +1161,7 @@
        d="m -35.202495,198.05117 11.11168,0"
        id="path4363-14"
        inkscape:connector-curvature="0"
-       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\path4459.png"
+       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\withSWR.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200" />
     <path
@@ -1168,7 +1169,7 @@
        d="m -35.202495,182.89889 11.11168,0"
        id="path4363-2-6"
        inkscape:connector-curvature="0"
-       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\path4459.png"
+       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\withSWR.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200" />
     <path
@@ -1176,7 +1177,7 @@
        d="m -35.202495,166.73644 11.11168,0"
        id="path4363-6-0"
        inkscape:connector-curvature="0"
-       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\path4459.png"
+       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\withSWR.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200" />
     <path
@@ -1184,7 +1185,7 @@
        d="m -35.202505,152.59432 11.11168,0"
        id="path4363-0-7"
        inkscape:connector-curvature="0"
-       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\path4459.png"
+       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\withSWR.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200" />
     <path
@@ -1192,7 +1193,7 @@
        d="m -35.202495,138.45217 11.11168,0"
        id="path4363-1-1"
        inkscape:connector-curvature="0"
-       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\path4459.png"
+       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\withSWR.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200" />
     <text
@@ -1202,7 +1203,7 @@
        y="136.43185"
        id="text4404-77"
        sodipodi:linespacing="125%"
-       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\path4459.png"
+       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\withSWR.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200"><tspan
          sodipodi:role="line"
@@ -1217,7 +1218,7 @@
        y="150.40878"
        id="text4404-6-7"
        sodipodi:linespacing="125%"
-       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\path4459.png"
+       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\withSWR.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200"><tspan
          sodipodi:role="line"
@@ -1232,7 +1233,7 @@
        y="164.55093"
        id="text4404-7-3"
        sodipodi:linespacing="125%"
-       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\path4459.png"
+       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\withSWR.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200"><tspan
          sodipodi:role="line"
@@ -1247,7 +1248,7 @@
        y="180.71338"
        id="text4404-1-9"
        sodipodi:linespacing="125%"
-       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\path4459.png"
+       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\withSWR.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200"><tspan
          sodipodi:role="line"
@@ -1262,7 +1263,7 @@
        y="195.36057"
        id="text4404-0-8"
        sodipodi:linespacing="125%"
-       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\path4459.png"
+       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\withSWR.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200"><tspan
          sodipodi:role="line"
@@ -1275,7 +1276,7 @@
        d="m -87.22534,242.49788 11.11168,0"
        id="path4363-8"
        inkscape:connector-curvature="0"
-       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\path4459.png"
+       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\withSWR.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200" />
     <path
@@ -1283,7 +1284,7 @@
        d="m -87.22534,227.3456 11.11168,0"
        id="path4363-2-2"
        inkscape:connector-curvature="0"
-       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\path4459.png"
+       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\withSWR.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200" />
     <path
@@ -1291,7 +1292,7 @@
        d="m -87.22534,211.18315 11.11168,0"
        id="path4363-6-6"
        inkscape:connector-curvature="0"
-       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\path4459.png"
+       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\withSWR.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200" />
     <path
@@ -1299,7 +1300,7 @@
        d="m -87.22535,197.04103 11.11168,0"
        id="path4363-0-6"
        inkscape:connector-curvature="0"
-       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\path4459.png"
+       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\withSWR.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200" />
     <path
@@ -1307,7 +1308,7 @@
        d="m -87.22534,182.89888 11.11168,0"
        id="path4363-1-0"
        inkscape:connector-curvature="0"
-       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\path4459.png"
+       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\withSWR.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200" />
     <text
@@ -1317,7 +1318,7 @@
        y="180.87859"
        id="text4404-3"
        sodipodi:linespacing="125%"
-       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\path4459.png"
+       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\withSWR.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200"><tspan
          sodipodi:role="line"
@@ -1332,7 +1333,7 @@
        y="194.85551"
        id="text4404-6-0"
        sodipodi:linespacing="125%"
-       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\path4459.png"
+       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\withSWR.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200"><tspan
          sodipodi:role="line"
@@ -1347,7 +1348,7 @@
        y="208.99763"
        id="text4404-7-2"
        sodipodi:linespacing="125%"
-       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\path4459.png"
+       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\withSWR.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200"><tspan
          sodipodi:role="line"
@@ -1362,7 +1363,7 @@
        y="225.16008"
        id="text4404-1-94"
        sodipodi:linespacing="125%"
-       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\path4459.png"
+       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\withSWR.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200"><tspan
          sodipodi:role="line"
@@ -1377,7 +1378,7 @@
        y="239.80727"
        id="text4404-0-83"
        sodipodi:linespacing="125%"
-       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\path4459.png"
+       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\withSWR.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200"><tspan
          sodipodi:role="line"
@@ -1390,7 +1391,7 @@
        d="m -34.192335,302.09688 11.11168,0"
        id="path4363-12"
        inkscape:connector-curvature="0"
-       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\path4459.png"
+       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\withSWR.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200" />
     <path
@@ -1398,7 +1399,7 @@
        d="m -34.192335,286.9446 11.11168,0"
        id="path4363-2-0"
        inkscape:connector-curvature="0"
-       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\path4459.png"
+       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\withSWR.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200" />
     <path
@@ -1406,7 +1407,7 @@
        d="m -34.192335,270.78215 11.11168,0"
        id="path4363-6-1"
        inkscape:connector-curvature="0"
-       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\path4459.png"
+       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\withSWR.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200" />
     <path
@@ -1414,7 +1415,7 @@
        d="m -34.192345,256.64003 11.11168,0"
        id="path4363-0-64"
        inkscape:connector-curvature="0"
-       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\path4459.png"
+       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\withSWR.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200" />
     <path
@@ -1422,7 +1423,7 @@
        d="m -34.192335,242.49788 11.11168,0"
        id="path4363-1-06"
        inkscape:connector-curvature="0"
-       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\path4459.png"
+       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\withSWR.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200" />
     <text
@@ -1432,7 +1433,7 @@
        y="240.47758"
        id="text4404-18"
        sodipodi:linespacing="125%"
-       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\path4459.png"
+       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\withSWR.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200"><tspan
          sodipodi:role="line"
@@ -1447,7 +1448,7 @@
        y="254.45451"
        id="text4404-6-8"
        sodipodi:linespacing="125%"
-       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\path4459.png"
+       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\withSWR.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200"><tspan
          sodipodi:role="line"
@@ -1462,7 +1463,7 @@
        y="268.59665"
        id="text4404-7-1"
        sodipodi:linespacing="125%"
-       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\path4459.png"
+       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\withSWR.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200"><tspan
          sodipodi:role="line"
@@ -1477,7 +1478,7 @@
        y="284.75909"
        id="text4404-1-3"
        sodipodi:linespacing="125%"
-       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\path4459.png"
+       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\withSWR.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200"><tspan
          sodipodi:role="line"
@@ -1492,7 +1493,7 @@
        y="299.40628"
        id="text4404-0-80"
        sodipodi:linespacing="125%"
-       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\path4459.png"
+       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\withSWR.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200"><tspan
          sodipodi:role="line"
@@ -1505,7 +1506,7 @@
        d="m -85.20504,341.49283 11.11168,0"
        id="path4363-7"
        inkscape:connector-curvature="0"
-       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\path4459.png"
+       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\withSWR.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200" />
     <path
@@ -1513,7 +1514,7 @@
        d="m -85.20504,326.34055 11.11168,0"
        id="path4363-2-7"
        inkscape:connector-curvature="0"
-       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\path4459.png"
+       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\withSWR.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200" />
     <path
@@ -1521,7 +1522,7 @@
        d="m -85.20504,310.1781 11.11168,0"
        id="path4363-6-8"
        inkscape:connector-curvature="0"
-       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\path4459.png"
+       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\withSWR.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200" />
     <path
@@ -1529,7 +1530,7 @@
        d="m -85.20505,296.03598 11.11168,0"
        id="path4363-0-3"
        inkscape:connector-curvature="0"
-       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\path4459.png"
+       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\withSWR.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200" />
     <path
@@ -1537,7 +1538,7 @@
        d="m -85.20504,281.89383 11.11168,0"
        id="path4363-1-8"
        inkscape:connector-curvature="0"
-       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\path4459.png"
+       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\withSWR.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200" />
     <text
@@ -1547,7 +1548,7 @@
        y="279.87354"
        id="text4404-37"
        sodipodi:linespacing="125%"
-       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\path4459.png"
+       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\withSWR.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200"><tspan
          sodipodi:role="line"
@@ -1562,7 +1563,7 @@
        y="293.85046"
        id="text4404-6-07"
        sodipodi:linespacing="125%"
-       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\path4459.png"
+       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\withSWR.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200"><tspan
          sodipodi:role="line"
@@ -1577,7 +1578,7 @@
        y="307.99258"
        id="text4404-7-9"
        sodipodi:linespacing="125%"
-       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\path4459.png"
+       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\withSWR.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200"><tspan
          sodipodi:role="line"
@@ -1592,7 +1593,7 @@
        y="324.15503"
        id="text4404-1-5"
        sodipodi:linespacing="125%"
-       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\path4459.png"
+       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\withSWR.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200"><tspan
          sodipodi:role="line"
@@ -1607,7 +1608,7 @@
        y="338.80222"
        id="text4404-0-0"
        sodipodi:linespacing="125%"
-       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\path4459.png"
+       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\withSWR.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200"><tspan
          sodipodi:role="line"
@@ -1620,7 +1621,7 @@
        d="m -32.677105,396.54614 11.11168,0"
        id="path4363-9"
        inkscape:connector-curvature="0"
-       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\path4459.png"
+       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\withSWR.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200" />
     <path
@@ -1628,7 +1629,7 @@
        d="m -32.677105,381.39386 11.11168,0"
        id="path4363-2-68"
        inkscape:connector-curvature="0"
-       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\path4459.png"
+       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\withSWR.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200" />
     <path
@@ -1636,7 +1637,7 @@
        d="m -32.677105,365.23141 11.11168,0"
        id="path4363-6-3"
        inkscape:connector-curvature="0"
-       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\path4459.png"
+       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\withSWR.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200" />
     <path
@@ -1644,7 +1645,7 @@
        d="m -32.677115,351.08929 11.11168,0"
        id="path4363-0-4"
        inkscape:connector-curvature="0"
-       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\path4459.png"
+       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\withSWR.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200" />
     <path
@@ -1652,7 +1653,7 @@
        d="m -32.677105,336.94714 11.11168,0"
        id="path4363-1-84"
        inkscape:connector-curvature="0"
-       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\path4459.png"
+       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\withSWR.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200" />
     <text
@@ -1662,7 +1663,7 @@
        y="334.92685"
        id="text4404-9"
        sodipodi:linespacing="125%"
-       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\path4459.png"
+       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\withSWR.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200"><tspan
          sodipodi:role="line"
@@ -1677,7 +1678,7 @@
        y="348.90378"
        id="text4404-6-5"
        sodipodi:linespacing="125%"
-       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\path4459.png"
+       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\withSWR.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200"><tspan
          sodipodi:role="line"
@@ -1692,7 +1693,7 @@
        y="363.0459"
        id="text4404-7-33"
        sodipodi:linespacing="125%"
-       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\path4459.png"
+       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\withSWR.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200"><tspan
          sodipodi:role="line"
@@ -1707,7 +1708,7 @@
        y="379.20834"
        id="text4404-1-7"
        sodipodi:linespacing="125%"
-       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\path4459.png"
+       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\withSWR.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200"><tspan
          sodipodi:role="line"
@@ -1722,7 +1723,7 @@
        y="393.85553"
        id="text4404-0-3"
        sodipodi:linespacing="125%"
-       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\path4459.png"
+       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\withSWR.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200"><tspan
          sodipodi:role="line"
@@ -1735,7 +1736,7 @@
        d="m 421.744,66.958374 60.96002,0"
        id="path4656"
        inkscape:connector-curvature="0"
-       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\path4459.png"
+       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\withSWR.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200" />
     <text
@@ -1745,7 +1746,7 @@
        y="61.315876"
        id="text4658"
        sodipodi:linespacing="125%"
-       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\path4459.png"
+       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\withSWR.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200"><tspan
          sodipodi:role="line"
@@ -1758,7 +1759,7 @@
        d="m 423.09142,143.16259 60.96002,0"
        id="path4656-8"
        inkscape:connector-curvature="0"
-       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\path4459.png"
+       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\withSWR.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200" />
     <text
@@ -1768,7 +1769,7 @@
        y="137.52008"
        id="text4658-8"
        sodipodi:linespacing="125%"
-       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\path4459.png"
+       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\withSWR.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200"><tspan
          sodipodi:role="line"
@@ -1781,7 +1782,7 @@
        d="m 424.87714,215.66259 60.96001,0"
        id="path4656-6"
        inkscape:connector-curvature="0"
-       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\path4459.png"
+       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\withSWR.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200" />
     <text
@@ -1791,7 +1792,7 @@
        y="210.02008"
        id="text4658-81"
        sodipodi:linespacing="125%"
-       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\path4459.png"
+       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\withSWR.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200"><tspan
          sodipodi:role="line"
@@ -1804,7 +1805,7 @@
        d="m 425.23427,297.09116 60.96002,0"
        id="path4656-89"
        inkscape:connector-curvature="0"
-       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\path4459.png"
+       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\withSWR.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200" />
     <text
@@ -1814,7 +1815,7 @@
        y="291.44867"
        id="text4658-7"
        sodipodi:linespacing="125%"
-       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\path4459.png"
+       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\withSWR.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200"><tspan
          sodipodi:role="line"
@@ -1827,7 +1828,7 @@
        d="m 427.02,380.30544 60.96001,0"
        id="path4656-2"
        inkscape:connector-curvature="0"
-       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\path4459.png"
+       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\withSWR.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200" />
     <text
@@ -1837,7 +1838,7 @@
        y="374.66296"
        id="text4658-82"
        sodipodi:linespacing="125%"
-       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\path4459.png"
+       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\withSWR.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200"><tspan
          sodipodi:role="line"
@@ -1850,7 +1851,7 @@
        d="m 242.85714,100.93361 240.71429,-10"
        id="path4732"
        inkscape:connector-curvature="0"
-       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\path4459.png"
+       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\withSWR.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200" />
     <path
@@ -1858,7 +1859,7 @@
        d="m 282.85714,175.21932 -41.42857,2.85715"
        id="path4736"
        inkscape:connector-curvature="0"
-       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\path4459.png"
+       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\withSWR.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200" />
     <path
@@ -1866,7 +1867,7 @@
        d="M 318.57143,173.07647 482.85714,160.21932"
        id="path4738"
        inkscape:connector-curvature="0"
-       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\path4459.png"
+       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\withSWR.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200" />
     <path
@@ -1874,7 +1875,7 @@
        d="m 283.57143,249.50504 -41.42857,2.85714"
        id="path4742"
        inkscape:connector-curvature="0"
-       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\path4459.png"
+       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\withSWR.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200" />
     <path
@@ -1882,7 +1883,7 @@
        d="M 317.14286,245.93361 486.42857,233.07647"
        id="path4744"
        inkscape:connector-curvature="0"
-       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\path4459.png"
+       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\withSWR.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200" />
     <path
@@ -1890,7 +1891,7 @@
        d="m 243.57143,325.21932 242.85714,-7.14285"
        id="path4746"
        inkscape:connector-curvature="0"
-       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\path4459.png"
+       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\withSWR.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200" />
     <path
@@ -1898,7 +1899,7 @@
        d="m 549.28571,150.93361 24.28572,0"
        id="path4762"
        inkscape:connector-curvature="0"
-       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\path4459.png"
+       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\withSWR.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200" />
     <path
@@ -1906,7 +1907,7 @@
        d="m 550.71429,218.07647 22.14285,0"
        id="path4764"
        inkscape:connector-curvature="0"
-       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\path4459.png"
+       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\withSWR.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200" />
     <path
@@ -1914,7 +1915,7 @@
        d="m 610,176.6479 35,0"
        id="path4766"
        inkscape:connector-curvature="0"
-       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\path4459.png"
+       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\withSWR.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200" />
     <path
@@ -1922,7 +1923,7 @@
        d="M 643.57143,166.6479 610,168.79075"
        id="path4768"
        inkscape:connector-curvature="0"
-       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\path4459.png"
+       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\withSWR.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200" />
     <path
@@ -1930,7 +1931,7 @@
        d="m 575,171.6479 -258.57143,20"
        id="path4770"
        inkscape:connector-curvature="0"
-       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\path4459.png"
+       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\withSWR.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200" />
     <path
@@ -1938,7 +1939,7 @@
        d="M 550,70.219324 642.85714,31.647896"
        id="path4772"
        inkscape:connector-curvature="0"
-       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\path4459.png"
+       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\withSWR.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200" />
     <path
@@ -1946,7 +1947,7 @@
        d="M 552.85714,299.50504 645,281.6479"
        id="path4774"
        inkscape:connector-curvature="0"
-       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\path4459.png"
+       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\withSWR.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200" />
     <path
@@ -1954,7 +1955,7 @@
        d="m 537.14286,468.07647 0,-62.14286"
        id="path4797"
        inkscape:connector-curvature="0"
-       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\path4459.png"
+       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\withSWR.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200" />
     <path
@@ -1962,7 +1963,7 @@
        d="m 510,95.93361 0,34.28571"
        id="path4799"
        inkscape:connector-curvature="0"
-       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\path4459.png"
+       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\withSWR.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200" />
     <path
@@ -1970,7 +1971,7 @@
        d="m 510.71429,169.50504 0,33.57143"
        id="path4801"
        inkscape:connector-curvature="0"
-       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\path4459.png"
+       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\withSWR.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200" />
     <path
@@ -1978,7 +1979,7 @@
        d="m 517.85714,169.50504 0,33.57143"
        id="path4803"
        inkscape:connector-curvature="0"
-       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\path4459.png"
+       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\withSWR.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200" />
     <path
@@ -1986,7 +1987,7 @@
        d="m 510.71429,243.07647 0,42.14285"
        id="path4805"
        inkscape:connector-curvature="0"
-       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\path4459.png"
+       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\withSWR.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200" />
     <path
@@ -1994,7 +1995,7 @@
        d="m 517.85714,243.07647 0,42.14285"
        id="path4807"
        inkscape:connector-curvature="0"
-       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\path4459.png"
+       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\withSWR.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200" />
     <path
@@ -2002,7 +2003,7 @@
        d="m 523.57143,242.36218 0,41.42857"
        id="path4809"
        inkscape:connector-curvature="0"
-       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\path4459.png"
+       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\withSWR.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200" />
     <path
@@ -2010,7 +2011,7 @@
        d="m 510.71429,325.21932 0,40.71429"
        id="path4811"
        inkscape:connector-curvature="0"
-       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\path4459.png"
+       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\withSWR.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200" />
     <path
@@ -2018,7 +2019,7 @@
        d="m 517.14286,323.79075 0,42.14286"
        id="path4813"
        inkscape:connector-curvature="0"
-       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\path4459.png"
+       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\withSWR.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200" />
     <path
@@ -2026,7 +2027,7 @@
        d="m 525,323.79075 0,42.14286"
        id="path4815"
        inkscape:connector-curvature="0"
-       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\path4459.png"
+       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\withSWR.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200" />
     <path
@@ -2034,7 +2035,7 @@
        d="m 530,323.79075 0,41.42857"
        id="path4817"
        inkscape:connector-curvature="0"
-       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\path4459.png"
+       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\withSWR.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200" />
     <path
@@ -2042,7 +2043,7 @@
        d="m 510.71429,406.6479 0,61.42857"
        id="path4819"
        inkscape:connector-curvature="0"
-       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\path4459.png"
+       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\withSWR.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200" />
     <path
@@ -2050,7 +2051,7 @@
        d="m 518.57143,405.93361 0,62.85714"
        id="path4821"
        inkscape:connector-curvature="0"
-       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\path4459.png"
+       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\withSWR.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200" />
     <path
@@ -2058,7 +2059,7 @@
        d="m 524.28571,407.36218 0,62.14286"
        id="path4823"
        inkscape:connector-curvature="0"
-       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\path4459.png"
+       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\withSWR.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200" />
     <path
@@ -2066,46 +2067,23 @@
        d="m 530.71429,405.93361 0,63.57143"
        id="path4825"
        inkscape:connector-curvature="0"
-       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\path4459.png"
+       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\withSWR.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200" />
     <path
-       style="fill:none;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:none"
-       d="m 543.48106,510.21932 11.60932,0"
+       style="fill:none;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       d="m 550.10285,510.21932 10.64602,0"
        id="path4829"
        inkscape:connector-curvature="0"
-       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\path4459.png"
+       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\withSWR.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200" />
-    <path
-       style="fill:none;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:none"
-       d="m 186.08932,597.02293 0,26.39279 77.82136,0 0,-24.36258 -77.82136,0 z"
-       id="path4831"
-       inkscape:connector-curvature="0"
-       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\path4459.png"
-       inkscape:export-xdpi="200"
-       inkscape:export-ydpi="200" />
-    <text
-       xml:space="preserve"
-       style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
-       x="205.71428"
-       y="620.2193"
-       id="text4833"
-       sodipodi:linespacing="125%"
-       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\path4459.png"
-       inkscape:export-xdpi="200"
-       inkscape:export-ydpi="200"><tspan
-         sodipodi:role="line"
-         id="tspan4835"
-         x="205.71428"
-         y="620.2193"
-         style="font-size:25px">C4</tspan></text>
     <path
        style="fill:none;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:1,1;stroke-dashoffset:0"
        d="m 191.42857,334.50504 0,31.42857"
        id="path4839"
        inkscape:connector-curvature="0"
-       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\path4459.png"
+       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\withSWR.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200" />
     <path
@@ -2113,7 +2091,7 @@
        d="m 190.71429,405.21932 0,194.28572"
        id="path4841"
        inkscape:connector-curvature="0"
-       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\path4459.png"
+       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\withSWR.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200" />
     <path
@@ -2121,7 +2099,7 @@
        d="m 190.71429,262.36218 0,32.14286"
        id="path4843"
        inkscape:connector-curvature="0"
-       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\path4459.png"
+       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\withSWR.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200" />
     <path
@@ -2129,7 +2107,7 @@
        d="m 190.71429,188.79075 0,33.57143"
        id="path4845"
        inkscape:connector-curvature="0"
-       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\path4459.png"
+       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\withSWR.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200" />
     <path
@@ -2137,7 +2115,7 @@
        d="m 190.71429,112.36218 0,37.14286"
        id="path4847"
        inkscape:connector-curvature="0"
-       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\path4459.png"
+       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\withSWR.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200" />
     <path
@@ -2145,7 +2123,7 @@
        d="m 200,222.36218 0,-33.57143"
        id="path4851"
        inkscape:connector-curvature="0"
-       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\path4459.png"
+       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\withSWR.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200" />
     <path
@@ -2153,7 +2131,7 @@
        d="m 200,293.79075 0,-31.42857"
        id="path4853"
        inkscape:connector-curvature="0"
-       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\path4459.png"
+       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\withSWR.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200" />
     <path
@@ -2161,7 +2139,7 @@
        d="m 200.71429,365.93361 0,-31.42857"
        id="path4855"
        inkscape:connector-curvature="0"
-       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\path4459.png"
+       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\withSWR.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200" />
     <path
@@ -2169,7 +2147,7 @@
        d="m 200.71429,405.93361 0,194.28571"
        id="path4857"
        inkscape:connector-curvature="0"
-       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\path4459.png"
+       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\withSWR.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200" />
     <path
@@ -2177,7 +2155,7 @@
        d="m 210.71429,293.79075 0,-32.14285"
        id="path4861"
        inkscape:connector-curvature="0"
-       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\path4459.png"
+       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\withSWR.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200" />
     <path
@@ -2185,7 +2163,7 @@
        d="m 210.71429,333.07647 0,32.14285"
        id="path4863"
        inkscape:connector-curvature="0"
-       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\path4459.png"
+       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\withSWR.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200" />
     <path
@@ -2193,7 +2171,7 @@
        d="m 210.71429,405.21932 0,195"
        id="path4865"
        inkscape:connector-curvature="0"
-       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\path4459.png"
+       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\withSWR.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200" />
     <path
@@ -2201,7 +2179,7 @@
        d="m 220.71429,365.93361 0,-32.14286"
        id="path4869"
        inkscape:connector-curvature="0"
-       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\path4459.png"
+       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\withSWR.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200" />
     <path
@@ -2209,7 +2187,7 @@
        d="m 220.71429,405.93361 0,192.85714"
        id="path4871"
        inkscape:connector-curvature="0"
-       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\path4459.png"
+       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\withSWR.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200" />
     <path
@@ -2217,7 +2195,7 @@
        d="m 231.42857,405.21932 0,194.28572"
        id="path4873"
        inkscape:connector-curvature="0"
-       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\path4459.png"
+       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\withSWR.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200" />
     <path
@@ -2225,7 +2203,7 @@
        d="m 652.85714,156.6479 0,-113.571433"
        id="path4877"
        inkscape:connector-curvature="0"
-       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\path4459.png"
+       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\withSWR.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200" />
     <path
@@ -2233,7 +2211,7 @@
        d="m 652.14286,258.79075 0,-68.57143"
        id="path4879"
        inkscape:connector-curvature="0"
-       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\path4459.png"
+       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\withSWR.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200" />
     <path
@@ -2241,7 +2219,7 @@
        d="m 652.14286,292.36218 0,305.71429"
        id="path4881"
        inkscape:connector-curvature="0"
-       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\path4459.png"
+       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\withSWR.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200" />
     <path
@@ -2249,7 +2227,7 @@
        d="m 662.85714,257.36218 0,-65.71428"
        id="path4885"
        inkscape:connector-curvature="0"
-       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\path4459.png"
+       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\withSWR.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200" />
     <path
@@ -2257,7 +2235,7 @@
        d="m 662.85714,292.36218 0,307.14286"
        id="path4887"
        inkscape:connector-curvature="0"
-       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\path4459.png"
+       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\withSWR.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200" />
     <path
@@ -2265,38 +2243,38 @@
        d="m 673.57143,293.07647 0,306.42857"
        id="path4889"
        inkscape:connector-curvature="0"
-       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\path4459.png"
+       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\withSWR.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200" />
     <path
        style="fill:none;stroke:#000000;stroke-width:0.94984645;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:1;stroke-opacity:1;stroke-dasharray:none"
-       d="m 389.39395,649.34724 0,54.28049 91.2121,0 0,-55.38825 -91.2121,0 z"
+       d="m 944.97785,361.45376 0,54.28049 91.21205,0 0,-55.38825 -91.21205,0 z"
        id="path2989-9"
        inkscape:connector-curvature="0"
-       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\path4459.png"
+       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\withSWR.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200" />
     <text
        xml:space="preserve"
        style="font-size:30.50649261px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
-       x="394.50519"
-       y="682.61847"
+       x="950.08911"
+       y="394.72501"
        id="text3260-0"
        sodipodi:linespacing="125%"
-       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\path4459.png"
+       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\withSWR.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200"><tspan
          sodipodi:role="line"
          id="tspan3262-7"
-         x="394.50519"
-         y="682.61847"
+         x="950.08911"
+         y="394.72501"
          style="font-size:21px">Stormw1</tspan></text>
     <path
        style="fill:none;stroke:#000000;stroke-width:0.94984645;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:1;stroke-opacity:1;stroke-dasharray:none"
        d="m 802.2511,269.34724 0,54.28049 91.2121,0 0,-55.38825 -91.2121,0 z"
        id="path2989-8"
        inkscape:connector-curvature="0"
-       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\path4459.png"
+       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\withSWR.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200" />
     <text
@@ -2306,7 +2284,7 @@
        y="303.33276"
        id="text3260-1"
        sodipodi:linespacing="125%"
-       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\path4459.png"
+       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\withSWR.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200"><tspan
          sodipodi:role="line"
@@ -2316,33 +2294,33 @@
          style="font-size:22.87986946px">GWT1</tspan></text>
     <path
        style="fill:none;stroke:#000000;stroke-width:0.94984645;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:1;stroke-opacity:1;stroke-dasharray:none"
-       d="m 948.67967,153.63295 0,54.28049 91.21213,0 0,-55.38825 -91.21213,0 z"
+       d="m 1069.898,158.68371 0,54.28049 91.2121,0 0,-55.38825 -91.2121,0 z"
        id="path2989-86"
        inkscape:connector-curvature="0"
-       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\path4459.png"
+       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\withSWR.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200" />
     <text
        xml:space="preserve"
        style="font-size:30.50649261px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
-       x="960.93372"
-       y="188.33278"
+       x="1082.152"
+       y="193.38354"
        id="text3260-12"
        sodipodi:linespacing="125%"
-       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\path4459.png"
+       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\withSWR.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200"><tspan
          sodipodi:role="line"
          id="tspan3262-4"
-         x="960.93372"
-         y="188.33278"
+         x="1082.152"
+         y="193.38354"
          style="font-size:22.87986946px">PWR1</tspan></text>
     <path
        style="fill:none;stroke:#000000;stroke-width:0.91900003;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:1;stroke-opacity:1;stroke-dasharray:none"
        d="m 726.15615,322.20204 0,83.17743 34.83054,0 0,-83.17743 z"
        id="path2987-7-2"
        inkscape:connector-curvature="0"
-       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\path4459.png"
+       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\withSWR.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200" />
     <text
@@ -2352,7 +2330,7 @@
        y="366.90988"
        id="text3085-95-5"
        sodipodi:linespacing="125%"
-       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\path4459.png"
+       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\withSWR.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200"><tspan
          sodipodi:role="line"
@@ -2365,7 +2343,7 @@
        d="m 726.15616,93.63061 0,83.17744 34.83054,0 0,-83.17744 z"
        id="path2987-7-6"
        inkscape:connector-curvature="0"
-       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\path4459.png"
+       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\withSWR.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200" />
     <text
@@ -2375,7 +2353,7 @@
        y="138.33847"
        id="text3085-95-2"
        sodipodi:linespacing="125%"
-       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\path4459.png"
+       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\withSWR.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200"><tspan
          sodipodi:role="line"
@@ -2388,7 +2366,7 @@
        d="M 550,78.076467 725,109.50504"
        id="path4987"
        inkscape:connector-curvature="0"
-       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\path4459.png"
+       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\withSWR.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200" />
     <path
@@ -2396,7 +2374,7 @@
        d="M 550,140.93361 725.71429,120.21932"
        id="path4989"
        inkscape:connector-curvature="0"
-       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\path4459.png"
+       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\withSWR.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200" />
     <path
@@ -2404,7 +2382,7 @@
        d="m 574.28571,202.36218 -23.57142,10"
        id="path5001"
        inkscape:connector-curvature="0"
-       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\path4459.png"
+       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\withSWR.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200" />
     <path
@@ -2412,7 +2390,7 @@
        d="M 610,187.36218 645.71429,171.6479"
        id="path5003"
        inkscape:connector-curvature="0"
-       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\path4459.png"
+       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\withSWR.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200" />
     <path
@@ -2420,7 +2398,7 @@
        d="m 680,156.6479 45.71429,-17.85715"
        id="path5005"
        inkscape:connector-curvature="0"
-       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\path4459.png"
+       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\withSWR.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200" />
     <path
@@ -2428,7 +2406,7 @@
        d="M 552.14286,294.50504 726.42857,158.07647"
        id="path5007"
        inkscape:connector-curvature="0"
-       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\path4459.png"
+       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\withSWR.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200" />
     <path
@@ -2436,7 +2414,7 @@
        d="m 652.14286,258.07647 73.57143,-88.57143"
        id="path5011"
        inkscape:connector-curvature="0"
-       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\path4459.png"
+       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\withSWR.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200" />
     <path
@@ -2444,23 +2422,15 @@
        d="M 645,267.36218 553.57143,378.79075"
        id="path5013"
        inkscape:connector-curvature="0"
-       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\path4459.png"
+       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\withSWR.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200" />
     <path
-       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       d="m 760.71429,152.36218 187.85714,10.71429"
+       style="fill:none;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:none"
+       d="m 761.11027,152.75816 307.27333,21.03401"
        id="path5015"
        inkscape:connector-curvature="0"
-       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\path4459.png"
-       inkscape:export-xdpi="200"
-       inkscape:export-ydpi="200" />
-    <path
-       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       d="M 892.85714,277.36218 948.57143,175.21932"
-       id="path5017"
-       inkscape:connector-curvature="0"
-       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\path4459.png"
+       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\withSWR.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200" />
     <path
@@ -2468,7 +2438,7 @@
        d="M 682.14286,24.505039 726.42857,227.36218"
        id="path5019"
        inkscape:connector-curvature="0"
-       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\path4459.png"
+       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\withSWR.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200" />
     <path
@@ -2476,7 +2446,7 @@
        d="m 683.57143,173.07647 42.85714,76.42857"
        id="path5023"
        inkscape:connector-curvature="0"
-       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\path4459.png"
+       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\withSWR.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200" />
     <path
@@ -2484,7 +2454,7 @@
        d="m 761.42857,255.93361 40.71429,29.28571"
        id="path5027"
        inkscape:connector-curvature="0"
-       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\path4459.png"
+       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\withSWR.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200" />
     <path
@@ -2492,7 +2462,7 @@
        d="m 761.42857,363.07647 41.42857,-59.28572"
        id="path5029"
        inkscape:connector-curvature="0"
-       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\path4459.png"
+       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\withSWR.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200" />
     <path
@@ -2500,7 +2470,7 @@
        d="m 685,270.93361 41.42857,-0.71429"
        id="path5031"
        inkscape:connector-curvature="0"
-       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\path4459.png"
+       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\withSWR.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200" />
     <path
@@ -2508,7 +2478,7 @@
        d="M 554.28571,384.50504 726.42857,277.36218"
        id="path5033"
        inkscape:connector-curvature="0"
-       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\path4459.png"
+       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\withSWR.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200" />
     <path
@@ -2516,7 +2486,7 @@
        d="m 551.42857,230.21932 175,132.14286"
        id="path5039"
        inkscape:connector-curvature="0"
-       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\path4459.png"
+       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\withSWR.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200" />
     <path
@@ -2524,7 +2494,7 @@
        d="m 552.85714,311.6479 172.85715,60.71428"
        id="path5041"
        inkscape:connector-curvature="0"
-       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\path4459.png"
+       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\withSWR.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200" />
     <path
@@ -2532,7 +2502,7 @@
        d="m 554.28571,392.36218 171.42858,-7.85714"
        id="path5043"
        inkscape:connector-curvature="0"
-       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\path4459.png"
+       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\withSWR.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200" />
     <path
@@ -2540,7 +2510,7 @@
        d="m 550.71429,88.076467 38.57142,56.428573"
        id="path5045"
        inkscape:connector-curvature="0"
-       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\path4459.png"
+       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\withSWR.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200" />
     <path
@@ -2548,7 +2518,7 @@
        d="m 610,173.07647 60,86.42857"
        id="path5047"
        inkscape:connector-curvature="0"
-       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\path4459.png"
+       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\withSWR.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200" />
     <path
@@ -2556,7 +2526,7 @@
        d="m 685.71429,282.36218 40.71428,55.71429"
        id="path5049"
        inkscape:connector-curvature="0"
-       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\path4459.png"
+       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\withSWR.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200" />
     <path
@@ -2564,7 +2534,7 @@
        d="m 550,159.50504 25,26.42857"
        id="path5051"
        inkscape:connector-curvature="0"
-       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\path4459.png"
+       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\withSWR.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200" />
     <path
@@ -2572,7 +2542,7 @@
        d="m 610,224.50504 36.42857,40"
        id="path5053"
        inkscape:connector-curvature="0"
-       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\path4459.png"
+       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\withSWR.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200" />
     <path
@@ -2580,7 +2550,7 @@
        d="m 673.57143,293.07647 52.14286,57.85714"
        id="path5055"
        inkscape:connector-curvature="0"
-       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\path4459.png"
+       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\withSWR.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200" />
     <path
@@ -2590,7 +2560,7 @@
        inkscape:connector-curvature="0"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200"
-       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\path4459.png" />
+       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\withSWR.png" />
     <text
        xml:space="preserve"
        style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
@@ -2600,7 +2570,7 @@
        sodipodi:linespacing="125%"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200"
-       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\path4459.png"><tspan
+       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\withSWR.png"><tspan
          sodipodi:role="line"
          id="tspan3667"
          x="-172.85715"
@@ -2660,7 +2630,7 @@
        d="m 241.93153,395.25795 246.47723,0"
        id="path3689"
        inkscape:connector-curvature="0"
-       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\path4459.png"
+       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\withSWR.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200" />
     <path
@@ -2668,74 +2638,102 @@
        d="m 242.85714,380.21933 17.14286,0 0,218.57142"
        id="path4461"
        inkscape:connector-curvature="0"
-       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\path4459.png"
+       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\withSWR.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200" />
     <path
        style="fill:none;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
-       d="m 623.94647,597.02292 0,26.39279 77.82136,0 0,-24.36258 -77.82136,0 z"
+       d="m 186.28915,597.77181 0,24.89501 514.72979,0 0,-22.98001 -514.72979,0 z"
        id="path4831-1"
        inkscape:connector-curvature="0"
-       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\path4459.png"
+       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\withSWR.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200" />
     <text
        xml:space="preserve"
        style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
-       x="643.57141"
-       y="620.2193"
+       x="411.23633"
+       y="619.20917"
        id="text4833-7"
        sodipodi:linespacing="125%"
-       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\path4459.png"
+       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\withSWR.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200"><tspan
          sodipodi:role="line"
          id="tspan4835-4"
-         x="643.57141"
-         y="620.2193"
-         style="font-size:25px">C8</tspan></text>
+         x="411.23633"
+         y="619.20917"
+         style="font-size:25px">C4</tspan></text>
     <path
        style="fill:none;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:1,1;stroke-dashoffset:0"
        d="m 850.71429,323.07647 0,118.57143 -308.57143,0 0,27.14285"
        id="path3328"
-       inkscape:connector-curvature="0" />
-    <path
-       style="fill:none;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
-       d="m 394.66075,600.59436 0,26.39279 77.82136,0 0,-24.36258 -77.82136,0 z"
-       id="path4831-17"
        inkscape:connector-curvature="0"
-       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\path4459.png"
+       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\withSWR.png"
+       inkscape:export-xdpi="200"
+       inkscape:export-ydpi="200" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.94984645;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:1;stroke-opacity:1;stroke-dasharray:none"
+       d="m 943.33329,268.16141 0,54.28049 91.21211,0 0,-55.38825 -91.21211,0 z"
+       id="path2989-8-1"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\withSWR.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200" />
     <text
        xml:space="preserve"
-       style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
-       x="414.28574"
-       y="623.79077"
-       id="text4833-4"
+       style="font-size:30.50649261px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       x="958.44458"
+       y="302.14694"
+       id="text3260-1-7"
        sodipodi:linespacing="125%"
-       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\path4459.png"
+       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\withSWR.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200"><tspan
          sodipodi:role="line"
-         id="tspan4835-0"
-         x="414.28574"
-         y="623.79077"
-         style="font-size:25px">C9</tspan></text>
+         id="tspan3262-5-4"
+         x="958.44458"
+         y="302.14694"
+         style="font-size:22.87986946px">SWR1</tspan></text>
     <path
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       d="m 264.28571,612.36218 130.71429,0"
-       id="path3353"
-       inkscape:connector-curvature="0" />
+       d="m 892.97485,281.61579 48.48732,0"
+       id="path4122"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\withSWR.png"
+       inkscape:export-xdpi="200"
+       inkscape:export-ydpi="200" />
     <path
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       d="m 623.57143,611.6479 -150.71429,0"
-       id="path3355"
-       inkscape:connector-curvature="0" />
+       d="m 987.92919,322.02189 0,38.3858"
+       id="path4128"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\withSWR.png"
+       inkscape:export-xdpi="200"
+       inkscape:export-ydpi="200" />
     <path
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       d="m 432.14286,627.36218 0,20.71429"
-       id="path3357"
-       inkscape:connector-curvature="0" />
+       d="m 1034.3962,284.64625 21.2132,0 0,-88.89343 14.1421,0"
+       id="path4130"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\withSWR.png"
+       inkscape:export-xdpi="200"
+       inkscape:export-ydpi="200" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:1,1;stroke-dashoffset:0"
+       d="m 968.73807,322.02011 0,20.20354 -103.3034,0 0,105.05845 -317.93377,0 0,20.20354"
+       id="path4132"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\withSWR.png"
+       inkscape:export-xdpi="200"
+       inkscape:export-ydpi="200" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 423.25392,623.04735 0,32.32488 507.09657,0 0,-357.594 12.12183,0"
+       id="path4134"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="C:\Users\Acer\Documents\GitHub\CD3Waterbalance\doc\complex system\withSWR.png"
+       inkscape:export-xdpi="200"
+       inkscape:export-ydpi="200" />
   </g>
 </svg>

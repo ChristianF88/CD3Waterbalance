@@ -29,24 +29,28 @@ import pycd3
 #        print "NodeFactory.getSource"
 #        return "Addons.py"
 
-class Greywatertank(pycd3.Node):
+class Stormwaterreservoir(pycd3.Node):
     def __init__(self):
         pycd3.Node.__init__(self)
-        self.greywaterin = pycd3.Flow()
-        self.greywaterout = pycd3.Flow()
+        self.stormwaterin = pycd3.Flow()
+        self.stormwaterout = pycd3.Flow()
         self.check_storage = pycd3.Flow()
         self.Additional_Demand = pycd3.Flow()
         self.wastewater = pycd3.Flow()
+        self.overflow = pycd3.Flow()
          
         #dir (self.inf)
         print "init node"
-        self.addInPort("Grey_Water_In", self.greywaterin)
-        self.addInPort("Treated_Grey_Water_Out", self.greywaterout)
+        self.addInPort("Storm_Water_In", self.stormwaterin)
+        self.addInPort("Treated_Storm_Water_Out", self.stormwaterout)
         self.addOutPort("Current_Volume",self.check_storage)
         self.addOutPort("Additional_Demand",self.Additional_Demand)
         self.addOutPort("Waste_Water",self.wastewater)
+        self.addOutPort("Overflow",self.overflow)
         self.myyield = pycd3.Double(0.9)
         self.addParameter("Yield_of_Treatment [-]", self.myyield)
+        self.storage_volume = pycd3.Double(1000)
+        self.addParameter("Storage_Volume_[m^3]", self.storage_volume)
 
      
     def init(self, start, stop, dt):
@@ -58,26 +62,29 @@ class Greywatertank(pycd3.Node):
         
     def f(self, current, dt):
         
-        self.current_volume += self.greywaterin[0]*self.myyield - self.greywaterout[0]
-        self.wastewater[0] = self.greywaterin[0]*(1-self.myyield)
+        self.current_volume += self.stormwaterin[0]*self.myyield - self.stormwaterout[0]
+        self.wastewater[0] = self.stormwaterin[0]*(1-self.myyield)
         
-        if self.current_volume >= 0:
+        if self.storage_volume < self.current_volume:
+            self.overflow[0] = self.stormwaterin[0]*self.myyield - self.stormwaterout[0]
+            self.current_volume = self.storage_volume
             self.Additional_Demand[0] = 0.0
-            self.check_storage[0] = self.current_volume
-            
-        else:
-            self.Additional_Demand[0] = self.greywaterout[0]
-            self.current_volume = 0.0
-            self.check_storage[0] = self.current_volume
-            
-       
         
-      
+        elif self.current_volume >= 0:
+            self.Additional_Demand[0] = 0.0
+            self.overflow[0] = 0.0
+        else:
+            self.Additional_Demand[0] = self.stormwaterout[0]
+            self.current_volume = 0.0
+            self.overflow[0] = 0.0
+            
+        self.check_storage[0] = self.current_volume
+    
         return dt
     
     def getClassName(self):
         #print "getClassName"
-        return "Greywatertank"
+        return "Stormwaterreservoir"
 
 #def register(nr):
 #    for c in pycd3.Node.__subclasses__():

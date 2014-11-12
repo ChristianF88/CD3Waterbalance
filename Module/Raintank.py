@@ -34,7 +34,7 @@ class Raintank(pycd3.Node):
         pycd3.Node.__init__(self)
         self.collected_w = pycd3.Flow()
         self.non_pot_in = pycd3.Flow()
-        self.non_pot_out = pycd3.Flow()
+        self.Additional_Demand = pycd3.Flow()
         self.overflow = pycd3.Flow()
         self.check_storage = pycd3.Flow()
         #dir (self.inf)
@@ -42,7 +42,7 @@ class Raintank(pycd3.Node):
         self.addInPort("Collected_Water", self.collected_w)
         self.addInPort("Non_Potable_In", self.non_pot_in)
         self.addOutPort("Overflow", self.overflow)
-        self.addOutPort("Additional_Demand", self.non_pot_out)
+        self.addOutPort("Additional_Demand", self.Additional_Demand)
         self.addOutPort("Check_Storage", self.check_storage)
         self.storage_v = pycd3.Double(20.0)
         self.addParameter("Storage_Volume [m^3]", self.storage_v)
@@ -64,20 +64,20 @@ class Raintank(pycd3.Node):
         self.current_volume += self.collected_w[0]-self.non_pot_in[0]
         
         if self.current_volume >= self.storage_v:
-            self.overflow[0] = self.collected_w[0]
-            self.non_pot_out[0] = 0.0
+            self.overflow[0] = self.collected_w[0]-self.non_pot_in[0]
+            self.Additional_Demand[0] = 0.0
             self.current_volume = self.storage_v
-            self.check_storage[0] = self.current_volume
             
         elif self.current_volume >0:
             self.overflow[0] = 0.0
-            self.non_pot_out[0] = 0.0
-            self.check_storage[0] = self.current_volume
+            self.Additional_Demand[0] = 0.0
         else:
             self.overflow[0] = 0.0
-            self.non_pot_out[0] = - self.non_pot_in[0]
+            self.Additional_Demand[0] = self.non_pot_in[0]
             self.current_volume = 0.0
-            self.check_storage[0] = self.current_volume
+            
+        self.check_storage[0] = self.current_volume
+
             
        
         return dt

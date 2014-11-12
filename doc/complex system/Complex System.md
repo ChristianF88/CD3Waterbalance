@@ -5,7 +5,7 @@ Included BLocks:
  - 8 x File Reader
  - 1 x Pattern Implementer
  - 8 x Distributor
- - 8 x Collector
+ - 9 x Collector
  - 5 x Catchment
  - 5 x Household
  - 3 x Raintank
@@ -112,7 +112,7 @@ Included BLocks:
 
 # 
 
-#### Collector #1, #2
+#### Collector #1, #2, #9
 
 | Variable  |  Value  |
 | :------------ |:---------------:|
@@ -120,7 +120,7 @@ Included BLocks:
 
 # 
 
-#### Collector #3, #5, #7
+#### Collector #5, #7
 
 | Variable  |  Value  |
 | :------------ |:---------------:|
@@ -128,7 +128,7 @@ Included BLocks:
 
 # 
 
-#### Collector #4
+#### Collector #3, #4
 
 | Variable  |  Value  |
 | :------------ |:---------------:|
@@ -330,18 +330,18 @@ Connected to:
 |  Pattern Implementer|1|  2 [1, 1] |  2 [1, 1] |
 |  Distributor|8 | 6 [1, 5] |  6 [1, 5] |
 |  Catchment|5 | 5 [2, 3] |  8 [3, 5] |
-|  Collector| 8| a+1 [a, 1] |  a+1 [a, 1] | a(C1, C2, C3, C4, C5, C6, C7, C8) = {2, 2, 5, 6, 5, 4, 5, 3}
+|  Collector| 8| a+1 [a, 1] |  a+1 [a, 1] | a(C1, C2, C3, C4, C5, C6, C7, C8, C9) = {2, 2, 6, 6, 5, 4, 5, 3, 2}
 | Household| 5| 11 [7, 4]|  11 [7, 4] | 
 |  Raintank|3 | 5 [2, 3] |  5 [2, 3] |
-|  Grey Water Tank|1 | 4 [2, 2] |  4 [2, 2] |
-|  Stormwater Drain| 1| 2 [2, 0] |  3 [2, 1] |
+|  Grey Water Tank|1 | 5 [2, 3] |  5 [2, 3] |
+|  Stormwater Drain| 1| 1 [1, 0] |  2 [1, 1] |
 |  Sewer| 1 |1 [1, 0] |  2 [1, 1] |
 | Potable Water Reservoir   | 1| 3 [2, 1] |  3 [2, 1] |
 | Fileout   | 5 | 1 [1, 0] |  2 [1, 1] |
 
 # 
 
-Number of Links = Connected (i) * Number of Blocks / 2 = 104 
+Number of Links = [ Sum( Connected (i) * Number of Blocks ) ] / 2 = 106 
 
 <br>
 

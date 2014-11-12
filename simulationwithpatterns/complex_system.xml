@@ -177,7 +177,7 @@
                 <parameter name="Number_of_Inports" type="int" value="2"/>
             </node>
 			<node id="Collector_2" class="Collector">
-                <parameter name="Number_of_Inports" type="int" value="5"/>
+                <parameter name="Number_of_Inports" type="int" value="6"/>
             </node>
 			<node id="Collector_3" class="Collector">
                 <parameter name="Number_of_Inports" type="int" value="6"/>
@@ -193,6 +193,9 @@
             </node>
 			<node id="Collector_7" class="Collector">
                 <parameter name="Number_of_Inports" type="int" value="3"/>
+            </node>
+			<node id="Collector_8" class="Collector">
+                <parameter name="Number_of_Inports" type="int" value="2"/>
             </node>
 			<node id="Household_0" class="Household"/>
 			<node id="Household_1" class="Household"/>
@@ -549,11 +552,11 @@
 			</connection>
 			<connection id="79">
                 <source node="Collector_7" port="Outport"/>
-                <sink node="Stormwaterpipe_0" port="overflow"/>
+                <sink node="Collector_8" port="Inport_1"/>
 			</connection>
 			<connection id="80">
                 <source node="Collector_3" port="Outport"/>
-                <sink node="Stormwaterpipe_0" port="runoff"/>
+                <sink node="Collector_8" port="Inport_2"/>
 			</connection>
 			<connection id="81">
                 <source node="Household_0" port="Potable_Water"/>
@@ -647,6 +650,14 @@
                 <source node="Raintank_2" port="Check_Storage"/>
                 <sink node="FileOut_1" port="in"/>
 			</connection>
+			<connection id="104">
+                <source node="Greywatertank_0" port="Waste_Water"/>
+                <sink node="Collector_2" port="Inport_6"/>
+			</connection>
+			<connection id="105">
+                <source node="Collector_8" port="Outport"/>
+                <sink node="Stormwaterpipe_0" port="Inport"/>
+			</connection>
         </connectionlist>
     </model>
     <gui>
@@ -680,6 +691,7 @@
 		<nodeposition id="Collector_5" x="-800" y="-75"/>
 		<nodeposition id="Collector_6" x="-800" y="-225"/>
 		<nodeposition id="Collector_7" x="-800" y="600"/>
+		<nodeposition id="Collector_8" x="-800" y="550"/>
         <nodeposition id="Household_0" x="-1700" y="-475"/>
         <nodeposition id="Household_1" x="-1700" y="-275"/>
 		<nodeposition id="Household_2" x="-1700" y="-75"/>

@@ -32,14 +32,12 @@ import pycd3
 class Stormwaterpipe(pycd3.Node):
     def __init__(self):
         pycd3.Node.__init__(self)
-        self.rain_w_overflow = pycd3.Flow()
-        self.runoff = pycd3.Flow()
+        self.inport = pycd3.Flow()
         self.discharged_V = pycd3.Flow()
         #dir (self.inf)
         print "init node"
-        self.addInPort("overflow", self.rain_w_overflow)
-        self.addInPort("runoff", self.runoff)
-        self.addOutPort("discharged_V", self.discharged_V)
+        self.addInPort("Inport", self.inport)
+        self.addOutPort("Volume", self.discharged_V)
         self.current_V=0.0
                
         
@@ -54,8 +52,7 @@ class Stormwaterpipe(pycd3.Node):
         
     def f(self, current, dt):
         
-        stormwater = self.rain_w_overflow[0]+self.runoff[0]
-        self.current_V += stormwater
+        self.current_V += self.inport[0]
         self.discharged_V[0] = self.current_V
        
 
