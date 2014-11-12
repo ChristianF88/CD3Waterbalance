@@ -46,7 +46,7 @@ class Greywatertank(pycd3.Node):
         self.addOutPort("Additional_Demand",self.Additional_Demand)
         self.addOutPort("Waste_Water",self.wastewater)
         self.myyield = pycd3.Double(0.9)
-        self.addParameter("Yield_of_Treatment [-]", self.myyield)
+        self.addParameter("Yield_of_Treatment_[-]", self.myyield)
 
      
     def init(self, start, stop, dt):

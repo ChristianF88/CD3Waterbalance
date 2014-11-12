@@ -13,7 +13,7 @@ Included BLocks:
  - 1 x Stormwater Drain
  - 1 x Sewer
  - 1 x Potable Water Reservoir
- - 5 x Fileout
+ - 12 x Fileout
  
 <br>
 
@@ -329,26 +329,26 @@ Connected to:
 |     File Reader|8|  1 [0, 1] |  1 [0, 1] |
 |  Pattern Implementer|1|  2 [1, 1] |  2 [1, 1] |
 |  Distributor|8 | 6 [1, 5] |  6 [1, 5] |
-|  Catchment|5 | 5 [2, 3] |  8 [3, 5] |
+|  Catchment|5 | 6 [2, 4] |  8 [3, 5] |
 |  Collector| 8| a+1 [a, 1] |  a+1 [a, 1] | a(C1, C2, C3, C4, C5, C6, C7, C8, C9) = {2, 2, 6, 6, 5, 4, 5, 3, 2}
 | Household| 5| 11 [7, 4]|  11 [7, 4] | 
 |  Raintank|3 | 5 [2, 3] |  5 [2, 3] |
 |  Grey Water Tank|1 | 5 [2, 3] |  5 [2, 3] |
-|  Stormwater Drain| 1| 1 [1, 0] |  2 [1, 1] |
-|  Sewer| 1 |1 [1, 0] |  2 [1, 1] |
+|  Stormwater Drain| 1| 2 [1, 1] |  2 [1, 1] |
+|  Sewer| 1 |2 [1, 1] |  2 [1, 1] |
 | Potable Water Reservoir   | 1| 3 [2, 1] |  3 [2, 1] |
-| Fileout   | 5 | 1 [1, 0] |  2 [1, 1] |
+| Fileout   | 12 | a+b [a, b] |  2 [1, 1] | a(Fo1 - Fo7, Fo8 - Fo12) = {[1, 0], [1, 1]}
 
 # 
 
-Number of Links = [ Sum( Connected (i) * Number of Blocks ) ] / 2 = 106 
+Number of Links = [ Sum( Connected (i) * Number of Blocks ) ] / 2 = 113 
 
 <br>
 
 ## Thoughts
 
 - Check max time step for stability of muskingum
-- Greywatertank wastewater to sewer? at the moment its a sink 
+
 
 
 
