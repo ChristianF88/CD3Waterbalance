@@ -17,35 +17,35 @@
     <model>
 		<nodelist>
 			<node id="File_Reader_0" class="File_Reader">
-                <parameter name="" type="string" value="inputfiles/evapo.ixx"/>
+                <parameter name="" type="string" value="../inputfiles/evapo.ixx"/>
                 <parameter name="Type_H_for_height_[mm]_or_F_for_flow_[l/h]" type="string" value="H"/>
 			</node>
 			<node id="File_Reader_1" class="File_Reader">
-                <parameter name="" type="string" value="inputfiles/rain.ixx"/>
+                <parameter name="" type="string" value="../inputfiles/rain.ixx"/>
                 <parameter name="Type_H_for_height_[mm]_or_F_for_flow_[l/h]" type="string" value="H"/>
             </node>
 			<node id="File_Reader_2" class="File_Reader">
-                <parameter name="" type="string" value="inputfiles/bath.ixx"/>
+                <parameter name="" type="string" value="../inputfiles/bath.ixx"/>
                 <parameter name="Type_H_for_height_[mm]_or_F_for_flow_[l/h]" type="string" value="F"/>
             </node>
 			<node id="File_Reader_3" class="File_Reader">
-                <parameter name="" type="string" value="inputfiles/dishwasher.ixx"/>
+                <parameter name="" type="string" value="../inputfiles/dishwasher.ixx"/>
                 <parameter name="Type_H_for_height_[mm]_or_F_for_flow_[l/h]" type="string" value="F"/>
             </node>
 			<node id="File_Reader_4" class="File_Reader">
-                <parameter name="" type="string" value="inputfiles/shower.ixx"/>
+                <parameter name="" type="string" value="../inputfiles/shower.ixx"/>
                 <parameter name="Type_H_for_height_[mm]_or_F_for_flow_[l/h]" type="string" value="F"/>
             </node>
 			<node id="File_Reader_5" class="File_Reader">
-                <parameter name="" type="string" value="inputfiles/toilet.ixx"/>
+                <parameter name="" type="string" value="../inputfiles/toilet.ixx"/>
                 <parameter name="Type_H_for_height_[mm]_or_F_for_flow_[l/h]" type="string" value="F"/>
             </node>
 			<node id="File_Reader_6" class="File_Reader">
-                <parameter name="" type="string" value="inputfiles/tap.ixx"/>
+                <parameter name="" type="string" value="../inputfiles/tap.ixx"/>
                 <parameter name="Type_H_for_height_[mm]_or_F_for_flow_[l/h]" type="string" value="F"/>
             </node>
 			<node id="File_Reader_7" class="File_Reader">
-                <parameter name="" type="string" value="inputfiles/washing_machine.ixx"/>
+                <parameter name="" type="string" value="../inputfiles/washing_machine.ixx"/>
                 <parameter name="Type_H_for_height_[mm]_or_F_for_flow_[l/h]" type="string" value="F"/>
             </node>
 			<node id="Pattern_Impl_0" class="Pattern_Impl">
@@ -243,16 +243,16 @@
                 <parameter name="out_file_name" type="string" value="Infiltration(CA0).txt"/>
             </node>
 			<node id="FileOut_8" class="FileOut">
-                <parameter name="out_file_name" type="string" value="Infiltration(CA1)Sewer.txt"/>
+                <parameter name="out_file_name" type="string" value="Infiltration(CA1).txt"/>
             </node>
 			<node id="FileOut_9" class="FileOut">
-                <parameter name="out_file_name" type="string" value="Infiltration(CA2)Sewer.txt"/>
+                <parameter name="out_file_name" type="string" value="Infiltration(CA2).txt"/>
             </node>
 			<node id="FileOut_10" class="FileOut">
-                <parameter name="out_file_name" type="string" value="Infiltration(CA3)Sewer.txt"/>
+                <parameter name="out_file_name" type="string" value="Infiltration(CA3).txt"/>
             </node>
 			<node id="FileOut_11" class="FileOut">
-                <parameter name="out_file_name" type="string" value="Infiltration(CA4)Sewer.txt"/>
+                <parameter name="out_file_name" type="string" value="Infiltration(CA4).txt"/>
             </node>
 		</nodelist>
 		        <connectionlist>
