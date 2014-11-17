@@ -16,7 +16,7 @@ from itertools import cycle
 from numpy import size, asarray
 
 
-def getoutputdata(location_files1):
+def getoutputdata(location_files1, totalarea=4301.):
     #getting outputvector
     #location_files1='C:\Users\Acer\Documents\GitHub\CD3Waterbalance\simulationwithpatterns\outputfiles'
     file_names=os.listdir(str(location_files1)[0:])
@@ -46,6 +46,14 @@ def getoutputdata(location_files1):
     for i in range((len(alltogether)+1))[1:]:
         for n in range(size(alltogether,1))[1:]:
             Outputvector[n][i]=float(alltogether[i-1][n][1])
+            
+    for i in range(len(Outputvector[0])):
+        if Outputvector[0][i] == 'evapo_model':
+            for n in range(len(Outputvector))[1:]:
+                Outputvector[n][i]=float(Outputvector[n][i])/1000*totalarea
+        if Outputvector[0][i] == 'rain_model':
+            for n in range(len(Outputvector))[1:]:
+                Outputvector[n][i]=float(Outputvector[n][i])/1000*totalarea
     #checks whether all values have been inserted
     for i in range(size(Outputvector,0)):
         if 'error' in Outputvector[i]:
@@ -80,50 +88,50 @@ def getinputdata(location_files2, numberhh=5., totalarea=4301., lenindoor=9000):
                 indoor.append(mylist)
                 namesindoor.append(file_names[i])
     #creating vector right size    
-    global rainevapovector, indoorvector      
-    rainevapovector=[['error']*(len(namesrainevapo)+1) for m in range(size(rainevapo[0],0)-1)]
-    indoorvector=[['error']*(len(namesindoor)+1) for m in range(size(indoor[0],0))]
+    global Rainevapovector, Indoorvector      
+    Rainevapovector=[['error']*(len(namesrainevapo)+1) for m in range(size(rainevapo[0],0)-1)]
+    Indoorvector=[['error']*(len(namesindoor)+1) for m in range(size(indoor[0],0))]
     #writing time colum    
     for i in range(size(rainevapo[0],0)-1):
-        rainevapovector[i][0]=float(date2num(datetime.strptime(rainevapo[1][i+1][0]+" "+rainevapo[1][i+1][1],"%d.%m.%Y %H:%M:%S")))
+        Rainevapovector[i][0]=float(date2num(datetime.strptime(rainevapo[1][i+1][0]+" "+rainevapo[1][i+1][1],"%d.%m.%Y %H:%M:%S")))
     for i in range(size(indoor[0],0)):
-        indoorvector[i][0]=float(date2num(datetime.strptime(indoor[1][i][0]+" "+indoor[1][i][1],"%d.%m.%Y %H:%M:%S")))
+        Indoorvector[i][0]=float(date2num(datetime.strptime(indoor[1][i][0]+" "+indoor[1][i][1],"%d.%m.%Y %H:%M:%S")))
     #writing Values of inputfiles in vector
     for i in range((len(namesrainevapo)+1))[1:]:
         for n in range(size(rainevapo[0],0)-1):
-            rainevapovector[n][i]=float(rainevapo[i-1][n+1][2])
+            Rainevapovector[n][i]=float(rainevapo[i-1][n+1][2])
     for i in range((len(namesindoor)+1))[1:]:
         for n in range(size(indoor[0],0)):
-            indoorvector[n][i]=float(indoor[i-1][n][2])
+            Indoorvector[n][i]=float(indoor[i-1][n][2])
     
     #correcting unit and volume!
-    rainevapovector=np.asarray(rainevapovector)
-    indoorvector=np.asarray(indoorvector)
+    Rainevapovector=np.asarray(Rainevapovector)
+    Indoorvector=np.asarray(Indoorvector)
     for i in range(len(namesrainevapo)+1)[1:]:
-        rainevapovector[:,i]=rainevapovector[:,i]/1000*totalarea
+        Rainevapovector[:,i]=Rainevapovector[:,i]/1000*totalarea
     for i in range(len(namesindoor)+1)[1:]:
-        indoorvector[:,i]=indoorvector[:,i]/1000*numberhh*(float(indoorvector[2][0])-float(indoorvector[1][0]))*24
+        Indoorvector[:,i]=Indoorvector[:,i]/1000*numberhh*(float(Indoorvector[2][0])-float(Indoorvector[1][0]))*24
     #giving header for future reference
-    rainevapovector=rainevapovector.tolist()
-    rainevapovector.insert(0,['time']*(len(namesrainevapo)+1))
+    Rainevapovector=Rainevapovector.tolist()
+    Rainevapovector.insert(0,['time']*(len(namesrainevapo)+1))
     for i in range(len(namesrainevapo)+1)[1:]:
-        rainevapovector[0][i]=namesrainevapo[i-1][:(len(namesrainevapo[i-1])-4)]
-    indoorvector=indoorvector.tolist()
-    indoorvector.insert(0,['time']*(len(namesindoor)+1))
+        Rainevapovector[0][i]=namesrainevapo[i-1][:(len(namesrainevapo[i-1])-4)]
+    Indoorvector=Indoorvector.tolist()
+    Indoorvector.insert(0,['time']*(len(namesindoor)+1))
     for i in range(len(namesindoor)+1)[1:]:
-        indoorvector[0][i]=namesindoor[i-1][:(len(namesindoor[i-1])-4)]
-    rainevapovector = np.asarray(rainevapovector)   
-    indoorvector = np.asarray(indoorvector) 
+        Indoorvector[0][i]=namesindoor[i-1][:(len(namesindoor[i-1])-4)]
+    Rainevapovector = np.asarray(Rainevapovector)   
+    Indoorvector = np.asarray(Indoorvector) 
     print 'Indoorvector and RainEvapovector have been created'
     return 
         
 
 
 
-#Possible Input: Outdoor Demand, Indoor demand, all filenames (without endings)
+#Possible Input: Outdoor_Demand, Indoor_Demand, all (plots everthing), all filenames (without endings)
 def plotter(Vector1, Vector2, Vector3,limx, limy, toplot=[] ):
-    #Vector1=indoorvector
-    #Vector2=rainevapovector
+    #Vector1=Indoorvector
+    #Vector2=Rainevapovector
     #Vector3=Outputvector
     #toplot=['bath', 'dishwasher', 'Raintank1', 'Sewer', 'rain', 'Outdoor_Demand', 'Indoor_Demand']
     #liste der zu plottenden sachen erzeugen
@@ -182,6 +190,14 @@ def plotter(Vector1, Vector2, Vector3,limx, limy, toplot=[] ):
             storageID=storageID.tolist()
             storageID[0]='Indoor_Demand'
             listtoplot.append([variable[:,0], storageID])
+            
+        elif toplot[i] == 'all':
+            for n in range(len(Vector1[0]))[1:]:
+                listtoplot.append([Vector1[:,0], Vector1[:,n]])                      
+            for n in range(len(Vector2[0]))[1:]:
+                listtoplot.append([Vector2[:,0], Vector2[:,n]])                      
+            for n in range(len(Vector3[0]))[1:]:
+                listtoplot.append([Vector3[:,0], Vector3[:,n]])           
         else:
             print 'Error: Wrong input name!'
     #LEGENDE!!!save pic if wanted
@@ -190,19 +206,117 @@ def plotter(Vector1, Vector2, Vector3,limx, limy, toplot=[] ):
     pl.ylim(float(limy[0]), float(limy[1]))
     lines = ["-","--","-.",":"]
     linecycler = cycle(lines)
-    for i in range(len(toplot)):
-        exec 'pl.plot(asarray(listtoplot['+str(i)+'])[0][1:],asarray(listtoplot['+str(i)+'])[1][1:], linewidth=2.5, linestyle = next(linecycler), label=toplot['+str(i)+'])'
-    pl.legend(loc='right')
+    for i in range(len(listtoplot)):
+        exec 'pl.plot(asarray(listtoplot['+str(i)+'])[0][1:],asarray(listtoplot['+str(i)+'])[1][1:], linewidth=2.5, linestyle = next(linecycler), label=listtoplot['+str(i)+'][1][0])'
+    pl.legend(loc='left')
     pl.show()
 
     return
+
+    #tocheck (all, Evapo, Rain, Indooruse, Outdoordemand?, System)
+def Bilanz(Data, lossfactor = 1.135, totalarea = 4301., tocheck):
+    #tocheck=['Evapo', 'Rain', 'System', 'Indooruse']
+    #Data=[Rainevapovector, Outputvector, Indoorvector]
+    colorred = "\033[01;31m{0}\033[00m"
+    for i in range(len(tocheck)):
+        #evapotranspiration check
+        if tocheck[i] == 'Evapo':
+            evapomodel = 0.0
+            evapoinput = 0.0
+            for i in range(len(Data)):
+                for n in range(len(Data[i][0])):
+                    if Data[i][0][n] == 'evapo':
+                        for m in range(len(Data[i][:,n]))[1:]:
+                            evapoinput += float(Data[i][:,n][m])
+                    elif Data[i][0][n] == 'evapo_model':
+                        for m in range(len(Data[i][:,n]))[1:]:            
+                            evapomodel += float(Data[i][:,n][m])
+            ErrorFRPI=(1 - evapomodel/evapoinput) * 100
+            print 'The difference of given and produced Evapotranspiraten calculated by the Pattern Implementer and Filereader due to rounding errors is '+ colorred.format(str(ErrorFRPI))+' %'
+        #rain check    
+        elif tocheck[i] == 'Rain':
+            rainmodel = 0.0
+            raininput = 0.0
+            for i in range(len(Data)):
+                for n in range(len(Data[i][0])):
+                    if Data[i][0][n] == 'rain':
+                        for m in range(len(Data[i][:,n]))[1:]:
+                            raininput += float(Data[i][:,n][m])
+                    elif Data[i][0][n] == 'rain_model':
+                        for m in range(len(Data[i][:,n]))[1:]:            
+                            rainmodel += float(Data[i][:,n][m])
+            ErrorFR=(1 - rainmodel/raininput) * 100
+            print 'The difference of given and produced Rain calculated by the Filereader due to rounding errors is '+ colorred.format(str(ErrorFR))+' %'
+        #total system
+        #Lists have to be in alphabetical order
+        elif tocheck[i] == 'System': 
+            
+            totalstorage = []
+            totalstoragelist = ['GreyWaterTank', 'Raintank1', 'Raintank2', 'Raintank3']
+            inputER=[]
+            inputERlist = ['evapo_model', 'rain_model']
+            outputISSP = []
+            outputISSPlist = ['Infiltration', 'PotableWaterDemand', 'Sewer', 'Stormwater']
+            for i in range(len(Data)):
+                for n in range(len(Data[i][0])):
+                    if Data[i][0][n] in totalstoragelist:            
+                        totalstorage.append(Data[i][:,n])
+                    elif Data[i][0][n] in inputERlist:
+                        inputER.append(Data[i][:,n])
+                    elif Data[i][0][n] in outputISSPlist:
+                        outputISSP.append(Data[i][:,n])
+            
+            totalstoragescalar = 0.0
+            totalinput = 0.0
+            totaloutput = 0.0
+            totaloutputPWR = 0.0
+            totalinputET = 0.0
+            amount = 0.0
+            for i in range(len(totalstoragelist)):
+                totalstoragescalar += float(totalstorage[i][-1])
+            for i in range(len(outputISSPlist)):
+                if outputISSPlist[i] == 'PotableWaterDemand':
+                    for n in range(len(outputISSP[0]))[1:]:
+                        totaloutputPWR += float(outputISSP[i][n])
+                else:
+                    for n in range(len(outputISSP[0]))[1:]:
+                        totaloutput -= float(outputISSP[i][n])
+            for i in range(len(inputER[0]))[1:]:
+                if float(inputER[1][i]) > float(inputER[0][i]):
+                    totalinput += float(inputER[1][i])-float(inputER[0][i])
+                    totalinputET += float(inputER[0][i])
+            
+            for i in range(len(inputER[0]))[3:]: 
+                if float(inputER[1][i-2]) == 0:
+                    if float(inputER[1][i-1]) == 0:
+                        if float(inputER[1][i]) != 0:
+                            amount += 1
+                        else:
+                            pass
+                    else:
+                        pass
+                else:
+                    pass
+            totallosses = amount * totalarea * lossfactor/1000
+            total_error = abs(totalinput - totallosses + totaloutput + totaloutputPWR-totalstoragescalar)
+            print (2 * total_error)/(totallosses+totaloutputPWR+totalinput+totalinputET-totaloutput)
+        #indooruse check
+    
+        #outdoor demand check
+    
+    
+    return
+
+
+
+
 
 
 
 def theholelot(outputfiles='C:\Users\Acer\Documents\GitHub\CD3Waterbalance\simulationwithpatterns\outputfiles', inputfiles='C:\Users\Acer\Documents\GitHub\CD3Waterbalance\simulationwithpatterns\inputfiles', numberhh=5, totalarea=4301):
     getoutputdata(outputfiles)
     getinputdata(inputfiles, numberhh, totalarea)
-    plotter(indoorvector, rainevapovector, Outputvector,[0,365],[0,10], ['evapo', 'bath', 'dishwasher', 'Raintank1', 'rain', 'Outdoor_Demand'])
+    #plotter(Indoorvector, Rainevapovector, Outputvector,[0,365],[0,5], ['all'])
     print 'done'
     return
 
@@ -216,7 +330,7 @@ def theholelot(outputfiles='C:\Users\Acer\Documents\GitHub\CD3Waterbalance\simul
 #def main():
 #getoutputdata('C:\Users\Acer\Documents\GitHub\CD3Waterbalance\simulationwithpatterns\outputfiles')
 #getinputdata('C:\Users\Acer\Documents\GitHub\CD3Waterbalance\simulationwithpatterns\inputfiles',5 , 4301)
-
+#plotter(Indoorvector, Rainevapovector, Outputvector,[0,365],[0,2], ['all'])
 theholelot()
 
 #if __name__=='__main__': main()

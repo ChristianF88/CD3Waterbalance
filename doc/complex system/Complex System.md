@@ -166,7 +166,7 @@ Included BLocks:
 |   Fraction of Pervious Area (pA) [-]  |  0.18 | 
 |   Initial Infiltration Capacity [m/h]  |  0.6 | 
 |   Number of Subareas [-]  |  2 | 
-|   Wetting Loss [mm]  |  0.39 | 
+|   Wetting Loss [mm]  |  0.4 | 
 |   Runoff Velocity iAR [m/s]  |  0.04 | 
 |   Weighting Coefficient iAR [-]  |  0.04 | 
 |   Runoff Velocity iASD [m/s]  |  0.03 | 
@@ -207,14 +207,14 @@ Included BLocks:
 |   Length [m]   |  50 | 
 |   Width [m]   |  16 | 
 |   Decay Constant [1/min]   |  1.9 | 
-|   Depression Loss [mm]  |  1.0 | 
+|   Depression Loss [mm]  |  1.5 | 
 |   Final Infiltration Capacity [m/h]   |  0.21 | 
 |   Fraction of Impervious Area to Reservoir (iAR) [-]  |  0.30 | 
 |   Fraction of Impervious Area to Stormwater Drain (iASD) [-]  |  0.60 | 
 |   Fraction of Pervious Area (pA) [-]  |  0.10 | 
 |   Initial Infiltration Capacity [m/h]  |  0.6 | 
 |   Number of Subareas [-]  |  2 | 
-|   Wetting Loss [mm]  |  0.3 | 
+|   Wetting Loss [mm]  |  0.4 | 
 |   Runoff Velocity iAR [m/s]  |  0.07 | 
 |   Weighting Coefficient iAR [-]  |  0.04 | 
 |   Runoff Velocity iASD [m/s]  |  0.06 | 
@@ -238,7 +238,7 @@ Included BLocks:
 |   Fraction of Pervious Area (pA) [-]  |  0.46 | 
 |   Initial Infiltration Capacity [m/h]  |  0.6 | 
 |   Number of Subareas [-]  |  1 | 
-|   Wetting Loss [mm]  |  0.39 | 
+|   Wetting Loss [mm]  |  0.4 | 
 |   Runoff Velocity iAR [m/s]  |  0.08 | 
 |   Weighting Coefficient iAR [-]  |  0.04 | 
 |   Runoff Velocity iASD [m/s]  |  0.06 | 
@@ -262,7 +262,7 @@ Included BLocks:
 |   Fraction of Pervious Area (pA) [-]  |  0.0 | 
 |   Initial Infiltration Capacity [m/h]  |  0.6 | 
 |   Number of Subareas [-]  |  2 | 
-|   Wetting Loss [mm]  |  0.39 | 
+|   Wetting Loss [mm]  |  0.4 | 
 |   Runoff Velocity iAR [m/s]  |  0.03 | 
 |   Weighting Coefficient iAR [-]  |  0.04 | 
 |   Runoff Velocity iASD [m/s]  |  0.021 | 
@@ -337,11 +337,11 @@ Connected to:
 |  Stormwater Drain| 1| 2 [1, 1] |  2 [1, 1] |
 |  Sewer| 1 |2 [1, 1] |  2 [1, 1] |
 | Potable Water Reservoir   | 1| 3 [2, 1] |  3 [2, 1] |
-| Fileout   | 13 | a+b [a, b] |  2 [1, 1] | a(Fo1 - Fo7,Fo13; Fo8 - Fo12) = {[1, 0]; [1, 1]}
+| Fileout   | 15 | a+b [a, b] |  2 [1, 1] | a,b(Fo1 - Fo7, Fo13; Fo8 - Fo12, Fo14, Fo15) = {[1, 0]; [1, 1]}
 
 # 
 
-Number of Links = [ Sum( Connected (i) * Number of Blocks ) ] / 2 = 119 
+Number of Links = [ Sum( Connected (i) * Number of Blocks ) ] / 2 = 121
 
 <br>
 

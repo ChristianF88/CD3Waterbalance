@@ -103,3 +103,7 @@ gauss_curve = 1/(deviation*np.sqrt(2*pi))*np.exp(-1/2.*((xtime-zenith/24.)/devia
 factor =gauss_curve/mean(gauss_curve)
 pattern=asarray([xtime,factor]).transpose().tolist()
 pattern.append([1.0, pattern[0][1]])
+
+#bedingtes vektor anfügen
+
+a=[]

@@ -36,9 +36,9 @@ class Sewer2(pycd3.Node):
         self.discharged_V = pycd3.Flow()
         #dir (self.inf)
         print "init node"
-        self.addInPort("black_w", self.black_w)
-        self.addOutPort("discharged_V", self.discharged_V)
-        self.current_V=0.0
+        self.addInPort("Black_Water", self.black_w)
+        self.addOutPort("Discharged_Volume", self.discharged_V)
+        
                
         
         #self.addOutPort("gw", self.gw)
@@ -52,9 +52,8 @@ class Sewer2(pycd3.Node):
         
     def f(self, current, dt):
         
-        sewer_w = self.black_w[0]
-        self.current_V += sewer_w
-        self.discharged_V[0] = self.current_V
+        
+        self.discharged_V[0] = self.black_w[0]
        
 
         return dt
