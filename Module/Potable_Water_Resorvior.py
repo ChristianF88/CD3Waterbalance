@@ -39,7 +39,7 @@ class Potable_Water_Resorvoir(pycd3.Node):
         #dir (self.inf)
         print "init node"
         self.addInPort("Potable_Water_Demand", self.pot_w)
-        self.addInPort("Nonpotable_Water_Demand", self.nonpot_w)
+        self.addInPort("Non_Potable_Water_Demand", self.nonpot_w)
         self.addOutPort("Demand", self.demand)
          
     def init(self, start, stop, dt):

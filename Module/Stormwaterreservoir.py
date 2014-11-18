@@ -49,7 +49,7 @@ class Stormwaterreservoir(pycd3.Node):
         self.addOutPort("Overflow",self.overflow)
         self.myyield = pycd3.Double(0.9)
         self.addParameter("Yield_of_Treatment [-]", self.myyield)
-        self.storage_volume = pycd3.Double(1000)
+        self.storage_volume = pycd3.Double(100)
         self.addParameter("Storage_Volume_[m^3]", self.storage_volume)
 
      
@@ -65,7 +65,7 @@ class Stormwaterreservoir(pycd3.Node):
         self.current_volume += self.stormwaterin[0]*self.myyield - self.stormwaterout[0]
         self.wastewater[0] = self.stormwaterin[0]*(1-self.myyield)
         
-        if self.storage_volume < self.current_volume:
+        if self.storage_volume <= self.current_volume:
             self.overflow[0] = self.stormwaterin[0]*self.myyield - self.stormwaterout[0]
             self.current_volume = self.storage_volume
             self.Additional_Demand[0] = 0.0
@@ -74,7 +74,7 @@ class Stormwaterreservoir(pycd3.Node):
             self.Additional_Demand[0] = 0.0
             self.overflow[0] = 0.0
         else:
-            self.Additional_Demand[0] = self.stormwaterout[0]
+            self.Additional_Demand[0] = self.stormwaterout[0]-self.stormwaterin[0]*self.myyield
             self.current_volume = 0.0
             self.overflow[0] = 0.0
             

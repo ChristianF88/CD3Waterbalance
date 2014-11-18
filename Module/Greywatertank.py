@@ -47,6 +47,8 @@ class Greywatertank(pycd3.Node):
         self.addOutPort("Waste_Water",self.wastewater)
         self.myyield = pycd3.Double(0.9)
         self.addParameter("Yield_of_Treatment_[-]", self.myyield)
+        self.storage_v = pycd3.Double(40.0)
+        self.addParameter("Storage_Volume_[m^3]", self.storage_v)
 
      
     def init(self, start, stop, dt):
@@ -61,15 +63,22 @@ class Greywatertank(pycd3.Node):
         self.current_volume += self.greywaterin[0]*self.myyield - self.greywaterout[0]
         self.wastewater[0] = self.greywaterin[0]*(1-self.myyield)
         
-        if self.current_volume >= 0:
+        if self.current_volume >= self.storage_v:
+            self.Additional_Demand[0] = 0.0
+            self.current_volume = self.storage_v
+            self.check_storage[0] = self.storage_v
+            self.wastewater[0] = self.greywaterin[0] - self.greywaterout[0]
+            
+        elif self.current_volume >= 0:
             self.Additional_Demand[0] = 0.0
             self.check_storage[0] = self.current_volume
+            self.wastewater[0] = self.greywaterin[0]*(1-self.myyield)
             
         else:
-            self.Additional_Demand[0] = self.greywaterout[0]
+            self.Additional_Demand[0] = self.greywaterout[0] - self.greywaterin[0]*self.myyield
             self.current_volume = 0.0
             self.check_storage[0] = self.current_volume
-            
+            self.wastewater[0] = self.greywaterin[0]*(1-self.myyield)
        
         
       

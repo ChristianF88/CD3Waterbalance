@@ -16,7 +16,7 @@ from itertools import cycle
 from numpy import size, asarray
 
 
-def getoutputdata(location_files1, totalarea=4301.):
+def getoutputdata(location_files1, totalarea=485.1):
     #getting outputvector
     #location_files1='C:\Users\Acer\Documents\GitHub\CD3Waterbalance\simulationwithpatterns\outputfiles'
     file_names=os.listdir(str(location_files1)[0:])
@@ -34,7 +34,7 @@ def getoutputdata(location_files1, totalarea=4301.):
             names.append(file_names[i])
     #creating vector right size
     global Outputvector
-    Outputvector=[['error']*len(file_names) for m in range(size(alltogether,1))]
+    Outputvector=[['error']*(len(alltogether)+1) for m in range(size(alltogether,1))]
     #writing header
     Outputvector[0][0]='Time'
     for i in range(size(alltogether,0)):
@@ -65,7 +65,7 @@ def getoutputdata(location_files1, totalarea=4301.):
     print 'Outputvector has been created'      
     return
 
-def getinputdata(location_files2, numberhh=5., totalarea=4301., lenindoor=9000):
+def getinputdata(location_files2, numberhh=1., totalarea=485.1, lenindoor=9000):
     #getting inputvector
     #location_files2='C:\Users\Acer\Documents\GitHub\CD3Waterbalance\simulationwithpatterns\inputfiles'
     file_names=os.listdir(str(location_files2)[0:])
@@ -214,8 +214,8 @@ def plotter(Vector1, Vector2, Vector3,limx, limy, toplot=[] ):
     return
 
     #tocheck (all, Evapo, Rain, Indooruse, Outdoordemand?, System)
-def Bilanz(Data, lossfactor = 1.135, totalarea = 4301., tocheck):
-    #tocheck=['Evapo', 'Rain', 'System', 'Indooruse']
+def Bilanz(Data, tocheck, lossfactor = 0, totalarea = 485.1):
+    #tocheck=['Evapo', 'Rain', 'System']
     #Data=[Rainevapovector, Outputvector, Indoorvector]
     colorred = "\033[01;31m{0}\033[00m"
     for i in range(len(tocheck)):
@@ -267,25 +267,28 @@ def Bilanz(Data, lossfactor = 1.135, totalarea = 4301., tocheck):
                         outputISSP.append(Data[i][:,n])
             
             totalstoragescalar = 0.0
-            totalinput = 0.0
-            totaloutput = 0.0
-            totaloutputPWR = 0.0
-            totalinputET = 0.0
+            rainminusevapo = 0.0
+            SewerStormwInfiltr = 0.0
+            PWRonly = 0.0
+            ETonly = 0.0
             amount = 0.0
-            for i in range(len(totalstoragelist)):
+            #Speicher
+            for i in range(len(totalstorage)):
                 totalstoragescalar += float(totalstorage[i][-1])
-            for i in range(len(outputISSPlist)):
+            #Potable_Water_Demand/Sewer,Infiltr.,Stormwater
+            for i in range(len(outputISSP)):
                 if outputISSPlist[i] == 'PotableWaterDemand':
                     for n in range(len(outputISSP[0]))[1:]:
-                        totaloutputPWR += float(outputISSP[i][n])
+                        PWRonly += float(outputISSP[i][n])
                 else:
                     for n in range(len(outputISSP[0]))[1:]:
-                        totaloutput -= float(outputISSP[i][n])
+                        SewerStormwInfiltr -= float(outputISSP[i][n])
+            #Rain and Evapo
             for i in range(len(inputER[0]))[1:]:
                 if float(inputER[1][i]) > float(inputER[0][i]):
-                    totalinput += float(inputER[1][i])-float(inputER[0][i])
-                    totalinputET += float(inputER[0][i])
-            
+                    rainminusevapo += float(inputER[1][i])-float(inputER[0][i])
+                    ETonly += float(inputER[0][i])
+            #Losses
             for i in range(len(inputER[0]))[3:]: 
                 if float(inputER[1][i-2]) == 0:
                     if float(inputER[1][i-1]) == 0:
@@ -298,8 +301,17 @@ def Bilanz(Data, lossfactor = 1.135, totalarea = 4301., tocheck):
                 else:
                     pass
             totallosses = amount * totalarea * lossfactor/1000
-            total_error = abs(totalinput - totallosses + totaloutput + totaloutputPWR-totalstoragescalar)
-            print (2 * total_error)/(totallosses+totaloutputPWR+totalinput+totalinputET-totaloutput)
+            #Outdoor_Demand
+            
+            total_error = abs(rainminusevapo - totallosses + SewerStormwInfiltr + PWRonly-totalstoragescalar)
+            print (2 * total_error)/(totallosses+PWRonly+rainminusevapo+ETonly-SewerStormwInfiltr)
+            print lossfactor
+            print totalarea
+            print 'PWR: '+str(PWRonly)
+            print 'R-ET: '+str(rainminusevapo)
+            print 'SewerStormwInfiltr: '+str(SewerStormwInfiltr)
+            print 'Losses: '+str(totallosses)
+            print 'R-ET - Losses - SewerStormwInfiltr: '+str(rainminusevapo+SewerStormwInfiltr-totallosses)
         #indooruse check
     
         #outdoor demand check
@@ -313,10 +325,11 @@ def Bilanz(Data, lossfactor = 1.135, totalarea = 4301., tocheck):
 
 
 
-def theholelot(outputfiles='C:\Users\Acer\Documents\GitHub\CD3Waterbalance\simulationwithpatterns\outputfiles', inputfiles='C:\Users\Acer\Documents\GitHub\CD3Waterbalance\simulationwithpatterns\inputfiles', numberhh=5, totalarea=4301):
+def theholelot(outputfiles='C:\Users\Acer\Documents\GitHub\CD3Waterbalance\simulationwithpatterns\outputfiles', inputfiles='C:\Users\Acer\Documents\GitHub\CD3Waterbalance\simulationwithpatterns\inputfiles', numberhh=1, totalarea=485.1, Data=[Rainevapovector, Outputvector, Indoorvector], tocheck=['Evapo', 'Rain', 'System'], lossfactor = 0):
     getoutputdata(outputfiles)
     getinputdata(inputfiles, numberhh, totalarea)
-    #plotter(Indoorvector, Rainevapovector, Outputvector,[0,365],[0,5], ['all'])
+    plotter(Indoorvector, Rainevapovector, Outputvector,[3,4],[0,0.1], ['evapo_model', 'rain_model', 'Infiltration', 'PotableWaterDemand', 'Sewer', 'Stormwater', 'evapo'])
+    Bilanz(Data, tocheck, lossfactor, totalarea)
     print 'done'
     return
 

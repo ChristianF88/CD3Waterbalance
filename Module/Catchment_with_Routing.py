@@ -54,8 +54,8 @@ class Catchment_w_Routing(pycd3.Node):
         self.addOutPort("Outdoor_Demand", self.outdoor_use)
         
         #Catchment area + fraction info of pervious and impervious parts
-        self.area_width = pycd3.Double(10)
-        self.addParameter("Catchment_Width_[m]", self.area_width)
+        self.area_property = pycd3.Double(1000)
+        self.addParameter("Catchment_Area_[m^2]", self.area_property)
         self.area_length = pycd3.Double(100)
         self.addParameter("Catchment_Length_[m]", self.area_length)
         self.perv_area = pycd3.Double(0.4)
@@ -119,8 +119,6 @@ class Catchment_w_Routing(pycd3.Node):
         print start
         print stop
         print dt
-        
-        self.area_property = self.area_width*self.area_length
         
         #starting values for Horton model
         self.possible_infiltr_raw = self.Horton_initial_cap/3600.*dt
@@ -249,7 +247,7 @@ class Catchment_w_Routing(pycd3.Node):
                     
                         self.collected_w_raw = (self.rain[0]-self.evapo[0]) * self.imp_area_raintank * self.area_property / 1000.
                         self.actual_infiltr[0] = self.possible_infiltr_raw * self.perv_area * self.area_property
-                        self.runoff_perv_raw = (self.current_effective_rain_height - self.possible_infiltr_raw * 1000.) / 1000. * self.perv_area * self.area_property
+                        self.runoff_perv_raw = 0.0
                         self.runoff_raw = 0.0
                         self.outdoor_use[0] = 0.0
                     
@@ -264,7 +262,7 @@ class Catchment_w_Routing(pycd3.Node):
                     
                     self.collected_w_raw = (self.rain[0]-self.evapo[0]) * self.imp_area_raintank * self.area_property / 1000.
                     self.actual_infiltr[0] = self.current_effective_rain_height / 1000. * self.perv_area * self.area_property
-                    self.runoff_raw = self.runoff[0] = (self.rain[0]-self.evapo[0]) * self.imp_area_stormwater * self.area_property / 1000.
+                    self.runoff_raw  = (self.rain[0]-self.evapo[0]) * self.imp_area_stormwater * self.area_property / 1000.
                     self.outdoor_use[0] = 0.0
                     self.runoff_perv_raw = 0.0
                     
@@ -274,7 +272,7 @@ class Catchment_w_Routing(pycd3.Node):
                     self.collected_w_raw = (self.rain[0]-self.evapo[0]) * self.imp_area_raintank * self.area_property / 1000.
                     self.actual_infiltr[0] = self.possible_infiltr_raw * self.perv_area * self.area_property
                     self.runoff_perv_raw = (self.current_effective_rain_height - self.possible_infiltr_raw * 1000.) / 1000. * self.perv_area * self.area_property
-                    self.runoff_raw = self.runoff[0] = (self.rain[0]-self.evapo[0]) * self.imp_area_stormwater * self.area_property / 1000. 
+                    self.runoff_raw  = (self.rain[0]-self.evapo[0]) * self.imp_area_stormwater * self.area_property / 1000. 
                     self.outdoor_use[0] = 0.0
                  
                 #saving the information that the initial wetting loss and depression loss has been overcome 

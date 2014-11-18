@@ -9,26 +9,26 @@ import sys
 import pycd3
 import math
 
-class NodeFactory(pycd3.INodeFactory):
-    def __init__(self, node):
-        pycd3.INodeFactory.__init__(self)
-        self.node = node
-        print "NodeFactory.__init__"
-        
-    def getNodeName(self):
-        print "NodeFactory.getName"
-        return self.node.__name__
-        
-    def createNode(self):
-        print "NodeFactory.createNode"
-        n = self.node()
-        n.__disown__()
-        print "NodeFactory.disowned"
-        return n
-        
-    def getSource(self):
-        print "NodeFactory.getSource"
-        return "Practice.py"
+#class NodeFactory(pycd3.INodeFactory):
+#    def __init__(self, node):
+#        pycd3.INodeFactory.__init__(self)
+#        self.node = node
+#        print "NodeFactory.__init__"
+#        
+#    def getNodeName(self):
+#        print "NodeFactory.getName"
+#        return self.node.__name__
+#        
+#    def createNode(self):
+#        print "NodeFactory.createNode"
+#        n = self.node()
+#        n.__disown__()
+#        print "NodeFactory.disowned"
+#        return n
+#        
+#    def getSource(self):
+#        print "NodeFactory.getSource"
+#        return "Practice.py"
 
 class Catchment(pycd3.Node):
     def __init__(self):
@@ -43,39 +43,39 @@ class Catchment(pycd3.Node):
         
         #dir (self.inf)
         print "init node"
-        self.addInPort("rain", self.rain)
-        self.addInPort("evapo", self.evapo)
-        self.addOutPort("possible_infiltr", self.possible_infiltr)
-        self.addOutPort("actual_infiltr", self.actual_infiltr)
-        self.addOutPort("runoff", self.runoff)
-        self.addOutPort("collected_w", self.collected_w)
-        self.addOutPort("outdoor_use", self.outdoor_use)
+        self.addInPort("Rain", self.rain)
+        self.addInPort("Evapotranspiration", self.evapo)
+        self.addOutPort("Possible_Infiltration", self.possible_infiltr)
+        self.addOutPort("Actual_Infiltration", self.actual_infiltr)
+        self.addOutPort("Runoff", self.runoff)
+        self.addOutPort("Collected_Water", self.collected_w)
+        self.addOutPort("Outdoor_Demand", self.outdoor_use)
         
         #Catchment area + fraction info of pervious and impervious parts
         self.area_property = pycd3.Double(1)
-        self.addParameter("area_property [m*m]", self.area_property)
+        self.addParameter("Catchment_Area_[m^2]", self.area_property)
         self.perv_area = pycd3.Double(0.4)
-        self.addParameter("perv_area [-]", self.perv_area)
+        self.addParameter("Fraktion_of_Pervious_Area_[-]", self.perv_area)
         self.imp_area_stormwater = pycd3.Double(0.4)
-        self.addParameter("imp_area_stormwater [-]", self.imp_area_stormwater)
+        self.addParameter("Fraktion_of_Impervious_Area_to_Stormwater_Drain_[-]", self.imp_area_stormwater)
         self.imp_area_raintank = pycd3.Double(0.2)
-        self.addParameter("imp_area_raintank [-]", self.imp_area_raintank)
+        self.addParameter("Fraktion_of_Impervious_Area_to_Reservoir_[-]", self.imp_area_raintank)
         
         #default values for Gras (Wikipedia)
         self.Horton_initial_cap = pycd3.Double(0.9)                             
-        self.addParameter("Horton_initial_cap [m/h]", self.Horton_initial_cap)
+        self.addParameter("Initial_Infiltration_Capacity_[m/h]", self.Horton_initial_cap)
         self.Horton_final_cap = pycd3.Double(0.29)                              
-        self.addParameter("Horton_final_cap [m/h]", self.Horton_final_cap)
+        self.addParameter("Final_Infiltration_Capacity_[m/h]", self.Horton_final_cap)
         self.Horton_decay_constant = pycd3.Double(2.0)                          
-        self.addParameter("Horton_decay_constant [1/min]", self.Horton_decay_constant)
+        self.addParameter("Decay_Constant_[1/min]", self.Horton_decay_constant)
         
         #default values for suburbs (scrip Prof. Krebs)
         self.depression_loss = pycd3.Double(1.5)                                
-        self.addParameter("depression_capacitiy [mm]", self.depression_loss)
+        self.addParameter("Depression_Loss_[mm]", self.depression_loss)
         
         #default values for (scrip Prof. Krebs)
         self.initial_loss = pycd3.Double(0.4)                                   
-        self.addParameter("initial_loss [mm]", self.initial_loss)
+        self.addParameter("Wetting_Loss_[mm]", self.initial_loss)
         
         #storage and time values
         self.current_effective_rain_height = 0.0
@@ -186,7 +186,7 @@ class Catchment(pycd3.Node):
                     
                         self.collected_w[0] = (self.rain[0]-self.evapo[0]) * self.imp_area_raintank * self.area_property / 1000
                         self.actual_infiltr[0] = self.possible_infiltr[0] * self.perv_area * self.area_property
-                        self.runoff[0] = self.runoff[0] = (self.current_effective_rain_height - self.possible_infiltr[0] * 1000) / 1000 * self.perv_area * self.area_property
+                        self.runoff[0] = 0.0
                         self.outdoor_use[0] = 0.0
                     
                     #saving the information that the initial wetting loss has been overcome
@@ -200,7 +200,7 @@ class Catchment(pycd3.Node):
                     
                     self.collected_w[0] = (self.rain[0]-self.evapo[0]) * self.imp_area_raintank * self.area_property / 1000
                     self.actual_infiltr[0] = self.current_effective_rain_height / 1000 * self.perv_area * self.area_property
-                    self.runoff[0] = self.runoff[0] = (self.rain[0]-self.evapo[0]) * self.imp_area_stormwater * self.area_property / 1000
+                    self.runoff[0]  = (self.rain[0]-self.evapo[0]) * self.imp_area_stormwater * self.area_property / 1000
                     self.outdoor_use[0] = 0.0
                     
                 #if less water can be infiltrated than rain is falling , the pervious fraction will produce runoff    
@@ -208,7 +208,7 @@ class Catchment(pycd3.Node):
                     
                     self.collected_w[0] = (self.rain[0]-self.evapo[0]) * self.imp_area_raintank * self.area_property / 1000
                     self.actual_infiltr[0] = self.possible_infiltr[0] * self.perv_area * self.area_property
-                    self.runoff[0] = self.runoff[0] = (self.rain[0]-self.evapo[0]) * self.imp_area_stormwater * self.area_property / 1000 + (self.current_effective_rain_height - self.possible_infiltr[0] * 1000) / 1000 * self.perv_area * self.area_property
+                    self.runoff[0]  = (self.rain[0]-self.evapo[0]) * self.imp_area_stormwater * self.area_property / 1000 + (self.current_effective_rain_height - self.possible_infiltr[0] * 1000) / 1000 * self.perv_area * self.area_property
                     self.outdoor_use[0] = 0.0
                  
                 #saving the information that the initial wetting loss and depression loss has been overcome 
@@ -231,11 +231,11 @@ class Catchment(pycd3.Node):
         #print "getClassName"
         return "Catchment"
 
-def register(nr):
-    for c in pycd3.Node.__subclasses__():
-        nf = NodeFactory(c)
-        nf.__disown__()
-        nr.addNodeFactory(nf)
+#def register(nr):
+#    for c in pycd3.Node.__subclasses__():
+#        nf = NodeFactory(c)
+#        nf.__disown__()
+#        nr.addNodeFactory(nf)
         
 # def test():
 #     nr = pycd3.NodeRegistry()

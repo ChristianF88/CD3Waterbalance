@@ -157,7 +157,7 @@ Included BLocks:
 | Variable  |  Value  |
 | :------------ |:---------------:|
 |   Length [m]   |  33 | 
-|   Width [m]   |  14.7 | 
+|   Area [m^2]   |  485.1 | 
 |   Decay Constant [1/min]   |  1.9 | 
 |   Depression Loss [mm]  |  1.5 | 
 |   Final Infiltration Capacity [m/h]   |  0.21 | 
@@ -181,7 +181,7 @@ Included BLocks:
 | Variable  |  Value  |
 | :------------ |:---------------:|
 |   Length [m]   |  27 | 
-|   Width [m]   |  31.7 | 
+|   Area [m^2]   |  855.9 | 
 |   Decay Constant [1/min]   |  1.8 | 
 |   Depression Loss [mm]  |  1.5 | 
 |   Final Infiltration Capacity [m/h]   |  0.27 | 
@@ -205,7 +205,7 @@ Included BLocks:
 | Variable  |  Value  |
 | :------------ |:---------------:|
 |   Length [m]   |  50 | 
-|   Width [m]   |  16 | 
+|   Area [m^2]   |  800 | 
 |   Decay Constant [1/min]   |  1.9 | 
 |   Depression Loss [mm]  |  1.5 | 
 |   Final Infiltration Capacity [m/h]   |  0.21 | 
@@ -229,7 +229,7 @@ Included BLocks:
 | Variable  |  Value  |
 | :------------ |:---------------:|
 |   Length [m]   |  20 | 
-|   Width [m]   |  48 | 
+|   Area [m^2]   |  960 | 
 |   Decay Constant [1/min]   |  1.9 | 
 |   Depression Loss [mm]  |  1.5 | 
 |   Final Infiltration Capacity [m/h]   |  0.21 | 
@@ -253,7 +253,7 @@ Included BLocks:
 | Variable  |  Value  |
 | :------------ |:---------------:|
 |   Length [m]   |  30 | 
-|   Width [m]   |  40 | 
+|   Area [m^2]   |  1200 | 
 |   Decay Constant [1/min]   |  1.9 | 
 |   Depression Loss [mm]  |  1.5 | 
 |   Final Infiltration Capacity [m/h]   |  0.21 | 
