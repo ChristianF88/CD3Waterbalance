@@ -188,13 +188,19 @@ class Catchment_w_Routing(pycd3.Node):
             #resetting the storage values as a simulation of the drying process respectively the continuous infitlration
             if self.rain_storage_perv > 0:
                 self.rain_storage_perv += self.current_effective_rain_height
-                
+                if self.rain_storage_perv > 0:
+                    pass
+                else:
+                    self.rain_storage_perv = 0.0
             else:
                 self.rain_storage_perv = 0.0
                                 
             if self.rain_storage_imp > 0:
                 self.rain_storage_imp += self.current_effective_rain_height
-                
+                if self.rain_storage_imp > 0:
+                    pass
+                else:
+                    self.rain_storage_imp = 0.0
             else:
                 self.rain_storage_imp = 0.0
             
@@ -247,12 +253,12 @@ class Catchment_w_Routing(pycd3.Node):
                     
                         self.collected_w_raw = (self.rain[0]-self.evapo[0]) * self.imp_area_raintank * self.area_property / 1000.
                         self.actual_infiltr[0] = self.possible_infiltr_raw * self.perv_area * self.area_property
-                        self.runoff_perv_raw = 0.0
+                        self.runoff_perv_raw = (self.current_effective_rain_height - self.possible_infiltr_raw * 1000.) / 1000. * self.perv_area * self.area_property
                         self.runoff_raw = 0.0
                         self.outdoor_use[0] = 0.0
                     
                     #saving the information that the initial wetting loss has been overcome
-                    self.rain_storage_per = self.initial_loss + 0.000000000001
+                    self.rain_storage_perv = self.initial_loss + 0.000000000001
             
             #once the wetting loss and depression loss has been overcome ther will be infiltration, water collection and runoff
             else:
@@ -276,7 +282,7 @@ class Catchment_w_Routing(pycd3.Node):
                     self.outdoor_use[0] = 0.0
                  
                 #saving the information that the initial wetting loss and depression loss has been overcome 
-                self.rain_storage_per = self.initial_loss + 0.000000000001
+                self.rain_storage_perv = self.initial_loss + 0.000000000001
                 self.rain_storage_imp = self.initial_loss + self.depression_loss + 0.00000000000001
         
         #if the effective currrent rain height equals zero there wont be any runoff thus no water collection as well as no infiltration
@@ -309,29 +315,29 @@ class Catchment_w_Routing(pycd3.Node):
             
             #calculating the flow in for each subreach
             if i==0:
-               self.Q_coll_i[i]=(self.inflow[0]*1000+self.rain[0]*self.subarea_size)*self.C_coll_x+self.Q_i_coll_storage_2[i]*self.C_coll_y
+               self.Q_coll_i[i]=(self.inflow[0]*1000+1000*self.collected_w_raw/self.amount_subareas)*self.C_coll_x+self.Q_i_coll_storage_2[i]*self.C_coll_y
                self.Q_i_coll_storage_2[i]=self.Q_coll_i[i]*(1-self.C_coll_x)*dt+self.Q_i_coll_storage_1[i]*(1-self.C_coll_y*dt)
                self.Q_i_coll_storage_1[i]=self.Q_i_coll_storage_2[i]
-               self.Q_runoff_i[i]=(self.inflow[0]*1000+self.rain[0]*self.subarea_size)*self.C_runoff_x+self.Q_i_runoff_storage_2[i]*self.C_runoff_y
+               self.Q_runoff_i[i]=(self.inflow[0]*1000+1000*self.runoff_raw/self.amount_subareas)*self.C_runoff_x+self.Q_i_runoff_storage_2[i]*self.C_runoff_y
                self.Q_i_runoff_storage_2[i]=self.Q_runoff_i[i]*(1-self.C_runoff_x)*dt+self.Q_i_runoff_storage_1[i]*(1-self.C_runoff_y*dt)
                self.Q_i_runoff_storage_1[i]=self.Q_i_runoff_storage_2[i]
-               self.Q_runoff_perv_i[i]=(self.inflow[0]*1000+self.rain[0]*self.subarea_size)*self.C_runoff_perv_x+self.Q_i_runoff_perv_storage_2[i]*self.C_runoff_perv_y
+               self.Q_runoff_perv_i[i]=(self.inflow[0]*1000+1000*self.runoff_perv_raw/self.amount_subareas)*self.C_runoff_perv_x+self.Q_i_runoff_perv_storage_2[i]*self.C_runoff_perv_y
                self.Q_i_runoff_perv_storage_2[i]=self.Q_runoff_perv_i[i]*(1-self.C_runoff_perv_x)*dt+self.Q_i_runoff_perv_storage_1[i]*(1-self.C_runoff_perv_y*dt)
                self.Q_i_runoff_perv_storage_1[i]=self.Q_i_runoff_perv_storage_2[i]
             else:
-                self.Q_coll_i[i]=(self.Q_coll_i[i-1]+self.rain[0]*self.subarea_size)*self.C_coll_x+self.Q_i_coll_storage_2[i]*self.C_coll_y
+                self.Q_coll_i[i]=(self.Q_coll_i[i-1]+1000*self.collected_w_raw/self.amount_subareas)*self.C_coll_x+self.Q_i_coll_storage_2[i]*self.C_coll_y
                 self.Q_i_coll_storage_2[i]=self.Q_coll_i[i]*(1-self.C_coll_x)*dt+self.Q_i_coll_storage_1[i]*(1-self.C_coll_y*dt)
                 self.Q_i_coll_storage_1[i]=self.Q_i_coll_storage_2[i]
-                self.Q_runoff_i[i]=(self.Q_runoff_i[i-1]+self.rain[0]*self.subarea_size)*self.C_runoff_x+self.Q_i_runoff_storage_2[i]*self.C_runoff_y
+                self.Q_runoff_i[i]=(self.Q_runoff_i[i-1]+1000*self.runoff_raw/self.amount_subareas)*self.C_runoff_x+self.Q_i_runoff_storage_2[i]*self.C_runoff_y
                 self.Q_i_runoff_storage_2[i]=self.Q_runoff_i[i]*(1-self.C_runoff_x)*dt+self.Q_i_runoff_storage_1[i]*(1-self.C_runoff_y*dt)
                 self.Q_i_runoff_storage_1[i]=self.Q_i_runoff_storage_2[i]
-                self.Q_runoff_perv_i[i]=(self.Q_runoff_perv_i[i-1]+self.rain[0]*self.subarea_size)*self.C_runoff_perv_x+self.Q_i_runoff_perv_storage_2[i]*self.C_runoff_perv_y
+                self.Q_runoff_perv_i[i]=(self.Q_runoff_perv_i[i-1]+1000*self.runoff_perv_raw/self.amount_subareas)*self.C_runoff_perv_x+self.Q_i_runoff_perv_storage_2[i]*self.C_runoff_perv_y
                 self.Q_i_runoff_perv_storage_2[i]=self.Q_runoff_perv_i[i]*(1-self.C_runoff_perv_x)*dt+self.Q_i_runoff_perv_storage_1[i]*(1-self.C_runoff_perv_y*dt)
                 self.Q_i_runoff_perv_storage_1[i]=self.Q_i_runoff_perv_storage_2[i]
         
         #outflow of catchment
         self.collected_w[0]=self.Q_coll_i[-1] /1000. 
-        self.runoff[0] =(self.Q_runoff_perv_i[-1]+self.Q_runoff_i[-1])/1000.
+        self.runoff[0] = (self.Q_runoff_perv_i[-1]+self.Q_runoff_i[-1])/1000.
         
         
         return dt

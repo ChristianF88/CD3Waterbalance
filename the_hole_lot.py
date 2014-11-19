@@ -15,6 +15,10 @@ from matplotlib.dates import date2num
 from itertools import cycle
 from numpy import size, asarray
 
+Rainevapovector =[]
+Outputvector =[]
+Indoorvector=[]
+
 
 def getoutputdata(location_files1, totalarea=485.1):
     #getting outputvector
@@ -214,7 +218,8 @@ def plotter(Vector1, Vector2, Vector3,limx, limy, toplot=[] ):
     return
 
     #tocheck (all, Evapo, Rain, Indooruse, Outdoordemand?, System)
-def Bilanz(Data, tocheck, lossfactor = 0, totalarea = 485.1):
+    #area_fractions = [perv, imperv_to_storage, imperv_to_stormw]
+def Bilanz(Data, tocheck, wettingloss = 0.4, depressionloss=1.0, totalarea = 485.1, area_fractions = [0.0, 0.0, 1.0]):
     #tocheck=['Evapo', 'Rain', 'System']
     #Data=[Rainevapovector, Outputvector, Indoorvector]
     colorred = "\033[01;31m{0}\033[00m"
@@ -250,13 +255,15 @@ def Bilanz(Data, tocheck, lossfactor = 0, totalarea = 485.1):
         #total system
         #Lists have to be in alphabetical order
         elif tocheck[i] == 'System': 
-            
+            #filenames in lists
             totalstorage = []
             totalstoragelist = ['GreyWaterTank', 'Raintank1', 'Raintank2', 'Raintank3']
             inputER=[]
             inputERlist = ['evapo_model', 'rain_model']
             outputISSP = []
             outputISSPlist = ['Infiltration', 'PotableWaterDemand', 'Sewer', 'Stormwater']
+            outputOD = []
+            
             for i in range(len(Data)):
                 for n in range(len(Data[i][0])):
                     if Data[i][0][n] in totalstoragelist:            
@@ -265,11 +272,14 @@ def Bilanz(Data, tocheck, lossfactor = 0, totalarea = 485.1):
                         inputER.append(Data[i][:,n])
                     elif Data[i][0][n] in outputISSPlist:
                         outputISSP.append(Data[i][:,n])
+                    if str(repr(Data[i][0][n])[1:15]) == 'Outdoor_Demand':
+                        outputOD.append(Data[i][:,n])
             
             totalstoragescalar = 0.0
-            rainminusevapo = 0.0
+            rainminusevapolosses = 0.0
             SewerStormwInfiltr = 0.0
             PWRonly = 0.0
+            OutdoorD = 0.0
             ETonly = 0.0
             amount = 0.0
             #Speicher
@@ -277,46 +287,80 @@ def Bilanz(Data, tocheck, lossfactor = 0, totalarea = 485.1):
                 totalstoragescalar += float(totalstorage[i][-1])
             #Potable_Water_Demand/Sewer,Infiltr.,Stormwater
             for i in range(len(outputISSP)):
-                if outputISSPlist[i] == 'PotableWaterDemand':
+                if outputISSP[i][0] == 'PotableWaterDemand':
                     for n in range(len(outputISSP[0]))[1:]:
                         PWRonly += float(outputISSP[i][n])
                 else:
                     for n in range(len(outputISSP[0]))[1:]:
                         SewerStormwInfiltr -= float(outputISSP[i][n])
-            #Rain and Evapo
+            #OutdoorDemand
+            for i in range(len(outputOD)):
+                for n in range(len(outputOD[0]))[1:]:
+                    OutdoorD += float(outputOD[i][n])
+            
+            #Rain and Evapo inlcuding losses
+            lossstorage_perv_impervreservoir = 0.0
+            lossstorage_imperstormw = 0.0
+            onlyrain=0.0
+            onlyevapo=0.0
+            rainminusevapo = 0.0
             for i in range(len(inputER[0]))[1:]:
                 if float(inputER[1][i]) > float(inputER[0][i]):
-                    rainminusevapo += float(inputER[1][i])-float(inputER[0][i])
-                    ETonly += float(inputER[0][i])
-            #Losses
-            for i in range(len(inputER[0]))[3:]: 
-                if float(inputER[1][i-2]) == 0:
-                    if float(inputER[1][i-1]) == 0:
-                        if float(inputER[1][i]) != 0:
-                            amount += 1
+                    lossstorage_perv_impervreservoir += (float(inputER[1][i]) - float(inputER[0][i]))/totalarea*1000
+                    lossstorage_imperstormw += (float(inputER[1][i]) - float(inputER[0][i]))/totalarea*1000
+                    if lossstorage_perv_impervreservoir > wettingloss:
+                        rainminusevapolosses += (float(inputER[1][i])-float(inputER[0][i]))*(area_fractions[0]+area_fractions[1])
+                        lossstorage_perv_impervreservoir = wettingloss
+                        
+                    if lossstorage_imperstormw > depressionloss + wettingloss:
+                        rainminusevapolosses += (float(inputER[1][i])-float(inputER[0][i]))*area_fractions[2]
+                        lossstorage_imperstormw = depressionloss + wettingloss
+                else:
+                    #simulation drying via evapotranspiration
+                    if lossstorage_perv_impervreservoir > 0:
+                        lossstorage_perv_impervreservoir += (float(inputER[1][i]) - float(inputER[0][i]))/totalarea*1000
+                        if lossstorage_perv_impervreservoir < 0:
+                            lossstorage_perv_impervreservoir = 0.0
                         else:
                             pass
                     else:
-                        pass
+                        lossstorage_perv_impervreservoir =  0.0
+                        
+                    if lossstorage_imperstormw > 0:
+                        lossstorage_imperstormw += (float(inputER[1][i]) - float(inputER[0][i]))/totalarea*1000
+                        if lossstorage_imperstormw < 0:
+                            lossstorage_imperstormw = 0.0
+                        else:
+                            pass
+                    else:
+                        lossstorage_imperstormw =  0.0
+               
+                onlyrain += float(inputER[1][i])
+                if float(inputER[1][i]) >= float(inputER[0][i]):
+                    onlyevapo += float(inputER[0][i])
+                    rainminusevapo += (float(inputER[1][i])-float(inputER[0][i]))
                 else:
-                    pass
-            totallosses = amount * totalarea * lossfactor/1000
-            #Outdoor_Demand
+                    onlyevapo += float(inputER[1][i])
+
             
-            total_error = abs(rainminusevapo - totallosses + SewerStormwInfiltr + PWRonly-totalstoragescalar)
-            print (2 * total_error)/(totallosses+PWRonly+rainminusevapo+ETonly-SewerStormwInfiltr)
-            print lossfactor
-            print totalarea
-            print 'PWR: '+str(PWRonly)
-            print 'R-ET: '+str(rainminusevapo)
-            print 'SewerStormwInfiltr: '+str(SewerStormwInfiltr)
-            print 'Losses: '+str(totallosses)
-            print 'R-ET - Losses - SewerStormwInfiltr: '+str(rainminusevapo+SewerStormwInfiltr-totallosses)
+            print 'Fraktion of Pervious Area: '+str(area_fractions[0])
+            print 'Fraktion of Impervious Area to Reservoir: '+str(area_fractions[1])
+            print 'Fraktion of Impervious Area to Stormdrain: '+str(area_fractions[2])
+            print 'Wetting Loss: '+str( wettingloss)
+            print 'Depression Loss: '+str(depressionloss)
+            print 'Total Rain: '+str(onlyrain) + ' = '+str(onlyevapo+rainminusevapo)
+            print 'Evaporated Rain: '+str(onlyevapo)
+            print 'Inital Losses only: '+str(rainminusevapo-rainminusevapolosses)
+            print 'Potable_Water_Demand: '+str(PWRonly)
+            print 'Outdoor_Demand: '+str(OutdoorD)
+            print 'Rain minus all Losses: '+str(rainminusevapolosses)
+            print 'SewerStormwInfiltr: '+str(-1*SewerStormwInfiltr)
+            print 'Absolut Error of entire balance: '+str(PWRonly-OutdoorD+rainminusevapolosses+SewerStormwInfiltr)
+            print 'Realtive Error of entire balance: '+str(100*(PWRonly-OutdoorD+rainminusevapolosses+SewerStormwInfiltr)*2/(PWRonly+OutdoorD+onlyrain+onlyevapo+(rainminusevapo-rainminusevapolosses)-SewerStormwInfiltr))+' %'
         #indooruse check
     
         #outdoor demand check
-    
-    
+        
     return
 
 
@@ -324,19 +368,20 @@ def Bilanz(Data, tocheck, lossfactor = 0, totalarea = 485.1):
 
 
 
-
-def theholelot(outputfiles='C:\Users\Acer\Documents\GitHub\CD3Waterbalance\simulationwithpatterns\outputfiles', inputfiles='C:\Users\Acer\Documents\GitHub\CD3Waterbalance\simulationwithpatterns\inputfiles', numberhh=1, totalarea=485.1, Data=[Rainevapovector, Outputvector, Indoorvector], tocheck=['Evapo', 'Rain', 'System'], lossfactor = 0):
+def theholelot(outputfiles='C:\Users\Acer\Documents\GitHub\CD3Waterbalance\simulationwithpatterns\outputfiles', inputfiles='C:\Users\Acer\Documents\GitHub\CD3Waterbalance\simulationwithpatterns\inputfiles', numberhh=1, totalarea=485.1, wettingloss = 0.1, depressionloss=0.0, area_fractions = [0.3, 0.0, 0.7]):
     getoutputdata(outputfiles)
     getinputdata(inputfiles, numberhh, totalarea)
     plotter(Indoorvector, Rainevapovector, Outputvector,[3,4],[0,0.1], ['evapo_model', 'rain_model', 'Infiltration', 'PotableWaterDemand', 'Sewer', 'Stormwater', 'evapo'])
-    Bilanz(Data, tocheck, lossfactor, totalarea)
+    Bilanz([Rainevapovector, Outputvector, Indoorvector], ['Evapo', 'Rain', 'System'], wettingloss, depressionloss, totalarea, area_fractions)
     print 'done'
     return
 
 
 
 
-
+summeevpo=0.0
+for i in range(len(Outputvector[:,-1]))[1:]:
+    summeevpo += float(Outputvector[:,-1][i])
 
 
 

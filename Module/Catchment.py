@@ -130,13 +130,19 @@ class Catchment(pycd3.Node):
             #resetting the storage values as a simulation of the drying process respectively the continuous infitlration
             if self.rain_storage_perv > 0:
                 self.rain_storage_perv += self.current_effective_rain_height
-                
+                if self.rain_storage_perv > 0:
+                    pass
+                else:
+                    self.rain_storage_perv = 0.0
             else:
                 self.rain_storage_perv = 0.0
                                 
             if self.rain_storage_imp > 0:
                 self.rain_storage_imp += self.current_effective_rain_height
-                
+                if self.rain_storage_imp > 0:
+                    pass
+                else:
+                    self.rain_storage_imp = 0.0
             else:
                 self.rain_storage_imp = 0.0
             
@@ -186,11 +192,11 @@ class Catchment(pycd3.Node):
                     
                         self.collected_w[0] = (self.rain[0]-self.evapo[0]) * self.imp_area_raintank * self.area_property / 1000
                         self.actual_infiltr[0] = self.possible_infiltr[0] * self.perv_area * self.area_property
-                        self.runoff[0] = 0.0
+                        self.runoff[0] = (self.current_effective_rain_height - self.possible_infiltr[0] * 1000) / 1000 * self.perv_area * self.area_property
                         self.outdoor_use[0] = 0.0
                     
                     #saving the information that the initial wetting loss has been overcome
-                    self.rain_storage_per = self.initial_loss + 0.000000000001
+                    self.rain_storage_perv = self.initial_loss + 0.000000000001
             
             #once the wetting loss and depression loss has been overcome ther will be infiltration, water collection and runoff
             else:
@@ -212,7 +218,7 @@ class Catchment(pycd3.Node):
                     self.outdoor_use[0] = 0.0
                  
                 #saving the information that the initial wetting loss and depression loss has been overcome 
-                self.rain_storage_per = self.initial_loss + 0.000000000001
+                self.rain_storage_perv = self.initial_loss + 0.000000000001
                 self.rain_storage_imp = self.initial_loss + self.depression_loss + 0.00000000000001
         
         #if the effective currrent rain height equals zero there wont be any runoff thus no water collection as well as no infiltration
@@ -223,7 +229,9 @@ class Catchment(pycd3.Node):
             self.runoff[0] = 0.0
             self.actual_infiltr[0] =0.0
             self.outdoor_use[0] = 0.0
-           
+            
+        
+        
            
         return dt
     
