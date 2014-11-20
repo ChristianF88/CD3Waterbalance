@@ -297,13 +297,7 @@ class Catchment_w_Routing(pycd3.Node):
         
         # returning the possible inflitration [m³/dt]
         self.possible_infiltr[0]=self.possible_infiltr_raw*self.area_property*self.perv_area
-        
-        #Muskingum model for folw dynamics (slower fow on gras and faster on roof)
-        
-        
-        #dividing are in 'amout_subareas' parts (same size)
-        self.subarea_size = self.area_property*self.imp_area_raintank/self.amount_subareas
-        
+
         #preparing the flow array 
         self.Q_coll_i = []
         self.Q_runoff_i = []
@@ -315,29 +309,29 @@ class Catchment_w_Routing(pycd3.Node):
             
             #calculating the flow in for each subreach
             if i==0:
-               self.Q_coll_i[i]=(self.inflow[0]*1000+1000*self.collected_w_raw/self.amount_subareas)*self.C_coll_x+self.Q_i_coll_storage_2[i]*self.C_coll_y
+               self.Q_coll_i[i]=(self.collected_w_raw/self.amount_subareas)*self.C_coll_x+self.Q_i_coll_storage_2[i]*self.C_coll_y
                self.Q_i_coll_storage_2[i]=self.Q_coll_i[i]*(1-self.C_coll_x)*dt+self.Q_i_coll_storage_1[i]*(1-self.C_coll_y*dt)
                self.Q_i_coll_storage_1[i]=self.Q_i_coll_storage_2[i]
-               self.Q_runoff_i[i]=(self.inflow[0]*1000+1000*self.runoff_raw/self.amount_subareas)*self.C_runoff_x+self.Q_i_runoff_storage_2[i]*self.C_runoff_y
+               self.Q_runoff_i[i]=(self.inflow[0]+self.runoff_raw/self.amount_subareas)*self.C_runoff_x+self.Q_i_runoff_storage_2[i]*self.C_runoff_y
                self.Q_i_runoff_storage_2[i]=self.Q_runoff_i[i]*(1-self.C_runoff_x)*dt+self.Q_i_runoff_storage_1[i]*(1-self.C_runoff_y*dt)
                self.Q_i_runoff_storage_1[i]=self.Q_i_runoff_storage_2[i]
-               self.Q_runoff_perv_i[i]=(self.inflow[0]*1000+1000*self.runoff_perv_raw/self.amount_subareas)*self.C_runoff_perv_x+self.Q_i_runoff_perv_storage_2[i]*self.C_runoff_perv_y
+               self.Q_runoff_perv_i[i]=(self.runoff_perv_raw/self.amount_subareas)*self.C_runoff_perv_x+self.Q_i_runoff_perv_storage_2[i]*self.C_runoff_perv_y
                self.Q_i_runoff_perv_storage_2[i]=self.Q_runoff_perv_i[i]*(1-self.C_runoff_perv_x)*dt+self.Q_i_runoff_perv_storage_1[i]*(1-self.C_runoff_perv_y*dt)
                self.Q_i_runoff_perv_storage_1[i]=self.Q_i_runoff_perv_storage_2[i]
             else:
-                self.Q_coll_i[i]=(self.Q_coll_i[i-1]+1000*self.collected_w_raw/self.amount_subareas)*self.C_coll_x+self.Q_i_coll_storage_2[i]*self.C_coll_y
+                self.Q_coll_i[i]=(self.Q_coll_i[i-1]+self.collected_w_raw/self.amount_subareas)*self.C_coll_x+self.Q_i_coll_storage_2[i]*self.C_coll_y
                 self.Q_i_coll_storage_2[i]=self.Q_coll_i[i]*(1-self.C_coll_x)*dt+self.Q_i_coll_storage_1[i]*(1-self.C_coll_y*dt)
                 self.Q_i_coll_storage_1[i]=self.Q_i_coll_storage_2[i]
-                self.Q_runoff_i[i]=(self.Q_runoff_i[i-1]+1000*self.runoff_raw/self.amount_subareas)*self.C_runoff_x+self.Q_i_runoff_storage_2[i]*self.C_runoff_y
+                self.Q_runoff_i[i]=(self.Q_runoff_i[i-1]+self.runoff_raw/self.amount_subareas)*self.C_runoff_x+self.Q_i_runoff_storage_2[i]*self.C_runoff_y
                 self.Q_i_runoff_storage_2[i]=self.Q_runoff_i[i]*(1-self.C_runoff_x)*dt+self.Q_i_runoff_storage_1[i]*(1-self.C_runoff_y*dt)
                 self.Q_i_runoff_storage_1[i]=self.Q_i_runoff_storage_2[i]
-                self.Q_runoff_perv_i[i]=(self.Q_runoff_perv_i[i-1]+1000*self.runoff_perv_raw/self.amount_subareas)*self.C_runoff_perv_x+self.Q_i_runoff_perv_storage_2[i]*self.C_runoff_perv_y
+                self.Q_runoff_perv_i[i]=(self.Q_runoff_perv_i[i-1]+self.runoff_perv_raw/self.amount_subareas)*self.C_runoff_perv_x+self.Q_i_runoff_perv_storage_2[i]*self.C_runoff_perv_y
                 self.Q_i_runoff_perv_storage_2[i]=self.Q_runoff_perv_i[i]*(1-self.C_runoff_perv_x)*dt+self.Q_i_runoff_perv_storage_1[i]*(1-self.C_runoff_perv_y*dt)
                 self.Q_i_runoff_perv_storage_1[i]=self.Q_i_runoff_perv_storage_2[i]
         
         #outflow of catchment
-        self.collected_w[0]=self.Q_coll_i[-1] /1000. 
-        self.runoff[0] = (self.Q_runoff_perv_i[-1]+self.Q_runoff_i[-1])/1000.
+        self.collected_w[0]=self.Q_coll_i[-1]  
+        self.runoff[0] = (self.Q_runoff_perv_i[-1]+self.Q_runoff_i[-1])
         
         
         return dt

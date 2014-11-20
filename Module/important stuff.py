@@ -105,5 +105,3 @@ pattern=asarray([xtime,factor]).transpose().tolist()
 pattern.append([1.0, pattern[0][1]])
 
 #bedingtes vektor anfügen
-
-a=[]
