@@ -49,36 +49,41 @@ class Greywatertank(pycd3.Node):
         self.addParameter("Yield_of_Treatment_[-]", self.myyield)
         self.storage_v = pycd3.Double(40.0)
         self.addParameter("Storage_Volume_[m^3]", self.storage_v)
-
+        self.current_volume = 0.0
+        self.rest = 0.0
+        self.rest2 = 0.0
      
     def init(self, start, stop, dt):
         print start
         print stop
         print dt
-        self.current_volume = 0.0
         return True
         
     def f(self, current, dt):
-        #takes care of excact watervolume when overflowing
-        if self.current_volume < self.storage_v:
-            self.volume_dt_minus_1 = self.current_volume
-        else:
-            pass        
         
-        #takes care of excact watervolume when emptying
-        if self.current_volume > 0:
-            self.volume_dt_minus_2 = self.current_volume
-        else:
-            pass
-        
+        self.current_volume_t_minus_one = self.current_volume 
         self.current_volume += self.greywaterin[0]*self.myyield - self.greywaterout[0]
-        self.wastewater[0] = self.greywaterin[0]*(1-self.myyield)
+        
         
         if self.current_volume >= self.storage_v:
+            if self.current_volume_t_minus_one < self.storage_v:
+                self.rest =self.storage_v - self.current_volume_t_minus_one
+            else:
+                self.rest = 0.0
+        elif self.current_volume <= 0.0:
+            if self.current_volume_t_minus_one > 0.0:
+                self.rest2 = self.current_volume_t_minus_one
+            else:
+                self.rest2 = 0.0
+        else:
+            self.rest2 = 0.0
+            self.rest = 0.0
+      
+        if self.current_volume >= self.storage_v:
             self.Additional_Demand[0] = 0.0
-            self.current_volume = self.volume_dt_minus_1
+            self.current_volume = self.storage_v
             self.check_storage[0] = self.current_volume
-            self.wastewater[0] = self.greywaterin[0] - self.greywaterout[0]
+            self.wastewater[0] = self.greywaterin[0] - self.greywaterout[0] - self.rest
         else:    
             if self.current_volume >= 0:
                 self.Additional_Demand[0] = 0.0
@@ -86,10 +91,10 @@ class Greywatertank(pycd3.Node):
                 self.wastewater[0] = self.greywaterin[0]*(1-self.myyield)
             
             else:
-                self.Additional_Demand[0] = self.greywaterout[0] - self.greywaterin[0]*self.myyield
-                self.current_volume = self.volume_dt_minus_2
+                self.Additional_Demand[0] = self.greywaterout[0] - self.greywaterin[0]*self.myyield -self.rest2
+                self.current_volume = 0.0
                 self.check_storage[0] = self.current_volume
-                self.wastewater[0] = self.greywaterin[0]*(1-self.myyield)
+                self.wastewater[0] = self.greywaterin[0]*(1-self.myyield) 
        
         
       

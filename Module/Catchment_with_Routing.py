@@ -85,18 +85,22 @@ class Catchment_w_Routing(pycd3.Node):
         self.amount_subareas = pycd3.Double(1)
         self.addParameter("Number_of-Subareas_[-]", self.amount_subareas)
         
+        #factor for calibrating outdoordemand
+        self.outdoor_demand_coefficient = pycd3.Double(0.5)
+        self.addParameter("Outdoor_Demand_Weighing_Factor_[-]", self.outdoor_demand_coefficient)
+        
         #Muskingum parameters K flowtime for entire catchment
         #divided by surface Area
-        self.rain_veloc_coll = pycd3.Double(0.9)
-        self.addParameter("Runoff_Velocity_iAR_[m/s]", self.rain_veloc_coll)
+        self.rain_runtime_coll = pycd3.Double(400)
+        self.addParameter("Runoff_Runtime_iAR_[s]", self.rain_runtime_coll)
         self.muskingum_coll_X = pycd3.Double(0.04)
         self.addParameter("Weighting_Coefficient_iAR_[-]", self.muskingum_coll_X)
-        self.rain_veloc_runoff = pycd3.Double(0.7)
-        self.addParameter("Runoff_Velocity_iASD_[m/s]", self.rain_veloc_runoff)
+        self.rain_runtime_runoff = pycd3.Double(500)
+        self.addParameter("Runoff_Runtime_iASD_[s]", self.rain_runtime_runoff)
         self.muskingum_runoff_X = pycd3.Double(0.05)
         self.addParameter("Weighting_Coefficient_iASD_[-]", self.muskingum_runoff_X)
-        self.rain_veloc_runoff_perv = pycd3.Double(0.4)
-        self.addParameter("Runoff_Velocity_pA_[m/s]", self.rain_veloc_runoff_perv)
+        self.rain_runtime_runoff_perv = pycd3.Double(700)
+        self.addParameter("Runoff_Runtime_pA_[s]", self.rain_runtime_runoff_perv)
         self.muskingum_runoff_perv_X = pycd3.Double(0.06)
         self.addParameter("Weighting_Coefficient_pA_[-]", self.muskingum_runoff_perv_X)
         
@@ -126,9 +130,9 @@ class Catchment_w_Routing(pycd3.Node):
         self.temp_cap_2 = self.Horton_initial_cap/3600.*dt
         
         #calculating the K values for a single subreach
-        self.muskingum_K_single_subreach_coll = (self.area_length/self.amount_subareas)/self.rain_veloc_coll
-        self.muskingum_K_single_subreach_runoff = (self.area_length/self.amount_subareas)/self.rain_veloc_runoff
-        self.muskingum_K_single_subreach_runoff_perv = (self.area_length/self.amount_subareas)/self.rain_veloc_runoff_perv
+        self.muskingum_K_single_subreach_coll = (self.rain_runtime_coll/self.amount_subareas)
+        self.muskingum_K_single_subreach_runoff = (self.rain_runtime_runoff/self.amount_subareas)
+        self.muskingum_K_single_subreach_runoff_perv = (self.rain_runtime_runoff_perv/self.amount_subareas)
         
         #calculating the Muskingum coefficients
         self.C_coll_x=(dt/2-self.muskingum_K_single_subreach_coll*self.muskingum_coll_X)/(dt/2+self.muskingum_K_single_subreach_coll*(1-self.muskingum_coll_X))
@@ -182,7 +186,7 @@ class Catchment_w_Routing(pycd3.Node):
             self.collected_w_raw = 0.0
             self.runoff_raw = 0.0
             self.actual_infiltr[0] =0.0
-            self.outdoor_use[0] = (self.evapo[0] - self.rain[0]) / 1000 * self.area_property * self.perv_area                                 
+            self.outdoor_use[0] = (self.evapo[0] - self.rain[0]) / 1000 * self.area_property * self.perv_area * self.outdoor_demand_coefficient                                
             self.runoff_perv_raw = 0.0
             
             #resetting the storage values as a simulation of the drying process respectively the continuous infitlration
