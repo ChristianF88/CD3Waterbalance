@@ -17,11 +17,11 @@ from numpy import size, asarray
 Rainevapovector =[]
 Outputvector =[]
 Indoorvector=[]
-
+area_fractions1=[]
+total_area = 0.0
 #killing the cd3 process (if necessary) and deleting old ouput .txt files
 def Deleter(location_files1='C:\Users\Acer\Documents\GitHub\CD3Waterbalance\simulationwithpatterns\outputfiles'):
     os.system("taskkill /cd3.exe")
-    file_names=os.listdir(location_files1)
     todelete = [ f for f in os.listdir(location_files1) if f.endswith(".txt") ]
     for i in range(len(todelete)):
         os.remove(location_files1+"\%s" % todelete[i])
@@ -34,8 +34,27 @@ def runcd3(filename='simple_system_CwR_RT_indooruse.xml'):
     p.wait()
     return
 
+    #[Area, perv_fraction, imperv_to_storage, imperv_to_stormw]
+#Catchment_area_fractions = [[485.1, 0.18, 0.63, 0.19], [855.9, 0.28, 0.43, 0.29], [800, 0.1, 0.3, 0.6], [960, 0.46, 0.45, 0.09], [1200, 0, 0, 1]]
+def Fractioncalculator(vector=[[485.1, 0.0, 1.0, 0.0]]):
+    global area_fractions1
+    global total_area
+    total_area = 0.0
+    area_fractions1_0 = 0.0
+    area_fractions1_1 = 0.0
+    area_fractions1_2 = 0.0
+    for i in range(len(vector)):
+        total_area += float(vector[i][0])
+        area_fractions1_0 += float(vector[i][0]*vector[i][1])
+        area_fractions1_1 += float(vector[i][0]*vector[i][2])
+        area_fractions1_2 += float(vector[i][0]*vector[i][3])
+        
+    area_fractions1=[area_fractions1_0/total_area, area_fractions1_1/total_area, area_fractions1_2/total_area]
+    return    
+    
+
 #getting model outputdata
-def getoutputdata(location_files1, totalarea=485.1):
+def getoutputdata(location_files1, totalarea=total_area):
     #getting outputvector
     #location_files1='C:\Users\Acer\Documents\GitHub\CD3Waterbalance\simulationwithpatterns\outputfiles'
     file_names=os.listdir(str(location_files1)[0:])
@@ -64,7 +83,7 @@ def getoutputdata(location_files1, totalarea=485.1):
     for i in range((len(alltogether)+1))[1:]:
         for n in range(size(alltogether,1))[1:]:
             Outputvector[n][i]=float(alltogether[i-1][n][1])
-            
+
     for i in range(len(Outputvector[0])):
         if Outputvector[0][i] == 'evapo_model':
             for n in range(len(Outputvector))[1:]:
@@ -83,7 +102,7 @@ def getoutputdata(location_files1, totalarea=485.1):
     print 'Outputvector has been created'      
     return
 
-def getinputdata(location_files2, numberhh=1., totalarea=485.1, lenindoor=9000):
+def getinputdata(location_files2, numberhh , totalarea=total_area, lenindoor=9000):
     #getting inputvector
     #location_files2='C:\Users\Acer\Documents\GitHub\CD3Waterbalance\simulationwithpatterns\inputfiles'
     file_names=os.listdir(str(location_files2)[0:])
@@ -121,7 +140,7 @@ def getinputdata(location_files2, numberhh=1., totalarea=485.1, lenindoor=9000):
     for i in range((len(namesindoor)+1))[1:]:
         for n in range(size(indoor[0],0)):
             Indoorvector[n][i]=float(indoor[i-1][n][2])
-    
+   
     #correcting unit and volume!
     Rainevapovector=np.asarray(Rainevapovector)
     Indoorvector=np.asarray(Indoorvector)
@@ -145,28 +164,11 @@ def getinputdata(location_files2, numberhh=1., totalarea=485.1, lenindoor=9000):
     
     
     
-    #[Area, perv_fraction, imperv_to_storage, imperv_to_stormw]
-Catchment_area_fractions = [[458.1, 0.18, 0.63, 0.19], [855.9, 0.28, 0.43, 0.29], [800, 0.1, 0.3, 0.6], [960, 0.46, 0.45, 0.09], [1200, 0, 0, 1]]
-def Fractioncalculator(vector=Catchment_area_fractions):
-    
-    total_area = 0.0
-    area_fractions1_0 = 0.0
-    area_fractions1_1 = 0.0
-    area_fractions1_2 = 0.0
-    for i in range(len(vector)):
-        total_area += vector[i][0]
-        area_fractions1_0 += vector[i][0]*vector[i][1]
-        area_fractions1_1 += vector[i][0]*vector[i][2]
-        area_fractions1_2 += vector[i][0]*vector[i][3]
-        
-    global area_fractions1        
-    area_fractions1=[area_fractions1_0/total_area, area_fractions1_1/total_area, area_fractions1_2/total_area]
-    return    
-    
+
 
     #tocheck (all, Evapo, Rain, Indooruse, Outdoordemand?, System)
     #area_fractions = [perv, imperv_to_storage, imperv_to_stormw]
-def Bilanz(Data, tocheck, wettingloss = 0.4, depressionloss=1.5, totalarea = 485.1, area_fractions = [0.0, 1.0, 0.0]):
+def Bilanz(Data, tocheck, wettingloss = 0.4, depressionloss=1.5, totalarea = total_area, area_fractions = area_fractions1):
     #tocheck=['Evapo', 'Rain', 'System']
     #Data=[Rainevapovector, Outputvector, Indoorvector]
     colorred = "\033[01;31m{0}\033[00m"
@@ -378,8 +380,8 @@ def plotter(Vector1, Vector2, Vector3,limx=[0,365], limy=[0,1], toplot=['rain_mo
                         i += 1
                     dailyoutdoordemand.append(outdoordemandsum)
                     outdoordemandsum=0.0
-                    
-            print 'The average Outdoordemand for the simulated time frame is: '+str(mean(dailyoutdoordemand))+' m³/d'
+                    dailyoutdoordemand_per_sm=mean(dailyoutdoordemand)/(area_fractions1[0]*total_area)
+            print 'The average Outdoordemand per square meter for the simulated time frame is: '+str(dailyoutdoordemand_per_sm)+' m³/(m²d)'
 
         elif toplot[i] == 'Indoor_Demand':
             allheaders=Vector1.tolist()[0]+Vector2.tolist()[0]+Vector3.tolist()[0]
@@ -434,19 +436,20 @@ def plotter(Vector1, Vector2, Vector3,limx=[0,365], limy=[0,1], toplot=['rain_mo
     pl.grid(True)
     pl.show()
     print 't=0: '+str(float(Vector1[1][0]))
-    print 'The plotted time range is: '+str([num2date(float(Vector1[1][0]) + float(limx[0])).strftime("%d.%m.%Y %H:%M:%S"), 
+    print 'The time range plotted: '+str([num2date(float(Vector1[1][0]) + float(limx[0])).strftime("%d.%m.%Y %H:%M:%S"), 
                                              num2date(float(Vector1[1][0]) + float(limx[1])).strftime("%d.%m.%Y %H:%M:%S")])
     return
 
 
-
+#[[485.1, 0.18, 0.63, 0.19], [855.9, 0.28, 0.43, 0.29], [800, 0.1, 0.3, 0.6], [960, 0.46, 0.45, 0.09], [1200, 0, 0, 1]]
 def theholelot(outputfiles='C:\Users\Acer\Documents\GitHub\CD3Waterbalance\simulationwithpatterns\outputfiles', inputfiles='C:\Users\Acer\Documents\GitHub\CD3Waterbalance\simulationwithpatterns\inputfiles', 
-               numberhh=1, totalarea=485.1, wettingloss = 0.4, depressionloss=1.5, area_fractions = [1.0, 0.0, 0.0]):    #area_fractions = [perv, imperv_to_storage, imperv_to_stormw]   
+               numberhh=1., wettingloss = 0.4, depressionloss=1.5):    #area_fractions = [perv, imperv_to_storage, imperv_to_stormw]   
     Deleter(outputfiles)
     runcd3('simple_system_CwR_RT_indooruse_GWT.xml')
-    getoutputdata(outputfiles)
-    getinputdata(inputfiles, numberhh, totalarea)
-    Bilanz([Rainevapovector, Outputvector, Indoorvector], ['Evapo', 'Rain', 'System'], wettingloss, depressionloss, totalarea, area_fractions)
+    Fractioncalculator([[485.1, 0.18, 0.63, 0.19]])
+    getoutputdata(outputfiles, total_area)
+    getinputdata(inputfiles, numberhh, total_area)
+    Bilanz([Rainevapovector, Outputvector, Indoorvector], ['Evapo', 'Rain', 'System'], wettingloss, depressionloss, total_area, area_fractions1)
     plotter(Indoorvector, Rainevapovector, Outputvector,[0,365],[0,1], ['rain_model', 'Stormwater', 'evapo_model', 'effective_rain','Indoor_Demand','Raintank1','Outdoor_Demand','Greywatertank1'])
     print 'done'
     return

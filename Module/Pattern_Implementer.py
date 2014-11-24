@@ -46,7 +46,7 @@ class Pattern_Impl(pycd3.Node):
         self.zenith = pycd3.Double(13)
         self.addParameter("sun_zenith_[0-23h]", self.zenith)
         self.sundown = pycd3.Double(20.5)
-        self.addParameter("sunup_[0-23h]", self.sundown)
+        self.addParameter("sundown_[0-23h]", self.sundown)
         
     def init(self, start, stop, dt):
         print start

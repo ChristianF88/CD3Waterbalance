@@ -104,10 +104,36 @@ factor =gauss_curve/mean(gauss_curve)
 pattern=asarray([xtime,factor]).transpose().tolist()
 pattern.append([1.0, pattern[0][1]])
 
-#bedingtes vektor anfügen
-filename='simple_system_CwR_RT_indooruse.xml'
 
-r'"""C:\Program Files (x86)\CityDrain3\bin\cd3.exe"   C:\Users\Acer\Documents\GitHub\CD3Waterbalance\simulationwithpatterns\outputfiles\%s""' % filename
-r'"""C:\Program Files (x86)\CityDrain3\bin\cd3.exe"   C:\Users\Acer\Documents\GitHub\CD3Waterbalance\simulationwithpatterns\outputfiles\simple_system_CwR_RT_indooruse.xml""'
-str("C:\Program Files (x86)\CityDrain3\bin\cd3.exe"   C:\Users\Acer\Documents\GitHub\CD3Waterbalance\simulationwithpatterns\outputfiles\)
-str('"""')
+
+class Complex:
+     def __init__(self, realpart, imagpart):
+         self.r = realpart
+         self.i = imagpart
+         print self
+x = Complex(3.0, -4.5)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
