@@ -108,31 +108,27 @@ class File_Reader (pycd3.Node):
                     self.out[0] = float(self.flow_int(self.growing_t))
                           
                 #if the overall time is out of the last interpolation range the next to rows will be interpolated    
-                elif self.growing_t >= date2num(datetime.strptime(self.mylist[1+self.interp_counter][0]+" "+ self.mylist[1+self.interp_counter][1],"%d.%m.%Y %H:%M:%S")):
+                elif self.growing_t > date2num(datetime.strptime(self.mylist[1+self.interp_counter][0]+" "+ self.mylist[1+self.interp_counter][1],"%d.%m.%Y %H:%M:%S")):
                     
                     #passing through rows
                     self.interp_counter += 1
-                    
-                    
-                    
-                    
-                                        
                     
                     #interpolation vectors
                     self.date_vector = [ date2num(datetime.strptime(self.mylist[int(0+self.interp_counter)][0]+" "+ self.mylist[int(0+self.interp_counter)][1],"%d.%m.%Y %H:%M:%S")) , date2num(datetime.strptime(self.mylist[int(1+self.interp_counter)][0]+" "+ self.mylist[int(1+self.interp_counter)][1],"%d.%m.%Y %H:%M:%S"))]
                     self.flow = [self.mylist[int(0+self.interp_counter)][2], self.mylist[int(1+self.interp_counter)][2] ]
                     
+                    #print [self.date_vector, self.growing_t, len(self.mylist),self.interp_counter,self.mylist[int(0+self.interp_counter)][0],self.mylist[int(1+self.interp_counter)][0]]
                     #interpolation
                     self.flow_int = interp1d(self.date_vector, self.flow)
                 
                 #solves out of range problem
-                if self.interp_counter <= len(self.mylist)-1:
+                #if self.interp_counter <= len(self.mylist)-1:
                     #value output at needed time
-                    self.out[0] = float(self.flow_int(self.growing_t))
-                else:
-                    self.out[0] =float(self.mylist[-1][2])               
+                self.out[0] = float(self.flow_int(self.growing_t))
+                #else:
+                   # self.out[0] =float(self.mylist[-1][2])               
                 
-                print [self.date_vector, date2num(datetime.strptime(self.mylist[-1][0]+" "+ self.mylist[-1][1],"%d.%m.%Y %H:%M:%S")), len(self.mylist),self.interp_counter,self.out[0]]
+                
                 
             #The set time step is larger than the files
             else:

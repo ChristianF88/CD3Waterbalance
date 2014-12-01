@@ -69,19 +69,20 @@ def getoutputdata(location_files1, totalarea=total_area):
             csv_file.closed
             alltogether.append(mylist)
             names.append(file_names[i])
+            csv_file.close()
     #creating vector right size
     global Outputvector
-    Outputvector=[['error']*(len(alltogether)+1) for m in range(size(alltogether,1))]
+    Outputvector=[['error']*(len(alltogether)+1) for m in range(len(alltogether[0]))]
     #writing header
     Outputvector[0][0]='Time'
-    for i in range(size(alltogether,0)):
+    for i in range(len(alltogether)):
         Outputvector[0][i+1]=names[i][:(len(names[i])-4)]
     #writing time colum
-    for i in range(size(alltogether,1))[1:]:
+    for i in range(len(alltogether[0]))[1:]:
         Outputvector[i][0]=float(date2num(datetime.strptime(alltogether[1][i][0][:19],"%d.%m.%Y %H:%M:%S")))
     #writing Values of inputfiles in vector
     for i in range((len(alltogether)+1))[1:]:
-        for n in range(size(alltogether,1))[1:]:
+        for n in range(len(alltogether[0]))[1:]:
             Outputvector[n][i]=float(alltogether[i-1][n][1])
 
     for i in range(len(Outputvector[0])):
@@ -92,7 +93,7 @@ def getoutputdata(location_files1, totalarea=total_area):
             for n in range(len(Outputvector))[1:]:
                 Outputvector[n][i]=float(Outputvector[n][i])/1000*totalarea
     #checks whether all values have been inserted
-    for i in range(size(Outputvector,0)):
+    for i in range(len(Outputvector)):
         if 'error' in Outputvector[i]:
             print 'A problem has occured, please check getoutputdata() function'
             print 'The problem has occured in line '+str(i)+' of the Outputvector'
@@ -445,7 +446,7 @@ def plotter(Vector1, Vector2, Vector3,limx=[0,365], limy=[0,1], toplot=['rain_mo
 def theholelot(outputfiles='C:\Users\Acer\Documents\GitHub\CD3Waterbalance\simulationwithpatterns\outputfiles', inputfiles='C:\Users\Acer\Documents\GitHub\CD3Waterbalance\simulationwithpatterns\inputfiles', 
                numberhh=1., wettingloss = 0.4, depressionloss=1.5):    #area_fractions = [perv, imperv_to_storage, imperv_to_stormw]   
     Deleter(outputfiles)
-    runcd3('simple_system_CwR_RT_indooruse_GWT.xml')
+    runcd3('simple_system_C.xml')
     Fractioncalculator([[485.1, 0.18, 0.63, 0.19]])
     getoutputdata(outputfiles, total_area)
     getinputdata(inputfiles, numberhh, total_area)

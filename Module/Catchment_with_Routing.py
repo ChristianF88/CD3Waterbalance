@@ -56,14 +56,12 @@ class Catchment_w_Routing(pycd3.Node):
         #Catchment area + fraction info of pervious and impervious parts
         self.area_property = pycd3.Double(1000)
         self.addParameter("Catchment_Area_[m^2]", self.area_property)
-        self.area_length = pycd3.Double(100)
-        self.addParameter("Catchment_Length_[m]", self.area_length)
         self.perv_area = pycd3.Double(0.4)
-        self.addParameter("Fraktion_of_Pervious_Area_(pA)_[-]", self.perv_area)
+        self.addParameter("Fraktion_of_Pervious_Area_pA_[-]", self.perv_area)
         self.imp_area_stormwater = pycd3.Double(0.4)
-        self.addParameter("Fraktion_of_Impervious_Area_to_Stormwater_Drain_(iASD)_[-]", self.imp_area_stormwater)
+        self.addParameter("Fraktion_of_Impervious_Area_to_Stormwater_Drain_iASD_[-]", self.imp_area_stormwater)
         self.imp_area_raintank = pycd3.Double(0.2)
-        self.addParameter("Fraktion_of_Impervious_Area_to_Reservoir_(iAR)_[-]", self.imp_area_raintank)
+        self.addParameter("Fraktion_of_Impervious_Area_to_Reservoir_iAR_[-]", self.imp_area_raintank)
         
         #default values for gras (Wikipedia)
         self.Horton_initial_cap = pycd3.Double(0.9)                             
@@ -83,7 +81,7 @@ class Catchment_w_Routing(pycd3.Node):
         
         #number of subareas for flowconcentration
         self.amount_subareas = pycd3.Double(1)
-        self.addParameter("Number_of-Subareas_[-]", self.amount_subareas)
+        self.addParameter("Number_of_Subareas_[-]", self.amount_subareas)
         
         #factor for calibrating outdoordemand
         self.outdoor_demand_coefficient = pycd3.Double(0.5)
