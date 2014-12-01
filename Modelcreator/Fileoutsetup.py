@@ -19,7 +19,7 @@ class Fileoutsetup:
    
     def Setandwrite_attributes(self,numberofFileouts, starting_value_i, attributevector):
         for i in range(numberofFileouts+starting_value_i)[starting_value_i:]:
-            self.Fileoutattributelist[i][str('Fileout_'+str(i))]["Storage_Volume"] = attributevector[i][0]
+            self.Fileoutattributelist[i][str('Fileout_'+str(i))]["out_file_name"] = attributevector[i][0]
     
         for i in range(numberofFileouts+starting_value_i)[starting_value_i:]:
             exec '''self.line1='\\t\\t\\t<node id="Fileout_'+str(i)+'" class="Fileout"/> \\n' '''
