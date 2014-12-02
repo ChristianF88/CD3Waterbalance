@@ -50,102 +50,102 @@
             </node>
 			<node id="Pattern_Impl_0" class="Pattern_Impl">
                 <parameter name="sun_zenith_[0-23h]" type="double" value="13"/>
-                <parameter name="sunup_[0-23h]" type="double" value="20.5"/>
+                <parameter name="sundown_[0-23h]" type="double" value="20.5"/>
             </node>
 			<node id="Catchment_w_Routing_0" class="Catchment_w_Routing">
-                <parameter name="Catchment_Length_[m]" type="double" value="33"/>
-                <parameter name="Catchment_Width_[m]" type="double" value="14.699999999999999"/>
+                <parameter name="Catchment_Area_[m^2]" type="double" value="485.1"/>
                 <parameter name="Decay_Constant_[1/min]" type="double" value="1.8999999999999999"/>
                 <parameter name="Depression_Loss_[mm]" type="double" value="1.5"/>
                 <parameter name="Final_Infiltration_Capacity_[m/h]" type="double" value="0.20999999999999999"/>
-                <parameter name="Fraktion_of_Impervious_Area_to_Reservoir_(iAR)_[-]" type="double" value="0.63"/>
-                <parameter name="Fraktion_of_Impervious_Area_to_Stormwater_Drain_(iASD)_[-]" type="double" value="0.19"/>
-                <parameter name="Fraktion_of_Pervious_Area_(pA)_[-]" type="double" value="0.17999999999999999"/>
+                <parameter name="Fraktion_of_Impervious_Area_to_Reservoir_iAR_[-]" type="double" value="0.63"/>
+                <parameter name="Fraktion_of_Impervious_Area_to_Stormwater_Drain_iASD_[-]" type="double" value="0.19"/>
+                <parameter name="Fraktion_of_Pervious_Area_pA_[-]" type="double" value="0.17999999999999999"/>
                 <parameter name="Initial_Infiltration_Capacity_[m/h]" type="double" value="0.59999999999999998"/>
-                <parameter name="Number_of-Subareas_[-]" type="double" value="2"/>
-                <parameter name="Runoff_Velocity_iAR_[m/s]" type="double" value="0.04"/>
-                <parameter name="Runoff_Velocity_iASD_[m/s]" type="double" value="0.03"/>
-                <parameter name="Runoff_Velocity_pA_[m/s]" type="double" value="0.02"/>
+                <parameter name="Number_of_Subareas_[-]" type="double" value="2"/>
+                <parameter name="Runoff_Runtime_iAR_[s]" type="double" value="400"/>
+                <parameter name="Runoff_Runtime_iASD_[s]" type="double" value="500"/>
+                <parameter name="Runoff_Runtime_pA_[s]" type="double" value="700"/>
                 <parameter name="Weighting_Coefficient_iAR_[-]" type="double" value="0.040000000000000001"/>
                 <parameter name="Weighting_Coefficient_iASD_[-]" type="double" value="0.050000000000000003"/>
                 <parameter name="Weighting_Coefficient_pA_[-]" type="double" value="0.059999999999999998"/>
-                <parameter name="Wetting_Loss_[mm]" type="double" value="0.39000000000000001"/>
+                <parameter name="Wetting_Loss_[mm]" type="double" value="0.4"/>
+				<parameter name="Outdoor_Demand_Weighing_Factor_[-]" type="double" value="0.5"/>
             </node>
 			<node id="Catchment_w_Routing_1" class="Catchment_w_Routing">
-                <parameter name="Catchment_Length_[m]" type="double" value="27"/>
-                <parameter name="Catchment_Width_[m]" type="double" value="31.7"/>
+                <parameter name="Catchment_Area_[m^2]" type="double" value="855.9"/>
                 <parameter name="Decay_Constant_[1/min]" type="double" value="1.8"/>
                 <parameter name="Depression_Loss_[mm]" type="double" value="1.5"/>
                 <parameter name="Final_Infiltration_Capacity_[m/h]" type="double" value="0.27"/>
-                <parameter name="Fraktion_of_Impervious_Area_to_Reservoir_(iAR)_[-]" type="double" value="0.43"/>
-                <parameter name="Fraktion_of_Impervious_Area_to_Stormwater_Drain_(iASD)_[-]" type="double" value="0.29"/>
-                <parameter name="Fraktion_of_Pervious_Area_(pA)_[-]" type="double" value="0.28"/>
+                <parameter name="Fraktion_of_Impervious_Area_to_Reservoir_iAR_[-]" type="double" value="0.43"/>
+                <parameter name="Fraktion_of_Impervious_Area_to_Stormwater_Drain_iASD_[-]" type="double" value="0.29"/>
+                <parameter name="Fraktion_of_Pervious_Area_pA_[-]" type="double" value="0.28"/>
                 <parameter name="Initial_Infiltration_Capacity_[m/h]" type="double" value="0.8"/>
-                <parameter name="Number_of-Subareas_[-]" type="double" value="1"/>
-                <parameter name="Runoff_Velocity_iAR_[m/s]" type="double" value="0.07"/>
-                <parameter name="Runoff_Velocity_iASD_[m/s]" type="double" value="0.06"/>
-                <parameter name="Runoff_Velocity_pA_[m/s]" type="double" value="0.03"/>
+                <parameter name="Number_of_Subareas_[-]" type="double" value="1"/>
+                <parameter name="Runoff_Runtime_iAR_[s]" type="double" value="400"/>
+                <parameter name="Runoff_Runtime_iASD_[s]" type="double" value="500"/>
+                <parameter name="Runoff_Runtime_pA_[s]" type="double" value="700"/>
                 <parameter name="Weighting_Coefficient_iAR_[-]" type="double" value="0.06"/>
                 <parameter name="Weighting_Coefficient_iASD_[-]" type="double" value="0.05"/>
                 <parameter name="Weighting_Coefficient_pA_[-]" type="double" value="0.06"/>
                 <parameter name="Wetting_Loss_[mm]" type="double" value="0.4"/>
+				<parameter name="Outdoor_Demand_Weighing_Factor_[-]" type="double" value="0.5"/>
             </node>
 			<node id="Catchment_w_Routing_2" class="Catchment_w_Routing">
-                <parameter name="Catchment_Length_[m]" type="double" value="50"/>
-                <parameter name="Catchment_Width_[m]" type="double" value="16"/>
+                <parameter name="Catchment_Area_[m^2]" type="double" value="800"/>
                 <parameter name="Decay_Constant_[1/min]" type="double" value="1.8999999999999999"/>
-                <parameter name="Depression_Loss_[mm]" type="double" value="1.0"/>
+                <parameter name="Depression_Loss_[mm]" type="double" value="1.5"/>
                 <parameter name="Final_Infiltration_Capacity_[m/h]" type="double" value="0.20999999999999999"/>
-                <parameter name="Fraktion_of_Impervious_Area_to_Reservoir_(iAR)_[-]" type="double" value="0.30"/>
-                <parameter name="Fraktion_of_Impervious_Area_to_Stormwater_Drain_(iASD)_[-]" type="double" value="0.60"/>
-                <parameter name="Fraktion_of_Pervious_Area_(pA)_[-]" type="double" value="0.10"/>
+                <parameter name="Fraktion_of_Impervious_Area_to_Reservoir_iAR_[-]" type="double" value="0.30"/>
+                <parameter name="Fraktion_of_Impervious_Area_to_Stormwater_Drain_iASD_[-]" type="double" value="0.60"/>
+                <parameter name="Fraktion_of_Pervious_Area_pA_[-]" type="double" value="0.10"/>
                 <parameter name="Initial_Infiltration_Capacity_[m/h]" type="double" value="0.59999999999999998"/>
-                <parameter name="Number_of-Subareas_[-]" type="double" value="2"/>
-                <parameter name="Runoff_Velocity_iAR_[m/s]" type="double" value="0.06999999999999999"/>
-                <parameter name="Runoff_Velocity_iASD_[m/s]" type="double" value="0.05999999999999999"/>
-                <parameter name="Runoff_Velocity_pA_[m/s]" type="double" value="0.04000000000000000"/>
+                <parameter name="Number_of_Subareas_[-]" type="double" value="2"/>
+                <parameter name="Runoff_Runtime_iAR_[s]" type="double" value="400"/>
+                <parameter name="Runoff_Runtime_iASD_[s]" type="double" value="500"/>
+                <parameter name="Runoff_Runtime_pA_[s]" type="double" value="700"/>
                 <parameter name="Weighting_Coefficient_iAR_[-]" type="double" value="0.040000000000000001"/>
                 <parameter name="Weighting_Coefficient_iASD_[-]" type="double" value="0.050000000000000003"/>
                 <parameter name="Weighting_Coefficient_pA_[-]" type="double" value="0.059999999999999998"/>
-                <parameter name="Wetting_Loss_[mm]" type="double" value="0.3"/>
+                <parameter name="Wetting_Loss_[mm]" type="double" value="0.4"/>
+				<parameter name="Outdoor_Demand_Weighing_Factor_[-]" type="double" value="0.5"/>
             </node>
 			<node id="Catchment_w_Routing_3" class="Catchment_w_Routing">
-                <parameter name="Catchment_Length_[m]" type="double" value="20"/>
-                <parameter name="Catchment_Width_[m]" type="double" value="48"/>
+                <parameter name="Catchment_Area_[m^2]" type="double" value="960"/>
                 <parameter name="Decay_Constant_[1/min]" type="double" value="1.8999999999999999"/>
                 <parameter name="Depression_Loss_[mm]" type="double" value="1.5"/>
                 <parameter name="Final_Infiltration_Capacity_[m/h]" type="double" value="0.20999999999999999"/>
-                <parameter name="Fraktion_of_Impervious_Area_to_Reservoir_(iAR)_[-]" type="double" value="0.45"/>
-                <parameter name="Fraktion_of_Impervious_Area_to_Stormwater_Drain_(iASD)_[-]" type="double" value="0.09"/>
-                <parameter name="Fraktion_of_Pervious_Area_(pA)_[-]" type="double" value="0.46"/>
+                <parameter name="Fraktion_of_Impervious_Area_to_Reservoir_iAR_[-]" type="double" value="0.45"/>
+                <parameter name="Fraktion_of_Impervious_Area_to_Stormwater_Drain_iASD_[-]" type="double" value="0.09"/>
+                <parameter name="Fraktion_of_Pervious_Area_pA_[-]" type="double" value="0.46"/>
                 <parameter name="Initial_Infiltration_Capacity_[m/h]" type="double" value="0.59999999999999998"/>
-                <parameter name="Number_of-Subareas_[-]" type="double" value="1"/>
-                <parameter name="Runoff_Velocity_iAR_[m/s]" type="double" value="0.08"/>
-                <parameter name="Runoff_Velocity_iASD_[m/s]" type="double" value="0.06"/>
-                <parameter name="Runoff_Velocity_pA_[m/s]" type="double" value="0.04"/>
+                <parameter name="Number_of_Subareas_[-]" type="double" value="1"/>
+                <parameter name="Runoff_Runtime_iAR_[s]" type="double" value="400"/>
+                <parameter name="Runoff_Runtime_iASD_[s]" type="double" value="500"/>
+                <parameter name="Runoff_Runtime_pA_[s]" type="double" value="700"/>
                 <parameter name="Weighting_Coefficient_iAR_[-]" type="double" value="0.040000000000000001"/>
                 <parameter name="Weighting_Coefficient_iASD_[-]" type="double" value="0.050000000000000003"/>
                 <parameter name="Weighting_Coefficient_pA_[-]" type="double" value="0.059999999999999998"/>
-                <parameter name="Wetting_Loss_[mm]" type="double" value="0.39000000000000001"/>
+                <parameter name="Wetting_Loss_[mm]" type="double" value="0.4"/>
+				<parameter name="Outdoor_Demand_Weighing_Factor_[-]" type="double" value="0.5"/>
             </node>
 			<node id="Catchment_w_Routing_4" class="Catchment_w_Routing">
-                <parameter name="Catchment_Length_[m]" type="double" value="30"/>
-                <parameter name="Catchment_Width_[m]" type="double" value="19"/>
+                <parameter name="Catchment_Area_[m^2]" type="double" value="1200"/>
                 <parameter name="Decay_Constant_[1/min]" type="double" value="1.8999999999999999"/>
                 <parameter name="Depression_Loss_[mm]" type="double" value="1.5"/>
                 <parameter name="Final_Infiltration_Capacity_[m/h]" type="double" value="0.20999999999999999"/>
-                <parameter name="Fraktion_of_Impervious_Area_to_Reservoir_(iAR)_[-]" type="double" value="0.0"/>
-                <parameter name="Fraktion_of_Impervious_Area_to_Stormwater_Drain_(iASD)_[-]" type="double" value="1.0"/>
-                <parameter name="Fraktion_of_Pervious_Area_(pA)_[-]" type="double" value="0.0"/>
+                <parameter name="Fraktion_of_Impervious_Area_to_Reservoir_iAR_[-]" type="double" value="0.0"/>
+                <parameter name="Fraktion_of_Impervious_Area_to_Stormwater_Drain_iASD_[-]" type="double" value="1.0"/>
+                <parameter name="Fraktion_of_Pervious_Area_pA_[-]" type="double" value="0.0"/>
                 <parameter name="Initial_Infiltration_Capacity_[m/h]" type="double" value="0.59999999999999998"/>
-                <parameter name="Number_of-Subareas_[-]" type="double" value="2"/>
-                <parameter name="Runoff_Velocity_iAR_[m/s]" type="double" value="0.03"/>
-                <parameter name="Runoff_Velocity_iASD_[m/s]" type="double" value="0.021"/>
-                <parameter name="Runoff_Velocity_pA_[m/s]" type="double" value="0.008"/>
+                <parameter name="Number_of_Subareas_[-]" type="double" value="2"/>
+                <parameter name="Runoff_Runtime_iAR_[s]" type="double" value="400"/>
+                <parameter name="Runoff_Runtime_iASD_[s]" type="double" value="500"/>
+                <parameter name="Runoff_Runtime_pA_[s]" type="double" value="700"/>
                 <parameter name="Weighting_Coefficient_iAR_[-]" type="double" value="0.040000000000000001"/>
                 <parameter name="Weighting_Coefficient_iASD_[-]" type="double" value="0.050000000000000003"/>
                 <parameter name="Weighting_Coefficient_pA_[-]" type="double" value="0.059999999999999998"/>
-                <parameter name="Wetting_Loss_[mm]" type="double" value="0.39000000000000001"/>
+                <parameter name="Wetting_Loss_[mm]" type="double" value="0.4"/>
+				<parameter name="Outdoor_Demand_Weighing_Factor_[-]" type="double" value="0.5"/>
             </node>
 			<node id="Distributor_0" class="Distributor">
                 <parameter name="Number_of_Outports" type="int" value="5"/>
@@ -198,25 +198,29 @@
 			<node id="Collector_8" class="Collector">
                 <parameter name="Number_of_Inports" type="int" value="2"/>
             </node>
+			<node id="Collector_9" class="Collector">
+                <parameter name="Number_of_Inports" type="int" value="5"/>
+            </node>
 			<node id="Household_0" class="Household"/>
 			<node id="Household_1" class="Household"/>
 			<node id="Household_2" class="Household"/>
 			<node id="Household_3" class="Household"/>
-			<node id="Household_4" class="Household"/>kl0
+			<node id="Household_4" class="Household"/>
 			<node id="Raintank_0" class="Raintank">
-                <parameter name="Storage_Volume [m^3]" type="double" value="5"/>
+                <parameter name="Storage_Volume_[m^3]" type="double" value="5"/>
             </node>
 			<node id="Raintank_1" class="Raintank">
-                <parameter name="Storage_Volume [m^3]" type="double" value="20"/>
+                <parameter name="Storage_Volume_[m^3]" type="double" value="20"/>
             </node>
 			<node id="Raintank_2" class="Raintank">
-                <parameter name="Storage_Volume [m^3]" type="double" value="10"/>
+                <parameter name="Storage_Volume_[m^3]" type="double" value="10"/>
             </node>
 			<node id="Stormwaterpipe_0" class="Stormwaterpipe"/>
             <node id="Sewer2_0" class="Sewer2"/>
 			<node id="Potable_Water_Resorvoir_0" class="Potable_Water_Resorvoir"/>
 			<node id="Greywatertank_0" class="Greywatertank">
                 <parameter name="Yield_of_Treatment [-]" type="double" value="0.90000000000000002"/>
+				<parameter name="Storage_Volume_[m^3]" type="double" value="40"/>
             </node>
 			<node id="FileOut_0" class="FileOut">
                 <parameter name="out_file_name" type="string" value="PotableWaterDemand.txt"/>
@@ -240,19 +244,28 @@
                 <parameter name="out_file_name" type="string" value="Sewer.txt"/>
             </node>
 			<node id="FileOut_7" class="FileOut">
-                <parameter name="out_file_name" type="string" value="Infiltration(CA0).txt"/>
+                <parameter name="out_file_name" type="string" value="Outdoor_Demand(CA0).txt"/>
             </node>
 			<node id="FileOut_8" class="FileOut">
-                <parameter name="out_file_name" type="string" value="Infiltration(CA1).txt"/>
+                <parameter name="out_file_name" type="string" value="Outdoor_Demand(CA1).txt"/>
             </node>
 			<node id="FileOut_9" class="FileOut">
-                <parameter name="out_file_name" type="string" value="Infiltration(CA2).txt"/>
+                <parameter name="out_file_name" type="string" value="Outdoor_Demand(CA2).txt"/>
             </node>
 			<node id="FileOut_10" class="FileOut">
-                <parameter name="out_file_name" type="string" value="Infiltration(CA3).txt"/>
+                <parameter name="out_file_name" type="string" value="Outdoor_Demand(CA3).txt"/>
             </node>
 			<node id="FileOut_11" class="FileOut">
-                <parameter name="out_file_name" type="string" value="Infiltration(CA4).txt"/>
+                <parameter name="out_file_name" type="string" value="Outdoor_Demand(CA4).txt"/>
+            </node>
+			<node id="FileOut_12" class="FileOut">
+                <parameter name="out_file_name" type="string" value="Infiltration.txt"/>
+            </node>
+			<node id="FileOut_13" class="FileOut">
+                <parameter name="out_file_name" type="string" value="evapo_model.txt"/>
+            </node>
+			<node id="FileOut_14" class="FileOut">
+                <parameter name="out_file_name" type="string" value="rain_model.txt"/>
             </node>
 		</nodelist>
 		        <connectionlist>
@@ -262,11 +275,11 @@
 			</connection>
 			<connection id="1">
                 <source node="File_Reader_1" port="Outport"/>
-                <sink node="Distributor_1" port="Inport"/>
+                <sink node="FileOut_14" port="in"/>
 			</connection>
 			<connection id="2">
                 <source node="Pattern_Impl_0" port="Outport"/>
-                <sink node="Distributor_0" port="Inport"/>
+                <sink node="FileOut_13" port="in"/>
 			</connection>
 			<connection id="3">
                 <source node="Distributor_0" port="Outport_1"/>
@@ -538,11 +551,11 @@
 			</connection>
 			<connection id="70">
                 <source node="Collector_2" port="Outport"/>
-                <sink node="Sewer2_0" port="black_w"/>
+                <sink node="Sewer2_0" port="Black_Water"/>
 			</connection>
 			<connection id="71">
                 <source node="Household_0" port="Non_Potable_Water"/>
-                <sink node="Raintank_0" port="Non_Potable_In"/>
+                <sink node="Raintank_0" port="Non_Potable_Demand"/>
 			</connection>
 			<connection id="72">
                 <source node="Household_1" port="Non_Potable_Water"/>
@@ -554,11 +567,11 @@
 			</connection>
 			<connection id="74">
                 <source node="Collector_1" port="Outport"/>
-                <sink node="Raintank_1" port="Non_Potable_In"/>
+                <sink node="Raintank_1" port="Non_Potable_Demand"/>
 			</connection>
 			<connection id="75">
                 <source node="Household_3" port="Non_Potable_Water"/>
-                <sink node="Raintank_2" port="Non_Potable_In"/>
+                <sink node="Raintank_2" port="Non_Potable_Demand"/>
 			</connection>
 			<connection id="76">
                 <source node="Raintank_0" port="Overflow"/>
@@ -638,7 +651,7 @@
 			</connection>
 			<connection id="95">
                 <source node="Collector_4" port="Outport"/>
-                <sink node="Potable_Water_Resorvoir_0" port="pot_w"/>
+                <sink node="Potable_Water_Resorvoir_0" port="Potable_Water_Demand"/>
 			</connection>
 			<connection id="96">
                 <source node="Collector_5" port="Outport"/>
@@ -650,10 +663,10 @@
 			</connection>
 			<connection id="98">
                 <source node="Greywatertank_0" port="Additional_Demand"/>
-                <sink node="Potable_Water_Resorvoir_0" port="nonpot_w"/>
+                <sink node="Potable_Water_Resorvoir_0" port="Non_Potable_Water_Demand"/>
 			</connection>
 			<connection id="99">
-                <source node="Potable_Water_Resorvoir_0" port="demand"/>
+                <source node="Potable_Water_Resorvoir_0" port="Demand"/>
                 <sink node="FileOut_0" port="in"/>
 			</connection>
 			<connection id="100">
@@ -678,14 +691,14 @@
 			</connection>
 			<connection id="105">
                 <source node="Collector_8" port="Outport"/>
-                <sink node="Stormwaterpipe_0" port="Inport"/>
+                <sink node="Stormwaterpipe_0" port="Runoff"/>
 			</connection>
 			<connection id="106">
-                <source node="Stormwaterpipe_0" port="Volume"/>
+                <source node="Stormwaterpipe_0" port="Discharged_Volume"/>
                 <sink node="FileOut_5" port="in"/>
 			</connection>
 			<connection id="107">
-                <source node="Sewer2_0" port="discharged_V"/>
+                <source node="Sewer2_0" port="Discharged_Volume"/>
                 <sink node="FileOut_6" port="in"/>
 			</connection>
 			<connection id="108">
@@ -707,6 +720,38 @@
 			<connection id="112">
                 <source node="FileOut_11" port="out"/>
                 <sink node="Household_4" port="Outdoor_Demand"/>
+			</connection>
+			<connection id="113">
+                <source node="Catchment_w_Routing_0" port="Actual_Infiltration"/>
+                <sink node="Collector_9" port="Inport_1"/>
+			</connection>
+			<connection id="114">
+                <source node="Catchment_w_Routing_1" port="Actual_Infiltration"/>
+                <sink node="Collector_9" port="Inport_2"/>
+			</connection>
+			<connection id="115">
+                <source node="Catchment_w_Routing_2" port="Actual_Infiltration"/>
+                <sink node="Collector_9" port="Inport_3"/>
+			</connection>
+			<connection id="116">
+                <source node="Catchment_w_Routing_3" port="Actual_Infiltration"/>
+                <sink node="Collector_9" port="Inport_4"/>
+			</connection>
+			<connection id="117">
+                <source node="Catchment_w_Routing_4" port="Actual_Infiltration"/>
+                <sink node="Collector_9" port="Inport_5"/>
+			</connection>
+			<connection id="118">
+                <source node="Collector_9" port="Outport"/>
+                <sink node="FileOut_12" port="in"/>
+			</connection>
+			<connection id="119">
+                <source node="FileOut_13" port="out"/>
+                <sink node="Distributor_0" port="Inport"/>
+			</connection>
+			<connection id="120">
+                <source node="FileOut_14" port="out"/>
+                <sink node="Distributor_1" port="Inport"/>
 			</connection>
         </connectionlist>
     </model>

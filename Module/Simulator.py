@@ -423,7 +423,7 @@ def plotter(Vector1, Vector2, Vector3,limx=[0,365], limy=[0,1], toplot=['rain_mo
         else:
             print 'Error: Wrong input name!'
     #LEGENDE!!!save pic if wanted
-    pl.figure(figsize=(16, 8), dpi=80)
+    pl.figure(figsize=(12, 6), dpi=80)
     pl.xlim(float(Vector1[1][0])+float(limx[0]), float(Vector1[1][0]) + float(limx[1]))
     pl.ylim(float(limy[0]), float(limy[1]))
     lines = ["-","--","-.",":"]
@@ -446,8 +446,8 @@ def plotter(Vector1, Vector2, Vector3,limx=[0,365], limy=[0,1], toplot=['rain_mo
 def theholelot(outputfiles='C:\Users\Acer\Documents\GitHub\CD3Waterbalance\simulationwithpatterns\outputfiles', inputfiles='C:\Users\Acer\Documents\GitHub\CD3Waterbalance\simulationwithpatterns\inputfiles', 
                numberhh=1., wettingloss = 0.4, depressionloss=1.5):    #area_fractions = [perv, imperv_to_storage, imperv_to_stormw]   
     Deleter(outputfiles)
-    runcd3('simple_system_C.xml')
-    Fractioncalculator([[485.1, 0.18, 0.63, 0.19]])
+    runcd3('complex_system.xml')
+    Fractioncalculator([[485.1, 0.18, 0.63, 0.19], [855.9, 0.28, 0.43, 0.29], [800, 0.1, 0.3, 0.6], [960, 0.46, 0.45, 0.09], [1200, 0, 0, 1]])
     getoutputdata(outputfiles, total_area)
     getinputdata(inputfiles, numberhh, total_area)
     Bilanz([Rainevapovector, Outputvector, Indoorvector], ['Evapo', 'Rain', 'System'], wettingloss, depressionloss, total_area, area_fractions1)

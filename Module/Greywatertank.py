@@ -64,37 +64,43 @@ class Greywatertank(pycd3.Node):
         self.current_volume_t_minus_one = self.current_volume 
         self.current_volume += self.greywaterin[0]*self.myyield - self.greywaterout[0]
         
-        
-        if self.current_volume >= self.storage_v:
-            if self.current_volume_t_minus_one < self.storage_v:
-                self.rest =self.storage_v - self.current_volume_t_minus_one
-            else:
-                self.rest = 0.0
-        elif self.current_volume <= 0.0:
-            if self.current_volume_t_minus_one > 0.0:
-                self.rest2 = self.current_volume_t_minus_one
+        if self.storage_v == 0.0:
+            self.current_volume ==0.0
+            self.Additional_Demand[0] = self.greywaterin[0]
+            self.check_storage[0] = self.current_volume
+            self.wastewater[0] = 0.0
+        else:
+            
+            if self.current_volume >= self.storage_v:
+                if self.current_volume_t_minus_one < self.storage_v:
+                    self.rest =self.storage_v - self.current_volume_t_minus_one
+                else:
+                    self.rest = 0.0
+            elif self.current_volume <= 0.0:
+                if self.current_volume_t_minus_one > 0.0:
+                    self.rest2 = self.current_volume_t_minus_one
+                else:
+                    self.rest2 = 0.0
             else:
                 self.rest2 = 0.0
-        else:
-            self.rest2 = 0.0
-            self.rest = 0.0
+                self.rest = 0.0
       
-        if self.current_volume >= self.storage_v:
-            self.Additional_Demand[0] = 0.0
-            self.current_volume = self.storage_v
-            self.check_storage[0] = self.current_volume
-            self.wastewater[0] = self.greywaterin[0] - self.greywaterout[0] - self.rest
-        else:    
-            if self.current_volume >= 0:
+            if self.current_volume >= self.storage_v:
                 self.Additional_Demand[0] = 0.0
+                self.current_volume = self.storage_v
                 self.check_storage[0] = self.current_volume
-                self.wastewater[0] = self.greywaterin[0]*(1-self.myyield)
+                self.wastewater[0] = self.greywaterin[0] - self.greywaterout[0] - self.rest
+            else:    
+                if self.current_volume >= 0:
+                    self.Additional_Demand[0] = 0.0
+                    self.check_storage[0] = self.current_volume
+                    self.wastewater[0] = self.greywaterin[0]*(1-self.myyield)
             
-            else:
-                self.Additional_Demand[0] = self.greywaterout[0] - self.greywaterin[0]*self.myyield -self.rest2
-                self.current_volume = 0.0
-                self.check_storage[0] = self.current_volume
-                self.wastewater[0] = self.greywaterin[0]*(1-self.myyield) 
+                else:
+                    self.Additional_Demand[0] = self.greywaterout[0] - self.greywaterin[0]*self.myyield -self.rest2
+                    self.current_volume = 0.0
+                    self.check_storage[0] = self.current_volume
+                    self.wastewater[0] = self.greywaterin[0]*(1-self.myyield) 
        
         
       

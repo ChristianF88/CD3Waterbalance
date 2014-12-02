@@ -39,7 +39,7 @@ class Raintank(pycd3.Node):
         #dir (self.inf)
         print "init node"
         self.addInPort("Collected_Water", self.collected_w)
-        self.addInPort("Non_Potable_In", self.non_pot_in)
+        self.addInPort("Non_Potable_Demand", self.non_pot_in)
         self.addOutPort("Overflow", self.overflow)
         self.addOutPort("Additional_Demand", self.Additional_Demand)
         self.addOutPort("Check_Storage", self.check_storage)
