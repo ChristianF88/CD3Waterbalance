@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<citydrain version="1.0">
+    <pluginpath path="nodes"/>
+    <pythonmodule module="C:/Users/Acer/Documents/GitHub/CD3Waterbalance/Module/cd3waterbalancemodules.py"/>
+    <pythonmodule module="C:/Users/Acer/Documents/GitHub/CD3Waterbalance/Module/cd3waterbalancemodules.py"/>
+    <simulation class="DefaultSimulation">
+        <time start="2000-Jan-01 00:00:00" stop="2001-Jan-01 00:00:00" dt="360">
+            <flowdefinition>
+                <flow name="Q"/>
+                <concentration name="BOD5"/>
+                <concentration name="COD"/>
+                <concentration name="Cu"/>
+                <concentration name="Ntot"/>
+            </flowdefinition>
+        </time>
+    </simulation>
+    <model>
+		<nodelist>
+			<node id="File_Reader_0" class="File_Reader">
+                <parameter name="" type="string" value="../inputfiles/evapo.ixx"/>
+                <parameter name="Type_H_for_height_[mm]_or_F_for_flow_[l/h]" type="string" value="H"/>
+			</node>
+			<node id="File_Reader_1" class="File_Reader">
+                <parameter name="" type="string" value="../inputfiles/rain.ixx"/>
+                <parameter name="Type_H_for_height_[mm]_or_F_for_flow_[l/h]" type="string" value="H"/>
+            </node>
+			<node id="File_Reader_2" class="File_Reader">
+                <parameter name="" type="string" value="../inputfiles/bath.ixx"/>
+                <parameter name="Type_H_for_height_[mm]_or_F_for_flow_[l/h]" type="string" value="F"/>
+            </node>
+			<node id="File_Reader_3" class="File_Reader">
+                <parameter name="" type="string" value="../inputfiles/dishwasher.ixx"/>
+                <parameter name="Type_H_for_height_[mm]_or_F_for_flow_[l/h]" type="string" value="F"/>
+            </node>
+			<node id="File_Reader_4" class="File_Reader">
+                <parameter name="" type="string" value="../inputfiles/shower.ixx"/>
+                <parameter name="Type_H_for_height_[mm]_or_F_for_flow_[l/h]" type="string" value="F"/>
+            </node>
+			<node id="File_Reader_5" class="File_Reader">
+                <parameter name="" type="string" value="../inputfiles/toilet.ixx"/>
+                <parameter name="Type_H_for_height_[mm]_or_F_for_flow_[l/h]" type="string" value="F"/>
+            </node>
+			<node id="File_Reader_6" class="File_Reader">
+                <parameter name="" type="string" value="../inputfiles/tap.ixx"/>
+                <parameter name="Type_H_for_height_[mm]_or_F_for_flow_[l/h]" type="string" value="F"/>
+            </node>
+			<node id="File_Reader_7" class="File_Reader">
+                <parameter name="" type="string" value="../inputfiles/washing_machine.ixx"/>
+                <parameter name="Type_H_for_height_[mm]_or_F_for_flow_[l/h]" type="string" value="F"/>
+            </node>
+			<node id="Pattern_Impl_0" class="Pattern_Impl">
+                <parameter name="sun_zenith_[0-23h]" type="double" value="13"/>
+                <parameter name="sundown_[0-23h]" type="double" value="20.5"/>
+            </node>
+			<node id="Catchment_w_Routing_0" class="Catchment_w_Routing">
+                <parameter name="Number_of_Subareas_[-]" type="double" value="1"/>
+                <parameter name="Fraktion_of_Impervious_Area_to_Reservoir_iAR_[-]" type="double" value="0.5"/>
+                <parameter name="Fraktion_of_Impervious_Area_to_Stormwater_Drain_iASD_[-]" type="double" value="0.3"/>
+                <parameter name="Depression_Loss_[mm]" type="double" value="1.5"/>
+                <parameter name="Runoff_Runtime_iAR_[s]" type="double" value="400"/>
+                <parameter name="Weighting_Coefficient_iASD_[-]" type="double" value="0.050000000000000003"/>
+                <parameter name="Decay_Constant_[1/min]" type="double" value="1.8999999999999999"/>
+                <parameter name="Initial_Infiltration_Capacity_[m/h]" type="double" value="0.59999999999999998"/>
+                <parameter name="Weighting_Coefficient_iAR_[-]" type="double" value="0.040000000000000001"/>
+                <parameter name="Wetting_Loss_[mm]" type="double" value="0.4"/>
+                <parameter name="Final_Infiltration_Capacity_[m/h]" type="double" value="0.20999999999999999"/>
+                <parameter name="Fraktion_of_Pervious_Area_pA_[-]" type="double" value="0.2"/>
+                <parameter name="Catchment_Area_[m^2]" type="double" value="485.1"/>
+                <parameter name="Weighting_Coefficient_pA_[-]" type="double" value="0.059999999999999998"/>
+                <parameter name="Runoff_Runtime_pA_[s]" type="double" value="700"/>
+                <parameter name="Runoff_Runtime_iASD_[s]" type="double" value="500"/>
+				<parameter name="Outdoor_Demand_Weighing_Factor_[-]" type="double" value="1"/>
+            </node>
+			<node id="Household_0" class="Household"/>
+			<node id="Stormwaterpipe_0" class="Stormwaterpipe"/>
+            <node id="Sewer2_0" class="Sewer2"/>
+			<node id="Potable_Water_Resorvoir_0" class="Potable_Water_Resorvoir"/>
+			<node id="Collector_0" class="Collector">
+                <parameter name="Number_of_Inports" type="int" value="2"/>
+            </node>
+			<node id="Collector_1" class="Collector">
+                <parameter name="Number_of_Inports" type="int" value="2"/>
+            </node>
+			<node id="Raintank_0" class="Raintank">
+                <parameter name="Storage_Volume_[m^3]" type="double" value="0.0"/>
+			</node>
+			<node id="FileOut_0" class="FileOut">
+                <parameter name="out_file_name" type="string" value="rain_model.txt"/>
+            </node>
+			<node id="FileOut_1" class="FileOut">
+                <parameter name="out_file_name" type="string" value="evapo_model.txt"/>
+            </node>
+			<node id="FileOut_2" class="FileOut">
+                <parameter name="out_file_name" type="string" value="Sewer.txt"/>
+            </node>
+			<node id="FileOut_3" class="FileOut">
+                <parameter name="out_file_name" type="string" value="Outdoor_Demand(CA0).txt"/>
+            </node>
+			<node id="FileOut_4" class="FileOut">
+                <parameter name="out_file_name" type="string" value="Infiltration.txt"/>
+            </node>
+			<node id="FileOut_5" class="FileOut">
+                <parameter name="out_file_name" type="string" value="Stormwater.txt"/>
+            </node>
+			<node id="FileOut_6" class="FileOut">
+                <parameter name="out_file_name" type="string" value="PotableWaterDemand.txt"/>
+            </node>
+			<node id="FileOut_7" class="FileOut">
+                <parameter name="out_file_name" type="string" value="Raintank1.txt"/>
+            </node>
+		</nodelist>
+		        <connectionlist>
+			<connection id="0">
+                <source node="File_Reader_0" port="Outport"/>
+                <sink node="Pattern_Impl_0" port="Inport"/>
+			</connection>
+			<connection id="1">
+                <source node="File_Reader_1" port="Outport"/>
+                <sink node="FileOut_0" port="in"/>
+			</connection>
+			<connection id="2">
+                <source node="Pattern_Impl_0" port="Outport"/>
+                <sink node="FileOut_1" port="in"/>
+			</connection>
+			<connection id="3">
+                <source node="FileOut_0" port="out"/>
+                <sink node="Catchment_w_Routing_0" port="Rain"/>
+			</connection>
+			<connection id="4">
+                <source node="FileOut_1" port="out"/>
+                <sink node="Catchment_w_Routing_0" port="Evapotranspiration"/>
+			</connection>
+			<connection id="5">
+                <source node="Catchment_w_Routing_0" port="Actual_Infiltration"/>
+                <sink node="FileOut_4" port="in"/>
+			</connection>
+			<connection id="6">
+                <source node="Catchment_w_Routing_0" port="Outdoor_Demand"/>
+                <sink node="FileOut_3" port="in"/>
+			</connection>
+			<connection id="7">
+                <source node="FileOut_3" port="out"/>
+                <sink node="Household_0" port="Outdoor_Demand"/>
+			</connection>
+			<connection id="8">
+                <source node="Catchment_w_Routing_0" port="Runoff"/>
+                <sink node="Collector_1" port="Inport_2"/>
+			</connection>
+			<connection id="17">
+                <source node="Catchment_w_Routing_0" port="Collected_Water"/>
+                <sink node="Raintank_0" port="Collected_Water"/>
+			</connection>
+			<connection id="18">
+                <source node="Household_0" port="Non_Potable_Water"/>
+                <sink node="Raintank_0" port="Non_Potable_Demand"/>
+			</connection>
+			<connection id="19">
+                <source node="Raintank_0" port="Overflow"/>
+                <sink node="Collector_1" port="Inport_1"/>
+			</connection>
+			<connection id="20">
+                <source node="Collector_1" port="Outport"/>
+                <sink node="Stormwaterpipe_0" port="Runoff"/>
+			</connection>
+			<connection id="21">
+                <source node="Raintank_0" port="Check_Storage"/>
+                <sink node="FileOut_7" port="in"/>
+			</connection>
+			<connection id="9">
+                <source node="Stormwaterpipe_0" port="Discharged_Volume"/>
+                <sink node="FileOut_5" port="in"/>
+			</connection>
+			<connection id="10">
+                <source node="Raintank_0" port="Additional_Demand"/>
+                <sink node="Potable_Water_Resorvoir_0" port="Non_Potable_Water_Demand"/>
+			</connection>
+			<connection id="11">
+                <source node="Household_0" port="Potable_Water"/>
+                <sink node="Potable_Water_Resorvoir_0" port="Potable_Water_Demand"/>
+			</connection>
+			<connection id="12">
+                <source node="Potable_Water_Resorvoir_0" port="Demand"/>
+                <sink node="FileOut_6" port="in"/>
+			</connection>
+			<connection id="13">
+                <source node="Household_0" port="Black_Water"/>
+                <sink node="Collector_0" port="Inport_1"/>
+			</connection>
+			<connection id="14">
+                <source node="Household_0" port="Grey_Water"/>
+                <sink node="Collector_0" port="Inport_2"/>
+			</connection>
+			<connection id="15">
+                <source node="Collector_0" port="Outport"/>
+                <sink node="Sewer2_0" port="Black_Water"/>
+			</connection>
+			<connection id="16">
+                <source node="Sewer2_0" port="Discharged_Volume"/>
+                <sink node="FileOut_2" port="in"/>
+			</connection>
+			<connection id="22">
+                <source node="File_Reader_2" port="Outport"/>
+                <sink node="Household_0" port="Bathtub_[l/h]"/>
+			</connection>
+			<connection id="23">
+                <source node="File_Reader_3" port="Outport"/>
+                <sink node="Household_0" port="Dishwasher_[l/h]"/>
+			</connection>
+			<connection id="24">
+                <source node="File_Reader_4" port="Outport"/>
+                <sink node="Household_0" port="Shower_[l/h]"/>
+			</connection>
+			<connection id="25">
+                <source node="File_Reader_6" port="Outport"/>
+                <sink node="Household_0" port="Tap_[l/h]"/>
+			</connection>
+			<connection id="26">
+                <source node="File_Reader_5" port="Outport"/>
+                <sink node="Household_0" port="Toilet_[l/h]"/>
+			</connection>
+			<connection id="27">
+                <source node="File_Reader_7" port="Outport"/>
+                <sink node="Household_0" port="Washing_Machine_[l/h]"/>
+			</connection>
+        </connectionlist>
+    </model>
+</citydrain>
