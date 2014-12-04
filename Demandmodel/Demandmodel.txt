@@ -1,0 +1,1 @@
+     time        	        Q [m^3/dt]        	     BOD5  [g/m^3]        	      COD  [g/m^3]        	       Cu  [g/m^3]        	     Ntot  [g/m^3]        

@@ -7,7 +7,8 @@ Created on Thu Oct 02 08:41:08 2014
 
 import sys
 import pycd3
-from scipy.interpolate import interp1d
+from datetime import datetime
+from matplotlib.dates import date2num
 
 
 class NodeFactory(pycd3.INodeFactory):
@@ -117,19 +118,19 @@ class Demand_Model (pycd3.Node):
             
         #run demand model for the next day
         elif self.overall_time + dt > ceil(self.overall_time)  :
-            
+            pass
         
         else:
             pass
         
         #lists created form demand model, containing demand vectors at different times time in list would be good
         #example = [[1.1, 2.1, ..., 2.3],[0.1, 1.5, ..., 4.4],....,[0.8, 5.5, ..., 6.4],[1.2, 0.5, ..., 2.4]]
-        self.Bathtub_demand =        
-        self.Shower_demand =
-        self.Toilet_demand =
-        self.Tap_demand =
-        self.Washing_Machine_ldemand =
-        self.Dishwasher_demand =
+#        self.Bathtub_demand =        
+#        self.Shower_demand =
+#        self.Toilet_demand =
+#        self.Tap_demand =
+#        self.Washing_Machine_ldemand =
+#        self.Dishwasher_demand =
         
         #interpolation to correct time step
         #interp between example[i-1][0 .... numberhouseholds-1] and example[i][0 .... numberhouseholds-1]
@@ -160,12 +161,12 @@ class Demand_Model (pycd3.Node):
 
         
         #result of interp. Vectors with with a length equal to number of households values for dt timestep
-        self.Bathtub_vector =        
-        self.Shower_vector =
-        self.Toilet_vector =
-        self.Tap_vector =
-        self.Washing_Machine_vector =
-        self.Dishwasher_vector =
+#        self.Bathtub_vector =        
+#        self.Shower_vector =
+#        self.Toilet_vector =
+#        self.Tap_vector =
+#        self.Washing_Machine_vector =
+#        self.Dishwasher_vector =
         
         #creating outports with corresponding value in vector
         #combine with first loop
