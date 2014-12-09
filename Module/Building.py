@@ -29,7 +29,7 @@ import pycd3
 #        print "NodeFactory.getSource"
 #        return "Addons.py"
 
-class Household(pycd3.Node):
+class Building(pycd3.Node):
     def __init__(self):
         print "init start hh"
         pycd3.Node.__init__(self)
@@ -80,7 +80,7 @@ class Household(pycd3.Node):
     
     def getClassName(self):
         #print "getClassName"
-        return "Household"
+        return "Building"
 
 #def register(nr):
 #    for c in pycd3.Node.__subclasses__():
@@ -90,8 +90,8 @@ class Household(pycd3.Node):
 #        
 # def test():
 #     nr = pycd3.NodeRegistry()
-#     nf = NodeFactory(Household).__disown__()
+#     nf = NodeFactory(Building).__disown__()
 #     nr.addNodeFactory(nf)
-#     node = nr.createNode("Household")
+#     node = nr.createNode("Building")
     
 #test()

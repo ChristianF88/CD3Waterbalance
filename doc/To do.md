@@ -1,15 +1,12 @@
 To do:
 
--	being able to select unit of inputdata 
-- 	improve pattern implementer if wanted calc pattern automatically (gauss?, or fourier maybe) or implement via textfile
-- 	balance and grafics for check (take losses into account?)
+- 	balance and grafics for check
 -  	vereinfachen... weniger eingänge verschiedene Eingangsgrößen durch Collector schaffen (eg. PWR)
 -	finish commenting blocks, finish documentation, port names (change xml)
 - 	dynamics for outdoor watering, additional uses and greywater-wastewater
--	write xml creator?
-- 	GWR size??
--	SWR size??
--	Stormwater only one import?!
--	Fileout für sum of streams...(x inports all added up fileout x go out)
--	catchment area length not lentgh and width
 -	update scheme complex system
+- 	explain model creator with graphics
+-	check stormwaterreservoir
+-	complete documentation
+-	check comments for all blocks
+-	delete collector_globals if possible

@@ -34,8 +34,8 @@ def runcd3(filename='simple_system_CwR_RT_indooruse.xml'):
     p.wait()
     return
 
-    #[Area, perv_fraction, imperv_to_storage, imperv_to_stormw]
-#Catchment_area_fractions = [[485.1, 0.18, 0.63, 0.19], [855.9, 0.28, 0.43, 0.29], [800, 0.1, 0.3, 0.6], [960, 0.46, 0.45, 0.09], [1200, 0, 0, 1]]
+#vector=[Area, perv_fraction, imperv_to_storage, imperv_to_stormw]
+#Catchment_area_fractions for complex system = [[485.1, 0.18, 0.63, 0.19], [855.9, 0.28, 0.43, 0.29], [800, 0.1, 0.3, 0.6], [960, 0.46, 0.45, 0.09], [1200, 0, 0, 1]]
 def Fractioncalculator(vector=[[485.1, 0.0, 1.0, 0.0]]):
     global area_fractions1
     global total_area
@@ -444,20 +444,21 @@ def plotter(Vector1, Vector2, Vector3,limx=[0,365], limy=[0,1], toplot=['rain_mo
 
 #[[485.1, 0.18, 0.63, 0.19], [855.9, 0.28, 0.43, 0.29], [800, 0.1, 0.3, 0.6], [960, 0.46, 0.45, 0.09], [1200, 0, 0, 1]]
 def theholelot(outputfiles='C:\Users\Acer\Documents\GitHub\CD3Waterbalance\simulationwithpatterns\outputfiles', inputfiles='C:\Users\Acer\Documents\GitHub\CD3Waterbalance\simulationwithpatterns\inputfiles', 
-               numberhh=1., wettingloss = 0.4, depressionloss=1.5):    #area_fractions = [perv, imperv_to_storage, imperv_to_stormw]   
+               numberhh=1., wettingloss = 0.4, depressionloss=1.5):    
     Deleter(outputfiles)
-    runcd3('complex_system.xml')
-    Fractioncalculator([[485.1, 0.18, 0.63, 0.19], [855.9, 0.28, 0.43, 0.29], [800, 0.1, 0.3, 0.6], [960, 0.46, 0.45, 0.09], [1200, 0, 0, 1]])
+    runcd3('simple_system_CwR_RT.xml')
+    #Fractioncalculator input = [[total Area, perv, imperv_to_storage, imperv_to_stormw],...]    
+    Fractioncalculator([[1000, 0.5, 0.25, 0.25]])
     getoutputdata(outputfiles, total_area)
     getinputdata(inputfiles, numberhh, total_area)
     Bilanz([Rainevapovector, Outputvector, Indoorvector], ['Evapo', 'Rain', 'System'], wettingloss, depressionloss, total_area, area_fractions1)
-    plotter(Indoorvector, Rainevapovector, Outputvector,[0,365],[0,1], ['rain_model', 'Stormwater', 'evapo_model', 'effective_rain','Indoor_Demand','Raintank1','Outdoor_Demand','Greywatertank1'])
+    plotter(Indoorvector, Rainevapovector, Outputvector,[0,365],[0,1], ['rain_model', 'Stormwater', 'evapo_model', 'effective_rain','Outdoor_Demand'])
     print 'done'
     return
 
 
-theholelot()
+#theholelot()
 
-
+runcd3(filename='Demand_Model.xml')
 
 

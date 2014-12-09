@@ -19028,16 +19028,16 @@
  				<parameter name="Runoff_Runtime_iASD_[s]" type="double" value="0"/> 
  				<parameter name="Outdoor_Demand_Weighing_Factor_[-]" type="double" value="0"/> 
  			</node> 
- 			<node id="Household_0" class="Household"/> 
-			<node id="Household_1" class="Household"/> 
-			<node id="Household_2" class="Household"/> 
-			<node id="Household_3" class="Household"/> 
-			<node id="Household_4" class="Household"/> 
-			<node id="Household_5" class="Household"/> 
-			<node id="Household_6" class="Household"/> 
-			<node id="Household_7" class="Household"/> 
-			<node id="Household_8" class="Household"/> 
-			<node id="Household_9" class="Household"/> 
+ 			<node id="Building_0" class="Building"/> 
+			<node id="Building_1" class="Building"/> 
+			<node id="Building_2" class="Building"/> 
+			<node id="Building_3" class="Building"/> 
+			<node id="Building_4" class="Building"/> 
+			<node id="Building_5" class="Building"/> 
+			<node id="Building_6" class="Building"/> 
+			<node id="Building_7" class="Building"/> 
+			<node id="Building_8" class="Building"/> 
+			<node id="Building_9" class="Building"/> 
 			<node id="Stormwaterpipe_0" class="Stormwaterpipe"/> 
 			<node id="Sewer2_0" class="Sewer2"/> 
 			<node id="Potable_Water_Resorvoir_0" class="Potable_Water_Resorvoir"/> 
@@ -19142,34 +19142,34 @@
 				<parameter name="Number_of_Inports" type="int" value="0"/> 
  			</node> 
  			<node id="Fileout_0" class="Fileout"/> 
-				<parameter name="out_file_name" type="string" value="Test.txt"/> 
+				<parameter name="out_file_name" type="string" value="0"/> 
  			</node> 
  			<node id="Fileout_1" class="Fileout"/> 
-				<parameter name="out_file_name" type="string" value="Test.txt"/> 
+				<parameter name="out_file_name" type="string" value="0"/> 
  			</node> 
  			<node id="Fileout_2" class="Fileout"/> 
-				<parameter name="out_file_name" type="string" value="Test.txt"/> 
+				<parameter name="out_file_name" type="string" value="0"/> 
  			</node> 
  			<node id="Fileout_3" class="Fileout"/> 
-				<parameter name="out_file_name" type="string" value="Test.txt"/> 
+				<parameter name="out_file_name" type="string" value="0"/> 
  			</node> 
  			<node id="Fileout_4" class="Fileout"/> 
-				<parameter name="out_file_name" type="string" value="Test.txt"/> 
+				<parameter name="out_file_name" type="string" value="0"/> 
  			</node> 
  			<node id="Fileout_5" class="Fileout"/> 
-				<parameter name="out_file_name" type="string" value="Test.txt"/> 
+				<parameter name="out_file_name" type="string" value="0"/> 
  			</node> 
  			<node id="Fileout_6" class="Fileout"/> 
-				<parameter name="out_file_name" type="string" value="Test.txt"/> 
+				<parameter name="out_file_name" type="string" value="0"/> 
  			</node> 
  			<node id="Fileout_7" class="Fileout"/> 
-				<parameter name="out_file_name" type="string" value="Test.txt"/> 
+				<parameter name="out_file_name" type="string" value="0"/> 
  			</node> 
  			<node id="Fileout_8" class="Fileout"/> 
-				<parameter name="out_file_name" type="string" value="Test.txt"/> 
+				<parameter name="out_file_name" type="string" value="0"/> 
  			</node> 
  			<node id="Fileout_9" class="Fileout"/> 
-				<parameter name="out_file_name" type="string" value="Test.txt"/> 
+				<parameter name="out_file_name" type="string" value="0"/> 
  			</node> 
  			<node id="Distributor_0" class="Distributor"/> 
 				<parameter name="Number_of_Outports" type="int" value="0"/> 

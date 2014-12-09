@@ -41,6 +41,7 @@ class Catchment_w_Routing(pycd3.Node):
         self.actual_infiltr = pycd3.Flow()
         self.outdoor_use = pycd3.Flow()
         self.inflow = pycd3.Flow()
+        self.outdoor_use_check = pycd3.Flow()
         
         #dir (self.inf)
         print "init node"
@@ -52,6 +53,7 @@ class Catchment_w_Routing(pycd3.Node):
         self.addOutPort("Runoff", self.runoff)
         self.addOutPort("Collected_Water", self.collected_w)
         self.addOutPort("Outdoor_Demand", self.outdoor_use)
+        self.addOutPort("Outdoor_Demand_Check", self.outdoor_use_check)
         
         #Catchment area + fraction info of pervious and impervious parts
         self.area_property = pycd3.Double(1000)
@@ -108,6 +110,7 @@ class Catchment_w_Routing(pycd3.Node):
         self.continuous_rain_time = 0.0
         self.continuous_rain_time_2 = 0.0                                        
         self.rain_storage_perv = 0.0
+        self.rain_storage_imp_before = 0.0
         
         #variable to check Horten model (has got to be 1 for a real simulation)
         self.k=1
@@ -186,7 +189,7 @@ class Catchment_w_Routing(pycd3.Node):
             self.actual_infiltr[0] =0.0
             self.outdoor_use[0] = (self.evapo[0] - self.rain[0]) / 1000 * self.area_property * self.perv_area * self.outdoor_demand_coefficient                                
             self.runoff_perv_raw = 0.0
-            
+            self.outdoor_use_check[0] = self.outdoor_use[0] 
             #resetting the storage values as a simulation of the drying process respectively the continuous infitlration
             if self.rain_storage_perv > 0:
                 self.rain_storage_perv += self.current_effective_rain_height
@@ -218,6 +221,7 @@ class Catchment_w_Routing(pycd3.Node):
             
             #calculating the current rain storage values to keep track of when the rain loss has been overcome,
             #as well as calculating the possilbe infiltration rate the the Horton model in a state of "wetting" (+ increasing the time step for the model)
+            self.rain_storage_imp_before = self.rain_storage_imp
             self.rain_storage_imp += self.rain[0]-self.evapo[0]
             self.rain_storage_perv += self.rain[0]-self.evapo[0]
             
@@ -265,22 +269,29 @@ class Catchment_w_Routing(pycd3.Node):
             #once the wetting loss and depression loss has been overcome ther will be infiltration, water collection and runoff
             else:
                 
+                #if self.rain_storage_imp_before == 0.0:
+                #    self.large_time_step_loss_imp = self.initial_loss + self.depression_loss
+                #    self.large_time_step_loss_perv = self.initial_loss
+                #else:
+                self.large_time_step_loss_imp = 0.
+                self.large_time_step_loss_perv = 0.
+                
                 #if more water can be infiltrated than rain is falling all rain will be infiltrated
                 if self.possible_infiltr_raw * 1000 >= self.current_effective_rain_height:
                     
-                    self.collected_w_raw = (self.rain[0]-self.evapo[0]) * self.imp_area_raintank * self.area_property / 1000.
-                    self.actual_infiltr[0] = self.current_effective_rain_height / 1000. * self.perv_area * self.area_property
-                    self.runoff_raw  = (self.rain[0]-self.evapo[0]) * self.imp_area_stormwater * self.area_property / 1000.
+                    self.collected_w_raw = (self.rain[0]-self.evapo[0]-self.large_time_step_loss_imp) * self.imp_area_raintank * self.area_property / 1000.
+                    self.actual_infiltr[0] = (self.current_effective_rain_height-self.large_time_step_loss_perv) / 1000. * self.perv_area * self.area_property
+                    self.runoff_raw  = (self.rain[0]-self.evapo[0]-self.large_time_step_loss_imp) * self.imp_area_stormwater * self.area_property / 1000.
                     self.outdoor_use[0] = 0.0
                     self.runoff_perv_raw = 0.0
                     
                 #if less water can be infiltrated than rain is falling , the pervious fraction will produce runoff    
                 else:
                     
-                    self.collected_w_raw = (self.rain[0]-self.evapo[0]) * self.imp_area_raintank * self.area_property / 1000.
+                    self.collected_w_raw = (self.rain[0]-self.evapo[0]-self.large_time_step_loss_imp) * self.imp_area_raintank * self.area_property / 1000.
                     self.actual_infiltr[0] = self.possible_infiltr_raw * self.perv_area * self.area_property
-                    self.runoff_perv_raw = (self.current_effective_rain_height - self.possible_infiltr_raw * 1000.) / 1000. * self.perv_area * self.area_property
-                    self.runoff_raw  = (self.rain[0]-self.evapo[0]) * self.imp_area_stormwater * self.area_property / 1000. 
+                    self.runoff_perv_raw = (self.current_effective_rain_height - self.large_time_step_loss_perv - self.possible_infiltr_raw * 1000.) / 1000. * self.perv_area * self.area_property
+                    self.runoff_raw  = (self.rain[0]-self.evapo[0] - self.large_time_step_loss_imp) * self.imp_area_stormwater * self.area_property / 1000. 
                     self.outdoor_use[0] = 0.0
                  
                 #saving the information that the initial wetting loss and depression loss has been overcome 
@@ -296,6 +307,10 @@ class Catchment_w_Routing(pycd3.Node):
             self.actual_infiltr[0] =0.0
             self.outdoor_use[0] = 0.0
             self.runoff_perv_raw = 0.0
+        
+        #to be able to ceck the entire outdoor_demand of all catchments without thousands of fileouts 
+        #additional outport that can be connected to collector and added outdoordemand written in one fileout
+        self.outdoor_use_check[0] = self.outdoor_use[0]        
         
         # returning the possible inflitration [m³/dt]
         self.possible_infiltr[0]=self.possible_infiltr_raw*self.area_property*self.perv_area
@@ -334,7 +349,7 @@ class Catchment_w_Routing(pycd3.Node):
         #outflow of catchment
         self.collected_w[0]=self.Q_coll_i[-1]  
         self.runoff[0] = (self.Q_runoff_perv_i[-1]+self.Q_runoff_i[-1])
-        
+         
         
         return dt
     

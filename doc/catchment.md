@@ -26,14 +26,14 @@ Basic features:
 
 |Catchment Attributes  | Type  |  Unit  |
 | :------------ |:---------------:| :-----:|
-|    Catchment Width   | Constant |  [m]
-|    Catchment Length   |    Constant     |  [m]  |
+|    Catchment Area   | Constant |  [m^2]
 | Fraction of Pervious Area (pA) |   Constant  |  [-]   |
 |   Fraction of Impervious Area to Reservoir (iAR)| Constant |  [-]
 |    Fraction of Impervious Area to Stormwater Drain (iASD)  |    Constant     |  [-]  |
 | Number of Subareas |   Constant  |  [-]   |
 | Wetting Loss |   Constant  |  [mm]   |
 | Depression Loss |   Constant  |  [mm]   |
+| Outdoor_Demand_Weighing_Factor |   Constant  |  [-]   |
 
 # 
 

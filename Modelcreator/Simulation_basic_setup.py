@@ -12,11 +12,13 @@ class Simulation_basic_setup:
          self.stopdate = stopdate
          self.timestep = timestep
          self.module= module
-    
+         '''
+         the line <pluginpath path="nodes"/> causes problems in the latest citydrain version?!
+         '''
     
          self.string1 = """<?xml version="1.0" encoding="UTF-8"?>
 <citydrain version="1.0">
-    <pluginpath path="nodes"/>
+    <pluginpath path="nodes"/> 
     <pythonmodule module="""
          self.string2="""/>
     <pythonmodule module="""

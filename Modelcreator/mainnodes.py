@@ -8,7 +8,7 @@ Created on Mon Dec 01 12:01:46 2014
 from Need_to_have_modelinput import Need_to_have_modelinput
 from Simulation_basic_setup import Simulation_basic_setup
 from Catchmentsetup import Catchmentsetup
-from Householdsetup import Householdsetup
+from Buildingsetup import Buildingsetup
 from Stormwaterpipesetup import Stormwaterpipesetup
 from Sewer2setup import Sewer2setup
 from Potablewaterreservoirsetup import Potablewaterreservoirsetup
@@ -29,7 +29,7 @@ Setupheader = Simulation_basic_setup("2000-Jan-01 00:00:00", "2001-Jan-01 00:00:
 Needtohaveinputs = Need_to_have_modelinput("C:/Users/Acer/Documents/GitHub/CD3Waterbalance/simulationwithpatterns/inputfiles/rain.ixx", "C:/Users/Acer/Documents/GitHub/CD3Waterbalance/simulationwithpatterns/inputfiles/evapo.ixx", "13", "20,5")
 Catchments = Catchmentsetup(1000 ,0, Decay_Constant =1.9, Catchment_Area = 100, Fraktion_of_Impervious_Area_to_Reservoir_iAR= 0.4, Fraktion_of_Impervious_Area_to_Stormwater_Drain_iASD = 0.3, Fraktion_of_Pervious_Area_pA = 0.3, Number_of_Subareas = 1, Initial_Infiltration_Capacity = 0.6, Final_Infiltration_Capacity = 0.21, Depression_Loss = 1.5, Wetting_Loss = 0.4, Outdoor_Demand_Weighing_Factor = 0.5, Runoff_Runtime_iAR = 400, Runoff_Runtime_iASD = 500, Runoff_Runtime_pA = 700, Weighting_Coefficient_iAR = 0.04, Weighting_Coefficient_iASD = 0.05, Weighting_Coefficient_pA = 0.06)
 Catchments.Setandwrite_attributes(1000,0,Catchattrvec)
-Households = Householdsetup(10,0)
+Buildings = Buildingsetup(10,0)
 Stormwaterpipe =  Stormwaterpipesetup(1,0)
 Sewers =  Sewer2setup(1,0)
 Potablewaterreservoir = Potablewaterreservoirsetup(1,0)
@@ -55,8 +55,8 @@ Allstrings.append(Needtohaveinputs.Modelinputnodesstring)
 #Node List
 for i in range(len(Catchments.Catchmentnodelist)):
     Allstrings.append(Catchments.Catchmentnodelist[i])
-for i in range(len(Households.Householdnodelist)):
-    Allstrings.append(Households.Householdnodelist[i])
+for i in range(len(Buildings.Buildingnodelist)):
+    Allstrings.append(Buildings.Buildingnodelist[i])
 for i in range(len(Stormwaterpipe.Stormwaterpipenodelist)):
     Allstrings.append(Stormwaterpipe.Stormwaterpipenodelist[i])
 for i in range(len(Sewers.Sewer2nodelist)):

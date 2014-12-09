@@ -8,7 +8,7 @@ Created on Mon Nov 10 13:02:58 2014
 import pycd3
 
 import Raintank
-import Household
+import Building
 import Stormwaterpipe
 import Sewer2
 import Potable_Water_Resorvior
@@ -19,6 +19,7 @@ import Collector
 import Catchment_with_Routing
 import Greywatertank
 import Catchment
+import Demand_Model
 
 class NodeFactory(pycd3.INodeFactory):
     def __init__(self, node):
