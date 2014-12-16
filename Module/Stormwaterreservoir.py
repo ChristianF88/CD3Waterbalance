@@ -41,8 +41,8 @@ class Stormwaterreservoir(pycd3.Node):
          
         #dir (self.inf)
         print "init node"
-        self.addInPort("Storm_Water_In", self.stormwaterin)
-        self.addInPort("Treated_Storm_Water_Out", self.stormwaterout)
+        self.addInPort("Stormwater_In", self.stormwaterin)
+        self.addInPort("Treated_Stormwater_Out", self.stormwaterout)
         self.addOutPort("Current_Volume",self.check_storage)
         self.addOutPort("Additional_Demand",self.Additional_Demand)
         self.addOutPort("Waste_Water",self.wastewater)

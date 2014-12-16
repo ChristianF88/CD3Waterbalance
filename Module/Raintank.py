@@ -42,7 +42,7 @@ class Raintank(pycd3.Node):
         self.addInPort("Non_Potable_Demand", self.non_pot_in)
         self.addOutPort("Overflow", self.overflow)
         self.addOutPort("Additional_Demand", self.Additional_Demand)
-        self.addOutPort("Check_Storage", self.check_storage)
+        self.addOutPort("Current_Volume", self.check_storage)
         self.storage_v = pycd3.Double(20.0)
         self.addParameter("Storage_Volume_[m^3]", self.storage_v)
 

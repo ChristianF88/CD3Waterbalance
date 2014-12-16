@@ -17,6 +17,7 @@ from Greywatertanksetup import Greywatertanksetup
 from Fileoutsetup import Fileoutsetup
 from Collectorsetup import Collectorsetup
 from Distributorsetup import Distributorsetup
+from Demandmodelsetup import Demandmodelsetup
 
 
 Catchattrvec=[[0]*17]*1000      
@@ -25,6 +26,7 @@ Rainwaterattrvec = [[0]]*10
 Collectorattrvec = [[0]]*10
 Distributorattrvec = [[0]]*10
 Fileoutattrvec = [[0]]*10
+Demandmodelattrvec = [[1,2,3,4]]*10
 Setupheader = Simulation_basic_setup("2000-Jan-01 00:00:00", "2001-Jan-01 00:00:00", "360", "C:/Users/Acer/Documents/GitHub/CD3Waterbalance/Module/cd3waterbalancemodules.py")
 Needtohaveinputs = Need_to_have_modelinput("C:/Users/Acer/Documents/GitHub/CD3Waterbalance/simulationwithpatterns/inputfiles/rain.ixx", "C:/Users/Acer/Documents/GitHub/CD3Waterbalance/simulationwithpatterns/inputfiles/evapo.ixx", "13", "20,5")
 Catchments = Catchmentsetup(1000 ,0, Decay_Constant =1.9, Catchment_Area = 100, Fraktion_of_Impervious_Area_to_Reservoir_iAR= 0.4, Fraktion_of_Impervious_Area_to_Stormwater_Drain_iASD = 0.3, Fraktion_of_Pervious_Area_pA = 0.3, Number_of_Subareas = 1, Initial_Infiltration_Capacity = 0.6, Final_Infiltration_Capacity = 0.21, Depression_Loss = 1.5, Wetting_Loss = 0.4, Outdoor_Demand_Weighing_Factor = 0.5, Runoff_Runtime_iAR = 400, Runoff_Runtime_iASD = 500, Runoff_Runtime_pA = 700, Weighting_Coefficient_iAR = 0.04, Weighting_Coefficient_iASD = 0.05, Weighting_Coefficient_pA = 0.06)
@@ -43,6 +45,8 @@ Fileouts = Fileoutsetup(10,0,out_file_name = 'Test.txt')
 Fileouts.Setandwrite_attributes(10,0,Fileoutattrvec)
 Distributors = Distributorsetup(10,0,Number_of_Outports = 2)
 Distributors.Setandwrite_attributes(10,0,Distributorattrvec)
+Demandmodels = Demandmodelsetup(10,0,Number_of_Commercial_Units = [4], Number_of_Residential_Units=[4])
+Demandmodels.Setandwrite_attributes(10,0,Demandmodelattrvec)
 
 
 
@@ -73,6 +77,8 @@ for i in range(len(Fileouts.Fileoutnodelist)):
     Allstrings.append(Fileouts.Fileoutnodelist[i])
 for i in range(len(Distributors.Distributornodelist)):
     Allstrings.append(Distributors.Distributornodelist[i])    
+for i in range(len(Demandmodels.Demand_Modelnodelist)):
+    Allstrings.append(Demandmodels.Demand_Modelnodelist[i])
     
 #Connectionlist
 Allstrings.append('\t\t</nodelist>\n')

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <citydrain version="1.0">
-    <pluginpath path="nodes"/>
+    <pluginpath path="nodes"/> 
     <pythonmodule module="C:/Users/Acer/Documents/GitHub/CD3Waterbalance/Module/cd3waterbalancemodules.py"/>
     <pythonmodule module="C:/Users/Acer/Documents/GitHub/CD3Waterbalance/Module/cd3waterbalancemodules.py"/>
     <simulation class="DefaultSimulation">
@@ -19200,6 +19200,46 @@
  			</node> 
  			<node id="Distributor_9" class="Distributor"/> 
 				<parameter name="Number_of_Outports" type="int" value="0"/> 
+ 			</node> 
+ 			<node id="Demand_Model_0" class="Demand_Model"> 
+				<parameter name="Number_of_Commercial_Units" type="string" value="[1, 2, 3, 4]"/> 
+ 				<parameter name="Number_of_Residential_Units" type="string" value="[1, 2, 3, 4]"/> 
+ 			</node> 
+ 			<node id="Demand_Model_1" class="Demand_Model"> 
+				<parameter name="Number_of_Commercial_Units" type="string" value="[1, 2, 3, 4]"/> 
+ 				<parameter name="Number_of_Residential_Units" type="string" value="[1, 2, 3, 4]"/> 
+ 			</node> 
+ 			<node id="Demand_Model_2" class="Demand_Model"> 
+				<parameter name="Number_of_Commercial_Units" type="string" value="[1, 2, 3, 4]"/> 
+ 				<parameter name="Number_of_Residential_Units" type="string" value="[1, 2, 3, 4]"/> 
+ 			</node> 
+ 			<node id="Demand_Model_3" class="Demand_Model"> 
+				<parameter name="Number_of_Commercial_Units" type="string" value="[1, 2, 3, 4]"/> 
+ 				<parameter name="Number_of_Residential_Units" type="string" value="[1, 2, 3, 4]"/> 
+ 			</node> 
+ 			<node id="Demand_Model_4" class="Demand_Model"> 
+				<parameter name="Number_of_Commercial_Units" type="string" value="[1, 2, 3, 4]"/> 
+ 				<parameter name="Number_of_Residential_Units" type="string" value="[1, 2, 3, 4]"/> 
+ 			</node> 
+ 			<node id="Demand_Model_5" class="Demand_Model"> 
+				<parameter name="Number_of_Commercial_Units" type="string" value="[1, 2, 3, 4]"/> 
+ 				<parameter name="Number_of_Residential_Units" type="string" value="[1, 2, 3, 4]"/> 
+ 			</node> 
+ 			<node id="Demand_Model_6" class="Demand_Model"> 
+				<parameter name="Number_of_Commercial_Units" type="string" value="[1, 2, 3, 4]"/> 
+ 				<parameter name="Number_of_Residential_Units" type="string" value="[1, 2, 3, 4]"/> 
+ 			</node> 
+ 			<node id="Demand_Model_7" class="Demand_Model"> 
+				<parameter name="Number_of_Commercial_Units" type="string" value="[1, 2, 3, 4]"/> 
+ 				<parameter name="Number_of_Residential_Units" type="string" value="[1, 2, 3, 4]"/> 
+ 			</node> 
+ 			<node id="Demand_Model_8" class="Demand_Model"> 
+				<parameter name="Number_of_Commercial_Units" type="string" value="[1, 2, 3, 4]"/> 
+ 				<parameter name="Number_of_Residential_Units" type="string" value="[1, 2, 3, 4]"/> 
+ 			</node> 
+ 			<node id="Demand_Model_9" class="Demand_Model"> 
+				<parameter name="Number_of_Commercial_Units" type="string" value="[1, 2, 3, 4]"/> 
+ 				<parameter name="Number_of_Residential_Units" type="string" value="[1, 2, 3, 4]"/> 
  			</node> 
  		</nodelist>
 			<connectionlist>
