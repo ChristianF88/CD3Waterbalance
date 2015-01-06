@@ -11,7 +11,7 @@ from datetime import datetime
 from matplotlib.dates import date2num
 import random
 from math import floor, ceil
-from numpy import add, around
+from numpy import add, around, asarray
 sys.path.append('C:\Users\Acer\Documents\GitHub\CD3Waterbalance\WaterDemandModel')
 from C_WaterDemandModel import WaterDemandModel
 import config
@@ -43,11 +43,9 @@ class Demand_Model (pycd3.Node):
         pycd3.Node.__init__(self)
         
         #Inports
-        self.numberpeople = pycd3.Double(4)
-        self.addParameter("Number of People living in HH", self.numberpeople)
-        self.number_residential_units = pycd3.Double(4)
+        self.number_residential_units = pycd3.String("[4]")
         self.addParameter("Number_of_Residential_Units", self.number_residential_units)
-        self.number_commercial_units = pycd3.Double(4)
+        self.number_commercial_units = pycd3.String("[4]")
         self.addParameter("Number_of_Commercial_Units", self.number_commercial_units)
         
         #Outports
@@ -79,6 +77,13 @@ class Demand_Model (pycd3.Node):
         self.addOutPort("TestOutport_Dishwasher_[l/h]", self.TestDishwasher)
         print "init node"
         
+        #converting inputstrings to lists
+        self.number_residential_units = str(self.number_residential_units)[1:-1].split(',')
+        for i in range(len(self.number_residential_units)):
+            self.number_residential_units[i] = int(self.number_residential_units[i])
+        self.number_commercial_units = str(self.number_commercial_units)[1:-1].split(',')
+        for i in range(len(self.number_commercial_units)):
+            self.number_commercial_units[i] = int(self.number_commercial_units[i])
         
     def init(self, start, stop, dt):
         print start
@@ -93,6 +98,8 @@ class Demand_Model (pycd3.Node):
         self.overall_time = self.simulation_start_time
 
         self.Test=0
+        
+        self.run = WaterDemandModel(self.number_residential_units,self.number_commercial_units)
        
         return True
         
@@ -100,6 +107,18 @@ class Demand_Model (pycd3.Node):
         
         
     def f(self, current, dt):
+        
+        def adding_unit_uses(Demanddictionary,usestring):
+            sumvector = asarray([0.0]*24)
+            if usestring != 'bath' and usestring != 'washing_machine':
+                for i in range(len(self.number_residential_units)):
+                    sumvector += asarray(Demanddictionary['R'+str(i+1)][usestring])
+                for i in range(len(self.number_commercial_units)):
+                    sumvector += asarray(Demanddictionary['C'+str(i+1)][usestring])
+            else:
+                for i in range(len(self.number_residential_units)):
+                    sumvector += asarray(Demanddictionary['R'+str(i+1)][usestring])
+            return sumvector
         
         if dt < 3600 :
 
@@ -112,14 +131,14 @@ class Demand_Model (pycd3.Node):
             #first run of demand model, when simulation starts
             if self.overall_time == self.simulation_start_time:
             
-                run = WaterDemandModel([int(self.number_residential_units)],[int(self.number_commercial_units)])
-                Demanddictionary = run.getDemands()
-                self.shower_vector = add(Demanddictionary['C1']['shower'],Demanddictionary['R1']['shower'])
-                self.toilet_vector = add(Demanddictionary['C1']['toilet'],Demanddictionary['R1']['toilet'])
-                self.tap_vector = add(Demanddictionary['C1']['tap'],Demanddictionary['R1']['tap'])
-                self.bath_vector = Demanddictionary['R1']['bath']
-                self.washing_machine_vector = Demanddictionary['R1']['washing_machine']
-                self.dishwasher_vector = add(Demanddictionary['C1']['dish_washer'],Demanddictionary['R1']['dish_washer'])
+                self.run.newDay()
+                Demanddictionary = self.run.getDemands()
+                self.shower_vector = adding_unit_uses(Demanddictionary,'shower')
+                self.toilet_vector = adding_unit_uses(Demanddictionary,'toilet')
+                self.tap_vector = adding_unit_uses(Demanddictionary,'tap')
+                self.bath_vector = adding_unit_uses(Demanddictionary,'bath')
+                self.washing_machine_vector = adding_unit_uses(Demanddictionary,'washing_machine')
+                self.dishwasher_vector = adding_unit_uses(Demanddictionary,'dish_washer')
             
             
                 #start value, goin through list, resetting index for next day
@@ -137,14 +156,14 @@ class Demand_Model (pycd3.Node):
             #run demand model for the next 24 hours
             elif self.overall_time >= ceil(self.overall_time) -1/24. and self.overall_time <= ceil(self.overall_time) -1/24. + (dt)/3600./24. :
                 
-                run = WaterDemandModel([int(self.number_residential_units)],[int(self.number_commercial_units)])
-                Demanddictionary = run.getDemands()
-                self.shower_vector = add(Demanddictionary['C1']['shower'],Demanddictionary['R1']['shower'])
-                self.toilet_vector = add(Demanddictionary['C1']['toilet'],Demanddictionary['R1']['toilet'])
-                self.tap_vector = add(Demanddictionary['C1']['tap'],Demanddictionary['R1']['tap'])
-                self.bath_vector = Demanddictionary['R1']['bath']
-                self.washing_machine_vector = Demanddictionary['R1']['washing_machine']
-                self.dishwasher_vector = add(Demanddictionary['C1']['dish_washer'],Demanddictionary['R1']['dish_washer'])
+                self.run.newDay()
+                Demanddictionary = self.run.getDemands()
+                self.shower_vector = adding_unit_uses(Demanddictionary,'shower')
+                self.toilet_vector = adding_unit_uses(Demanddictionary,'toilet')
+                self.tap_vector = adding_unit_uses(Demanddictionary,'tap')
+                self.bath_vector = adding_unit_uses(Demanddictionary,'bath')
+                self.washing_machine_vector = adding_unit_uses(Demanddictionary,'washing_machine')
+                self.dishwasher_vector = adding_unit_uses(Demanddictionary,'dish_washer')
             
                 self.hourly_rate = 0
                 self.time_facor_index = 0
@@ -263,23 +282,23 @@ class Demand_Model (pycd3.Node):
             self.hourly_rate = int(ceil((around(self.simulation_start_time, decimals=4)-floor(around(self.simulation_start_time, decimals=4)))*24))
             
             if self.overall_time == self.simulation_start_time:
-                run = WaterDemandModel([int(self.number_residential_units)],[int(self.number_commercial_units)])
-                Demanddictionary = run.getDemands()
-                self.shower_vector = add(Demanddictionary['C1']['shower'],Demanddictionary['R1']['shower'])
-                self.toilet_vector = add(Demanddictionary['C1']['toilet'],Demanddictionary['R1']['toilet'])
-                self.tap_vector = add(Demanddictionary['C1']['tap'],Demanddictionary['R1']['tap'])
-                self.bath_vector = Demanddictionary['R1']['bath']
-                self.washing_machine_vector = Demanddictionary['R1']['washing_machine']
-                self.dishwasher_vector = add(Demanddictionary['C1']['dish_washer'],Demanddictionary['R1']['dish_washer'])
+                self.run.newDay()
+                Demanddictionary = self.run.getDemands()
+                self.shower_vector = adding_unit_uses(Demanddictionary,'shower')
+                self.toilet_vector = adding_unit_uses(Demanddictionary,'toilet')
+                self.tap_vector = adding_unit_uses(Demanddictionary,'tap')
+                self.bath_vector = adding_unit_uses(Demanddictionary,'bath')
+                self.washing_machine_vector = adding_unit_uses(Demanddictionary,'washing_machine')
+                self.dishwasher_vector = adding_unit_uses(Demanddictionary,'dish_washer')
             elif self.hourly_rate > 23:
-                run = WaterDemandModel([int(self.number_residential_units)],[int(self.number_commercial_units)])
-                Demanddictionary = run.getDemands()
-                self.shower_vector = add(Demanddictionary['C1']['shower'],Demanddictionary['R1']['shower'])
-                self.toilet_vector = add(Demanddictionary['C1']['toilet'],Demanddictionary['R1']['toilet'])
-                self.tap_vector = add(Demanddictionary['C1']['tap'],Demanddictionary['R1']['tap'])
-                self.bath_vector = Demanddictionary['R1']['bath']
-                self.washing_machine_vector = Demanddictionary['R1']['washing_machine']
-                self.dishwasher_vector = add(Demanddictionary['C1']['dish_washer'],Demanddictionary['R1']['dish_washer'])
+                self.run.newDay()
+                Demanddictionary = self.run.getDemands()
+                self.shower_vector = adding_unit_uses(Demanddictionary,'shower')
+                self.toilet_vector = adding_unit_uses(Demanddictionary,'toilet')
+                self.tap_vector = adding_unit_uses(Demanddictionary,'tap')
+                self.bath_vector = adding_unit_uses(Demanddictionary,'bath')
+                self.washing_machine_vector = adding_unit_uses(Demanddictionary,'washing_machine')
+                self.dishwasher_vector = adding_unit_uses(Demanddictionary,'dish_washer')
                 
                 self.hourly_rate = 0
                 print 'it was greater than 23'
@@ -296,14 +315,104 @@ class Demand_Model (pycd3.Node):
             print self.hourly_rate
             self.hourly_rate += 1
         
+        elif dt == 3600*24:
+            
+            if self.overall_time == self.simulation_start_time:
+                
+                self.startingsum = int(ceil((around(self.simulation_start_time, decimals=4)-floor(around(self.simulation_start_time, decimals=4)))*24))
+                
+                if self.startingsum == 0:
+                    self.startingsum = 1
+                else:
+                    pass
+                
+                self.run.newDay()
+                Demanddictionary = self.run.getDemands()
+                self.shower_vector_1 = adding_unit_uses(Demanddictionary,'shower').tolist()
+                self.toilet_vector_1 = adding_unit_uses(Demanddictionary,'toilet').tolist()
+                self.tap_vector_1 = adding_unit_uses(Demanddictionary,'tap').tolist()
+                self.bath_vector_1 = adding_unit_uses(Demanddictionary,'bath').tolist()
+                self.washing_machine_vector_1 = adding_unit_uses(Demanddictionary,'washing_machine').tolist()
+                self.dishwasher_vector_1 = adding_unit_uses(Demanddictionary,'dish_washer').tolist()
+                
+                self.run.newDay()
+                Demanddictionary = self.run.getDemands()
+                self.shower_vector_2 = adding_unit_uses(Demanddictionary,'shower').tolist()
+                self.toilet_vector_2 = adding_unit_uses(Demanddictionary,'toilet').tolist()
+                self.tap_vector_2 = adding_unit_uses(Demanddictionary,'tap').tolist()
+                self.bath_vector_2 = adding_unit_uses(Demanddictionary,'bath').tolist()
+                self.washing_machine_vector_2 = adding_unit_uses(Demanddictionary,'washing_machine').tolist()
+                self.dishwasher_vector_2 = adding_unit_uses(Demanddictionary,'dish_washer').tolist()
+                
+                self.shower_vector_check = self.shower_vector_1[self.startingsum:]
+                self.shower_vector_check.append(self.shower_vector_2[0])
+                self.toilet_vector_check = self.toilet_vector_1[self.startingsum:]
+                self.toilet_vector_check.append(self.toilet_vector_2[0])
+                self.tap_vector_check = self.tap_vector_1[self.startingsum:]
+                self.tap_vector_check.append(self.tap_vector_2[0])
+                self.bath_vector_check = self.bath_vector_1[self.startingsum:]
+                self.bath_vector_check.append(self.bath_vector_2[0])
+                self.washing_machine_vector_check = self.washing_machine_vector_1[self.startingsum:]
+                self.washing_machine_vector_check.append(self.washing_machine_vector_2[0])
+                self.dishwasher_vector_check = self.dishwasher_vector_1[self.startingsum:]
+                self.dishwasher_vector_check.append(self.dishwasher_vector_2[0])
+
+            else:
+                
+                self.shower_vector_1 = self.shower_vector_2
+                self.toilet_vector_1 = self.toilet_vector_2
+                self.tap_vector_1 = self.tap_vector_2
+                self.bath_vector_1 = self.bath_vector_2
+                self.washing_machine_vector_1 = self.washing_machine_vector_2
+                self.dishwasher_vector_1 = self.dishwasher_vector_2                
+                
+                self.run.newDay()
+                Demanddictionary = self.run.getDemands()
+                self.shower_vector_2 = adding_unit_uses(Demanddictionary,'shower')
+                self.toilet_vector_2 = adding_unit_uses(Demanddictionary,'toilet')
+                self.tap_vector_2 = adding_unit_uses(Demanddictionary,'tap')
+                self.bath_vector_2 = adding_unit_uses(Demanddictionary,'bath')
+                self.washing_machine_vector_2 = adding_unit_uses(Demanddictionary,'washing_machine')
+                self.dishwasher_vector_2 = adding_unit_uses(Demanddictionary,'dish_washer')
+                
+                self.startingsum = 1
+                
+            if self.Test == 24:
+                self.Test = 0
+            else:
+                pass
+            
+            
+
+            self.TestBathtub[0] = self.bath_vector_check[self.Test]
+            self.TestShower[0] = self.shower_vector_check[self.Test]
+            self.TestToilet[0] = self.toilet_vector_check[self.Test]
+            self.TestTap[0] = self.tap_vector_check[self.Test]
+            self.TestWashing_Machine[0] = self.washing_machine_vector_check[self.Test]
+            self.TestDishwasher[0] = self.dishwasher_vector_check[self.Test]
+                
+            self.Bathtub[0] = sum(self.bath_vector_1[self.startingsum:])+self.bath_vector_2[0]
+            self.Shower[0] = sum(self.shower_vector_1[self.startingsum:])+self.shower_vector_2[0]
+            self.Toilet[0] = sum(self.toilet_vector_1[self.startingsum:])+self.toilet_vector_2[0]
+            self.Tap[0] = sum(self.tap_vector_1[self.startingsum:])+self.tap_vector_2[0]
+            self.Washing_Machine[0] = sum(self.washing_machine_vector_1[self.startingsum:])+self.washing_machine_vector_2[0]
+            self.Dishwasher[0] = sum(self.dishwasher_vector_1[self.startingsum:])+self.dishwasher_vector_2[0]
+            
+            self.overall_time += dt/3600./24.
+            self.Test += 1 
+        
+        elif dt < 3600*24:
+            
+            
+            
         else:
-            pass
+            print "Error: The Time step of simulation can't be greater than one day!!"
         return dt
     
     def getClassName(self):
         print "getClassName"
         return "Demand_Model"
-
+        
 def register(nr):
     for c in pycd3.Node.__subclasses__():
         nf = NodeFactory(c)

@@ -6,6 +6,7 @@ Created on Tue Dec 02 11:20:04 2014
 """
 from Stormwaterreservoirlevel import Stormwaterreservoirlevel
 from Global_counters import Global_counters
+from Global_meaning_list import Global_meaning_list
 
 
 class Supplylevel:
@@ -17,6 +18,8 @@ class Supplylevel:
         self.infiltr_coll_list = []
         self.outdoordemand = []
         self.indoor_demand_coll_list = []
+        self.need_to_have_filout_list = []
+        self.fileout_numbers_names_list = []
         
     def writeconnections(self, supplyvec):
         
@@ -51,13 +54,13 @@ class Supplylevel:
             adding Potable Water Reservoir
             '''            
             
-            #adds collector for potable water reservoir of nonpot(from SWR)
+            #adds collector for potable water reservoir of nonpot(Additional Demand)
             self.nonpot_coll_strings=[]
             if Stormwater.numbers_of_large_swr != []:
                 for n in range(len(Stormwater.numbers_of_large_swr)):
                     string1='\t\t\t<connection id="'+str(Global_counters.number_of_connections)+'">\n' 
-                    string2='\t\t\t\t<source node="Stormwaterreservoir_'+str(Stormwater.numbers_of_large_swr[n])+'" port="Additional_Demand"/> \n ' 
-                    string3='\t\t\t\t<sink node="Collector_'+str(Global_counters.number_of_collectors)+'" port="Inport'+str(n+1)+'"/> \n ' 
+                    string2='\t\t\t\t<source node="Stormwaterreservoir_'+str(Stormwater.numbers_of_large_swr[n])+'" port="Additional_Demand"/>\n' 
+                    string3='\t\t\t\t<sink node="Collector_'+str(Global_counters.number_of_collectors)+'" port="Inport_'+str(n+1)+'"/>\n' 
                     string4='\t\t\t</connection>\n' 
                     Global_counters.number_of_connections += 1
                     #writes all string in one and puts it in list
@@ -71,8 +74,8 @@ class Supplylevel:
             if Stormwater.only_GWR != []:
                 for p in range(len(Stormwater.numbers_of_large_swr)):
                     string1='\t\t\t<connection id="'+str(Global_counters.number_of_connections)+'">\n' 
-                    string2='\t\t\t\t<source node="Greywatertank_'+str(Stormwater.only_GWR[p])+'" port="Additional_Demand"/> \n ' 
-                    string3='\t\t\t\t<sink node="Collector_'+str(Global_counters.number_of_collectors)+'" port="Inport'+str(p+n+2)+'"/> \n ' 
+                    string2='\t\t\t\t<source node="Greywatertank_'+str(Stormwater.only_GWR[p])+'" port="Additional_Demand"/>\n' 
+                    string3='\t\t\t\t<sink node="Collector_'+str(Global_counters.number_of_collectors)+'" port="Inport_'+str(p+n+2)+'"/>\n' 
                     string4='\t\t\t</connection>\n' 
                     Global_counters.number_of_connections += 1
                     #writes all string in one and puts it in list
@@ -83,22 +86,25 @@ class Supplylevel:
             else:
                 p = -1
             #adds collector for potable water reservoir of nonpot (from buildings, not connected to GWR/SWR)
-            for m in range(len(Stormwater.additionaldemand_from_pwr_coll_list)):
-                string1='\t\t\t<connection id="'+str(Global_counters.number_of_connections)+'">\n' 
-                string2='\t\t\t\t<source node="Collector_'+str(Stormwater.additionaldemand_from_pwr_coll_list[m])+'" port="Outport"/> \n ' 
-                string3='\t\t\t\t<sink node="Collector_'+str(Global_counters.number_of_collectors)+'" port="Inport'+str(m+n+p+3)+'"/> \n ' 
-                string4='\t\t\t</connection>\n' 
-                Global_counters.number_of_connections += 1
-                #writes all string in one and puts it in list
-                self.nonpotcollstrings = ''
-                for o in range(5)[1:]:
-                    exec 'self.nonpotcollstrings += string'+str(o)
-                self.nonpot_coll_strings.append(self.nonpotcollstrings)
-            
+            if Stormwater.additionaldemand_from_pwr_coll_list != []:
+                for m in range(len(Stormwater.additionaldemand_from_pwr_coll_list)):
+                    string1='\t\t\t<connection id="'+str(Global_counters.number_of_connections)+'">\n' 
+                    string2='\t\t\t\t<source node="Collector_'+str(Stormwater.additionaldemand_from_pwr_coll_list[m])+'" port="Outport"/>\n' 
+                    string3='\t\t\t\t<sink node="Collector_'+str(Global_counters.number_of_collectors)+'" port="Inport_'+str(m+n+p+3)+'"/>\n' 
+                    string4='\t\t\t</connection>\n' 
+                    Global_counters.number_of_connections += 1
+                    #writes all string in one and puts it in list
+                    self.nonpotcollstrings = ''
+                    for o in range(5)[1:]:
+                        exec 'self.nonpotcollstrings += string'+str(o)
+                    self.nonpot_coll_strings.append(self.nonpotcollstrings)
+            else:
+                m = -1
+
             #adds potable water reservoir connecting nonpot
             string1='\t\t\t<connection id="'+str(Global_counters.number_of_connections)+'">\n' 
-            string2='\t\t\t\t<source node="Collector_'+str(Global_counters.number_of_collectors)+'" port="Outport"/> \n ' 
-            string3='\t\t\t\t<sink node="Potable_Water_Resorvoir_'+str(Global_counters.number_of_potablwaterreservoirs)+'" port="Non_Potable_Water_Demand"/> \n ' 
+            string2='\t\t\t\t<source node="Collector_'+str(Global_counters.number_of_collectors)+'" port="Outport"/>\n' 
+            string3='\t\t\t\t<sink node="Potable_Water_Resorvoir_'+str(Global_counters.number_of_potablwaterreservoirs)+'" port="Non_Potable_Water_Demand"/>\n' 
             string4='\t\t\t</connection>\n' 
             Global_counters.number_of_connections += 1
             #writes all string in one and puts it in list
@@ -107,16 +113,17 @@ class Supplylevel:
                 exec 'self.nonpotcollstrings += string'+str(o)
             self.nonpot_coll_strings.append(self.nonpotcollstrings)
             #writes collector number in list that knows number of inports for later reference
-            Global_counters.number_of_collectors_ports_list.append([Global_counters.number_of_collectors, len(Stormwater.additionaldemand_from_pwr_coll_list)])
+            Global_counters.number_of_collectors_ports_list.append([Global_counters.number_of_collectors, m+n+p+3])
             #writes collector number in list that knows connection for later reference
+            Global_meaning_list.collectors.append(['Collector_'+str(Global_counters.number_of_collectors), 'collects Additonal Demands from small Tanks (Buildings) and GW-/SW-Reservoirs for nonpot Demand from PWR'])
             Global_counters.number_of_collectors += 1
             
             #adds collector for potable water reservoir of pot
             self.pot_coll_strings=[]
             for m in range(Global_counters.number_of_buildings):
                 string1='\t\t\t<connection id="'+str(Global_counters.number_of_connections)+'">\n' 
-                string2='\t\t\t\t<source node="Building_'+str(m)+'" port="Potable_Water"/> \n ' 
-                string3='\t\t\t\t<sink node="Collector_'+str(Global_counters.number_of_collectors)+'" port="Inport'+str(m+1)+'"/> \n ' 
+                string2='\t\t\t\t<source node="Building_'+str(m)+'" port="Potable_Water"/>\n' 
+                string3='\t\t\t\t<sink node="Collector_'+str(Global_counters.number_of_collectors)+'" port="Inport_'+str(m+1)+'"/>\n' 
                 string4='\t\t\t</connection>\n' 
                 Global_counters.number_of_connections += 1
                 #writes all string in one and puts it in list
@@ -127,8 +134,8 @@ class Supplylevel:
             
             #adds potable water reservoir connecting pot
             string1='\t\t\t<connection id="'+str(Global_counters.number_of_connections)+'">\n' 
-            string2='\t\t\t\t<source node="Collector_'+str(Global_counters.number_of_collectors)+'" port="Outport"/> \n ' 
-            string3='\t\t\t\t<sink node="Potable_Water_Resorvoir_'+str(Global_counters.number_of_potablwaterreservoirs)+'" port="Potable_Water_Demand"/> \n ' 
+            string2='\t\t\t\t<source node="Collector_'+str(Global_counters.number_of_collectors)+'" port="Outport"/>\n' 
+            string3='\t\t\t\t<sink node="Potable_Water_Resorvoir_'+str(Global_counters.number_of_potablwaterreservoirs)+'" port="Potable_Water_Demand"/>\n' 
             string4='\t\t\t</connection>\n' 
             Global_counters.number_of_connections += 1
             #writes all string in one and puts it in list
@@ -139,6 +146,7 @@ class Supplylevel:
             #writes collector number in list that knows number of inports for later reference
             Global_counters.number_of_collectors_ports_list.append([Global_counters.number_of_collectors, Global_counters.number_of_buildings])
             #writes collector number in list that knows connection for later reference
+            Global_meaning_list.collectors.append(['Collector_'+str(Global_counters.number_of_collectors), 'collects potable Demand from Buildings for pot Demand from PWR'])
             Global_counters.number_of_collectors += 1
             Global_counters.number_of_potablwaterreservoirs += 1
             
@@ -151,8 +159,8 @@ class Supplylevel:
             if len(Stormwater.numbers_of_large_swr) != []:
                 for n in range(len(Stormwater.numbers_of_large_swr)):
                     string1='\t\t\t<connection id="'+str(Global_counters.number_of_connections)+'">\n' 
-                    string2='\t\t\t\t<source node="Stormwaterreservoir_'+str(Stormwater.numbers_of_large_swr[n])+'" port="Overflow"/> \n ' 
-                    string3='\t\t\t\t<sink node="Collector_'+str(Global_counters.number_of_collectors)+'" port="Inport'+str(n+1)+'"/> \n ' 
+                    string2='\t\t\t\t<source node="Stormwaterreservoir_'+str(Stormwater.numbers_of_large_swr[n])+'" port="Overflow"/>\n' 
+                    string3='\t\t\t\t<sink node="Collector_'+str(Global_counters.number_of_collectors)+'" port="Inport_'+str(n+1)+'"/>\n' 
                     string4='\t\t\t</connection>\n' 
                     Global_counters.number_of_connections += 1
                     #writes all string in one and puts it in list
@@ -169,8 +177,8 @@ class Supplylevel:
             if len(Stormwater.runoff_overflow_to_stormwaterdrain_coll_list) != []:
                 for m in range(len(Stormwater.runoff_overflow_to_stormwaterdrain_coll_list)):
                     string1='\t\t\t<connection id="'+str(Global_counters.number_of_connections)+'">\n' 
-                    string2='\t\t\t\t<source node="Collector_'+str(Stormwater.runoff_overflow_to_stormwaterdrain_coll_list[m])+'" port="Outport"/> \n ' 
-                    string3='\t\t\t\t<sink node="Collector_'+str(Global_counters.number_of_collectors)+'" port="Inport'+str(m+2+n)+'"/> \n ' 
+                    string2='\t\t\t\t<source node="Collector_'+str(Stormwater.runoff_overflow_to_stormwaterdrain_coll_list[m])+'" port="Outport"/>\n' 
+                    string3='\t\t\t\t<sink node="Collector_'+str(Global_counters.number_of_collectors)+'" port="Inport_'+str(m+2+n)+'"/>\n' 
                     string4='\t\t\t</connection>\n' 
                     Global_counters.number_of_connections += 1
                     #writes all string in one and puts it in list
@@ -184,8 +192,8 @@ class Supplylevel:
                 
             #adds stormwaterdrain
             string1='\t\t\t<connection id="'+str(Global_counters.number_of_connections)+'">\n' 
-            string2='\t\t\t\t<source node="Collector_'+str(Global_counters.number_of_collectors)+'" port="Outport"/> \n ' 
-            string3='\t\t\t\t<sink node="Stormwaterpipe_'+str(Global_counters.number_of_stormwaterpipes)+'" port="Runoff"/> \n ' 
+            string2='\t\t\t\t<source node="Collector_'+str(Global_counters.number_of_collectors)+'" port="Outport"/>\n' 
+            string3='\t\t\t\t<sink node="Stormwaterpipe_'+str(Global_counters.number_of_stormwaterpipes)+'" port="Runoff"/>\n' 
             string4='\t\t\t</connection>\n' 
             Global_counters.number_of_connections += 1
             #writes all string in one and puts it in list
@@ -196,6 +204,7 @@ class Supplylevel:
             #writes collector number in list that knows number of inports for later reference
             Global_counters.number_of_collectors_ports_list.append([Global_counters.number_of_collectors, number_of_inports_1 + number_of_inports_2])
             #writes collector number in list that knows connection for later reference
+            Global_meaning_list.collectors.append(['Collector_'+str(Global_counters.number_of_collectors), 'collects Additional Demand and Runoff leading to Stormwaterpipe'])
             Global_counters.number_of_collectors += 1
             Global_counters.number_of_stormwaterpipes += 1
             
@@ -207,8 +216,8 @@ class Supplylevel:
             if len(Stormwater.numbers_of_large_swr) != []:
                 for n in range(len(Stormwater.numbers_of_large_swr)):
                     string1='\t\t\t<connection id="'+str(Global_counters.number_of_connections)+'">\n' 
-                    string2='\t\t\t\t<source node="Stormwaterreservoir_'+str(Stormwater.numbers_of_large_swr[n])+'" port="Waste_Water"/> \n ' 
-                    string3='\t\t\t\t<sink node="Collector_'+str(Global_counters.number_of_collectors)+'" port="Inport'+str(n+1)+'"/> \n ' 
+                    string2='\t\t\t\t<source node="Stormwaterreservoir_'+str(Stormwater.numbers_of_large_swr[n])+'" port="Waste_Water"/>\n' 
+                    string3='\t\t\t\t<sink node="Collector_'+str(Global_counters.number_of_collectors)+'" port="Inport_'+str(n+1)+'"/>\n' 
                     string4='\t\t\t</connection>\n' 
                     Global_counters.number_of_connections += 1
                     #writes all string in one and puts it in list
@@ -226,8 +235,8 @@ class Supplylevel:
             if Global_counters.number_of_greywatertanks != 0:
                 for m in range(Global_counters.number_of_greywatertanks):
                     string1='\t\t\t<connection id="'+str(Global_counters.number_of_connections)+'">\n' 
-                    string2='\t\t\t\t<source node="Greywatertank_'+str(m)+'" port="Waste_Water"/> \n ' 
-                    string3='\t\t\t\t<sink node="Collector_'+str(Global_counters.number_of_collectors)+'" port="Inport'+str(m+n+2)+'"/> \n ' 
+                    string2='\t\t\t\t<source node="Greywatertank_'+str(m)+'" port="Waste_Water"/>\n' 
+                    string3='\t\t\t\t<sink node="Collector_'+str(Global_counters.number_of_collectors)+'" port="Inport_'+str(m+n+2)+'"/>\n' 
                     string4='\t\t\t</connection>\n' 
                     Global_counters.number_of_connections += 1
                     #writes all string in one and puts it in list
@@ -246,8 +255,8 @@ class Supplylevel:
             if Stormwater.greywater_to_sewer_coll_list != []:
                 for p in range(len(Stormwater.greywater_to_sewer_coll_list)):
                     string1='\t\t\t<connection id="'+str(Global_counters.number_of_connections)+'">\n' 
-                    string2='\t\t\t\t<source node="Collector_'+str(Stormwater.greywater_to_sewer_coll_list[p])+'" port="Outport"/> \n ' 
-                    string3='\t\t\t\t<sink node="Collector_'+str(Global_counters.number_of_collectors)+'" port="Inport'+str(p+m+n+3)+'"/> \n ' 
+                    string2='\t\t\t\t<source node="Collector_'+str(Stormwater.greywater_to_sewer_coll_list[p])+'" port="Outport"/>\n' 
+                    string3='\t\t\t\t<sink node="Collector_'+str(Global_counters.number_of_collectors)+'" port="Inport_'+str(p+m+n+3)+'"/>\n' 
                     string4='\t\t\t</connection>\n' 
                     Global_counters.number_of_connections += 1
                     #writes all string in one and puts it in list
@@ -264,8 +273,8 @@ class Supplylevel:
             #collects all black water from buildings
             for q in range(Global_counters.number_of_buildings):
                     string1='\t\t\t<connection id="'+str(Global_counters.number_of_connections)+'">\n' 
-                    string2='\t\t\t\t<source node="Building_'+str(q)+'" port="Black_Water"/> \n ' 
-                    string3='\t\t\t\t<sink node="Collector_'+str(Global_counters.number_of_collectors)+'" port="Inport'+str(q+p+m+n+4)+'"/> \n ' 
+                    string2='\t\t\t\t<source node="Building_'+str(q)+'" port="Black_Water"/>\n' 
+                    string3='\t\t\t\t<sink node="Collector_'+str(Global_counters.number_of_collectors)+'" port="Inport_'+str(q+p+m+n+4)+'"/>\n' 
                     string4='\t\t\t</connection>\n' 
                     Global_counters.number_of_connections += 1
                     #writes all string in one and puts it in list
@@ -276,8 +285,8 @@ class Supplylevel:
                     
             #adds sewer       
             string1='\t\t\t<connection id="'+str(Global_counters.number_of_connections)+'">\n' 
-            string2='\t\t\t\t<source node="Collector_'+str(Global_counters.number_of_collectors)+'" port="Outport"/> \n ' 
-            string3='\t\t\t\t<sink node="Sewer_'+str(Global_counters.number_of_sewers)+'" port="Black_Water"/> \n ' 
+            string2='\t\t\t\t<source node="Collector_'+str(Global_counters.number_of_collectors)+'" port="Outport"/>\n' 
+            string3='\t\t\t\t<sink node="Sewer2_'+str(Global_counters.number_of_sewers)+'" port="Black_Water"/>\n' 
             string4='\t\t\t</connection>\n' 
             Global_counters.number_of_connections += 1
             #writes all string in one and puts it in list
@@ -288,6 +297,7 @@ class Supplylevel:
             
             #writes collector number in list that knows number of inports for later reference
             Global_counters.number_of_collectors_ports_list.append([Global_counters.number_of_collectors, number_of_inports_1 + number_of_inports_2 + number_of_inports_3+Global_counters.number_of_buildings])
+            Global_meaning_list.collectors.append(['Collector_'+str(Global_counters.number_of_collectors), 'collects Black Water from Buildings, Greywater not connected to Reservoir, Waste Water from Greywaterreservoirs and Stormwaterreservoirs leading to Sewer'])            
             Global_counters.number_of_collectors += 1
             Global_counters.number_of_sewers += 1
          
@@ -310,8 +320,8 @@ class Supplylevel:
         self.modelinput_strings = []
         #filereader - distributor connection
         string1='\t\t\t<connection id="'+str(Global_counters.number_of_connections)+'">\n' 
-        string2='\t\t\t\t<source node="File_Reader_'+str(Global_counters.number_of_filereaders)+'" port="Outport"/> \n ' 
-        string3='\t\t\t\t<sink node="Distributor_'+str(Global_counters.number_of_distributors)+'" port="Inport"/> \n ' 
+        string2='\t\t\t\t<source node="File_Reader_'+str(Global_counters.number_of_filereaders)+'" port="Outport"/>\n' 
+        string3='\t\t\t\t<sink node="Distributor_'+str(Global_counters.number_of_distributors)+'" port="Inport"/>\n' 
         string4='\t\t\t</connection>\n' 
         Global_counters.number_of_connections += 1
         #writes all string in one and puts it in list
@@ -323,8 +333,8 @@ class Supplylevel:
         #distributor - catchment connection (rain)
         for q in range(Global_counters.number_of_catchments):
             string1='\t\t\t<connection id="'+str(Global_counters.number_of_connections)+'">\n' 
-            string2='\t\t\t\t<source node="Distributor_'+str(Global_counters.number_of_distributors)+'" port="Outport_'+str(q+1)+'"/> \n ' 
-            string3='\t\t\t\t<sink node="Catchment_w_Routing_'+str(q)+'" port="Rain"/> \n ' 
+            string2='\t\t\t\t<source node="Distributor_'+str(Global_counters.number_of_distributors)+'" port="Outport_'+str(q+1)+'"/>\n' 
+            string3='\t\t\t\t<sink node="Catchment_w_Routing_'+str(q)+'" port="Rain"/>\n' 
             string4='\t\t\t</connection>\n' 
             Global_counters.number_of_connections += 1
             #writes all string in one and puts it in list
@@ -338,10 +348,24 @@ class Supplylevel:
         Global_counters.number_of_filereaders += 1
         Global_counters.number_of_distributors += 1
         
+        #filereader - pattern_implementer connection
+        string1='\t\t\t<connection id="'+str(Global_counters.number_of_connections)+'">\n' 
+        string2='\t\t\t\t<source node="File_Reader_'+str(Global_counters.number_of_filereaders)+'" port="Outport"/>\n' 
+        string3='\t\t\t\t<sink node="Pattern_Impl_'+str(Global_counters.number_of_patternimplementers)+'" port="Inport"/>\n' 
+        string4='\t\t\t</connection>\n' 
+        Global_counters.number_of_connections += 1
+        #writes all string in one and puts it in list
+        self.modelinputstrings = ''
+        for o in range(5)[1:]:
+            exec 'self.modelinputstrings += string'+str(o)
+        self.modelinput_strings.append(self.modelinputstrings)
+        
+        Global_counters.number_of_filereaders += 1
+        
         #pattern_implementer - distributor connection
         string1='\t\t\t<connection id="'+str(Global_counters.number_of_connections)+'">\n' 
-        string2='\t\t\t\t<source node="Pattern_Impl_'+str(Global_counters.number_of_patternimplementers)+'" port="Outport"/> \n ' 
-        string3='\t\t\t\t<sink node="Distributor_'+str(Global_counters.number_of_distributors)+'" port="Inport"/> \n ' 
+        string2='\t\t\t\t<source node="Pattern_Impl_'+str(Global_counters.number_of_patternimplementers)+'" port="Outport"/>\n' 
+        string3='\t\t\t\t<sink node="Distributor_'+str(Global_counters.number_of_distributors)+'" port="Inport"/>\n' 
         string4='\t\t\t</connection>\n' 
         Global_counters.number_of_connections += 1
         #writes all string in one and puts it in list
@@ -353,8 +377,8 @@ class Supplylevel:
         #distributor - catchment connection (evapo)
         for q in range(Global_counters.number_of_catchments):
             string1='\t\t\t<connection id="'+str(Global_counters.number_of_connections)+'">\n' 
-            string2='\t\t\t\t<source node="Distributor_'+str(Global_counters.number_of_distributors)+'" port="Outport_'+str(q+1)+'"/> \n ' 
-            string3='\t\t\t\t<sink node="Catchment_w_Routing_'+str(q)+'" port="Evapotranspiration"/> \n ' 
+            string2='\t\t\t\t<source node="Distributor_'+str(Global_counters.number_of_distributors)+'" port="Outport_'+str(q+1)+'"/>\n' 
+            string3='\t\t\t\t<sink node="Catchment_w_Routing_'+str(q)+'" port="Evapotranspiration"/>\n' 
             string4='\t\t\t</connection>\n' 
             Global_counters.number_of_connections += 1
             #writes all string in one and puts it in list
@@ -374,8 +398,8 @@ class Supplylevel:
         self.check_greytanks_strings = []
         for q in range(Global_counters.number_of_greywatertanks):
             string1='\t\t\t<connection id="'+str(Global_counters.number_of_connections)+'">\n' 
-            string2='\t\t\t\t<source node="Greywatertank_'+str(q)+'" port="Current_Volume"/> \n ' 
-            string3='\t\t\t\t<sink node="Collector_'+str(Global_counters.number_of_collectors)+'" port="Inport_'+str(q+1)+'"/> \n ' 
+            string2='\t\t\t\t<source node="Greywatertank_'+str(q)+'" port="Current_Volume"/>\n' 
+            string3='\t\t\t\t<sink node="Collector_'+str(Global_counters.number_of_collectors)+'" port="Inport_'+str(q+1)+'"/>\n' 
             string4='\t\t\t</connection>\n' 
             Global_counters.number_of_connections += 1
             #writes all string in one and puts it in list
@@ -386,6 +410,8 @@ class Supplylevel:
              
         #writes collector number in list that knows number of inports for later reference
         Global_counters.number_of_collectors_ports_list.append([Global_counters.number_of_collectors, Global_counters.number_of_greywatertanks])
+        Global_meaning_list.collectors.append(['Collector_'+str(Global_counters.number_of_collectors), 'collects Current_Volume of Greywatertanks/reservoirs (for checking levels)'])
+        self.need_to_have_filout_list.append([Global_counters.number_of_collectors, 'Greywatertanklevels'])
         Global_counters.number_of_collectors += 1
 
         '''
@@ -394,8 +420,8 @@ class Supplylevel:
         self.check_stormtanks_strings = []
         for q in range(Global_counters.number_of_stormwaterreservoirs):
             string1='\t\t\t<connection id="'+str(Global_counters.number_of_connections)+'">\n' 
-            string2='\t\t\t\t<source node="Stormwaterreservoir_'+str(q)+'" port="Current_Volume"/> \n ' 
-            string3='\t\t\t\t<sink node="Collector_'+str(Global_counters.number_of_collectors)+'" port="Inport_'+str(q+1)+'"/> \n ' 
+            string2='\t\t\t\t<source node="Stormwaterreservoir_'+str(q)+'" port="Current_Volume"/>\n' 
+            string3='\t\t\t\t<sink node="Collector_'+str(Global_counters.number_of_collectors)+'" port="Inport_'+str(q+1)+'"/>\n' 
             string4='\t\t\t</connection>\n' 
             Global_counters.number_of_connections += 1
             #writes all string in one and puts it in list
@@ -406,6 +432,8 @@ class Supplylevel:
              
         #writes collector number in list that knows number of inports for later reference
         Global_counters.number_of_collectors_ports_list.append([Global_counters.number_of_collectors, Global_counters.number_of_stormwaterreservoirs])
+        Global_meaning_list.collectors.append(['Collector_'+str(Global_counters.number_of_collectors), 'collects Current_Volume of Stormwaterreservoirs (for checking levels)'])
+        self.need_to_have_filout_list.append( [Global_counters.number_of_collectors, 'Stormwaterreservoirlevels'])
         Global_counters.number_of_collectors += 1
         
         '''
@@ -414,8 +442,8 @@ class Supplylevel:
         self.check_raintanks_strings = []
         for q in range(len(Stormwater.raintankstorage_coll_list)):
             string1='\t\t\t<connection id="'+str(Global_counters.number_of_connections)+'">\n' 
-            string2='\t\t\t\t<source node="Collector_'+str(Stormwater.raintankstorage_coll_list[q])+'" port="Outport"/> \n ' 
-            string3='\t\t\t\t<sink node="Collector_'+str(Global_counters.number_of_collectors)+'" port="Inport_'+str(q+1)+'"/> \n ' 
+            string2='\t\t\t\t<source node="Collector_'+str(Stormwater.raintankstorage_coll_list[q])+'" port="Outport"/>\n' 
+            string3='\t\t\t\t<sink node="Collector_'+str(Global_counters.number_of_collectors)+'" port="Inport_'+str(q+1)+'"/>\n' 
             string4='\t\t\t</connection>\n' 
             Global_counters.number_of_connections += 1
             #writes all string in one and puts it in list
@@ -426,6 +454,8 @@ class Supplylevel:
              
         #writes collector number in list that knows number of inports for later reference
         Global_counters.number_of_collectors_ports_list.append([Global_counters.number_of_collectors, len(Stormwater.raintankstorage_coll_list)])
+        Global_meaning_list.collectors.append(['Collector_'+str(Global_counters.number_of_collectors), 'collects Current_Volume Collectors from Clusterlevel of Raintanks (for checking levels)'])
+        self.need_to_have_filout_list.append([Global_counters.number_of_collectors, 'Rainwatertanklevels'])
         Global_counters.number_of_collectors += 1
         
         '''
@@ -434,8 +464,8 @@ class Supplylevel:
         self.check_infiltration_strings = []
         for q in range(Global_counters.number_of_catchments):
             string1='\t\t\t<connection id="'+str(Global_counters.number_of_connections)+'">\n' 
-            string2='\t\t\t\t<source node="Catchment_w_Routing_'+str(q)+'" port="Actual_Infiltration"/> \n ' 
-            string3='\t\t\t\t<sink node="Collector_'+str(Global_counters.number_of_collectors)+'" port="Inport_'+str(q+1)+'"/> \n ' 
+            string2='\t\t\t\t<source node="Catchment_w_Routing_'+str(q)+'" port="Actual_Infiltration"/>\n' 
+            string3='\t\t\t\t<sink node="Collector_'+str(Global_counters.number_of_collectors)+'" port="Inport_'+str(q+1)+'"/>\n' 
             string4='\t\t\t</connection>\n' 
             Global_counters.number_of_connections += 1
             #writes all string in one and puts it in list
@@ -446,6 +476,8 @@ class Supplylevel:
              
         #writes collector number in list that knows number of inports for later reference
         Global_counters.number_of_collectors_ports_list.append([Global_counters.number_of_collectors, Global_counters.number_of_catchments])
+        Global_meaning_list.collectors.append(['Collector_'+str(Global_counters.number_of_collectors), 'collects Actual Infiltration of all Catchments'])
+        self.need_to_have_filout_list.append([Global_counters.number_of_collectors, 'Actual_Infiltration'])
         Global_counters.number_of_collectors += 1
 
         '''
@@ -454,8 +486,8 @@ class Supplylevel:
         self.check_outdoordemand_strings = []
         for q in range(Global_counters.number_of_catchments):
             string1='\t\t\t<connection id="'+str(Global_counters.number_of_connections)+'">\n' 
-            string2='\t\t\t\t<source node="Catchment_w_Routing_'+str(q)+'" port="Outdoor_Demand_Check"/> \n ' 
-            string3='\t\t\t\t<sink node="Collector_'+str(Global_counters.number_of_collectors)+'" port="Inport_'+str(q+1)+'"/> \n ' 
+            string2='\t\t\t\t<source node="Catchment_w_Routing_'+str(q)+'" port="Outdoor_Demand_Check"/>\n' 
+            string3='\t\t\t\t<sink node="Collector_'+str(Global_counters.number_of_collectors)+'" port="Inport_'+str(q+1)+'"/>\n' 
             string4='\t\t\t</connection>\n' 
             Global_counters.number_of_connections += 1
             #writes all string in one and puts it in list
@@ -466,6 +498,8 @@ class Supplylevel:
              
         #writes collector number in list that knows number of inports for later reference
         Global_counters.number_of_collectors_ports_list.append([Global_counters.number_of_collectors, Global_counters.number_of_catchments])
+        Global_meaning_list.collectors.append(['Collector_'+str(Global_counters.number_of_collectors), 'collects Outdoor Demand of all Catchments'])
+        self.need_to_have_filout_list.append([Global_counters.number_of_collectors, 'Outdoor_Demand'])
         Global_counters.number_of_collectors += 1
         
         '''
@@ -474,8 +508,8 @@ class Supplylevel:
         self.check_demandmodel_bath_strings = []
         for q in range(Global_counters.number_of_demandmodels):
             string1='\t\t\t<connection id="'+str(Global_counters.number_of_connections)+'">\n' 
-            string2='\t\t\t\t<source node="Demand_Model_'+str(q)+'" port="Outport_Check_Bathtub_[l/h]"/> \n ' 
-            string3='\t\t\t\t<sink node="Collector_'+str(Global_counters.number_of_collectors)+'" port="Inport_'+str(q+1)+'"/> \n ' 
+            string2='\t\t\t\t<source node="Demand_Model_'+str(q)+'" port="Outport_Check_Bathtub_[l/h]"/>\n' 
+            string3='\t\t\t\t<sink node="Collector_'+str(Global_counters.number_of_collectors)+'" port="Inport_'+str(q+1)+'"/>\n' 
             string4='\t\t\t</connection>\n' 
             Global_counters.number_of_connections += 1
             #writes all string in one and puts it in list
@@ -485,14 +519,15 @@ class Supplylevel:
             self.check_demandmodel_bath_strings.append(self.checkdemandmodelbathstrings)   
         #writes collector number in list that knows number of inports for later reference
         Global_counters.number_of_collectors_ports_list.append([Global_counters.number_of_collectors, Global_counters.number_of_demandmodels])
+        Global_meaning_list.collectors.append(['Collector_'+str(Global_counters.number_of_collectors), 'collects Bathtub Demand from all Demandmodels'])
         self.indoor_demand_coll_list.append(Global_counters.number_of_collectors)
         Global_counters.number_of_collectors += 1
         
         self.check_demandmodel_shower_strings = []
         for q in range(Global_counters.number_of_demandmodels):
             string1='\t\t\t<connection id="'+str(Global_counters.number_of_connections)+'">\n' 
-            string2='\t\t\t\t<source node="Demand_Model_'+str(q)+'" port="Outport_Check_Shower_[l/h]"/> \n ' 
-            string3='\t\t\t\t<sink node="Collector_'+str(Global_counters.number_of_collectors)+'" port="Inport_'+str(q+1)+'"/> \n ' 
+            string2='\t\t\t\t<source node="Demand_Model_'+str(q)+'" port="Outport_Check_Shower_[l/h]"/>\n' 
+            string3='\t\t\t\t<sink node="Collector_'+str(Global_counters.number_of_collectors)+'" port="Inport_'+str(q+1)+'"/>\n' 
             string4='\t\t\t</connection>\n' 
             Global_counters.number_of_connections += 1
             #writes all string in one and puts it in list
@@ -502,14 +537,15 @@ class Supplylevel:
             self.check_demandmodel_shower_strings.append(self.checkdemandmodelbathstrings)   
         #writes collector number in list that knows number of inports for later reference
         Global_counters.number_of_collectors_ports_list.append([Global_counters.number_of_collectors, Global_counters.number_of_demandmodels])
+        Global_meaning_list.collectors.append(['Collector_'+str(Global_counters.number_of_collectors), 'collects Shower Demand from all Demandmodels'])
         self.indoor_demand_coll_list.append(Global_counters.number_of_collectors)
         Global_counters.number_of_collectors += 1
         
         self.check_demandmodel_tap_strings = []
         for q in range(Global_counters.number_of_demandmodels):
             string1='\t\t\t<connection id="'+str(Global_counters.number_of_connections)+'">\n' 
-            string2='\t\t\t\t<source node="Demand_Model_'+str(q)+'" port="Outport_Check_Tap_[l/h]"/> \n ' 
-            string3='\t\t\t\t<sink node="Collector_'+str(Global_counters.number_of_collectors)+'" port="Inport_'+str(q+1)+'"/> \n ' 
+            string2='\t\t\t\t<source node="Demand_Model_'+str(q)+'" port="Outport_Check_Tap_[l/h]"/>\n' 
+            string3='\t\t\t\t<sink node="Collector_'+str(Global_counters.number_of_collectors)+'" port="Inport_'+str(q+1)+'"/>\n' 
             string4='\t\t\t</connection>\n' 
             Global_counters.number_of_connections += 1
             #writes all string in one and puts it in list
@@ -519,14 +555,15 @@ class Supplylevel:
             self.check_demandmodel_tap_strings.append(self.checkdemandmodelbathstrings)   
         #writes collector number in list that knows number of inports for later reference
         Global_counters.number_of_collectors_ports_list.append([Global_counters.number_of_collectors, Global_counters.number_of_demandmodels])
+        Global_meaning_list.collectors.append(['Collector_'+str(Global_counters.number_of_collectors), 'collects Tap Demand from all Demandmodels'])
         self.indoor_demand_coll_list.append(Global_counters.number_of_collectors)
         Global_counters.number_of_collectors += 1
         
         self.check_demandmodel_toilet_strings = []
         for q in range(Global_counters.number_of_demandmodels):
             string1='\t\t\t<connection id="'+str(Global_counters.number_of_connections)+'">\n' 
-            string2='\t\t\t\t<source node="Demand_Model_'+str(q)+'" port="Outport_Check_Toilet_[l/h]"/> \n ' 
-            string3='\t\t\t\t<sink node="Collector_'+str(Global_counters.number_of_collectors)+'" port="Inport_'+str(q+1)+'"/> \n ' 
+            string2='\t\t\t\t<source node="Demand_Model_'+str(q)+'" port="Outport_Check_Toilet_[l/h]"/>\n' 
+            string3='\t\t\t\t<sink node="Collector_'+str(Global_counters.number_of_collectors)+'" port="Inport_'+str(q+1)+'"/>\n' 
             string4='\t\t\t</connection>\n' 
             Global_counters.number_of_connections += 1
             #writes all string in one and puts it in list
@@ -536,14 +573,15 @@ class Supplylevel:
             self.check_demandmodel_toilet_strings.append(self.checkdemandmodelbathstrings)   
         #writes collector number in list that knows number of inports for later reference
         Global_counters.number_of_collectors_ports_list.append([Global_counters.number_of_collectors, Global_counters.number_of_demandmodels])
+        Global_meaning_list.collectors.append(['Collector_'+str(Global_counters.number_of_collectors), 'collects Toilet Demand from all Demandmodels'])
         self.indoor_demand_coll_list.append(Global_counters.number_of_collectors)
         Global_counters.number_of_collectors += 1
         
         self.check_demandmodel_washingmachine_strings = []
         for q in range(Global_counters.number_of_demandmodels):
             string1='\t\t\t<connection id="'+str(Global_counters.number_of_connections)+'">\n' 
-            string2='\t\t\t\t<source node="Demand_Model_'+str(q)+'" port="Outport_Check_Washing_Machine_[l/h]"/> \n ' 
-            string3='\t\t\t\t<sink node="Collector_'+str(Global_counters.number_of_collectors)+'" port="Inport_'+str(q+1)+'"/> \n ' 
+            string2='\t\t\t\t<source node="Demand_Model_'+str(q)+'" port="Outport_Check_Washing_Machine_[l/h]"/>\n' 
+            string3='\t\t\t\t<sink node="Collector_'+str(Global_counters.number_of_collectors)+'" port="Inport_'+str(q+1)+'"/>\n' 
             string4='\t\t\t</connection>\n' 
             Global_counters.number_of_connections += 1
             #writes all string in one and puts it in list
@@ -553,14 +591,15 @@ class Supplylevel:
             self.check_demandmodel_washingmachine_strings.append(self.checkdemandmodelbathstrings)   
         #writes collector number in list that knows number of inports for later reference
         Global_counters.number_of_collectors_ports_list.append([Global_counters.number_of_collectors, Global_counters.number_of_demandmodels])
+        Global_meaning_list.collectors.append(['Collector_'+str(Global_counters.number_of_collectors), 'collects Washing Machine Demand from all Demandmodels'])
         self.indoor_demand_coll_list.append(Global_counters.number_of_collectors)
         Global_counters.number_of_collectors += 1
         
         self.check_demandmodel_dishwasher_strings = []
         for q in range(Global_counters.number_of_demandmodels):
             string1='\t\t\t<connection id="'+str(Global_counters.number_of_connections)+'">\n' 
-            string2='\t\t\t\t<source node="Demand_Model_'+str(q)+'" port="Outport_Check_Dishwasher_[l/h]"/> \n ' 
-            string3='\t\t\t\t<sink node="Collector_'+str(Global_counters.number_of_collectors)+'" port="Inport_'+str(q+1)+'"/> \n ' 
+            string2='\t\t\t\t<source node="Demand_Model_'+str(q)+'" port="Outport_Check_Dishwasher_[l/h]"/>\n' 
+            string3='\t\t\t\t<sink node="Collector_'+str(Global_counters.number_of_collectors)+'" port="Inport_'+str(q+1)+'"/>\n' 
             string4='\t\t\t</connection>\n' 
             Global_counters.number_of_connections += 1
             #writes all string in one and puts it in list
@@ -570,35 +609,91 @@ class Supplylevel:
             self.check_demandmodel_dishwasher_strings.append(self.checkdemandmodelbathstrings)   
         #writes collector number in list that knows number of inports for later reference
         Global_counters.number_of_collectors_ports_list.append([Global_counters.number_of_collectors, Global_counters.number_of_demandmodels])
+        Global_meaning_list.collectors.append(['Collector_'+str(Global_counters.number_of_collectors), 'collects Dishwasher Demand from all Demandmodels'])
         self.indoor_demand_coll_list.append(Global_counters.number_of_collectors)
         Global_counters.number_of_collectors += 1
         
-        #indooruse together
+        #all indoordemands togehter
         self.check_indoordemand_strings = []
         for q in range(len(self.indoor_demand_coll_list)):
             string1='\t\t\t<connection id="'+str(Global_counters.number_of_connections)+'">\n' 
-            string2='\t\t\t\t<source node="Collector_'+str(self.indoor_demand_coll_list[q])+'" port="Outport"/> \n ' 
-            string3='\t\t\t\t<sink node="Collector_'+str(Global_counters.number_of_collectors)+'" port="Inport_'+str(q+1)+'"/> \n ' 
+            string2='\t\t\t\t<source node="Collector_'+str(self.indoor_demand_coll_list[q])+'" port="Outport"/>\n' 
+            string3='\t\t\t\t<sink node="Collector_'+str(Global_counters.number_of_collectors)+'" port="Inport_'+str(q+1)+'"/>\n' 
             string4='\t\t\t</connection>\n' 
             Global_counters.number_of_connections += 1
             #writes all string in one and puts it in list
-            self.checkdemandmodelbathstrings = ''
+            self.checkindoordemandstrings = ''
             for o in range(5)[1:]:
-                exec 'self.checkdemandmodelbathstrings += string'+str(o)
-            self.check_indoordemand_strings.append(self.checkdemandmodelbathstrings)   
+                exec 'self.checkindoordemandstrings += string'+str(o)
+            self.check_indoordemand_strings.append(self.checkindoordemandstrings)   
         #writes collector number in list that knows number of inports for later reference
         Global_counters.number_of_collectors_ports_list.append([Global_counters.number_of_collectors, len(self.indoor_demand_coll_list)])
+        Global_meaning_list.collectors.append(['Collector_'+str(Global_counters.number_of_collectors), 'collects entire Indoor Demand from all 6 individuell Collectors'])
+        self.need_to_have_filout_list.append([Global_counters.number_of_collectors, 'Indoordemand'])
         Global_counters.number_of_collectors += 1
         
         '''
         ads need to have fileouts
         '''
+        #adds fileouts to collectors
+        self.fileout_strings =[]
+        for q in range(len(self.need_to_have_filout_list)):
+            string1='\t\t\t<connection id="'+str(Global_counters.number_of_connections)+'">\n' 
+            string2='\t\t\t\t<source node="Collector_'+str(self.need_to_have_filout_list[q][0])+'" port="Outport"/>\n' 
+            string3='\t\t\t\t<sink node="FileOut_'+str(Global_counters.number_of_fileouts)+'" port="in"/>\n' 
+            string4='\t\t\t</connection>\n' 
+            Global_counters.number_of_connections += 1
+            
+            #writes all string in one and puts it in list
+            self.fileoutstrings = ''
+            for o in range(5)[1:]:
+                exec 'self.fileoutstrings += string'+str(o)
+            self.fileout_strings.append(self.fileoutstrings) 
+            Global_counters.numbers_names_of_fileouts_list.append([Global_counters.number_of_fileouts, str(self.need_to_have_filout_list[q][1])+'_'+str(i)+'.txt'])
+            Global_counters.number_of_fileouts += 1
         
         
+        #adds fileout for Sewer
+        string1='\t\t\t<connection id="'+str(Global_counters.number_of_connections)+'">\n' 
+        string2='\t\t\t\t<source node="Sewer2_'+str(Global_counters.number_of_sewers-1)+'" port="Discharged_Volume"/>\n' 
+        string3='\t\t\t\t<sink node="FileOut_'+str(Global_counters.number_of_fileouts)+'" port="in"/>\n' 
+        string4='\t\t\t</connection>\n' 
+        Global_counters.number_of_connections += 1
+        #writes all string in one and puts it in list
+        self.fileoutstrings = ''
+        for o in range(5)[1:]:
+            exec 'self.fileoutstrings += string'+str(o)
+        self.fileout_strings.append(self.fileoutstrings)
+        Global_counters.numbers_names_of_fileouts_list.append([Global_counters.number_of_fileouts, 'Sewer_'+str(i)+'.txt'])
+        Global_counters.number_of_fileouts += 1
         
+        #adds fileout for Stormwaterdrain
+        string1='\t\t\t<connection id="'+str(Global_counters.number_of_connections)+'">\n' 
+        string2='\t\t\t\t<source node="Stormwaterpipe_'+str(Global_counters.number_of_stormwaterpipes-1)+'" port="Discharged_Volume"/>\n' 
+        string3='\t\t\t\t<sink node="FileOut_'+str(Global_counters.number_of_fileouts)+'" port="in"/>\n' 
+        string4='\t\t\t</connection>\n' 
+        Global_counters.number_of_connections += 1
+        #writes all string in one and puts it in list
+        self.fileoutstrings = ''
+        for o in range(5)[1:]:
+            exec 'self.fileoutstrings += string'+str(o)
+        self.fileout_strings.append(self.fileoutstrings)
+        Global_counters.numbers_names_of_fileouts_list.append([Global_counters.number_of_fileouts, 'Stormwaterpipe_'+str(i)+'.txt'])
+        Global_counters.number_of_fileouts += 1
         
-        
-        
+        #adds fileout for Potable_Water_Resorvoir
+        string1='\t\t\t<connection id="'+str(Global_counters.number_of_connections)+'">\n' 
+        string2='\t\t\t\t<source node="Potable_Water_Resorvoir_'+str(Global_counters.number_of_potablwaterreservoirs-1)+'" port="Demand"/>\n' 
+        string3='\t\t\t\t<sink node="FileOut_'+str(Global_counters.number_of_fileouts)+'" port="in"/> \n ' 
+        string4='\t\t\t</connection>\n' 
+        Global_counters.number_of_connections += 1
+        #writes all string in one and puts it in list
+        self.fileoutstrings = ''
+        for o in range(5)[1:]:
+            exec 'self.fileoutstrings += string'+str(o)
+        self.fileout_strings.append(self.fileoutstrings)
+        Global_counters.numbers_names_of_fileouts_list.append([Global_counters.number_of_fileouts, 'Potable_Water_Resorvoir_Demand_'+str(i)+'.txt'])
+        Global_counters.number_of_fileouts += 1
         
         
         for m in range(len(self.Supplylevel_loop_list)):
@@ -629,26 +724,29 @@ class Supplylevel:
             self.Supplylevel_list.append(self.check_demandmodel_dishwasher_strings[m])
         for m in range(len(self.check_indoordemand_strings)):
             self.Supplylevel_list.append(self.check_indoordemand_strings[m])
+        for m in range(len(self.fileout_strings)):
+            self.Supplylevel_list.append(self.fileout_strings[m])
+            
 
 
 
 
-supplyvec =[[[[[6,[1,0]*3,[0,0,0],800],[7,[1]*7,[0,0,0],1],[2,[0,1],[0,0,1],1],0], 
-              [[6,[1,0]*3,[0,0,1],1],[7,[1]*7,[0,0,1],1],[2,[0,1],[0,0,1],1],0],1],
-[[[6,[1,0]*3,[0,0,0],1],[7,[1]*7,[0,0,0],1],[2,[0,1],[0,0,1],1],0], 
- [[6,[1,0]*3,[0,0,1],1],[7,[1]*7,[0,0,1],1],[2,[0,1],[0,0,1],1],1],0]]]
-
-Supplylevel = Supplylevel()
-Supplylevel.writeconnections(supplyvec)            
-
-Supplylevel.stormdrain_strings
-
-
-#for i in range(len(Supplylevel.Supplylevel_list)):
-#    print Supplylevel.Supplylevel_list[i]
-
-for i in range(len(Supplylevel.check_outdoordemand_strings)):
-    print Supplylevel.check_outdoordemand_strings[i]
+#supplyvec =[[[[[6,[1,0]*3,[0,0,0],800],[7,[1]*7,[0,0,0],1],[2,[0,1],[0,0,1],1],0], 
+#              [[6,[1,0]*3,[0,0,1],1],[7,[1]*7,[0,0,1],1],[2,[0,1],[0,0,1],1],0],1],
+#[[[6,[1,0]*3,[0,0,0],1],[7,[1]*7,[0,0,0],1],[2,[0,1],[0,0,1],1],0], 
+# [[6,[1,0]*3,[0,0,1],1],[7,[1]*7,[0,0,1],1],[2,[0,1],[0,0,1],1],1],0]]]
+#
+#Supplylevel = Supplylevel()
+#Supplylevel.writeconnections(supplyvec)            
+#
+#Supplylevel.stormdrain_strings
+#
+#
+##for i in range(len(Supplylevel.Supplylevel_list)):
+##    print Supplylevel.Supplylevel_list[i]
+#
+#for i in range(len(Supplylevel.check_outdoordemand_strings)):
+#    print Supplylevel.check_outdoordemand_strings[i]
    
 #print len(Stormwater.Stormwaterreservoirlevel_list)
 #print Global_counters.number_of_demandmodels
@@ -665,7 +763,7 @@ for i in range(len(Supplylevel.check_outdoordemand_strings)):
 #print Global_counters.number_of_potablwaterreservoirs
 #print Global_counters.number_of_catchments    
     
-    
+ 
     
     
     

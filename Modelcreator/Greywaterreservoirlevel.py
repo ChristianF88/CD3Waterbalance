@@ -7,6 +7,7 @@ Created on Wed Dec 03 11:37:18 2014
 
 from Global_counters import Global_counters
 from Clusterlevel import Clusterlevel
+from Global_meaning_list import Global_meaning_list
 #this class adds Greywatertanks to certain clusters
 
 class Greywaterreservoirlevel:
@@ -47,8 +48,8 @@ class Greywaterreservoirlevel:
                     #if cluster is connected to stormwaterreservoir
                     if Cluster.decision_gwr_swr_pwr[m] == 'gwr':
                         string1='\t\t\t<connection id="'+str(Global_counters.number_of_connections)+'">\n' 
-                        string2='\t\t\t\t<source node="Collector_'+str(Cluster.additionaldemand_from_gwr_coll_list[additional_demand_from_gw_listcounter])+'" port="Outport"/> \n ' 
-                        string3='\t\t\t\t<sink node="Collector_'+str(Global_counters.number_of_collectors)+'" port="Inport'+str(coll_used_from_gw_inportcounter)+'"/> \n ' 
+                        string2='\t\t\t\t<source node="Collector_'+str(Cluster.additionaldemand_from_gwr_coll_list[additional_demand_from_gw_listcounter])+'" port="Outport"/>\n' 
+                        string3='\t\t\t\t<sink node="Collector_'+str(Global_counters.number_of_collectors)+'" port="Inport_'+str(coll_used_from_gw_inportcounter)+'"/>\n' 
                         string4='\t\t\t</connection>\n' 
                         additional_demand_from_gw_listcounter += 1
                         Global_counters.number_of_connections += 1
@@ -74,6 +75,7 @@ class Greywaterreservoirlevel:
                 Global_counters.number_of_collectors_ports_list.append([Global_counters.number_of_collectors, coll_used_from_gw_inportcounter])
                 #writes collector number in list that knows connection for later reference
                 self.additionaldemand_from_gw_coll_list.append(Global_counters.number_of_collectors)
+                Global_meaning_list.collectors.append(['Collector_'+str(Global_counters.number_of_collectors), 'collects Current_Volume Greywaterreservoirs'])
                 Global_counters.number_of_collectors += 1
                     
                     
@@ -86,8 +88,8 @@ class Greywaterreservoirlevel:
                 for m in range(Cluster.number_of_clusters):
                     if Cluster.decision_sewer_gwr[m] == 'gwr':
                         string1='\t\t\t<connection id="'+str(Global_counters.number_of_connections)+'">\n' 
-                        string2='\t\t\t\t<source node="Collector_'+str(Cluster.greywater_to_reservoir_coll_list[gwr_inflow_listcounter])+'" port="Outport"/> \n ' 
-                        string3='\t\t\t\t<sink node="Collector_'+str(Global_counters.number_of_collectors)+'" port="Inport'+str(gwr_inflow_inportcounter)+'"/> \n ' 
+                        string2='\t\t\t\t<source node="Collector_'+str(Cluster.greywater_to_reservoir_coll_list[gwr_inflow_listcounter])+'" port="Outport"/>\n' 
+                        string3='\t\t\t\t<sink node="Collector_'+str(Global_counters.number_of_collectors)+'" port="Inport_'+str(gwr_inflow_inportcounter)+'"/>\n' 
                         string4='\t\t\t</connection>\n' 
                         gwr_inflow_listcounter += 1
                         Global_counters.number_of_connections += 1
@@ -106,6 +108,7 @@ class Greywaterreservoirlevel:
                 Global_counters.number_of_collectors_ports_list.append([Global_counters.number_of_collectors, gwr_inflow_inportcounter])
                 #writes collector number in list that knows connection for later reference
                 self.gw_inflow_coll_list.append(Global_counters.number_of_collectors)
+                Global_meaning_list.collectors.append(['Collector_'+str(Global_counters.number_of_collectors), 'collects Greywater Collectors from Clusterlevel for Greywaterreservoirs'])
                 Global_counters.number_of_collectors += 1
                     
                     
@@ -113,13 +116,13 @@ class Greywaterreservoirlevel:
                 self.gwr_in_strings = []
                 self.gwr_out_strings = []
                 string1='\t\t\t<connection id="'+str(Global_counters.number_of_connections)+'">\n' 
-                string2='\t\t\t\t<source node="Collector_'+str(self.additionaldemand_from_gw_coll_list[0])+'" port="Outport"/> \n ' 
-                string3='\t\t\t\t<sink node="Greywatertank_'+str(Global_counters.number_of_greywatertanks)+'" port="Treated_Grey_Water_Out"/> \n ' 
+                string2='\t\t\t\t<source node="Collector_'+str(self.additionaldemand_from_gw_coll_list[0])+'" port="Outport"/>\n' 
+                string3='\t\t\t\t<sink node="Greywatertank_'+str(Global_counters.number_of_greywatertanks)+'" port="Treated_Grey_Water_Out"/>\n' 
                 string4='\t\t\t</connection>\n' 
                 Global_counters.number_of_connections += 1
                 string5='\t\t\t<connection id="'+str(Global_counters.number_of_connections)+'">\n' 
-                string6='\t\t\t\t<source node="Collector_'+str(self.gw_inflow_coll_list[0])+'" port="Outport"/> \n ' 
-                string7='\t\t\t\t<sink node="Greywatertank_'+str(Global_counters.number_of_greywatertanks)+'" port="Grey_Water_In"/> \n ' 
+                string6='\t\t\t\t<source node="Collector_'+str(self.gw_inflow_coll_list[0])+'" port="Outport"/>\n' 
+                string7='\t\t\t\t<sink node="Greywatertank_'+str(Global_counters.number_of_greywatertanks)+'" port="Grey_Water_In"/>\n' 
                 string8='\t\t\t</connection>\n' 
                 Global_counters.number_of_connections += 1
                 #writes all string in one and puts it in list

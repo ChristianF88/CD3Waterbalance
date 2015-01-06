@@ -12,18 +12,18 @@ class Fileoutsetup:
         self.Fileoutattributelist = []
         self.Fileoutnodelist = []
         for i in range(numberofFileouts+starting_value_i)[starting_value_i:]:
-            exec 'self.Fileoutattributelist.append({"Fileout_'+str(i)+'" : Fileoutattributes})'
-
+            exec 'self.Fileoutattributelist.append({"Fileout_'+str(i)+'" : dict.copy(Fileoutattributes)})'
+            
         print str(numberofFileouts)+' Fileouts have been created!'
         return
    
     def Setandwrite_attributes(self,numberofFileouts, starting_value_i, attributevector):
         for i in range(numberofFileouts+starting_value_i)[starting_value_i:]:
-            self.Fileoutattributelist[i][str('Fileout_'+str(i))]["out_file_name"] = attributevector[i][0]
+            self.Fileoutattributelist[i-starting_value_i][str('Fileout_'+str(i))]["out_file_name"] = attributevector[i-starting_value_i]
     
         for i in range(numberofFileouts+starting_value_i)[starting_value_i:]:
-            exec '''self.line1='\\t\\t\\t<node id="Fileout_'+str(i)+'" class="Fileout"/> \\n' '''
-            exec '''self.line2='\\t\\t\\t\\t<parameter name="out_file_name" type="string" value="'+str(self.Fileoutattributelist[i][str('Fileout_'+str(i))]["out_file_name"])+'"/> \\n ' '''
+            exec '''self.line1='\\t\\t\\t<node id="FileOut_'+str(i)+'" class="FileOut"> \\n' '''
+            exec '''self.line2='\\t\\t\\t\\t<parameter name="out_file_name" type="string" value="'+str(self.Fileoutattributelist[i-starting_value_i][str('Fileout_'+str(i))]["out_file_name"])+'"/> \\n ' '''
             exec '''self.line3='\\t\\t\\t</node> \\n ' '''        
             alllines = ''
             for n in range(3):
@@ -31,7 +31,7 @@ class Fileoutsetup:
                 
             self.Fileoutnodelist.append(alllines)
 
-        return
+        return 
 
 
 

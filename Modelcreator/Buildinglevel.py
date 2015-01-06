@@ -113,7 +113,6 @@ class Buildinglevel:
             self.numbers_of_raintanks_list.append(Global_counters.number_of_raintanks)
             self.numbers_of_buildings_list.append(Global_counters.number_of_buildings)
             self.numbers_of_catchments_list.append(Global_counters.number_of_catchments)
-            self.numbers_of_catchments_list.append(Global_counters.number_of_demandmodels)
             #adds Greywatertanks
             if number_of_buildinglevels[1][i] == 1:
                 string37='\t\t\t<connection id="'+str(Global_counters.number_of_connections)+'">\n'
@@ -151,7 +150,7 @@ class Buildinglevel:
             if number_of_buildinglevels[2][0] == 1:
                 self.numbers_of_buildings_contributing_gw_list.append(self.numbers_of_greywatertanks_list[i])
             else:
-                self.numbers_of_buildings_contributing_gw_list.append('not_contributing to gw')
+                self.numbers_of_buildings_contributing_gw_list.append('not_contributing to gw '+str(type(self.numbers_of_greywatertanks_list[i])))
                 
             if number_of_buildinglevels[2][1] == 1:
                 self.numbers_of_buildings_using_gw_list.append(self.numbers_of_greywatertanks_list[i])

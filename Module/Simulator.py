@@ -459,6 +459,6 @@ def theholelot(outputfiles='C:\Users\Acer\Documents\GitHub\CD3Waterbalance\simul
 
 #theholelot()
 Deleter('C:\Users\Acer\Documents\GitHub\CD3Waterbalance\simulationwithpatterns\outputfiles')
-runcd3(filename='Demand_Model.xml')
+runcd3(filename='Test.xml')
 
 

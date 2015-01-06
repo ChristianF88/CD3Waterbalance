@@ -5,9 +5,9 @@ import os
 
 RAW_FILE_PATH = "C:\Users\Acer\Documents\GitHub\CD3Waterbalance\WaterDemandModel"
 
-RESIDENTIAL_DIURNAL_PATTERN_DATABASE = os.path.join(RAW_FILE_PATH, "csvFiles\ResidentialDiurnalPattern.csv")
+# location and appliance specific files
 
-RESIDENTIAL_UNIT_SIZE_DATABASE = os.path.join(RAW_FILE_PATH, "csvFiles\ResidentialUnitSize.csv")
+RESIDENTIAL_DIURNAL_PATTERN_DATABASE = os.path.join(RAW_FILE_PATH, "csvFiles\ResidentialDiurnalPattern.csv")
 
 RESIDENTIAL_TOILET_FLUSH_FREQ_DATABASE = os.path.join(RAW_FILE_PATH, "csvFiles\ResidentialToiletFlushFrequency.csv")
 
@@ -19,12 +19,10 @@ RESIDENTIAL_BATH_FREQUENCY_DATABASE = os.path.join(RAW_FILE_PATH, "csvFiles\Resi
 
 RESIDENTIAL_WASH_MACHINE_FREQ_DATABASE = os.path.join(RAW_FILE_PATH, "csvFiles\ResidentialWashMachineFrequency.csv")
 
+RESIDENTIAL_UNIT_SIZE_DATABASE = os.path.join(RAW_FILE_PATH, "csvFiles\ResidentialUnitSize.csv")
+
 
 COMMERCIAL_DIURNAL_PATTERN_DATABASE = os.path.join(RAW_FILE_PATH, "csvFiles\CommercialDiurnalPattern.csv")
-
-COMMERCIAL_BUILDING_NLA = os.path.join(RAW_FILE_PATH, "csvFiles\CommercialBuildingNLA.csv")
-
-COMMERCIAL_BUILDING_OWP = os.path.join(RAW_FILE_PATH, "csvFiles\CommercialBuilding_m2_per_OWP.csv")
 
 COMMERCIAL_TOILET_FLUSH_FREQ_DATABASE = os.path.join(RAW_FILE_PATH, "csvFiles\CommercialToiletFlushFrequency.csv")
 
@@ -34,11 +32,7 @@ COMMERCIAL_SHOWER_DURATION_DATABASE = os.path.join(RAW_FILE_PATH, "csvFiles\Comm
 
 COMMERCIAL_BATH_FREQUENCY_DATABASE = os.path.join(RAW_FILE_PATH, "csvFiles\CommercialBathUseFrequency.csv")
 
-
-
-
-
-
+# appliance specific files:
 
 SHOWER_FLOWRATE_DATABASE = os.path.join(RAW_FILE_PATH, "csvFiles\ShowerFlowRate.csv")
 
