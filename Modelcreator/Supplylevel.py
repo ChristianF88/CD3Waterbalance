@@ -629,7 +629,7 @@ class Supplylevel:
         #writes collector number in list that knows number of inports for later reference
         Global_counters.number_of_collectors_ports_list.append([Global_counters.number_of_collectors, len(self.indoor_demand_coll_list)])
         Global_meaning_list.collectors.append(['Collector_'+str(Global_counters.number_of_collectors), 'collects entire Indoor Demand from all 6 individuell Collectors'])
-        self.need_to_have_filout_list.append([Global_counters.number_of_collectors, 'Indoordemand'])
+        self.need_to_have_filout_list.append([Global_counters.number_of_collectors, 'Indoor_Demand'])
         Global_counters.number_of_collectors += 1
         
         '''
@@ -678,7 +678,7 @@ class Supplylevel:
         for o in range(5)[1:]:
             exec 'self.fileoutstrings += string'+str(o)
         self.fileout_strings.append(self.fileoutstrings)
-        Global_counters.numbers_names_of_fileouts_list.append([Global_counters.number_of_fileouts, 'Stormwaterpipe_'+str(i)+'.txt'])
+        Global_counters.numbers_names_of_fileouts_list.append([Global_counters.number_of_fileouts, 'Stormwaterdrain_'+str(i)+'.txt'])
         Global_counters.number_of_fileouts += 1
         
         #adds fileout for Potable_Water_Resorvoir
@@ -692,7 +692,7 @@ class Supplylevel:
         for o in range(5)[1:]:
             exec 'self.fileoutstrings += string'+str(o)
         self.fileout_strings.append(self.fileoutstrings)
-        Global_counters.numbers_names_of_fileouts_list.append([Global_counters.number_of_fileouts, 'Potable_Water_Resorvoir_Demand_'+str(i)+'.txt'])
+        Global_counters.numbers_names_of_fileouts_list.append([Global_counters.number_of_fileouts, 'Potable_Water_Demand_'+str(i)+'.txt'])
         Global_counters.number_of_fileouts += 1
         
         

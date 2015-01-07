@@ -207,11 +207,11 @@ def Bilanz(Data, tocheck, wettingloss = 0.4, depressionloss=1.5, totalarea = tot
         elif tocheck[i] == 'System': 
             #filenames in lists
             totalstorage = []
-            totalstoragelist = ['Greywatertank1', 'Raintank1', 'Raintank2', 'Raintank3']
+            totalstoragelist = ['Greywatertanklevels_0', 'Rainwatertanklevels_0', 'Stormwaterreservoirlevels_0']
             inputER=[]
             inputERlist = ['evapo_model', 'rain_model']
             outputISSP = []
-            outputISSPlist = ['Infiltration', 'PotableWaterDemand', 'Sewer', 'Stormwater']
+            outputISSPlist = ['Actual_Infiltration_0', 'Potable_Water_Resorvoir_Demand_0', 'Sewer_0', 'Stormwaterpipe_0']
             outputOD = []
             
             for i in range(len(Data)):
@@ -445,10 +445,10 @@ def plotter(Vector1, Vector2, Vector3,limx=[0,365], limy=[0,1], toplot=['rain_mo
 #[[485.1, 0.18, 0.63, 0.19], [855.9, 0.28, 0.43, 0.29], [800, 0.1, 0.3, 0.6], [960, 0.46, 0.45, 0.09], [1200, 0, 0, 1]]
 def theholelot(outputfiles='C:\Users\Acer\Documents\GitHub\CD3Waterbalance\simulationwithpatterns\outputfiles', inputfiles='C:\Users\Acer\Documents\GitHub\CD3Waterbalance\simulationwithpatterns\inputfiles', 
                numberhh=1., wettingloss = 0.4, depressionloss=1.5):    
-    Deleter(outputfiles)
-    runcd3('simple_system_CwR_RT.xml')
-    #Fractioncalculator input = [[total Area, perv, imperv_to_storage, imperv_to_stormw],...]    
-    Fractioncalculator([[1000, 0.5, 0.25, 0.25]])
+    #Deleter(outputfiles)
+    #runcd3('simple_system_CwR_RT.xml')
+    ##Fractioncalculator input = [[total Area, perv, imperv_to_storage, imperv_to_stormw],...]    
+    Fractioncalculator([[800,0.4,0.4,0.2],[10000,0.1,0.1,0.8],[900,0.4,0.3,0.3],[500,0.5,0.4,0.1],[1400,0.4,0.0,0.6], [20000,0.0,0.0,1]])
     getoutputdata(outputfiles, total_area)
     getinputdata(inputfiles, numberhh, total_area)
     Bilanz([Rainevapovector, Outputvector, Indoorvector], ['Evapo', 'Rain', 'System'], wettingloss, depressionloss, total_area, area_fractions1)
@@ -458,7 +458,16 @@ def theholelot(outputfiles='C:\Users\Acer\Documents\GitHub\CD3Waterbalance\simul
 
 
 #theholelot()
-Deleter('C:\Users\Acer\Documents\GitHub\CD3Waterbalance\simulationwithpatterns\outputfiles')
-runcd3(filename='Test.xml')
+#Deleter('C:\Users\Acer\Documents\GitHub\CD3Waterbalance\simulationwithpatterns\outputfiles')
+#runcd3(filename='Test.xml')
+
+
+[[800,0.4,0.4,0.2],[10000,0.1,0.1,0.8],[900,0.4,0.3,0.3],[500,0.5,0.4,0.1],[1400,0.4,0.0,0.6], [20000,0.0,0.0,1]]
+
+
+
+
+
+
 
 
