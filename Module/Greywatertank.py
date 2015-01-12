@@ -41,12 +41,12 @@ class Greywatertank(pycd3.Node):
         
         #dir (self.inf)
         print "init node"
-        self.addInPort("Grey_Water_In", self.greywaterin)
-        self.addInPort("Treated_Grey_Water_Out", self.greywaterout)
+        self.addInPort("Greywater_In", self.greywaterin)
+        self.addInPort("Greywater_Out", self.greywaterout)
         self.addOutPort("Current_Volume",self.check_storage)
         self.addOutPort("Additional_Demand",self.Additional_Demand)
-        self.addOutPort("Waste_Water",self.wastewater)
-        self.addOutPort("Grey_Water_Overflow",self.greywateroverflow)
+        self.addOutPort("Wastewater",self.wastewater)
+        self.addOutPort("Greywater_Overflow",self.greywateroverflow)
         self.myyield = pycd3.Double(0.9)
         self.addParameter("Yield_of_Treatment_[-]", self.myyield)
         self.storage_v = pycd3.Double(40.0)

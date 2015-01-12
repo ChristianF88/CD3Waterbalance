@@ -9,16 +9,15 @@ import pycd3
 
 import Raintank
 import Building
-import Stormwaterpipe
+import Stormwaterdrain
 import Sewer2
-import Potable_Water_Resorvior
+import Potable_Water_Reservior
 import Pattern_Implementer
 import File_Reader
 import Distributor
 import Collector
 import Catchment_with_Routing
 import Greywatertank
-import Catchment
 import Demand_Model
 import Stormwaterreservoir
 

@@ -9,7 +9,7 @@ from Need_to_have_modelinput import Need_to_have_modelinput
 from Simulation_basic_setup import Simulation_basic_setup
 from Catchmentsetup import Catchmentsetup
 from Buildingsetup import Buildingsetup
-from Stormwaterpipesetup import Stormwaterpipesetup
+from Stormwaterdrainsetup import Stormwaterdrainsetup
 from Sewer2setup import Sewer2setup
 from Potablewaterreservoirsetup import Potablewaterreservoirsetup
 from Raintanksetup import Raintanksetup
@@ -63,7 +63,7 @@ def Additional_Fileouts(Connection_Name_List):
 
 ''' Creating Connections, Supplyvector necessary (explanation in the XML-Creator.md on Github in the doc folder) '''
 
-supplyvec =[[[[[5,[1,0,1,0,0],[0,0,1],1],0],1]]]
+supplyvec =[[[[[5,[1,0,1,0,0],[1,0,1],1],[3,[1,0,1],[1,1,1],2],1],[[2,[0,1],[0,0,0],1],[8,[1,0,1,0,0,1,1,0],[0,0,1],1],0],1]]]
 
 Supplylevel = Supplylevel()
 Supplylevel.writeconnections(supplyvec)
@@ -73,15 +73,29 @@ Supplylevel.writeconnections(supplyvec)
 
 Catchattrvec=[[1,1.9,800,0.4,0.2,0.4,0.6,0.21,1.5,0.4,0.5,400,500,700,0.04,0.05,0.06],[1,1.8,10000,0.1,0.8,0.1,0.6,0.21,1.5,0.4,0.5,380,510,710,0.04,0.05,0.06],
               [1,2,900,0.3,0.3,0.4,0.6,0.21,1.5,0.4,0.5,420,520,690,0.04,0.05,0.06],[1,1.7,500,0.4,0.1,0.5,0.6,0.21,1.5,0.4,0.5,380,520,720,0.04,0.05,0.06],
-[1,1.9,1400,0.0,0.6,0.4,0.6,0.21,1.5,0.4,0.5,400,500,700,0.04,0.05,0.06], [1,1.9,20000,0.0,1,0.0,0.6,0.21,1.5,0.4,0.5,400,500,700,0.04,0.05,0.06]]
+[1,1.9,1400,0.0,0.6,0.4,0.6,0.21,1.5,0.4,0.5,400,500,700,0.04,0.05,0.06], [1,1.9,20000,0.0,1,0.0,0.6,0.21,1.5,0.4,0.5,400,500,700,0.04,0.05,0.06],
+[1,1.9,1000,0.4,0.3,0.3,0.6,0.21,1.5,0.4,0.5,400,500,700,0.04,0.05,0.06],[1,2.1,1000,0.38,0.12,0.5,0.6,0.21,1.5,0.4,0.5,380,510,710,0.04,0.05,0.06],
+[1,2,900,0.0,0.7,0.3,0.6,0.21,1.5,0.4,0.5,420,520,690,0.04,0.05,0.06],[1,1.9,20000,0.0,1,0.0,0.6,0.21,1.5,0.4,0.5,400,500,700,0.04,0.05,0.06],
+[1,1.7,1200,0.4,0.1,0.5,0.6,0.21,1.5,0.4,0.5,380,520,720,0.04,0.05,0.06],[1,1.95,950,0.7,0.25,0.05,0.6,0.21,1.5,0.4,0.5,400,500,700,0.04,0.05,0.06], 
+[1,1.9,2000,0.5,0.3,0.2,0.6,0.21,1.5,0.4,0.5,400,500,700,0.04,0.05,0.06],[1,1.9,20000,0.0,1,0.0,0.6,0.21,1.5,0.4,0.5,400,500,700,0.04,0.05,0.06],
+[1,1.9,1800,0.2,0.2,0.6,0.6,0.21,1.5,0.4,0.5,400,500,700,0.04,0.05,0.06],[1,1.8,1000,0.0,0.9,0.1,0.6,0.21,1.5,0.4,0.5,380,510,710,0.04,0.05,0.06],
+[1,1.9,20000,0.0,1,0.0,0.6,0.21,1.5,0.4,0.5,400,500,700,0.04,0.05,0.06],
+[1,2,1450,0.7,0.1,0.2,0.6,0.21,1.5,0.4,0.5,420,520,690,0.04,0.05,0.06],[1,1.7,1100,0.5,0.1,0.4,0.6,0.21,1.5,0.4,0.5,380,520,720,0.04,0.05,0.06],
+[1,1.9,1210,0.3,0.1,0.6,0.6,0.21,1.5,0.4,0.5,400,500,700,0.04,0.05,0.06], [1,1.9,4000,0.5,0.2,0.3,0.6,0.21,1.5,0.4,0.5,400,500,700,0.04,0.05,0.06],
+[1,1.9,800,0.4,0.2,0.4,0.6,0.21,1.5,0.4,0.5,400,500,700,0.04,0.05,0.06],[1,1.8,1000,0.0,0.8,0.2,0.6,0.21,1.5,0.4,0.5,380,510,710,0.04,0.05,0.06],
+[1,2,900,0.3,0.3,0.4,0.6,0.21,1.5,0.4,0.5,420,520,690,0.04,0.05,0.06],[1,1.7,1500,0.4,0.1,0.5,0.6,0.21,1.5,0.4,0.5,380,520,720,0.04,0.05,0.06],
+[1,1.9,20000,0.0,1,0.0,0.6,0.21,1.5,0.4,0.5,400,500,700,0.04,0.05,0.06]]
+             
               
 Greywaterattrvec = [[0.9,5]]*(Global_counters.number_of_greywatertanks) 
 
-Stormwaterresattrvec = [[0.9,15]]*(Global_counters.number_of_stormwaterreservoirs)
+Stormwaterresattrvec = [[0.9,40]]*(Global_counters.number_of_stormwaterreservoirs)
 
-Rainwaterattrvec = [[5],[5],[5],[5],[0]]
+Rainwaterattrvec = [[5]]*(Global_counters.number_of_raintanks)
 
-Demandmodelattrvec = [[[4,4,3],[0]], [[5,2,3,4,8,6,5],[7,2,1,3]], [[3,4],[0]], [[5],[0]], [[0],[4]]]
+Demandmodelattrvec = [[[4,4,3],[0]], [[5,2,3,4,8,6,5],[7,2,1,3]], [[3,4],[0]], [[5],[0]], [[0],[4]],
+                      [[5],[0]],[[7],[0]],[[4],[0]],[[5],[1]],[[5],[0]],[[5],[0]],[[12],[0]],[[3],[0]],
+[[5,4,2],[0]],[[5,4,2],[0]],[[5,4,2],[0]],[[5,5,6],[1]],[[3,2,5],[0]],[[2,4,5],[0]],[[5,5,5],[0]],[[3,2,3],[0]]]
 
 Simulationsetupvec = ["2000-Jan-01 00:00:00", "2001-Jan-01 00:00:00", "360", "C:/Users/Acer/Documents/GitHub/CD3Waterbalance/Module/cd3waterbalancemodules.py"]
 
@@ -109,7 +123,7 @@ Needtohaveinputs = Need_to_have_modelinput(Needtohaveinputsvec[0], Needtohaveinp
 Catchments = Catchmentsetup(Global_counters.number_of_catchments ,0, Decay_Constant =1.9, Catchment_Area = 100, Fraktion_of_Impervious_Area_to_Reservoir_iAR= 0.4, Fraktion_of_Impervious_Area_to_Stormwater_Drain_iASD = 0.3, Fraktion_of_Pervious_Area_pA = 0.3, Number_of_Subareas = 1, Initial_Infiltration_Capacity = 0.6, Final_Infiltration_Capacity = 0.21, Depression_Loss = 1.5, Wetting_Loss = 0.4, Outdoor_Demand_Weighing_Factor = 0.5, Runoff_Runtime_iAR = 400, Runoff_Runtime_iASD = 500, Runoff_Runtime_pA = 700, Weighting_Coefficient_iAR = 0.04, Weighting_Coefficient_iASD = 0.05, Weighting_Coefficient_pA = 0.06)
 Catchments.Setandwrite_attributes(Global_counters.number_of_catchments,0,Catchattrvec)
 Buildings = Buildingsetup(Global_counters.number_of_buildings,0)
-Stormwaterpipe =  Stormwaterpipesetup(Global_counters.number_of_stormwaterpipes,0)
+Stormwaterdrain =  Stormwaterdrainsetup(Global_counters.number_of_stormwaterpipes,0)
 Sewers =  Sewer2setup(Global_counters.number_of_sewers,0)
 Potablewaterreservoir = Potablewaterreservoirsetup(Global_counters.number_of_potablwaterreservoirs,0)
 Greywatertank = Greywatertanksetup(Global_counters.number_of_greywatertanks,0,Yield_of_Treatment = 0.9, Storage_Volume = 15.0)
@@ -133,8 +147,8 @@ for i in range(len(Catchments.Catchmentnodelist)):
     Nodelist.append(Catchments.Catchmentnodelist[i])
 for i in range(len(Buildings.Buildingnodelist)):
     Nodelist.append(Buildings.Buildingnodelist[i])
-for i in range(len(Stormwaterpipe.Stormwaterpipenodelist)):
-    Nodelist.append(Stormwaterpipe.Stormwaterpipenodelist[i])
+for i in range(len(Stormwaterdrain.Stormwaterpipenodelist)):
+    Nodelist.append(Stormwaterdrain.Stormwaterpipenodelist[i])
 for i in range(len(Sewers.Sewer2nodelist)):
     Nodelist.append(Sewers.Sewer2nodelist[i])
 for i in range(len(Potablewaterreservoir.Potablewaterreservoirnodelist)):
@@ -160,7 +174,7 @@ for i in range(len(Supplylevel.Supplylevel_list)):
     Connectionlist.append(Supplylevel.Supplylevel_list[i])   
 
 # adding additional Fileouts
-Connection_Name_List = [[100, 'Rain_Model.txt'],[108, 'Evapo_Model.txt']]
+Connection_Name_List = [[407, 'Rain_Model.txt'],[435, 'Evapo_Model.txt']]
 Additional_Fileouts(Connection_Name_List)        
     
 

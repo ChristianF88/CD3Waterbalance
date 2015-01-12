@@ -123,7 +123,7 @@ class Stormwaterreservoirlevel:
                 Global_counters.number_of_connections += 1
                 string5='\t\t\t<connection id="'+str(Global_counters.number_of_connections)+'">\n' 
                 string6='\t\t\t\t<source node="Collector_'+str(self.swr_outflow_coll_list[0])+'" port="Outport"/>\n' 
-                string7='\t\t\t\t<sink node="Stormwaterreservoir_'+str(Global_counters.number_of_stormwaterreservoirs)+'" port="Treated_Stormwater_Out"/>\n' 
+                string7='\t\t\t\t<sink node="Stormwaterreservoir_'+str(Global_counters.number_of_stormwaterreservoirs)+'" port="Stormwater_Out"/>\n' 
                 string8='\t\t\t</connection>\n' 
                 Global_counters.number_of_connections += 1
                 #writes all strings in one and puts it in list

@@ -17,6 +17,7 @@ from numpy import size, asarray
 Rainevapovector =[]
 Outputvector =[]
 area_fractions1=[]
+Fractioncalculatorvec = []
 total_area = 0.0
 #killing the cd3 process (if necessary) and deleting old ouput .txt files
 def Deleter(location_files1='C:\Users\Acer\Documents\GitHub\CD3Waterbalance\simulationwithpatterns\outputfiles'):
@@ -182,7 +183,7 @@ def Bilanz(Data, tocheck, wettingloss = 0.4, depressionloss=1.5, totalarea = tot
             inputER=[]
             inputERlist = ['Evapo_Model', 'Rain_Model']
             outputISSP = []
-            outputISSPlist = ['Actual_Infiltration_0', 'Potable_Water_Demand_0', 'Sewer_0', 'Stormwaterpipe_0']
+            outputISSPlist = ['Actual_Infiltration_0', 'Potable_Water_Demand_0', 'Sewer_0', 'Stormwaterdrain_0']
             outputOD = []                               
             
             for i in range(len(Data)):
@@ -383,14 +384,18 @@ def plotter(Vector1, Vector2, limx=[0,365], limy=[0,1], toplot=['Rain_Model', 'S
                                              num2date(float(Vector1[1][0]) + float(limx[1])).strftime("%d.%m.%Y %H:%M:%S")])
     return
 
+def Fractioncalcvec(Catchmentattributevector):
+    for i in range(len(Catchmentattributevector)):
+        Fractioncalculatorvec.append([Catchmentattributevector[i][2],Catchmentattributevector[i][5],Catchmentattributevector[i][3],Catchmentattributevector[i][4]])
 
 #[[485.1, 0.18, 0.63, 0.19], [855.9, 0.28, 0.43, 0.29], [800, 0.1, 0.3, 0.6], [960, 0.46, 0.45, 0.09], [1200, 0, 0, 1]]
 def theholelot(outputfiles='C:\Users\Acer\Documents\GitHub\CD3Waterbalance\simulationwithpatterns\outputfiles', inputfiles='C:\Users\Acer\Documents\GitHub\CD3Waterbalance\simulationwithpatterns\inputfiles', 
                wettingloss = 0.4, depressionloss=1.5):    
-    #Deleter(outputfiles)
-    #runcd3('Test.xml')
+    Deleter(outputfiles)
+    runcd3('Test.xml')
+    Fractioncalcvec(Catchmentattributevector)
     ##Fractioncalculator input = [[total Area, perv, imperv_to_storage, imperv_to_stormw],...]    
-    Fractioncalculator([[800,0.4,0.4,0.2],[10000,0.1,0.1,0.8],[900,0.4,0.3,0.3],[500,0.5,0.4,0.1],[1400,0.4,0.0,0.6], [20000,0.0,0.0,1]])
+    Fractioncalculator(Fractioncalculatorvec)
     getoutputdata(outputfiles, total_area)
     getinputdata(inputfiles, total_area)
     Bilanz([Rainevapovector, Outputvector], ['Evapo', 'Rain', 'System'], wettingloss, depressionloss, total_area, area_fractions1)
@@ -398,12 +403,23 @@ def theholelot(outputfiles='C:\Users\Acer\Documents\GitHub\CD3Waterbalance\simul
     print 'done'
     return
 
+Catchmentattributevector = [[1,1.9,800,0.4,0.2,0.4,0.6,0.21,1.5,0.4,0.5,400,500,700,0.04,0.05,0.06],[1,1.8,10000,0.1,0.8,0.1,0.6,0.21,1.5,0.4,0.5,380,510,710,0.04,0.05,0.06],
+              [1,2,900,0.3,0.3,0.4,0.6,0.21,1.5,0.4,0.5,420,520,690,0.04,0.05,0.06],[1,1.7,500,0.4,0.1,0.5,0.6,0.21,1.5,0.4,0.5,380,520,720,0.04,0.05,0.06],
+[1,1.9,1400,0.0,0.6,0.4,0.6,0.21,1.5,0.4,0.5,400,500,700,0.04,0.05,0.06], [1,1.9,20000,0.0,1,0.0,0.6,0.21,1.5,0.4,0.5,400,500,700,0.04,0.05,0.06],
+[1,1.9,1000,0.4,0.3,0.3,0.6,0.21,1.5,0.4,0.5,400,500,700,0.04,0.05,0.06],[1,2.1,1000,0.38,0.12,0.5,0.6,0.21,1.5,0.4,0.5,380,510,710,0.04,0.05,0.06],
+[1,2,900,0.0,0.7,0.3,0.6,0.21,1.5,0.4,0.5,420,520,690,0.04,0.05,0.06],[1,1.9,20000,0.0,1,0.0,0.6,0.21,1.5,0.4,0.5,400,500,700,0.04,0.05,0.06],
+[1,1.7,1200,0.4,0.1,0.5,0.6,0.21,1.5,0.4,0.5,380,520,720,0.04,0.05,0.06],[1,1.95,950,0.7,0.25,0.05,0.6,0.21,1.5,0.4,0.5,400,500,700,0.04,0.05,0.06], 
+[1,1.9,2000,0.5,0.3,0.2,0.6,0.21,1.5,0.4,0.5,400,500,700,0.04,0.05,0.06],[1,1.9,20000,0.0,1,0.0,0.6,0.21,1.5,0.4,0.5,400,500,700,0.04,0.05,0.06],
+[1,1.9,1800,0.2,0.2,0.6,0.6,0.21,1.5,0.4,0.5,400,500,700,0.04,0.05,0.06],[1,1.8,1000,0.0,0.9,0.1,0.6,0.21,1.5,0.4,0.5,380,510,710,0.04,0.05,0.06],
+[1,1.9,20000,0.0,1,0.0,0.6,0.21,1.5,0.4,0.5,400,500,700,0.04,0.05,0.06],
+[1,2,1450,0.7,0.1,0.2,0.6,0.21,1.5,0.4,0.5,420,520,690,0.04,0.05,0.06],[1,1.7,1100,0.5,0.1,0.4,0.6,0.21,1.5,0.4,0.5,380,520,720,0.04,0.05,0.06],
+[1,1.9,1210,0.3,0.1,0.6,0.6,0.21,1.5,0.4,0.5,400,500,700,0.04,0.05,0.06], [1,1.9,4000,0.5,0.2,0.3,0.6,0.21,1.5,0.4,0.5,400,500,700,0.04,0.05,0.06],
+[1,1.9,800,0.4,0.2,0.4,0.6,0.21,1.5,0.4,0.5,400,500,700,0.04,0.05,0.06],[1,1.8,1000,0.0,0.8,0.2,0.6,0.21,1.5,0.4,0.5,380,510,710,0.04,0.05,0.06],
+[1,2,900,0.3,0.3,0.4,0.6,0.21,1.5,0.4,0.5,420,520,690,0.04,0.05,0.06],[1,1.7,1500,0.4,0.1,0.5,0.6,0.21,1.5,0.4,0.5,380,520,720,0.04,0.05,0.06],
+[1,1.9,20000,0.0,1,0.0,0.6,0.21,1.5,0.4,0.5,400,500,700,0.04,0.05,0.06]]
 
 theholelot()
 
-
-
-#[[800,0.4,0.4,0.2],[10000,0.1,0.1,0.8],[900,0.4,0.3,0.3],[500,0.5,0.4,0.1],[1400,0.4,0.0,0.6], [20000,0.0,0.0,1]]
 
 
 

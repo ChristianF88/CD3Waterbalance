@@ -1,14 +1,8 @@
-# Catchment
+# Demand Model
 
 Basic features:
 
- - simulates the interaction between rain, evapotranspiration and pervious, as well as impervious area
- - produces dynamic flow using the _Muskingum Method_
- - differentiation between collected run-off and rainwater adding to the storm water drainage system can be made
- - infiltration rates estimated via _Horton Equation_
- - catchment can be divided in subareas
- - estimates outdoor use of connected Households
- - additional inflows can be implemented
+ - 
  
 <br>
 
@@ -16,54 +10,30 @@ Basic features:
 ### Input
 
 
-| Flow  | Type  |  Unit  |
-| :------------ |:---------------:| :-----:|	
-| Rain      | Time Series | [mm/dt] |
-| 	Evapotranspiration | Time Series  |   [mm/dt] |
-| Inflow | Time Series         |    [m³/dt] |
+| Input  | Type  |  Unit  |  Example  | Explanation |
+| :------------ |:---------------:| :-----:|:-----:| :-----: |	
+| Residential Vector     | Vector | [-] |  [4,6] |  2 residential units, 4 occupants in the first unit and 6 occupants in the second unit  |
+| 	Commercial Vector | Vector  |   [-] | [0]  |  no commercial units  |
+
 
 # 
 
-|Catchment Attributes  | Type  |  Unit  |
+| Output  | Type  |  Unit  |
 | :------------ |:---------------:| :-----:|
-|    Catchment Area   | Constant |  [m^2]
-| Fraction of Pervious Area (pA) |   Constant  |  [-]   |
-|   Fraction of Impervious Area to Reservoir (iAR)| Constant |  [-]
-|    Fraction of Impervious Area to Stormwater Drain (iASD)  |    Constant     |  [-]  |
-| Number of Subareas |   Constant  |  [-]   |
-| Wetting Loss |   Constant  |  [mm]   |
-| Depression Loss |   Constant  |  [mm]   |
-| Outdoor_Demand_Weighing_Factor |   Constant  |  [-]   |
+|    Outport Bathtub   | Time Series |  [l/h]
+| Outport Shower |   Time Series  |  [l/h]   |
+|   Outport Tap | Time Series |  [l/h]
+|    Outport Toilet  |    Time Series     |  [l/h]  |
+| Outport Dishwasher |   Time Series  |  [l/h]   |
+| Outport Washing Machine |   Time Series  |  [l/h]   |
+|    Outport Check Bathtub   | Time Series |  [l/h]
+| Outport Check Shower |   Time Series  |  [l/h]   |
+|   Outport Check Tap | Time Series |  [l/h]
+|    Outport Check Toilet  |    Time Series     |  [l/h]  |
+| Outport Check Dishwasher |   Time Series  |  [l/h]   |
+| Outport Check Washing Machine |   Time Series  |  [l/h]   |
 
-# 
 
-|Horton Method  | Type  |  Unit  |
-| :------------ |:---------------:| :-----:|
-|    Initial Infiltration Capacity (Horton)   | Constant |  [m/h]
-|    Final Infiltration Capacity (Horton)   |    Constant     |  [m/h]  |
-| Decay Constant (Horton) |   Constant  |  [1/min]   |
-
-# 
-
-|Muskingum Method  | Type  |  Unit  |
-| :------------ |:---------------:| :-----:|
-| Runoff Velocity (pA)  |   Constant  |  [m/s]   |
-| Weighting Coefficient (pA) |   Constant  |  [-]   |
-| Runoff Velocity  (iAR) |   Constant  |  [m/s]   |
-| Weighting Coefficient (iAR)|   Constant  |  [-]   |
-| Runoff Velocity  (iASD) |   Constant  |  [m/s]   |
-| Weighting Coefficient (iASD)|   Constant  |  [-]   |
-
-### Output 
-
-|Flow  | Type  |  Unit  |
-| :------------ |:---------------:| :-----:|
-| Possible Infiltration  |   time series  |  [m³/dt]   |
-| Actual Infiltration |   time series  |  [m³/dt]  |
-| Runoff |   time series  |  [m³/dt]  |
-| Collected Water|   time series  | [m³/dt]   |
-| Outdoor Demand |   time series  |  [m³/dt]  |
-| Outdoor Demand Check |   time series  |  [m³/dt]  |
 
 <br>
 

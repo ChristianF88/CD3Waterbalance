@@ -72,7 +72,7 @@ class Buildinglevel:
             string8='\t\t\t</connection>\n'
             Global_counters.number_of_connections += 1
             string9='\t\t\t<connection id="'+str(Global_counters.number_of_connections)+'">\n'
-            string10='\t\t\t\t<source node="Building_'+str(Global_counters.number_of_buildings)+'" port="Non_Potable_Water"/>\n'
+            string10='\t\t\t\t<source node="Building_'+str(Global_counters.number_of_buildings)+'" port="Non_Potable_Demand"/>\n'
             string11='\t\t\t\t<sink node="Raintank_'+str(Global_counters.number_of_raintanks)+'" port="Non_Potable_Demand"/>\n'
             string12='\t\t\t</connection>\n'
             Global_counters.number_of_connections += 1
@@ -117,12 +117,12 @@ class Buildinglevel:
             if number_of_buildinglevels[1][i] == 1:
                 string37='\t\t\t<connection id="'+str(Global_counters.number_of_connections)+'">\n'
                 string38='\t\t\t\t<source node="Raintank_'+str(Global_counters.number_of_raintanks)+'" port="Additional_Demand"/>\n'
-                string39='\t\t\t\t<sink node="Greywatertank_'+str(Global_counters.number_of_greywatertanks)+'" port="Treated_Grey_Water_Out"/>\n'
+                string39='\t\t\t\t<sink node="Greywatertank_'+str(Global_counters.number_of_greywatertanks)+'" port="Greywater_Out"/>\n'
                 string40='\t\t\t</connection>\n'
                 Global_counters.number_of_connections += 1
                 string41='\t\t\t<connection id="'+str(Global_counters.number_of_connections)+'">\n'
-                string42='\t\t\t\t<source node="Building_'+str(Global_counters.number_of_buildings)+'" port="Grey_Water"/>\n'
-                string43='\t\t\t\t<sink node="Greywatertank_'+str(Global_counters.number_of_greywatertanks)+'" port="Grey_Water_In"/>\n'
+                string42='\t\t\t\t<source node="Building_'+str(Global_counters.number_of_buildings)+'" port="Greywater"/>\n'
+                string43='\t\t\t\t<sink node="Greywatertank_'+str(Global_counters.number_of_greywatertanks)+'" port="Greywater_In"/>\n'
                 string44='\t\t\t</connection>\n'
                 Global_counters.number_of_connections += 1
                

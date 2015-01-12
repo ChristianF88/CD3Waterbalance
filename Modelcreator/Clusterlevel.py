@@ -84,26 +84,26 @@ class Clusterlevel:
                     if type(Buildings.numbers_of_buildings_contributing_gw_list[m]) == str:
                         if Buildings.numbers_of_buildings_contributing_gw_list[m] == "not_contributing to gw <type 'int'>":
                             string1='\t\t\t<connection id="'+str(Global_counters.number_of_connections)+'">\n' 
-                            string2='\t\t\t\t<source node="Building_'+str(Buildings.numbers_of_buildings_list[m])+'" port="Grey_Water"/>\n' 
+                            string2='\t\t\t\t<source node="Building_'+str(Buildings.numbers_of_buildings_list[m])+'" port="Greywater"/>\n' 
                             string3='\t\t\t\t<sink node="Collector_'+str(Global_counters.number_of_collectors)+'" port="Inport_'+str(m+1)+'"/>\n' 
                             string4='\t\t\t</connection>\n' 
                             Global_counters.number_of_connections += 1
                         else:
                             string1='\t\t\t<connection id="'+str(Global_counters.number_of_connections)+'">\n' 
-                            string2='\t\t\t\t<source node="Greywatertank_'+str(Buildings.numbers_of_greywatertanks_list[m][1])+'" port="Grey_Water_Overflow"/>\n' 
+                            string2='\t\t\t\t<source node="Greywatertank_'+str(Buildings.numbers_of_greywatertanks_list[m][1])+'" port="Greywater_Overflow"/>\n' 
                             string3='\t\t\t\t<sink node="Collector_'+str(Global_counters.number_of_collectors)+'" port="Inport_'+str(m+1)+'"/>\n' 
                             string4='\t\t\t</connection>\n' 
                             Global_counters.number_of_connections += 1
                     else:
                         if type(Buildings.numbers_of_buildings_contributing_gw_list[m]) == int:
                             string1='\t\t\t<connection id="'+str(Global_counters.number_of_connections)+'">\n' 
-                            string2='\t\t\t\t<source node="Building_'+str(Buildings.numbers_of_buildings_list[m])+'" port="Grey_Water"/>\n' 
+                            string2='\t\t\t\t<source node="Building_'+str(Buildings.numbers_of_buildings_list[m])+'" port="Greywater"/>\n' 
                             string3='\t\t\t\t<sink node="Collector_'+str(Global_counters.number_of_collectors)+'" port="Inport_'+str(m+1)+'"/>\n' 
                             string4='\t\t\t</connection>\n' 
                             Global_counters.number_of_connections += 1
                         else:
                             string1='\t\t\t<connection id="'+str(Global_counters.number_of_connections)+'">\n' 
-                            string2='\t\t\t\t<source node="Greywatertank_'+str(Buildings.numbers_of_greywatertanks_list[m][1])+'" port="Grey_Water_Overflow"/>\n' 
+                            string2='\t\t\t\t<source node="Greywatertank_'+str(Buildings.numbers_of_greywatertanks_list[m][1])+'" port="Greywater_Overflow"/>\n' 
                             string3='\t\t\t\t<sink node="Collector_'+str(Global_counters.number_of_collectors)+'" port="Inport_'+str(m+1)+'"/>\n' 
                             string4='\t\t\t</connection>\n' 
                             Global_counters.number_of_connections += 1

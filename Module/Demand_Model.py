@@ -45,9 +45,9 @@ class Demand_Model (pycd3.Node):
         
         #Inports
         self.number_residential_units = pycd3.String("[4,4,3,12,4,5,7,8,4,3,4,6]")
-        self.addParameter("Number_of_Residential_Units", self.number_residential_units)
+        self.addParameter("Residential_Vector", self.number_residential_units)
         self.number_commercial_units = pycd3.String("[4,20,2,5,3,4]")
-        self.addParameter("Number_of_Commercial_Units", self.number_commercial_units)
+        self.addParameter("Commercial_Vector", self.number_commercial_units)
         
         #Outports to connect to Household
         self.Bathtub=pycd3.Flow()

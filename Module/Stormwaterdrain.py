@@ -29,7 +29,7 @@ import pycd3
 #        print "NodeFactory.getSource"
 #        return "Addons.py"
 
-class Stormwaterpipe(pycd3.Node):
+class Stormwaterdrain(pycd3.Node):
     def __init__(self):
         pycd3.Node.__init__(self)
         self.inport = pycd3.Flow()
@@ -59,7 +59,7 @@ class Stormwaterpipe(pycd3.Node):
     
     def getClassName(self):
         #print "getClassName"
-        return "Stormwaterpipe"
+        return "Stormwaterdrain"
 
 #def register(nr):
 #    for c in pycd3.Node.__subclasses__():

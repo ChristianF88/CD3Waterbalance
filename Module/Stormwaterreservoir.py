@@ -42,10 +42,10 @@ class Stormwaterreservoir(pycd3.Node):
         #dir (self.inf)
         print "init node"
         self.addInPort("Stormwater_In", self.stormwaterin)
-        self.addInPort("Treated_Stormwater_Out", self.stormwaterout)
+        self.addInPort("Stormwater_Out", self.stormwaterout)
         self.addOutPort("Current_Volume",self.check_storage)
         self.addOutPort("Additional_Demand",self.Additional_Demand)
-        self.addOutPort("Waste_Water",self.wastewater)
+        self.addOutPort("Wastewater",self.wastewater)
         self.addOutPort("Overflow",self.overflow)
         self.myyield = pycd3.Double(0.9)
         self.addParameter("Yield_of_Treatment [-]", self.myyield)

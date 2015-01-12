@@ -12,14 +12,14 @@ Basic features:
 
 | Input  | Type  |  Unit  |
 | :------------ |:---------------:| :-----:|	
-| File      | time series | [DD.MM.YYYY HH:MM:SS value(see below)] |
+| File      | Time Series (File) | [DD.MM.YYYY HH:MM:SS value(see below)] |
 | 	Filecontent | Letter  |  "H" for Height [ _any_ ] or "F" for Flow [ _any_ ] |
 
 # 
 
 |Output   | Type  |  Unit  |
 | :------------ |:---------------:| :-----:|
-|  Inputdata with adjusted time step  |   time series  |  _same as input_  |
+|  Inputdata with adjusted time step  |   Time Series  |  _same as input_  |
 
 <br>
 

@@ -30,7 +30,7 @@ import pycd3
 #        print "NodeFactory.getSource"
 #        return "Addons.py"
 
-class Potable_Water_Resorvoir(pycd3.Node):
+class Potable_Water_Reservoir(pycd3.Node):
     def __init__(self):
         pycd3.Node.__init__(self)
         self.pot_w = pycd3.Flow()
@@ -58,7 +58,7 @@ class Potable_Water_Resorvoir(pycd3.Node):
     
     def getClassName(self):
         print "getClassName"
-        return "Potable_Water_Resorvoir"
+        return "Potable_Water_Reservoir"
 
 #def register(nr):
 #    for c in pycd3.Node.__subclasses__():

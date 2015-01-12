@@ -23,7 +23,7 @@ class Sewer2setup:
                 
             self.Sewer2nodelist.append(alllines)
 
-        print str(numberofSewer2s)+' Sewer2s have been created!'
+        print str(numberofSewer2s)+' Sewers have been created!'
         return
     
     

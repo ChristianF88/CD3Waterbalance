@@ -45,7 +45,7 @@ class Greywaterreservoirlevel:
                 counter_pwr = 0
                 counter_swr = 0
                 for m in range(Cluster.number_of_clusters):
-                    #if cluster is connected to stormwaterreservoir
+                    #if cluster is connected to greywaterreservoir
                     if Cluster.decision_gwr_swr_pwr[m] == 'gwr':
                         string1='\t\t\t<connection id="'+str(Global_counters.number_of_connections)+'">\n' 
                         string2='\t\t\t\t<source node="Collector_'+str(Cluster.additionaldemand_from_gwr_coll_list[additional_demand_from_gw_listcounter])+'" port="Outport"/>\n' 
@@ -117,12 +117,12 @@ class Greywaterreservoirlevel:
                 self.gwr_out_strings = []
                 string1='\t\t\t<connection id="'+str(Global_counters.number_of_connections)+'">\n' 
                 string2='\t\t\t\t<source node="Collector_'+str(self.additionaldemand_from_gw_coll_list[0])+'" port="Outport"/>\n' 
-                string3='\t\t\t\t<sink node="Greywatertank_'+str(Global_counters.number_of_greywatertanks)+'" port="Treated_Grey_Water_Out"/>\n' 
+                string3='\t\t\t\t<sink node="Greywatertank_'+str(Global_counters.number_of_greywatertanks)+'" port="Greywater_Out"/>\n' 
                 string4='\t\t\t</connection>\n' 
                 Global_counters.number_of_connections += 1
                 string5='\t\t\t<connection id="'+str(Global_counters.number_of_connections)+'">\n' 
                 string6='\t\t\t\t<source node="Collector_'+str(self.gw_inflow_coll_list[0])+'" port="Outport"/>\n' 
-                string7='\t\t\t\t<sink node="Greywatertank_'+str(Global_counters.number_of_greywatertanks)+'" port="Grey_Water_In"/>\n' 
+                string7='\t\t\t\t<sink node="Greywatertank_'+str(Global_counters.number_of_greywatertanks)+'" port="Greywater_In"/>\n' 
                 string8='\t\t\t</connection>\n' 
                 Global_counters.number_of_connections += 1
                 #writes all string in one and puts it in list

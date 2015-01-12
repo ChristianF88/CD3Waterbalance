@@ -15,7 +15,7 @@ class Potablewaterreservoirsetup:
         self.Potablewaterreservoirnodelist = []
         for i in range(numberofPotablewaterreservoirs+starting_value_i)[starting_value_i:]:
             exec 'self.Potablewaterreservoirattributelist.append({"Potablewaterreservoir_'+str(i)+'" : Potablewaterreservoirattributes})'
-            exec '''self.line1='\\t\\t\\t<node id="Potable_Water_Resorvoir_'+str(i)+'" class="Potable_Water_Resorvoir"/> \\n' '''
+            exec '''self.line1='\\t\\t\\t<node id="Potable_Water_Reservoir_'+str(i)+'" class="Potable_Water_Reservoir"/> \\n' '''
          
             alllines = ''
             for n in range(1):

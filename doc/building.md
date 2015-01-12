@@ -1,4 +1,4 @@
-# Household
+# Building
 
 Basic features:
 
@@ -39,9 +39,6 @@ Basic features:
 This Block uses the implemented indoor demand time series and the outdoor demand given by the catchment block to estimate the Water needed by the household as well as the waste water produced. Furthermore the block distinguishes between potable and non potable water demand as well as between produced grey water and black water.
 
 The individual stream are calculated by simple balances:
-
-- potable water demand consist out of Bathtub, Shower, Tap, Washing Machine, Dishwasher 
-- non potable water demand is 
 
 |Output Parameter  | Calculation  | 
 | :------------ |:---------------:| 

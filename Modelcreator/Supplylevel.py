@@ -104,7 +104,7 @@ class Supplylevel:
             #adds potable water reservoir connecting nonpot
             string1='\t\t\t<connection id="'+str(Global_counters.number_of_connections)+'">\n' 
             string2='\t\t\t\t<source node="Collector_'+str(Global_counters.number_of_collectors)+'" port="Outport"/>\n' 
-            string3='\t\t\t\t<sink node="Potable_Water_Resorvoir_'+str(Global_counters.number_of_potablwaterreservoirs)+'" port="Non_Potable_Water_Demand"/>\n' 
+            string3='\t\t\t\t<sink node="Potable_Water_Reservoir_'+str(Global_counters.number_of_potablwaterreservoirs)+'" port="Non_Potable_Water_Demand"/>\n' 
             string4='\t\t\t</connection>\n' 
             Global_counters.number_of_connections += 1
             #writes all string in one and puts it in list
@@ -122,7 +122,7 @@ class Supplylevel:
             self.pot_coll_strings=[]
             for m in range(Global_counters.number_of_buildings):
                 string1='\t\t\t<connection id="'+str(Global_counters.number_of_connections)+'">\n' 
-                string2='\t\t\t\t<source node="Building_'+str(m)+'" port="Potable_Water"/>\n' 
+                string2='\t\t\t\t<source node="Building_'+str(m)+'" port="Potable_Demand"/>\n' 
                 string3='\t\t\t\t<sink node="Collector_'+str(Global_counters.number_of_collectors)+'" port="Inport_'+str(m+1)+'"/>\n' 
                 string4='\t\t\t</connection>\n' 
                 Global_counters.number_of_connections += 1
@@ -135,7 +135,7 @@ class Supplylevel:
             #adds potable water reservoir connecting pot
             string1='\t\t\t<connection id="'+str(Global_counters.number_of_connections)+'">\n' 
             string2='\t\t\t\t<source node="Collector_'+str(Global_counters.number_of_collectors)+'" port="Outport"/>\n' 
-            string3='\t\t\t\t<sink node="Potable_Water_Resorvoir_'+str(Global_counters.number_of_potablwaterreservoirs)+'" port="Potable_Water_Demand"/>\n' 
+            string3='\t\t\t\t<sink node="Potable_Water_Reservoir_'+str(Global_counters.number_of_potablwaterreservoirs)+'" port="Potable_Water_Demand"/>\n' 
             string4='\t\t\t</connection>\n' 
             Global_counters.number_of_connections += 1
             #writes all string in one and puts it in list
@@ -193,7 +193,7 @@ class Supplylevel:
             #adds stormwaterdrain
             string1='\t\t\t<connection id="'+str(Global_counters.number_of_connections)+'">\n' 
             string2='\t\t\t\t<source node="Collector_'+str(Global_counters.number_of_collectors)+'" port="Outport"/>\n' 
-            string3='\t\t\t\t<sink node="Stormwaterpipe_'+str(Global_counters.number_of_stormwaterpipes)+'" port="Runoff"/>\n' 
+            string3='\t\t\t\t<sink node="Stormwaterdrain_'+str(Global_counters.number_of_stormwaterpipes)+'" port="Runoff"/>\n' 
             string4='\t\t\t</connection>\n' 
             Global_counters.number_of_connections += 1
             #writes all string in one and puts it in list
@@ -216,7 +216,7 @@ class Supplylevel:
             if len(Stormwater.numbers_of_large_swr) != []:
                 for n in range(len(Stormwater.numbers_of_large_swr)):
                     string1='\t\t\t<connection id="'+str(Global_counters.number_of_connections)+'">\n' 
-                    string2='\t\t\t\t<source node="Stormwaterreservoir_'+str(Stormwater.numbers_of_large_swr[n])+'" port="Waste_Water"/>\n' 
+                    string2='\t\t\t\t<source node="Stormwaterreservoir_'+str(Stormwater.numbers_of_large_swr[n])+'" port="Wastewater"/>\n' 
                     string3='\t\t\t\t<sink node="Collector_'+str(Global_counters.number_of_collectors)+'" port="Inport_'+str(n+1)+'"/>\n' 
                     string4='\t\t\t</connection>\n' 
                     Global_counters.number_of_connections += 1
@@ -235,7 +235,7 @@ class Supplylevel:
             if Global_counters.number_of_greywatertanks != 0:
                 for m in range(Global_counters.number_of_greywatertanks):
                     string1='\t\t\t<connection id="'+str(Global_counters.number_of_connections)+'">\n' 
-                    string2='\t\t\t\t<source node="Greywatertank_'+str(m)+'" port="Waste_Water"/>\n' 
+                    string2='\t\t\t\t<source node="Greywatertank_'+str(m)+'" port="Wastewater"/>\n' 
                     string3='\t\t\t\t<sink node="Collector_'+str(Global_counters.number_of_collectors)+'" port="Inport_'+str(m+n+2)+'"/>\n' 
                     string4='\t\t\t</connection>\n' 
                     Global_counters.number_of_connections += 1
@@ -273,7 +273,7 @@ class Supplylevel:
             #collects all black water from buildings
             for q in range(Global_counters.number_of_buildings):
                     string1='\t\t\t<connection id="'+str(Global_counters.number_of_connections)+'">\n' 
-                    string2='\t\t\t\t<source node="Building_'+str(q)+'" port="Black_Water"/>\n' 
+                    string2='\t\t\t\t<source node="Building_'+str(q)+'" port="Blackwater"/>\n' 
                     string3='\t\t\t\t<sink node="Collector_'+str(Global_counters.number_of_collectors)+'" port="Inport_'+str(q+p+m+n+4)+'"/>\n' 
                     string4='\t\t\t</connection>\n' 
                     Global_counters.number_of_connections += 1
@@ -286,7 +286,7 @@ class Supplylevel:
             #adds sewer       
             string1='\t\t\t<connection id="'+str(Global_counters.number_of_connections)+'">\n' 
             string2='\t\t\t\t<source node="Collector_'+str(Global_counters.number_of_collectors)+'" port="Outport"/>\n' 
-            string3='\t\t\t\t<sink node="Sewer2_'+str(Global_counters.number_of_sewers)+'" port="Black_Water"/>\n' 
+            string3='\t\t\t\t<sink node="Sewer2_'+str(Global_counters.number_of_sewers)+'" port="Blackwater"/>\n' 
             string4='\t\t\t</connection>\n' 
             Global_counters.number_of_connections += 1
             #writes all string in one and puts it in list
@@ -654,46 +654,49 @@ class Supplylevel:
         
         
         #adds fileout for Sewer
-        string1='\t\t\t<connection id="'+str(Global_counters.number_of_connections)+'">\n' 
-        string2='\t\t\t\t<source node="Sewer2_'+str(Global_counters.number_of_sewers-1)+'" port="Discharged_Volume"/>\n' 
-        string3='\t\t\t\t<sink node="FileOut_'+str(Global_counters.number_of_fileouts)+'" port="in"/>\n' 
-        string4='\t\t\t</connection>\n' 
-        Global_counters.number_of_connections += 1
-        #writes all string in one and puts it in list
-        self.fileoutstrings = ''
-        for o in range(5)[1:]:
-            exec 'self.fileoutstrings += string'+str(o)
-        self.fileout_strings.append(self.fileoutstrings)
-        Global_counters.numbers_names_of_fileouts_list.append([Global_counters.number_of_fileouts, 'Sewer_'+str(i)+'.txt'])
-        Global_counters.number_of_fileouts += 1
+        for q in range(Global_counters.number_of_sewers):
+            string1='\t\t\t<connection id="'+str(Global_counters.number_of_connections)+'">\n' 
+            string2='\t\t\t\t<source node="Sewer2_'+str(q)+'" port="Discharged_Volume"/>\n' 
+            string3='\t\t\t\t<sink node="FileOut_'+str(Global_counters.number_of_fileouts)+'" port="in"/>\n' 
+            string4='\t\t\t</connection>\n' 
+            Global_counters.number_of_connections += 1
+            #writes all string in one and puts it in list
+            self.fileoutstrings = ''
+            for o in range(5)[1:]:
+                exec 'self.fileoutstrings += string'+str(o)
+            self.fileout_strings.append(self.fileoutstrings)
+            Global_counters.numbers_names_of_fileouts_list.append([Global_counters.number_of_fileouts, 'Sewer_'+str(i)+'.txt'])
+            Global_counters.number_of_fileouts += 1
         
         #adds fileout for Stormwaterdrain
-        string1='\t\t\t<connection id="'+str(Global_counters.number_of_connections)+'">\n' 
-        string2='\t\t\t\t<source node="Stormwaterpipe_'+str(Global_counters.number_of_stormwaterpipes-1)+'" port="Discharged_Volume"/>\n' 
-        string3='\t\t\t\t<sink node="FileOut_'+str(Global_counters.number_of_fileouts)+'" port="in"/>\n' 
-        string4='\t\t\t</connection>\n' 
-        Global_counters.number_of_connections += 1
-        #writes all string in one and puts it in list
-        self.fileoutstrings = ''
-        for o in range(5)[1:]:
-            exec 'self.fileoutstrings += string'+str(o)
-        self.fileout_strings.append(self.fileoutstrings)
-        Global_counters.numbers_names_of_fileouts_list.append([Global_counters.number_of_fileouts, 'Stormwaterdrain_'+str(i)+'.txt'])
-        Global_counters.number_of_fileouts += 1
+        for q in range(Global_counters.number_of_stormwaterpipes):
+            string1='\t\t\t<connection id="'+str(Global_counters.number_of_connections)+'">\n' 
+            string2='\t\t\t\t<source node="Stormwaterdrain_'+str(q)+'" port="Discharged_Volume"/>\n' 
+            string3='\t\t\t\t<sink node="FileOut_'+str(Global_counters.number_of_fileouts)+'" port="in"/>\n' 
+            string4='\t\t\t</connection>\n' 
+            Global_counters.number_of_connections += 1
+            #writes all string in one and puts it in list
+            self.fileoutstrings = ''
+            for o in range(5)[1:]:
+                exec 'self.fileoutstrings += string'+str(o)
+            self.fileout_strings.append(self.fileoutstrings)
+            Global_counters.numbers_names_of_fileouts_list.append([Global_counters.number_of_fileouts, 'Stormwaterdrain_'+str(i)+'.txt'])
+            Global_counters.number_of_fileouts += 1
         
         #adds fileout for Potable_Water_Resorvoir
-        string1='\t\t\t<connection id="'+str(Global_counters.number_of_connections)+'">\n' 
-        string2='\t\t\t\t<source node="Potable_Water_Resorvoir_'+str(Global_counters.number_of_potablwaterreservoirs-1)+'" port="Demand"/>\n' 
-        string3='\t\t\t\t<sink node="FileOut_'+str(Global_counters.number_of_fileouts)+'" port="in"/> \n ' 
-        string4='\t\t\t</connection>\n' 
-        Global_counters.number_of_connections += 1
-        #writes all string in one and puts it in list
-        self.fileoutstrings = ''
-        for o in range(5)[1:]:
-            exec 'self.fileoutstrings += string'+str(o)
-        self.fileout_strings.append(self.fileoutstrings)
-        Global_counters.numbers_names_of_fileouts_list.append([Global_counters.number_of_fileouts, 'Potable_Water_Demand_'+str(i)+'.txt'])
-        Global_counters.number_of_fileouts += 1
+        for q in range(Global_counters.number_of_potablwaterreservoirs):
+            string1='\t\t\t<connection id="'+str(Global_counters.number_of_connections)+'">\n' 
+            string2='\t\t\t\t<source node="Potable_Water_Reservoir_'+str(q)+'" port="Demand"/>\n' 
+            string3='\t\t\t\t<sink node="FileOut_'+str(Global_counters.number_of_fileouts)+'" port="in"/> \n ' 
+            string4='\t\t\t</connection>\n' 
+            Global_counters.number_of_connections += 1
+            #writes all string in one and puts it in list
+            self.fileoutstrings = ''
+            for o in range(5)[1:]:
+                exec 'self.fileoutstrings += string'+str(o)
+            self.fileout_strings.append(self.fileoutstrings)
+            Global_counters.numbers_names_of_fileouts_list.append([Global_counters.number_of_fileouts, 'Potable_Water_Demand_'+str(i)+'.txt'])
+            Global_counters.number_of_fileouts += 1
         
         
         for m in range(len(self.Supplylevel_loop_list)):
