@@ -1,6 +1,6 @@
 
 
-# Greywatertank
+# Rainwatertank
 
 Basic features:
 

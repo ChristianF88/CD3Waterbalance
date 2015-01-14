@@ -172,7 +172,7 @@ This vector is responsible for setting the Greywatertanks/Greywaterreservoirs pr
     Greywatertankvector =[Yield of Treatment, Storage Volume]
 
 For more detailed information regarding the input units, output, etc. please check the
-[Greywatertank Description File]()
+[Greywatertank Description File](https://github.com/ChristianF88/CD3Waterbalance/blob/master/doc/greywatertank.md)
 
 <br>
 
@@ -185,9 +185,7 @@ This vector is responsible for setting the Stormwaterreservoirs properties.
     Stormwaterreservoirvector =[Yield of Treatment, Storage Volume]
 
 For more detailed information regarding the input units, output, etc. please check the
-[Stormwaterreservoirs Description File]()
-
-
+[Stormwaterreservoirs Description File](https://github.com/ChristianF88/CD3Waterbalance/blob/master/doc/stormwaterreservoir.md)
 
 
 <br>
@@ -201,11 +199,7 @@ This vector contains the properties of all raintanks.
     Rainwatertankvector =[Storage Volume]
 
 For more detailed information regarding the input units, output, etc. please check the
-[Rainwatertank Description File]()
-
-
-
-
+[Rainwatertank Description File](https://github.com/ChristianF88/CD3Waterbalance/blob/master/doc/raintank.md)
 
 
 <br>
@@ -239,28 +233,45 @@ A Buildings Water Demand depends on the number of units it consits out of. Furth
     
 
 For more detailed information regarding the input, output, etc. please check the
-[Demand Model Description File]()
-
+[Demand Model Description File](https://github.com/ChristianF88/CD3Waterbalance/blob/master/doc/demandmodel.md)
 
 
 <br>
 
 > ### Simulationsetup Vector
 
+City Drain 3 need some basic information regarding the Simulation Setup. 
 
-
-
+	Simulationsetup Vector = [Start Simulation, End Simulation, Time Step of Simulation, Path of Addons to implement]
+    
+	[Start Simulation] = "YYYY-MMM-DD hh:mm:ss"
+	[End Simulation] = "YYYY-MMM-DD hh:mm:ss"
+	[Time Step of Simulation] = "s"
+	[Path of Addons to implement] = "path of file"
+	
+    For example:
+    
+    	Simulationsetup Vector = ["2000-Jan-01 00:00:00", "2001-Jan-01 00:00:00", "360", "C:/Users/Acer/Documents/GitHub/CD3Waterbalance/Module/cd3waterbalancemodules.py"]
 
 
 <br>
 
 > ### Needtohaveinputs Vector
 
+This vector takes care of the input information for both [File Readers](https://github.com/ChristianF88/CD3Waterbalance/blob/master/doc/file_reader.md) and the [Pattern Implementer](). 
 
+	Needtohaveinputs Vector = [Path of Rain File, Path of Evapotranspiration File, average Time of when the Sun is at its Zenith, average Time of Sundown]
+    
+	[Path of Rain File] = "path of file"
+	[Path of Evapotranspiration File] = "path of file"
+	[average Time of when the Sun is at its Zenith] = "h"
+	[average Time of Sundown] = "h"
+	
+    For example:
+    
+    	Needtohaveinputs Vector = ["C:/Users/Acer/Documents/GitHub/CD3Waterbalance/simulationwithpatterns/inputfiles/rain.ixx", "C:/Users/Acer/Documents/GitHub/CD3Waterbalance/simulationwithpatterns/inputfiles/evapo.ixx", "13", "20.5"]
 
-
-
-
+		
 <br>
 
 > ### Connection Name List

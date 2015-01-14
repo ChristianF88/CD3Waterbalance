@@ -415,7 +415,7 @@ class Demand_Model (pycd3.Node):
             self.CheckDishwasher[0] = self.Dishwasher[0]
         
         
-        elif dt % 3600 == 0:
+        elif dt % 3600 == 0 and dt < 3600*24:
             '''
             calculation for timesteps equal to full hour steps
             '''

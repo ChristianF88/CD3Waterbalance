@@ -25,9 +25,9 @@ class Need_to_have_modelinput:
                 <parameter name="Type_H_for_height_[mm]_or_F_for_flow_[l/h]" type="string" value="H"/>
             </node>
             <node id="Pattern_Impl_0" class="Pattern_Impl">
-                <parameter name="sun_zenith_[0-23h]" type="double" value="""
+                <parameter name="Sun_Zenith_[0-23h]" type="double" value="""
          self.string4="""/>
-                <parameter name="sundown_[0-23h]" type="double" value="""
+                <parameter name="Sundown_[0-23h]" type="double" value="""
          self.string5="""/>
             </node> \n """
             
