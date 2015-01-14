@@ -32,7 +32,7 @@ class Clusterlevel:
         
     def writeconnections(self, clusterbuildingvec):
 
-        #circels through all elements of the clusterhouseholdsvector, calling the Householdclass, writing the Buildinglevel connections
+        #circels through all elements of the clusterbuildingvector, calling the Buildingclass, writing the Buildinglevel connections
         for i in range(len(clusterbuildingvec)):
             self.number_of_clusters += clusterbuildingvec[i][-1]            
             
@@ -73,7 +73,7 @@ class Clusterlevel:
                 Global_counters.number_of_collectors_ports_list.append([Global_counters.number_of_collectors, clusterbuildingvec[i][0]+1])
                 #writes collector number in list that knows connection for later reference
                 self.runoff_coll_list.append(Global_counters.number_of_collectors)
-                Global_meaning_list.collectors.append(['Collector_'+str(Global_counters.number_of_collectors), 'collects Runoff from Catchments including Street on Clusterlevel'])
+                Global_meaning_list.collectors.append(['Collector_'+str(Global_counters.number_of_collectors), 'collects Runoff from Catchments including Street on Clusterlevel', 'Cluster '+str(n+i), 'connected to Catchments '+str(Buildings.numbers_of_catchments_list)+'and the street catchment '+str(Global_counters.number_of_catchments-1)])
                 Global_counters.number_of_collectors +=1
                 
                 
