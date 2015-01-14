@@ -174,8 +174,8 @@ for i in range(len(Supplylevel.Supplylevel_list)):
     Connectionlist.append(Supplylevel.Supplylevel_list[i])   
 
 # adding additional Fileouts
-Connection_Name_List = [[407, 'Rain_Model.txt'],[435, 'Evapo_Model.txt']]
-Additional_Fileouts(Connection_Name_List)        
+Fileout_Connection_Name_List = [[407, 'Rain_Model.txt'],[435, 'Evapo_Model.txt']]
+Additional_Fileouts(Fileout_Connection_Name_List)        
     
 
 ''' creating XML - List '''

@@ -40,11 +40,13 @@ Basic features:
 
 | Model Outputs  | Part of XML created  | Class created | 
 | :------------ |:---------------:| 	:---------------:|
-| Connection Name List      | Nodelist, Connectionlist | Fileout  |
+| Fileout Connection Name List      | Nodelist, Connectionlist | Fileout  |
 
 <br>
 
+## Output
 
+An XML - File containing the model information for CD3.
 
 ## Detailed Input Description
 
@@ -258,7 +260,7 @@ City Drain 3 need some basic information regarding the Simulation Setup.
 
 > ### Needtohaveinputs Vector
 
-This vector takes care of the input information for both [File Readers](https://github.com/ChristianF88/CD3Waterbalance/blob/master/doc/file_reader.md) and the [Pattern Implementer](). 
+This vector takes care of the input information for both [File Readers](https://github.com/ChristianF88/CD3Waterbalance/blob/master/doc/file_reader.md) and the [Pattern Implementer](https://github.com/ChristianF88/CD3Waterbalance/blob/master/doc/pattern_implementer.md). 
 
 	Needtohaveinputs Vector = [Path of Rain File, Path of Evapotranspiration File, average Time of when the Sun is at its Zenith, average Time of Sundown]
     
@@ -274,44 +276,49 @@ This vector takes care of the input information for both [File Readers](https://
 		
 <br>
 
-> ### Connection Name List
+> ### Fileout Connection Name List
 
+A City Drain Fileout is a built in block that creates a txt - file during the simulation. This file contains all quantity and quality information for every single time step simulated.
+To be able to check any flow in detail, Fileouts can be inserted at any position desired. To insert Fileouts the XML - Creator must be run at first. 
+Once the connection list has been generated, the numbers of the connections that are supposed to be checked, as well as the corresponding names, have to be written into the 
+_Fileout Connection Name List_. After running the XML - Creator again the Model will be set up with the desired Fileouts.
 
+	Fileout Connection Name List = [Fileoutvector_0, Fileoutvector_1, ..., Fileoutvector_n]
+    
+    Fileoutvector = [Number of Connection, Name of created Txt - File]
 
-
-
+    For example:
+    
+    	Fileoutvector = [[407, 'Rain_Model.txt'],[435, 'Evapo_Model.txt']]
+ 
 
 <br>
 
 
+## The 5 Levels of Implementation in Detail
+
+
+> ### Buildinglevel
 
 
 
 
+> ### Clusterlevel
 
 
 
 
+> ### Greywaterreservoirlevel
 
 
 
 
+> ### Stormwaterreservoirlevel
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
+> ### Supplylevel
 
 
 

@@ -13,8 +13,8 @@ Basic features:
 | Input  | Type  |  Unit  |
 | :------------ |:---------------:| :-----:|	
 | Inport      | Time Series | _any_|
-| 	Sun Zenith | Constant  |   [hh] |
-| Sundown | Constant   |    [hh] |
+| 	Sun Zenith | Constant  |   [0-23.99 h] |
+| Sundown | Constant   |    [0-23.99 h] |
 
 # 
 
