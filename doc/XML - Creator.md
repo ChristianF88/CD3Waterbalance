@@ -301,27 +301,43 @@ _Fileout Connection Name List_. After running the XML - Creator again the Model 
 > ### Buildinglevel
 
 
->![alt text](https://raw.githubusercontent.com/ChristianF88/CD3Waterbalance/master/doc/Level%20shematics/Buildinglevel.png)
 
+![alt text](https://raw.githubusercontent.com/ChristianF88/CD3Waterbalance/master/doc/Level%20shematics/Buildinglevel.png)
 
+<br>
 
 > ### Clusterlevel
 
 
+![alt text](https://raw.githubusercontent.com/ChristianF88/CD3Waterbalance/master/doc/Level%20shematics/Clusterlevel.png)
 
+<br>
 
 > ### Greywaterreservoirlevel
 
 
+![alt text](https://raw.githubusercontent.com/ChristianF88/CD3Waterbalance/master/doc/Level%20shematics/Greywaterreservoirlevel.png)
 
+<br>
 
 > ### Stormwaterreservoirlevel
 
 
+![alt text](https://raw.githubusercontent.com/ChristianF88/CD3Waterbalance/master/doc/Level%20shematics/Stormwaterreservoirlevelpng.png)
 
+<br>
 
 > ### Supplylevel
 
+![alt text](https://raw.githubusercontent.com/ChristianF88/CD3Waterbalance/master/doc/Level%20shematics/Supplylevel_1.png)
+
+<br>
+
+![alt text](https://raw.githubusercontent.com/ChristianF88/CD3Waterbalance/master/doc/Level%20shematics/Supplylevel_2.png)
+
+<br>
+
+![alt text](https://raw.githubusercontent.com/ChristianF88/CD3Waterbalance/master/doc/Level%20shematics/Supplylevel_3.png)
 
 
 
