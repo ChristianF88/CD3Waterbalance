@@ -17,9 +17,11 @@ Basic features:
 | 	Bathtub | Time Series  |   [l/h] |
 | Shower      | Time Series | [l/h] |
 | 	Toilet | Time Series  |   [l/h] |
-| Tap      | Time Series | [l/h] |
+| Kitchen Tap      | Time Series | [l/h] |
+| Handbasin Tap      | Time Series | [l/h] |
 | 	Washing Machine | Time Series  |   [l/h] |
 | 	Dishwasher  | Time Series  |   [l/h] |
+| 	Evapcooler  | Time Series  |   [l/h] |
 
 # 
 
@@ -42,15 +44,15 @@ The individual stream are calculated by simple balances:
 
 |Output Parameter  | Calculation  | 
 | :------------ |:---------------:| 
-|    Potable Water    | Bathtub + Shower + Tap + Washing Machine + Dishwasher | 
+|    Potable Water    | Bathtub + Shower + Kitchen Tap + Handbasin Tap + Washing Machine + Dishwasher + Evapcooler | 
 |    Non Potable Water   |    Toilet + Outdoor Demand     | 
-|    Black Water   | Toilet |  
-|    Grey Water    |    Bathtub + Shower + Tap + Washing Machine + Dishwasher     | 
+|    Black Water   | Toilet + Kitchen Tap |  
+|    Grey Water    |    Bathtub + Handbasin Tap + Shower + Tap + Washing Machine + Dishwasher + Evapcooler    | 
 
 
 <br>
 
 ## Recommended Improvements
 
-- differ between kitchen tap and bathroom tap (at the moment all tap water = grey water)
-- take into account additional water losses for drinking and food preperation,...
+- enable water use selection for evap cooler as well as a factor that rules the input-output-ratio
+- take into account additional water losses for drinking, sweating, food preperation,...

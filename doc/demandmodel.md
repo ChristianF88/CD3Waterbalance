@@ -22,16 +22,20 @@ Basic features:
 | :------------ |:---------------:| :-----:|
 |    Outport Bathtub   | Time Series |  [l/h]
 | Outport Shower |   Time Series  |  [l/h]   |
-|   Outport Tap | Time Series |  [l/h]
+|   Outport Kitchen Tap | Time Series |  [l/h]|
+|   Outport Handbasin Tap | Time Series |  [l/h]|
 |    Outport Toilet  |    Time Series     |  [l/h]  |
 | Outport Dishwasher |   Time Series  |  [l/h]   |
+|   Outport Evapcooler | Time Series |  [l/h]|
 | Outport Washing Machine |   Time Series  |  [l/h]   |
-|    Outport Check Bathtub   | Time Series |  [l/h]
+|    Outport Check Bathtub   | Time Series |  [l/h] |
 | Outport Check Shower |   Time Series  |  [l/h]   |
-|   Outport Check Tap | Time Series |  [l/h]
+|   Outport Check Kitchen Tap | Time Series |  [l/h] |
+|   Outport Check Handbasin Tap | Time Series |  [l/h] |
 |    Outport Check Toilet  |    Time Series     |  [l/h]  |
 | Outport Check Dishwasher |   Time Series  |  [l/h]   |
 | Outport Check Washing Machine |   Time Series  |  [l/h]   |
+| Outport Check Evapcooler |   Time Series  |  [l/h]   |
 
 
 
@@ -40,8 +44,8 @@ Basic features:
 ## Description 
 
 The [stochastic demand model]() used produces, every time it is being run, diurnal demand - vectors, with a hourly time step, for each Unit in a building.
-The programmed City Drain 3 (CD3) addon block sums up all those vectors (for each use seperately), so that there's six vector for a building.
-(_bathtub vector, shower vector, tap vector, toilet vector, dishwasher vector, washing machine vector_)
+The programmed City Drain 3 (CD3) addon block sums up all those vectors (for each use seperately), so that there's eight vector for a building.
+(_bathtub vector, shower vector, kitchen tap vector, handbasin tap vector, evapcooler vector, toilet vector, dishwasher vector, washing machine vector_)
 The by the stochastic demand model produced added up vector have the following shape:
 
 demand model run n: 
@@ -72,7 +76,7 @@ Is the time step smaller than one hour a random event during that hour is being 
 
 ## Recommended Improvements
 
-- differentiate between tap use in kitchen and elsewhere.
+- fill up evapcooler use
 
 
 
