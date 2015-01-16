@@ -5,11 +5,11 @@ Basic features:
  - automated setup of an CD3 - Model
  - 5 levels of implementation
 
-      - Building level
-      -	Cluster level
-      - Greywaterreservoir level
-      - Stormwaterreservoir level
-      - Supply level
+      - Building Level
+      -	Cluster Level
+      - Greywaterreservoir Level
+      - Stormwaterreservoir Level
+      - Supply Level
  - basic and selective flowmeter implemetation
  # 
  - 
@@ -298,51 +298,66 @@ _Fileout Connection Name List_. After running the XML - Creator again the Model 
 ## The 5 Levels of Implementation in Detail
 
 
-> ### Buildinglevel
+> ### Building Level
 
 # 
 
+This level represents the smallest scale of implementation. It consist out of 4 to 5 blocks, a Demandmodel, a Building, a Catchment, a Raintank and optional a Greywatertank, as illustrated in the shematic below (Figure 1). The Demandmodel creates the indoor demand of the Building block its connected to. The Catchment produces the Buildings outdoor demand, which is proportional to the water loss of the pervious area due to evapotranspiration. Depending on the water stream potable or nonpotable water will be used to meet the demand. Similarly the produced wastewater is differenciated between blackwater and greywater. The Raintanks inflowing water is being produced by the Catchment and the outflowing water equals the Buildings demand of nonpotable water. If there's not enough water in the Raintank to meet the Buildings demand the signal is passed on to the Greywatertank if present, alternativly it's passed on to a higher scale.
 
+If a Building without Raintank is supposed to simulated simply set the tanks volume to zero.
 
+# 
+Figrue 1 : Building Complex Setup
 ![alt text](https://raw.githubusercontent.com/ChristianF88/CD3Waterbalance/master/doc/Level%20shematics/Buildinglevel.png)
+
 
 <br>
 
-> ### Clusterlevel
+> ### Cluster Level
 
 # 
 
+A number of Building Complexes (Figure 1) represent a Cluster. Next to the Building Complexes a street will be added. It's represented by a Catchment. Furthermore four Collector blocks are added, enabling the user to check runoff, greywater produced, raintank overflow and the additional demand of nonpotable water on a clusterlevel. This allows direct comparisons of clusters and show potential for optimization. 
 
+# 
+Figure 2: Cluster Setup
 ![alt text](https://raw.githubusercontent.com/ChristianF88/CD3Waterbalance/master/doc/Level%20shematics/Clusterlevel.png)
 
 <br>
 
-> ### Greywaterreservoirlevel
+> ### Greywaterreservoir Level
 
 # 
 
+Any number of Clusters desired make up one Greywaterreservoirlevel. A Greywaterreservoir is optional. If implemented the level will add one Collector for adding inflow and one Collector for adding demand of nonpotable water (outflow) to the reservoir. The Collectors summarize all inflow and outflow signals from the lower level. Figure 3 illustrates the system created by the XML Creator.
 
+# 
+Figure 3: Greywaterreservoir Complex
 ![alt text](https://raw.githubusercontent.com/ChristianF88/CD3Waterbalance/master/doc/Level%20shematics/Greywaterreservoirlevel.png)
 
 <br>
 
-> ### Stormwaterreservoirlevel
+> ### Stormwaterreservoir Level
+
+#
+
+Alike the before described scale of impementation (Figure 3) the Stormwaterreservoir-Levels reservoir is a optional feature (Figure 4). It consists out of Greywaterreservoir Levels. If the choosen to include, 2 Collectors will be added additionally. Analogous to Greywaterres.-Level the first Collector will reach down into the Clusterlevel and summarize all runoff and Raintank overflow as input into the Stormwaterreservoir whilst the other Collector collects all additional demand from either the Clusterlevels or Greywaterreservoirs.
 
 # 
 
-
+Figure 4: Stormwaterreservoir Complex
 ![alt text](https://raw.githubusercontent.com/ChristianF88/CD3Waterbalance/master/doc/Level%20shematics/Stormwaterreservoirlevelpng.png)
 
 <br>
 
-> ### Supplylevel
+> ### Supply Level
 
 # 
 
 
 
 # 
-
+Figure 5: Supply Complex
 ![alt text](https://raw.githubusercontent.com/ChristianF88/CD3Waterbalance/master/doc/Level%20shematics/Supplylevel_1.png)
 
 
@@ -351,16 +366,16 @@ _Fileout Connection Name List_. After running the XML - Creator again the Model 
 
 
 # 
-
+Figure 6:
 ![alt text](https://raw.githubusercontent.com/ChristianF88/CD3Waterbalance/master/doc/Level%20shematics/Supplylevel_2.png)
-
+ 
 <br>
 
 
 
 # 
 
-
+Figure 7: 
 ![alt text](https://raw.githubusercontent.com/ChristianF88/CD3Waterbalance/master/doc/Level%20shematics/Supplylevel_3.png)
 
 
