@@ -12,7 +12,7 @@ Basic features:
       - Supply Level
  - basic and selective flowmeter implemetation
  # 
- - 
+ - ...
  
 <br>
 
@@ -297,7 +297,6 @@ _Fileout Connection Name List_. After running the XML - Creator again the Model 
 
 ## The 5 Levels of Implementation in Detail
 
-
 > ### Building Level
 
 # 
@@ -354,7 +353,7 @@ Figure 4: Stormwaterreservoir Complex
 
 # 
 
-
+Containing numerous Stormwaterreservoir Complexes (Figure 4) this level is the topmoste scale. The Supply Level is able to set up more the one Supply Complex. To each Complex 4 Collectors, a Potable Water Reservoir, a Stormwaterdrain and a Sewer will be added. Figure 5 shows each Collectors function.
 
 # 
 Figure 5: Supply Complex
@@ -363,19 +362,21 @@ Figure 5: Supply Complex
 
 <br>
 
+The rain and evapotranspiration files are being distributed to all Catchments, no distinction between the different Supply Complexes is being made. Before being passed on to the Catchments the evapotranspiration data is modified by the Pattern Implementer to depict a more realistic evapotranspiration curve. 
+Also the for checking the models accuracy still unconnected building block outports will be summarized b Collectors. Figure 6 outlines the number of Collectors added and their role in detail.
 
 
 # 
-Figure 6:
+Figure 6: Rain and Evapotranspiration Input Setup and Stream Collection
 ![alt text](https://raw.githubusercontent.com/ChristianF88/CD3Waterbalance/master/doc/Level%20shematics/Supplylevel_2.png)
  
 <br>
 
-
+Finally the necessary Fileouts are added to the model (Figure 7).
 
 # 
 
-Figure 7: 
+Figure 7: Adding Fileouts
 ![alt text](https://raw.githubusercontent.com/ChristianF88/CD3Waterbalance/master/doc/Level%20shematics/Supplylevel_3.png)
 
 
