@@ -1,7 +1,8 @@
 __author__ = 'Jeddah'
-__project__ = "WaterDemandMdeol"
+__project__ = "WaterDemandModel"
 
-
+import sys
+sys.path.append('C:\Users\Acer\Documents\GitHub\CD3Waterbalance\WaterDemandModel')
 import sampling_db as DB
 import C_ApplianceType as Appliance
 import C_UnitType as Unit
@@ -33,22 +34,20 @@ class WaterDemandModel():
         # to stop run time error if zero's are provided as input:
         if len(residential_units)== 1:
             if residential_units[0] == 0:
-                self.__commercial_units = []
+                residential_units = []
 
         if len(commercial_units) == 1:
             if commercial_units[0] == 0:
-                self.__residential_units = []
+                commercial_units = []
 
-        # initialise objects:
-        self.__residential_units = residential_units
-        self.__commercial_units = commercial_units
-        self.__demand_output = {}
+        self.generateResidentialUnits(residential_units)
+        self.generateCommercialUnits(commercial_units)
 
     def __initialiseTimeseries(self):
         """
         This method initialises a timeseries array for each event and places it within the dictionary called 'timeseries'. The key of the dictionary is the unit_type (from C_Unit_TYpe) e.g. "COMMERCIAL" and appliance_type (from C_Appliances()) e.g. 'toilet'.
         For each appliance key an array of zeros is initialised. Where each zero represents one timestep of the timeseries. Volumes generated at different time steps can then be used to populate the initialised timeseries array.
-        The size of the array is dependant on the input 'elements'. Arrays for each appliance are made for all of the unit_types.
+
 
         A key for the number of actors ("actors") is also initialised in this method
 
@@ -77,7 +76,6 @@ class WaterDemandModel():
                     array.append(0.0)                            # add a zero to a
                 self.__timeseries[u_type][a_type] = array               # append it to the relevant array in the dictionary specified by unit type and appliance type.
 
-
     def __createTimeSeries(self,events,unit_type,numberOfActors):
         """
         This method is used to create a timeseries of water use volumes for each end use (event_type) within each unit type.
@@ -103,75 +101,101 @@ class WaterDemandModel():
             u_type = e.getUnitType()                # get the unit type of the event (i.e is the event occurring in a residential unit or commercial unit)
 
             # For individual event types:
-            volumes = self.__timeseries[u_type][e.getAppliance()]    # From the dictionary, get the initialised array for the specific event_type.
+            array = self.__timeseries[u_type][e.getAppliance()]    # From the dictionary, get the initialised array for the specific event_type.
                                                                      # Each time it goes through the loop, it calls up the correct array (corresponding to the key),
                                                                      # and adds the volume to it that is generated at a specific time using the code below.
             start = e.getStartTime()                    # get the start time of the event
             volume = e.getVolume()                      # get the volume of the event
-            volumes[int(start)] += volume               # Add the volume generated to the relevant timestep of the volumes array (who's index is the same as that of the start time)
+            array[int(start)] += volume               # Add the volume generated to the relevant timestep of the volumes array (who's index is the same as that of the start time)
 
+
+    def generateResidentialUnits(self,residential_units):
+        """
+        Method is used to create the unit objects with their actors. These objects are created once at the start of each model run. Whereby water use
+        events can then be created each day.
+        :param: residential_units. Is an array where each integer represents a residential unit. And the value of the integer represents the number of people.
+        :return: An array storing each of the residential unit objects.
+        """
+
+
+        res_actor_counter = 0  # represents the index of the res_unit array --> so the relevant number of people can be returned
+
+        for i in range(len(residential_units)):  # for the number of res units specified:
+
+
+            # get the number of actors in the unit from the input vector:
+            number_of_residential_actors = residential_units[res_actor_counter]
+
+            res_actor_counter += 1
+
+            r = residential.ResidentialUnit(number_of_residential_actors)  # instantiate the Residential Unit Class (with the number of actors). --> MAKE THE RESIDENTIAL UNIT OBJECTS
+
+            self.__residential_units.append(r)      # append each residential unit object in an array so it can be accessed each day the model is run.
 
     def generateResidentialDemands(self):
         """
-        Method is used to call all relevant methods of the residential classes to generate water use volumes a day.
-        :return: A timeseries dictionary at an hourly timestep with volumes produced for each appliance. As well as the
-        number of actors in the residential building.
+        The method is used to create all of the water use events of the residential unit. These events are stored in a dictionary. The method
+        is called each day the model is run. Whereby new events are made each day.
         """
 
         res_name_counter = 1  # used to create a name for each unit e.g. R1, R2
-        res_actor_counter = 0  # represents the index of the res_unit array --> so the relevant number of people can be returned
 
-        for i in range(len(self.__residential_units)):  # for the number of res units specified:
-
+        for r in self.__residential_units:
 
             # create a res unit ID R1 --> Rn
             res_name = "R" + str(res_name_counter)
             self.__demand_output[res_name] = {}
-
             res_name_counter += 1
 
-            # get the number of actors in the unit from the input vector:
-            number_of_residential_actors = self.__residential_units[res_actor_counter]
-
-            res_actor_counter += 1
-
-            r = residential.ResidentialUnit(number_of_residential_actors)  # instantiate the Residential Unit Class (with the number of actors)
+            number_of_actors = r.getNumberOfResidentialActors()        # get the number of actors in the unit
 
             all_resident_unit_events = r.getAllUnitEvents()  # get all of the residential unit events
 
-            self.__createTimeSeries(all_resident_unit_events, "RESIDENTIAL", number_of_residential_actors)  # populate the empty dictionary with volumes for each appliance. Append the number of actors.
+            self.__createTimeSeries(all_resident_unit_events, "RESIDENTIAL", number_of_actors)  # populate the empty dictionary with volumes for each appliance. Append the number of actors.
 
             self.__demand_output[res_name] = self.__timeseries["RESIDENTIAL"]  # append the populated dictionary to the output dictionary. Only return Residential information. Otherwise an empty dictionary for Commercial is returned as well.
 
 
+    def generateCommercialUnits(self, commercial_units):
+        """
+         Method is used to create the unit objects with their actors. These objects are created once at the start of each model run. Whereby water use
+        events can then be created each day.
+        :param: commercial_units. Is an array where each integer represents a commercial unit. And the value of the integer represents the number of people.
+        :return: An array storing each of the commercial unit objects.
+        """
+
+        com_actor_counter = 0  # represents the index of the res_unit array --> so the relevant number of people can be returned
+
+        for i in range(len(commercial_units)):
+
+            # get the number of actors in the unit from the input vector:
+            number_of_commercial_actors = commercial_units[com_actor_counter]
+            com_actor_counter += 1
+
+            c = commercial.CommercialUnit(number_of_commercial_actors)  # instantiate the Commercial Unit Class (with the number of actors)
+
+            self.__commercial_units.append(c)
+
     def generateCommercialDemands(self):
         """
-        Method is used to call all relevant methods of the commercial classes to generate water use volumes a day.
-        :return: A timeseries dictionary at an hourly timestep with volumes produced for each appliance. As well as the
-        number of actors in the residential building.
-        :return:
+        The method is used to create all of the water use events of the residential unit. These events are stored in a dictionary. The method
+        is called each day the model is run. Whereby new events are made each day.
         """
 
         com_name_counter = 1  # used to create a name for each unit e.g. C1, C2
-        com_actor_counter = 0  # represents the index of the res_unit array --> so the relevant number of people can be returned
 
-        for j in range(len(self.__commercial_units)):  # for the number of commercial units specified:
+        for c in self.__commercial_units:  # for the number of commercial units specified:
 
             # create a res unit ID C1 --> Cn
             comm_name = "C" + str(com_name_counter)
             self.__demand_output[comm_name] = {}
             com_name_counter += 1
 
-            # get the number of actors in the unit from the input vector:
-            number_of_commercial_actors = self.__commercial_units[com_actor_counter]
-            com_actor_counter += 1
-
-            c = commercial.CommercialUnit(
-                number_of_commercial_actors)  # instantiate the Commercial Unit Class (with the number of actors)
+            number_of_actors = c.getNumberOfCommercialActors()        # get the number of actors in the unit
 
             all_commercial_unit_events = c.getAllUnitEvents()  # get all of the commercial unit events
 
-            self.__createTimeSeries(all_commercial_unit_events, "COMMERCIAL",number_of_commercial_actors)  # populate the empty dictionary with volumes for each appliance. Append the number of actors.
+            self.__createTimeSeries(all_commercial_unit_events, "COMMERCIAL",number_of_actors)  # populate the empty dictionary with volumes for each appliance. Append the number of actors.
 
             self.__demand_output[comm_name] = self.__timeseries["COMMERCIAL"]  # append the populated dictionary to the output dictionary. Only return Commercial information. Otherwise an empty dictionary for Residential is returned as well.
 
@@ -195,20 +219,24 @@ class WaterDemandModel():
 
 if __name__ == "__main__":
 
-    res_units = [3,2]
-    com_units = []
-
+    # res_units = [1.0, 2.0, 2.0, 2.0, 5.0, 4.0, 4.0, 3.0, 2.0, 1.0, 4.0, 1.0, 5.0, 4.0, 4.0, 2.0, 1.0, 2.0, 1.0, 4.0, 3.0, 3.0, 4.0, 2.0, 2.0, 2.0, 2.0, 4.0, 3.0, 4.0, 5.0, 1.0, 6.0, 1.0, 2.0, 1.0, 2.0, 3.0, 4.0, 2.0, 1.0, 1.0, 2.0, 5.0, 2.0, 5.0, 2.0, 4.0, 2.0, 3.0, 4.0, 5.0, 1.0, 1.0, 3.0, 2.0, 2.0, 1.0, 2.0, 6.0, 3.0, 5.0, 1.0, 2.0, 3.0, 1.0, 1.0, 3.0, 3.0, 1.0, 3.0, 4.0, 4.0, 2.0, 3.0, 4.0, 4.0, 4.0, 2.0, 1.0, 3.0, 3.0, 6.0, 2.0, 4.0, 2.0, 1.0, 2.0, 3.0, 1.0, 1.0, 1.0, 1.0, 2.0, 2.0, 2.0, 1.0, 5.0, 2.0, 1.0]
+    res_units = [1]
+    # res_units = [3.0, 2.0, 3.0, 2.0, 2.0, 2.0, 3.0, 1.0, 1.0, 3.0, 2.0, 2.0, 2.0, 3.0, 1.0, 1.0, 3.0, 2.0, 2.0, 1.0, 2.0, 2.0, 3.0, 3.0, 1.0]
+    # com_units = [4.0, 2.0, 3.0, 1.0, 1.0, 2.0, 2.0, 2.0, 1.0, 3.0, 4.0, 4.0, 1.0, 3.0, 6.0, 3.0, 2.0, 3.0, 2.0, 2.0, 1.0, 5.0, 3.0, 3.0, 1.0, 2.0, 2.0, 2.0, 1.0, 1.0, 2.0, 1.0, 2.0, 2.0, 2.0, 1.0, 1.0, 2.0, 2.0, 3.0, 2.0, 3.0, 3.0, 4.0, 4.0, 3.0, 1.0, 2.0, 4.0, 2.0, 1.0, 5.0, 3.0, 2.0, 1.0, 2.0, 4.0, 1.0, 3.0, 3.0, 2.0, 4.0, 2.0, 4.0, 1.0, 5.0, 2.0, 4.0, 1.0, 1.0, 2.0, 3.0, 2.0, 1.0, 6.0, 3.0, 5.0, 1.0, 1.0, 2.0, 2.0, 2.0, 2.0, 2.0, 1.0, 2.0, 1.0, 3.0, 4.0, 2.0, 2.0, 2.0, 2.0, 2.0, 2.0, 5.0, 1.0, 1.0, 4.0, 5.0]
+    # com_units = [4.0, 3.0, 1.0, 2.0, 3.0, 2.0, 3.0, 1.0, 4.0, 1.0, 3.0, 2.0, 2.0, 3.0, 1.0, 2.0, 5.0, 1.0, 2.0, 4.0, 1.0, 1.0, 5.0, 2.0, 2.0]
+    com_units = [1]
     wb = WaterDemandModel(res_units,com_units)
-    day = 1
-    for i in range(2):
-        wb.newDay()
-        print "day ", day
 
-        print "R1 toilet: ", wb.getDemands()["R1"]["toilet"]
-        # print "R1 actors ", wb.getDemands()["R1"]["actors"]
-        print "R2 toilet ", wb.getDemands()["R2"]["toilet"]
-        # print "R2 actors ", wb.getDemands()["R2"]["actors"]
-        day += 1
+#    for i in range(2):
+#        wb.newDay()
+#        print wb.getDemands()
+        # print "day ", day
+        #
+        # print "R1 sh  ower: ", wb.getDemands()["R1"]["bath"]
+        # # print "R1 actors ", wb.getDemands()["R1"]["actors"]
+        # print "R2 toilet ", wb.getDemands()["R2"]["toilet"]
+        # # print "R2 actors ", wb.getDemands()["R2"]["actors"]
+
 
 
 

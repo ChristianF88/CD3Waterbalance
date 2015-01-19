@@ -25,8 +25,9 @@ class Greywaterreservoirlevel:
         
     def writeconnections(self, greyvec):
         #runs clusterclass
+        Cluster = Clusterlevel()        
         for i in range(len(greyvec)):
-            Cluster = Clusterlevel()
+            
             Cluster.writeconnections(greyvec[i][:-1])
                 
             #transfers collector lists of runoff and overflow to greywatertanklevel

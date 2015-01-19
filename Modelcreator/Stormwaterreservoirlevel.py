@@ -23,6 +23,7 @@ class Stormwaterreservoirlevel:
         self.only_GWR = []
         self.greywater_to_sewer_coll_list = []   
         self.raintankstorage_coll_list = []
+        self.numbers_of_large_gwr = []
         
     def writeconnections(self, stormvec):
         
@@ -43,15 +44,17 @@ class Stormwaterreservoirlevel:
         
         it consists out of Greywaterreservoirlevelvector and the last digit means that a Stormwaterreservoir is present (1 = is present) or not (0 = not present)
         '''
-        
+        Greytanklevel = Greywaterreservoirlevel()
         for i in range(len(stormvec)):
-            Greytanklevel = Greywaterreservoirlevel()
+            
             Greytanklevel.writeconnections(stormvec[i][:-1])
             
             for q in range(len(Greytanklevel.greywater_to_sewer_coll_list)):
                 self.greywater_to_sewer_coll_list.append(Greytanklevel.greywater_to_sewer_coll_list[q])
             for q in range(len(Greytanklevel.raintankstorage_coll_list)):
                 self.raintankstorage_coll_list.append(Greytanklevel.raintankstorage_coll_list[q])
+            for q in range(len(Greytanklevel.numbers_of_large_gwr)):
+                self.numbers_of_large_gwr.append(Greytanklevel.numbers_of_large_gwr[q])
             
             if stormvec[i][-1] == 1:
                 

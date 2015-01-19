@@ -47,8 +47,8 @@ class Buildinglevel:
             string24='\t\t\t</connection>\n'
             Global_counters.number_of_connections += 1
             string25='\t\t\t<connection id="'+str(Global_counters.number_of_connections)+'">\n'
-            string26='\t\t\t\t<source node="Demand_Model_'+str(Global_counters.number_of_demandmodels)+'" port="Outport_Tap_[l/h]"/>\n'
-            string27='\t\t\t\t<sink node="Building_'+str(Global_counters.number_of_buildings)+'" port="Tap_[l/h]"/>\n'
+            string26='\t\t\t\t<source node="Demand_Model_'+str(Global_counters.number_of_demandmodels)+'" port="Outport_Kitchen_Tap_[l/h]"/>\n'
+            string27='\t\t\t\t<sink node="Building_'+str(Global_counters.number_of_buildings)+'" port="Kitchen_Tap_[l/h]"/>\n'
             string28='\t\t\t</connection>\n'
             Global_counters.number_of_connections += 1
             string29='\t\t\t<connection id="'+str(Global_counters.number_of_connections)+'">\n'
@@ -60,6 +60,16 @@ class Buildinglevel:
             string34='\t\t\t\t<source node="Demand_Model_'+str(Global_counters.number_of_demandmodels)+'" port="Outport_Dishwasher_[l/h]"/>\n'
             string35='\t\t\t\t<sink node="Building_'+str(Global_counters.number_of_buildings)+'" port="Dishwasher_[l/h]"/>\n'
             string36='\t\t\t</connection>\n'
+            Global_counters.number_of_connections += 1
+            string37='\t\t\t<connection id="'+str(Global_counters.number_of_connections)+'">\n'
+            string38='\t\t\t\t<source node="Demand_Model_'+str(Global_counters.number_of_demandmodels)+'" port="Outport_Handbasin_Tap_[l/h]"/>\n'
+            string39='\t\t\t\t<sink node="Building_'+str(Global_counters.number_of_buildings)+'" port="Handbasin_Tap_[l/h]"/>\n'
+            string40='\t\t\t</connection>\n'
+            Global_counters.number_of_connections += 1
+            string41='\t\t\t<connection id="'+str(Global_counters.number_of_connections)+'">\n'
+            string42='\t\t\t\t<source node="Demand_Model_'+str(Global_counters.number_of_demandmodels)+'" port="Outport_Evapcooler_[l/h]"/>\n'
+            string43='\t\t\t\t<sink node="Building_'+str(Global_counters.number_of_buildings)+'" port="Evapcooler_[l/h]"/>\n'
+            string44='\t\t\t</connection>\n'
             Global_counters.number_of_connections += 1
             string1='\t\t\t<connection id="'+str(Global_counters.number_of_connections)+'">\n'
             string2='\t\t\t\t<source node="Catchment_w_Routing_'+str(Global_counters.number_of_catchments)+'" port="Collected_Water"/>\n'
@@ -82,29 +92,34 @@ class Buildinglevel:
             self.catchment_building = ''
             self.building_raintank = ''
             self.demandmodel_building_bathtub = ''
-            self.demandmodel_building_tap = ''
+            self.demandmodel_building_kitchen_tap = ''
             self.demandmodel_building_toilet = ''
             self.demandmodel_building_shower = ''
             self.demandmodel_building_washing_machine = ''
             self.demandmodel_building_dishwasher = ''
+            self.demandmodel_building_handbasin_tap = ''
+            self.demandmodel_building_evapcooler = ''
             for m in range(4):
                 exec 'self.catchment_raintank += string'+str(m+1)
                 exec 'self.catchment_building += string'+str(m+5)
                 exec 'self.building_raintank += string'+str(m+9)
                 exec 'self.demandmodel_building_bathtub += string'+str(m+13)
-                exec 'self.demandmodel_building_tap += string'+str(m+17)
+                exec 'self.demandmodel_building_kitchen_tap += string'+str(m+17)
+                exec 'self.demandmodel_building_handbasin_tap += string'+str(m+37)
                 exec 'self.demandmodel_building_toilet += string'+str(m+21)
                 exec 'self.demandmodel_building_shower += string'+str(m+25)
                 exec 'self.demandmodel_building_washing_machine += string'+str(m+29)
                 exec 'self.demandmodel_building_dishwasher += string'+str(m+33)
-            
+                exec 'self.demandmodel_building_evapcooler += string'+str(m+41)
             #writes string in list  
             self.Buildinglevel_connection_list.append(self.demandmodel_building_bathtub)
-            self.Buildinglevel_connection_list.append(self.demandmodel_building_tap)
+            self.Buildinglevel_connection_list.append(self.demandmodel_building_kitchen_tap)
+            self.Buildinglevel_connection_list.append(self.demandmodel_building_handbasin_tap)
             self.Buildinglevel_connection_list.append(self.demandmodel_building_toilet)
             self.Buildinglevel_connection_list.append(self.demandmodel_building_shower)
             self.Buildinglevel_connection_list.append(self.demandmodel_building_washing_machine)
             self.Buildinglevel_connection_list.append(self.demandmodel_building_dishwasher)
+            self.Buildinglevel_connection_list.append(self.demandmodel_building_evapcooler)
             self.Buildinglevel_connection_list.append(self.catchment_raintank)
             self.Buildinglevel_connection_list.append(self.catchment_building)
             self.Buildinglevel_connection_list.append(self.building_raintank)

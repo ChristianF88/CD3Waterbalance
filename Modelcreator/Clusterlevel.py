@@ -38,8 +38,9 @@ class Clusterlevel:
             
             #adding collectors to runoff from catchment, overflowraintank, greywater, additional demand (from raintanks), raintank storage check
             #and one street for each cluster (as a catchment)
+            Buildings = Buildinglevel()
             for n in range(clusterbuildingvec[i][3]):
-                Buildings = Buildinglevel()
+                
                 Buildings.writeconnections(clusterbuildingvec[i][:3])
                 
                 # adds catchment as a street

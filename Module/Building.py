@@ -42,9 +42,11 @@ class Building(pycd3.Node):
         self.bath_tub = pycd3.Flow()
         self.shower = pycd3.Flow()
         self.toilet = pycd3.Flow()
-        self.tap = pycd3.Flow()
+        self.kitchen_tap = pycd3.Flow()
+        self.handbasin_tap = pycd3.Flow()
         self.washing_machine = pycd3.Flow()
         self.dishwasher = pycd3.Flow() 
+        self.evapcooler = pycd3.Flow() 
         #self.decision = pycd3.String("")
         
         self.addOutPort("Blackwater", self.black_w)
@@ -55,11 +57,11 @@ class Building(pycd3.Node):
         self.addInPort("Bathtub_[l/h]", self.bath_tub)
         self.addInPort("Shower_[l/h]", self.shower)
         self.addInPort("Toilet_[l/h]", self.toilet)
-        self.addInPort("Tap_[l/h]", self.tap)
+        self.addInPort("Kitchen_Tap_[l/h]", self.kitchen_tap)
+        self.addInPort("Handbasin_Tap_[l/h]", self.handbasin_tap)
         self.addInPort("Washing_Machine_[l/h]", self.washing_machine)
         self.addInPort("Dishwasher_[l/h]", self.dishwasher)
-#        self.numberof_out_ports = pycd3.Integer(2)
-#        self.addParameter("Number_of_Outports", self.numberof_out_ports)     
+        self.addInPort("Evapcooler_[l/h]", self.evapcooler)   
         
         print "init node"
         
@@ -71,10 +73,10 @@ class Building(pycd3.Node):
         
     def f(self, current, dt):
         
-        self.pot_w[0] = (self.bath_tub[0]+self.shower[0]+self.tap[0]+self.dishwasher[0]+self.washing_machine[0])/3600/1000*dt
+        self.pot_w[0] = (self.bath_tub[0]+self.shower[0]+self.kitchen_tap[0]+self.handbasin_tap[0]+self.dishwasher[0]+self.washing_machine[0] + self.evapcooler[0])/3600/1000*dt
         self.nonpot_w[0] = (self.toilet[0])/3600/1000*dt+self.outdoor_demand[0]
-        self.black_w[0] = (self.toilet[0])/3600/1000*dt
-        self.grey_w[0] = (self.bath_tub[0]+self.shower[0]+self.tap[0]+self.washing_machine[0]+self.dishwasher[0])/3600/1000*dt
+        self.black_w[0] = (self.kitchen_tap[0]+self.toilet[0])/3600/1000*dt
+        self.grey_w[0] = (self.bath_tub[0]+self.shower[0]+self.handbasin_tap[0]+self.washing_machine[0]+self.dishwasher[0] + self.evapcooler[0])/3600/1000*dt
 
         return dt
     
