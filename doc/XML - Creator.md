@@ -383,7 +383,11 @@ Figure 7: Adding Fileouts
 
 
 
-
+## Recommended Improvements:
+ - enabling cluster to only use greywaterres. although stormwaterres. is present
+ - being able to switch Stormwater and Greywaterreservoir
+ - import Inflows to Catchments
+ - give a more detailed spacial description of which levels are under other levels
 
 
         
