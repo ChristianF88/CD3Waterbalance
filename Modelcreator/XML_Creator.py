@@ -202,7 +202,7 @@ class XML_Creator():
             outFile.write( self.Allstrings[i])
         outFile.close()
         
-        print 'The xml file has been saved!'        
+        print 'The xml file has been created and saved!'        
         
         return 
         

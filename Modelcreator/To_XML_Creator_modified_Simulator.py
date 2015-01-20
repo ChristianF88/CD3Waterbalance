@@ -19,11 +19,14 @@ from numpy import size, asarray
 class TheHoleLot:
 
     def __init__(self):
-        self.Rainevapovector =[]
-        self.Outputvector =[]
-        self.area_fractions1=[]
+        self.Rainevapovector = []
+        self.Outputvector = []
+        self.area_fractions1 = []
         self.Fractioncalculatorvec = []
-        self.total_area= 0.0
+        self.Lossvector = []
+        self.total_area = 0.0
+        self.wettingloss = 0.0
+        self.depressionloss = 0.0
         return
         
     #killing the cd3 process (if necessary) and deleting old ouput .txt files
@@ -45,6 +48,10 @@ class TheHoleLot:
     def Fractioncalculator(self,Catchmentattributevector):
             for i in range(len(Catchmentattributevector)):
                 self.Fractioncalculatorvec.append([Catchmentattributevector[i][2],Catchmentattributevector[i][5],Catchmentattributevector[i][3],Catchmentattributevector[i][4]])
+                self.wettingloss += Catchmentattributevector[i][9]
+                self.depressionloss += Catchmentattributevector[i][8]
+            self.wettingloss = self.wettingloss/(i+1)
+            self.depressionloss = self.depressionloss/(i+1)
             area_fractions1_0 = 0.0
             area_fractions1_1 = 0.0
             area_fractions1_2 = 0.0
@@ -55,6 +62,7 @@ class TheHoleLot:
                 area_fractions1_2 += float(self.Fractioncalculatorvec[i][0]*self.Fractioncalculatorvec[i][3])
                 
             self.area_fractions1=[area_fractions1_0/self.total_area, area_fractions1_1/self.total_area, area_fractions1_2/self.total_area]
+            
             return    
     
     '''
@@ -142,7 +150,7 @@ class TheHoleLot:
         
         #tocheck (all, Evapo, Rain, Indooruse, Outdoordemand?, System)
         #area_fractions = [perv, imperv_to_storage, imperv_to_stormw]
-    def Balance(self,wettingloss = 0.4, depressionloss=1.5, totalstoragelist = ['Greywatertanklevels',  'Rainwatertanklevels', 'Stormwaterreservoirlevels'],
+    def Balance(self, totalstoragelist = ['Greywatertanklevels',  'Rainwatertanklevels', 'Stormwaterreservoirlevels'],
                inputERlist = ['Evapo_Model', 'Rain_Model'], outputISSPlist = ['Actual_Infiltration', 'Potable_Water_Demand', 'Sewer', 'Stormwaterdrain']):
         #tocheck=['Evapo', 'Rain', 'System']
         #Data=[Rainevapovector, Outputvector]
@@ -232,17 +240,17 @@ class TheHoleLot:
             if float(inputER[1][i]) > float(inputER[0][i]):
                 lossstorage_perv_impervreservoir += (float(inputER[1][i]) - float(inputER[0][i]))/self.total_area*1000
                 lossstorage_imperstormw += (float(inputER[1][i]) - float(inputER[0][i]))/self.total_area*1000
-                if lossstorage_perv_impervreservoir > wettingloss:
+                if lossstorage_perv_impervreservoir > self.wettingloss:
                     rainminusevapolosses += (float(inputER[1][i])-float(inputER[0][i]))*(self.area_fractions1[0]+self.area_fractions1[1])
                     foreffectiverain1 = (float(inputER[1][i])-float(inputER[0][i]))*(self.area_fractions1[0]+self.area_fractions1[1])
-                    lossstorage_perv_impervreservoir = wettingloss
+                    lossstorage_perv_impervreservoir = self.wettingloss
                 else:
                     foreffectiverain1=0.0
                     
-                if lossstorage_imperstormw > depressionloss + wettingloss:
+                if lossstorage_imperstormw > self.depressionloss + self.wettingloss:
                     rainminusevapolosses += (float(inputER[1][i])-float(inputER[0][i]))*self.area_fractions1[2]
                     foreffectiverain2 = (float(inputER[1][i])-float(inputER[0][i]))*self.area_fractions1[2]
-                    lossstorage_imperstormw = depressionloss + wettingloss
+                    lossstorage_imperstormw = self.depressionloss + self.wettingloss
                 else:
                     foreffectiverain2=0.0
                     
@@ -281,8 +289,8 @@ class TheHoleLot:
         print 'Fraction of Pervious Area: '+str(self.area_fractions1[0])
         print 'Fraction of Impervious Area to Reservoir: '+str(self.area_fractions1[1])
         print 'Fraction of Impervious Area to Stormdrain: '+str(self.area_fractions1[2])
-        print 'Wetting Loss: '+str( wettingloss)+' mm'
-        print 'Depression Loss: '+str(depressionloss)+' mm'
+        print 'Wetting Loss: '+str( self.wettingloss)+' mm'
+        print 'Depression Loss: '+str(self.depressionloss)+' mm'
         print 'Total Rain: '+str(onlyrain) + ' = '+str(onlyevapo+rainminusevapo)+' m^3'
         print 'Evaporated Rain: '+str(onlyevapo)+' m^3'
         print 'Inital Losses only: '+str(rainminusevapo-rainminusevapolosses)+' m^3'

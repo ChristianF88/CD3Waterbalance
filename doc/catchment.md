@@ -47,11 +47,11 @@ Basic features:
 
 |Muskingum Method  | Type  |  Unit  |
 | :------------ |:---------------:| :-----:|
-| Runoff Velocity (pA)  |   Constant  |  [m/s]   |
+| Runoff Runtime (pA)  |   Constant  |  [s]   |
 | Weighting Coefficient (pA) |   Constant  |  [-]   |
-| Runoff Velocity  (iAR) |   Constant  |  [m/s]   |
+| Runoff Runtime  (iAR) |   Constant  |  [s]   |
 | Weighting Coefficient (iAR)|   Constant  |  [-]   |
-| Runoff Velocity  (iASD) |   Constant  |  [m/s]   |
+| Runoff Runtime  (iASD) |   Constant  |  [s]   |
 | Weighting Coefficient (iASD)|   Constant  |  [-]   |
 
 ### Output 

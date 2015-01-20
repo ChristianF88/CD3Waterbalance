@@ -34,7 +34,7 @@ Basic features:
 | Simulation Information  | Part of XML created  | Class created | 
 | :------------ |:---------------:| 	:---------------:|
 | Simulationsetup Vector  | Header, Pythonmodule, Simulation | -  |
-| Needtohaveinputs Vector  | Nodelist |  - |
+| Needtohaveinputs Vector  | Nodelist |  File Reader, Pattern Implementer |
 
 <br>
 
@@ -158,8 +158,28 @@ To set the Catchments features this vectors ist used.
                        Initial Infiltration Capacity, Final Infiltration Capacity, Depression Loss, Wetting Loss,
                        Outdoor Demand Weighing Factor, Runoff Runtime iAR, Runoff Runtime iASD, Runoff Runtime pA,
                        Weighting Coefficient iAR, Weighting Coefficient iASD, Weighting Coefficient pA]
-
-For more detailed information regarding the input units, output, etc. please check the
+                       
+	Units:
+    	
+        Number of Subareas = [-]
+		Decay Constant = [1/min]
+        Catchment Area = [m^2]
+        Fraktion of Impervious Area to Reservoir iAR = [-]
+        Fraktion of Impervious Area to Stormwater Drain iASD = [-]
+        Fraktion of Pervious Area pA = [-]
+        Initial Infiltration Capacity = [m/h]
+        Final Infiltration Capacity = [m/h]
+        Depression Loss = [mm]
+        Wetting Loss = [mm]
+        Outdoor Demand Weighing Factor = [-]
+        Runoff Runtime iAR = [s]
+        Runoff Runtime iASD = [s]
+        Runoff Runtime pA = [s]
+        Weighting Coefficient iAR = [-]
+        Weighting Coefficient iASD = [-]
+        Weighting Coefficient pA = [-]
+        
+For more detailed information regarding the input, output, etc. please check the
 [Catchment Description File](https://github.com/ChristianF88/CD3Waterbalance/blob/master/doc/catchment.md)
 
 
@@ -172,8 +192,13 @@ This vector is responsible for setting the Greywatertanks/Greywaterreservoirs pr
 	Greywatertank Attributevector = [Greywatertankvector_0, Greywatertankvector_1, ..., Greywatertankvector_n]
     
     Greywatertankvector =[Yield of Treatment, Storage Volume]
+    
+    Units:
+    	
+        Yield of Treatment = [-]
+        Storage Volume = [m^3]
 
-For more detailed information regarding the input units, output, etc. please check the
+For more detailed information regarding the input, output, etc. please check the
 [Greywatertank Description File](https://github.com/ChristianF88/CD3Waterbalance/blob/master/doc/greywatertank.md)
 
 <br>
@@ -185,8 +210,13 @@ This vector is responsible for setting the Stormwaterreservoirs properties.
 	Stormwaterreservoir Attributevector = [Stormwaterreservoirvector_0, Stormwaterreservoirvector_1, ..., Stormwaterreservoirvector_n]
     
     Stormwaterreservoirvector =[Yield of Treatment, Storage Volume]
+    
+    Units:
+    	
+        Yield of Treatment = [-]
+        Storage Volume = [m^3]
 
-For more detailed information regarding the input units, output, etc. please check the
+For more detailed information regarding the input, output, etc. please check the
 [Stormwaterreservoirs Description File](https://github.com/ChristianF88/CD3Waterbalance/blob/master/doc/stormwaterreservoir.md)
 
 
@@ -199,8 +229,12 @@ This vector contains the properties of all raintanks.
 	Rainwatertank Attributevector = [Rainwatertankvector_0, Rainwatertankvector_1, ..., Rainwatertankvector_n]
     
     Rainwatertankvector =[Storage Volume]
-
-For more detailed information regarding the input units, output, etc. please check the
+	
+    Units:
+    
+    	Storage Volume = [m^3]
+    
+For more detailed information regarding the input, output, etc. please check the
 [Rainwatertank Description File](https://github.com/ChristianF88/CD3Waterbalance/blob/master/doc/raintank.md)
 
 
@@ -246,10 +280,12 @@ City Drain 3 need some basic information regarding the Simulation Setup.
 
 	Simulationsetup Vector = [Start Simulation, End Simulation, Time Step of Simulation, Path of Addons to implement]
     
-	[Start Simulation] = "YYYY-MMM-DD hh:mm:ss"
-	[End Simulation] = "YYYY-MMM-DD hh:mm:ss"
-	[Time Step of Simulation] = "s"
-	[Path of Addons to implement] = "path of file"
+    Units:
+    
+	Start Simulation = [YYYY-MMM-DD hh:mm:ss]
+	End Simulation = [YYYY-MMM-DD hh:mm:ss]
+	Time Step of Simulation = [s]
+	Path of Addons to implement = [path of file]
 	
     For example:
     
@@ -264,10 +300,12 @@ This vector takes care of the input information for both [File Readers](https://
 
 	Needtohaveinputs Vector = [Path of Rain File, Path of Evapotranspiration File, average Time of when the Sun is at its Zenith, average Time of Sundown]
     
-	[Path of Rain File] = "path of file"
-	[Path of Evapotranspiration File] = "path of file"
-	[average Time of when the Sun is at its Zenith] = "h"
-	[average Time of Sundown] = "h"
+    Units:
+    
+	Path of Rain File = [path of file]
+	Path of Evapotranspiration File = [path of file]
+	average Time of when the Sun is at its Zenith = [h]
+	average Time of Sundown = [h]
 	
     For example:
     

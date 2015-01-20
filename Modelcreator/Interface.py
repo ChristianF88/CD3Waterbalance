@@ -27,8 +27,10 @@ Demandmodelattrvec = [[[4,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8],[8,10,10,
 Simulationsetupvec = ["2000-Jan-01 00:00:00", "2001-Jan-01 00:00:00", "360", "C:/Users/Acer/Documents/GitHub/CD3Waterbalance/Module/cd3waterbalancemodules.py"]
 Needtohaveinputsvec = ["C:/Users/Acer/Documents/GitHub/CD3Waterbalance/simulationwithpatterns/inputfiles/rain.ixx", "C:/Users/Acer/Documents/GitHub/CD3Waterbalance/simulationwithpatterns/inputfiles/evapo.ixx", "13", "20.5"]
 CreateXML.WriteNodes(Catchattrvec, Greywaterattrvec, Stormwaterresattrvec, Rainwaterattrvec, Demandmodelattrvec, Simulationsetupvec, Needtohaveinputsvec)
+
 #printing the Connectionlist to insert Fileouts
 CreateXML.PrintConnections()
+
 #insert Fileouts
 Fileout_Connection_Name_List = [[40, 'Rain_Model.txt'],[44, 'Evapo_Model.txt']]
 CreateXML.Additional_Fileouts(Fileout_Connection_Name_List) 
@@ -46,7 +48,7 @@ Simulator.runcd3('C:\Program Files (x86)\CityDrain3\\bin\cd3.exe', 'C:\Users\Ace
 Simulator.Fractioncalculator([[1,1.9,800,0.4,0.2,0.4,0.6,0.21,1.5,0.4,0.5,400,500,700,0.04,0.05,0.06],[1,1.8,10000,0,1,0,0.6,0.21,1.5,0.4,0.5,380,510,710,0.04,0.05,0.06]])
 Simulator.getoutputdata('C:\Users\Acer\Documents\GitHub\CD3Waterbalance\simulationwithpatterns\outputfiles')
 Simulator.getinputdata('C:\Users\Acer\Documents\GitHub\CD3Waterbalance\simulationwithpatterns\inputfiles')
-Simulator.Balance(0.4, 1.5, ['Greywatertanklevels',  'Rainwatertanklevels', 'Stormwaterreservoirlevels'], ['Evapo_Model', 'Rain_Model'], ['Actual_Infiltration', 'Potable_Water_Demand', 'Sewer', 'Stormwaterdrain'])
+Simulator.Balance(['Greywatertanklevels',  'Rainwatertanklevels', 'Stormwaterreservoirlevels'], ['Evapo_Model', 'Rain_Model'], ['Actual_Infiltration', 'Potable_Water_Demand', 'Sewer', 'Stormwaterdrain'])
 Simulator.Plotter([0,50], [0,10], ['Rain_Model', 'Stormwaterdrain', 'Evapo_Model', 'effective_rain','Indoor_Demand','Outdoor_Demand'])
 
 
@@ -75,7 +77,7 @@ Input: getoutputdata( - path to City Drain input folder - )
 Example: getoutputdata('C:\Users\Acer\Documents\GitHub\CD3Waterbalance\simulationwithpatterns\inputfiles')
 
 Balance - method checks the models mass balance by comparing input and output data
-Input: Balance( - wettingloss (in mm), depressionloss (in mm), list of all storage output file names, list of filereader/pattern implemeter output file names, list of other neccessary output file names  - )
+Input: Balance( - list of all storage output file names, list of filereader/pattern implemeter output file names, list of other neccessary output file names - )
 Example: Balance(0.4, 1.5, ['Greywatertanklevels',  'Rainwatertanklevels', 'Stormwaterreservoirlevels'], ['Evapo_Model', 'Rain_Model'], ['Actual_Infiltration', 'Potable_Water_Demand', 'Sewer', 'Stormwaterdrain'])
 
 Plotter - method plots any time series (file) wanted
