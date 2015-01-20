@@ -60,13 +60,13 @@ The Supplyvector contains the information for all 5 model setup levels.
 In its core the Clustervector accesses the Buildinglevel and creates Building Complexes.
 The Clustervector contains the following information:
 
-	[Number of Buildings, [Greywatertank existent (0 = No, 1 = Yes)], [contributing to Greywaterreservoir (0 = No, 1 = Yes), using treated Greywater from Reservoir (0 = No, 1 = Yes), using treated Stormwater (0 = No, 1 = Yes)], Number of Clusters ]
+	[[Greywatertank existent (for each Building (0 = No, 1 = Yes)], [contributing to Greywaterreservoir (0 = No, 1 = Yes), using treated Greywater from Reservoir (0 = No, 1 = Yes), using treated Stormwater (0 = No, 1 = Yes)], Number of Clusters ]
     
     For example: 
     
-    	Clustervector = [6, [1,0,1,0,1,0], [0,0,0], 3]
+    	Clustervector = [[1,0,1,0,1,0], [0,0,0], 3]
         
-        The Cluster contains 6 Buildings. The first, third and fifth Building do have a Greywatertank connected to them.
+        The Cluster contains 6 Buildings (that equals the length of the Clustervector[0]). The first, third and fifth Building do have a Greywatertank connected to them.
         The Cluster is not contributing to a Greywaterreservoir. It's not using Greywater from a Reservoir and it's not 
         connected to a Stormwaterreservoir. There're 3 Clusters of the configuration.
     
@@ -86,8 +86,8 @@ Looking at the next higher level, the Greywaterreservoirvector needs to have the
     For example: 
     
     	Greywaterreservoirvector = 
-        [[[6,[1,0,1,1,1,1],[1,0,0],1], [7,[1,0,0,0,1,0,1],[1,1,0],1], [2,[0,1],[0,0,0],5], 1], 
-         [[4,[1,0,1,1],[0,0,0],1], [3,[1,0,0],[0,0,0],7], [9,[0,1,0,1,1,0,1,0,1],[0,0,0],1], 0]]
+        [[[[1,0,1,1,1,1],[1,0,0],1], [[1,0,0,0,1,0,1],[1,1,0],1], [[0,1],[0,0,0],5], 1], 
+         [[[1,0,1,1],[0,0,0],1], [[1,0,0],[0,0,0],7], [[0,1,0,1,1,0,1,0,1],[0,0,0],1], 0]]
          
         The vector decribes 2 areas. The first one consists out of 3 Clustervector. The 7 clusters 
         (5 clusters of the third configuration) are connected to a Greywaterreservoir. The first cluster contributes to the 
@@ -111,8 +111,8 @@ The next scale of implementation is the Stormwaterreservoirlevel. Its inputvecto
     For example:
     	
         Stormwaterreservoirvector = 
-        [[[[6,[1,0,1,0,0,0],[0,0,1],1],[4,[1,1,0,1],[1,1,1],1],[2,[0,1],[1,1,1],1],1], 
-          [[3,[1,0,0],[0,0,1],1],[5,[0,0,0,0,0],[0,0,1],1],[2,[0,1],[0,0,1],1],0],1]]
+        [[[[[1,0,1,0,0,0],[0,0,1],1],[[1,1,0,1],[1,1,1],1],[[0,1],[1,1,1],1],1], 
+          [[[1,0,0],[0,0,1],1],[[0,0,0,0,0],[0,0,1],1],[[0,1],[0,0,1],1],0],1]]
           
         This example vector depicts one area only. The digit one at the vectors last position states that a Stormwaterreservoir
         is in place. It's connected to two Greywaterlevel subareas. The Clustervectors contain the "connection 
@@ -122,9 +122,9 @@ The next scale of implementation is the Stormwaterreservoirlevel. Its inputvecto
         Is a cluster using treated Greywater from a reservoir and a Stormwaterreservoir is present too, then the cluster 
         will be connected to that one too! The Clustervector needs to look like this:
         
-        [x,[...],[0,1,1],y] or [x,[...],[1,1,1],y]
+        [[...],[0,1,1],y] or [[...],[1,1,1],y]
         
-        [[[[2,[0,1],[0,1,0],1],1],1]] is no  valid configuration!!
+        [[[[[0,1],[0,1,0],1],1],1]] is no  valid configuration!!
         
 
 #  

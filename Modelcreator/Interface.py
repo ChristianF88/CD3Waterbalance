@@ -13,46 +13,56 @@ from To_XML_Creator_modified_Simulator import TheHoleLot
 CREATING THE XML
 Supplyvec and Attributevecs explanation in the XML-Creator.md on Github in the doc folder 
 '''
-#creating Connectionlist
-CreateXML = XML_Creator()
-supplyvec = [[[[[1,[1],[1,1,1],1],1],1]]]
-CreateXML.WriteConnections(supplyvec)
 
-#creating Nodelist
-Catchattrvec=[[1,1.9,800,0.4,0.2,0.4,0.6,0.21,1.5,0.4,0.5,400,500,700,0.04,0.05,0.06],[1,1.8,10000,0,1,0,0.6,0.21,1.5,0.4,0.5,380,510,710,0.04,0.05,0.06]]         
-Greywaterattrvec = [[0.9,5]]*(Global_counters.number_of_greywatertanks) 
-Stormwaterresattrvec = [[0.9,40]]*(Global_counters.number_of_stormwaterreservoirs)
-Rainwaterattrvec = [[5]]*(Global_counters.number_of_raintanks)
-Demandmodelattrvec = [[[4,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8],[8,10,10,10,1,2,9,9,9,5,5,4,6,4,8,6,3,5,3,3,4,4,4,4,4]]]                      
-Simulationsetupvec = ["2000-Jan-01 00:00:00", "2001-Jan-01 00:00:00", "360", "C:/Users/Acer/Documents/GitHub/CD3Waterbalance/Module/cd3waterbalancemodules.py"]
-Needtohaveinputsvec = ["C:/Users/Acer/Documents/GitHub/CD3Waterbalance/simulationwithpatterns/inputfiles/rain.ixx", "C:/Users/Acer/Documents/GitHub/CD3Waterbalance/simulationwithpatterns/inputfiles/evapo.ixx", "13", "20.5"]
-CreateXML.WriteNodes(Catchattrvec, Greywaterattrvec, Stormwaterresattrvec, Rainwaterattrvec, Demandmodelattrvec, Simulationsetupvec, Needtohaveinputsvec)
-
-#printing the Connectionlist to insert Fileouts
-CreateXML.PrintConnections()
-
-#insert Fileouts
-Fileout_Connection_Name_List = [[40, 'Rain_Model.txt'],[44, 'Evapo_Model.txt']]
-CreateXML.Additional_Fileouts(Fileout_Connection_Name_List) 
-#safe the xml file
-CreateXML.SaveXML()
-
+def XML():
+    
+    #creating Connectionlist
+    CreateXML = XML_Creator()
+    supplyvec = [[[[[[1],[1,1,1],1],1],1]]]
+    CreateXML.WriteConnections(supplyvec)
+    
+    #creating Nodelist
+    Catchattrvec=[[1,1.9,800,0.4,0.2,0.4,0.6,0.21,1.5,0.4,0.5,400,500,700,0.04,0.05,0.06],[1,1.8,10000,0,1,0,0.6,0.21,1.5,0.4,0.5,380,510,710,0.04,0.05,0.06]]         
+    Greywaterattrvec = [[0.9,5]]*(Global_counters.number_of_greywatertanks) 
+    Stormwaterresattrvec = [[0.9,40]]*(Global_counters.number_of_stormwaterreservoirs)
+    Rainwaterattrvec = [[5]]*(Global_counters.number_of_raintanks)
+    Demandmodelattrvec = [[[4,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8],[8,10,10,10,1,2,9,9,9,5,5,4,6,4,8,6,3,5,3,3,4,4,4,4,4]]]                      
+    Simulationsetupvec = ["2000-Jan-01 00:00:00", "2001-Jan-01 00:00:00", "360", "C:/Users/Acer/Documents/GitHub/CD3Waterbalance/Module/cd3waterbalancemodules.py"]
+    Needtohaveinputsvec = ["C:/Users/Acer/Documents/GitHub/CD3Waterbalance/simulationwithpatterns/inputfiles/rain.ixx", "C:/Users/Acer/Documents/GitHub/CD3Waterbalance/simulationwithpatterns/inputfiles/evapo.ixx", "13", "20.5"]
+    CreateXML.WriteNodes(Catchattrvec, Greywaterattrvec, Stormwaterresattrvec, Rainwaterattrvec, Demandmodelattrvec, Simulationsetupvec, Needtohaveinputsvec)
+    
+    #printing the Connectionlist to insert Fileouts
+    CreateXML.PrintConnections()
+    
+    #insert Fileouts
+    Fileout_Connection_Name_List = [[40, 'Rain_Model.txt'],[44, 'Evapo_Model.txt']]
+    CreateXML.Additional_Fileouts(Fileout_Connection_Name_List) 
+    
+    #safe the xml file
+    CreateXML.SaveXML()
+    
+    return
 
 '''
 RUNNING AND CHECKING THE XML
 '''
 
-Simulator = TheHoleLot()
-Simulator.Deleter('C:\Users\Acer\Documents\GitHub\CD3Waterbalance\simulationwithpatterns\outputfiles')
-Simulator.runcd3('C:\Program Files (x86)\CityDrain3\\bin\cd3.exe', 'C:\Users\Acer\Documents\GitHub\CD3Waterbalance\simulationwithpatterns\outputfiles\Test.xml')
-Simulator.Fractioncalculator([[1,1.9,800,0.4,0.2,0.4,0.6,0.21,1.5,0.4,0.5,400,500,700,0.04,0.05,0.06],[1,1.8,10000,0,1,0,0.6,0.21,1.5,0.4,0.5,380,510,710,0.04,0.05,0.06]])
-Simulator.getoutputdata('C:\Users\Acer\Documents\GitHub\CD3Waterbalance\simulationwithpatterns\outputfiles')
-Simulator.getinputdata('C:\Users\Acer\Documents\GitHub\CD3Waterbalance\simulationwithpatterns\inputfiles')
-Simulator.Balance(['Greywatertanklevels',  'Rainwatertanklevels', 'Stormwaterreservoirlevels'], ['Evapo_Model', 'Rain_Model'], ['Actual_Infiltration', 'Potable_Water_Demand', 'Sewer', 'Stormwaterdrain'])
-Simulator.Plotter([0,50], [0,10], ['Rain_Model', 'Stormwaterdrain', 'Evapo_Model', 'effective_rain','Indoor_Demand','Outdoor_Demand'])
+def Simulator():
+    Simulator = TheHoleLot()
+    Simulator.Deleter('C:\Users\Acer\Documents\GitHub\CD3Waterbalance\simulationwithpatterns\outputfiles')
+    Simulator.runcd3('C:\Program Files (x86)\CityDrain3\\bin\cd3.exe', 'C:\Users\Acer\Documents\GitHub\CD3Waterbalance\simulationwithpatterns\outputfiles\Test.xml')
+    Simulator.Fractioncalculator([[1,1.9,800,0.4,0.2,0.4,0.6,0.21,1.5,0.4,0.5,400,500,700,0.04,0.05,0.06],[1,1.8,10000,0,1,0,0.6,0.21,1.5,0.4,0.5,380,510,710,0.04,0.05,0.06]])
+    Simulator.getoutputdata('C:\Users\Acer\Documents\GitHub\CD3Waterbalance\simulationwithpatterns\outputfiles')
+    Simulator.getinputdata('C:\Users\Acer\Documents\GitHub\CD3Waterbalance\simulationwithpatterns\inputfiles')
+    Simulator.Balance(['Greywatertanklevels',  'Rainwatertanklevels', 'Stormwaterreservoirlevels'], ['Evapo_Model', 'Rain_Model'], ['Actual_Infiltration', 'Potable_Water_Demand', 'Sewer', 'Stormwaterdrain'])
+    Simulator.Plotter([0,50], [0,10], ['Rain_Model', 'Stormwaterdrain', 'Evapo_Model', 'effective_rain','Indoor_Demand','Outdoor_Demand'])
+    
+    return
 
+XML()
+Simulator()
 
-##Input description!!!!!!
+##Input description for Simulator!!!!!!
 
 '''
 Deleter - method delets all .txt - files is the City Drain output folder

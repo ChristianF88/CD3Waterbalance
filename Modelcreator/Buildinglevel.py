@@ -25,12 +25,12 @@ class Buildinglevel:
 
     def writeconnections(self, number_of_buildinglevels):
         """
-        number_of_buildinglevels = [number of buildings,[greywatertankvector],[contributing to ..., getting GW from GWR]]
+        number_of_buildinglevels = [number of buildings,[greywatertankvector],[contributing to ..., getting GW from GWR, connected to stormwaterreservoir]]
         number_of_buildinglevels = [5,[0,1,0,1,1],[1,0,1]]
         number_of_buildinglevels = [5 buldings,[first b. no gwt, second yes, third no, 4th and 5th yes], [all five contibute to GWR, non gets Water from it, connected to stormwaterreservoir]]        
         """
         #writing strings for each Buildinglevel 
-        for i in range(number_of_buildinglevels[0]):
+        for i in range(len(number_of_buildinglevels[0])):
             string13='\t\t\t<connection id="'+str(Global_counters.number_of_connections)+'">\n'
             string14='\t\t\t\t<source node="Demand_Model_'+str(Global_counters.number_of_demandmodels)+'" port="Outport_Bathtub_[l/h]"/>\n'
             string15='\t\t\t\t<sink node="Building_'+str(Global_counters.number_of_buildings)+'" port="Bathtub_[l/h]"/>\n'
@@ -129,7 +129,7 @@ class Buildinglevel:
             self.numbers_of_buildings_list.append(Global_counters.number_of_buildings)
             self.numbers_of_catchments_list.append(Global_counters.number_of_catchments)
             #adds Greywatertanks
-            if number_of_buildinglevels[1][i] == 1:
+            if number_of_buildinglevels[0][i] == 1:
                 string37='\t\t\t<connection id="'+str(Global_counters.number_of_connections)+'">\n'
                 string38='\t\t\t\t<source node="Raintank_'+str(Global_counters.number_of_raintanks)+'" port="Additional_Demand"/>\n'
                 string39='\t\t\t\t<sink node="Greywatertank_'+str(Global_counters.number_of_greywatertanks)+'" port="Greywater_Out"/>\n'
@@ -162,17 +162,17 @@ class Buildinglevel:
                 self.numbers_of_greywatertanks_list.append(Global_counters.number_of_raintanks)
             
             #creating lists with Houses that contribute to GWR/ use for later reference 
-            if number_of_buildinglevels[2][0] == 1:
+            if number_of_buildinglevels[1][0] == 1:
                 self.numbers_of_buildings_contributing_gw_list.append(self.numbers_of_greywatertanks_list[i])
             else:
                 self.numbers_of_buildings_contributing_gw_list.append('not_contributing to gw '+str(type(self.numbers_of_greywatertanks_list[i])))
                 
-            if number_of_buildinglevels[2][1] == 1:
+            if number_of_buildinglevels[1][1] == 1:
                 self.numbers_of_buildings_using_gw_list.append(self.numbers_of_greywatertanks_list[i])
             else:
                 self.numbers_of_buildings_using_gw_list.append('not using gw')
             
-            if number_of_buildinglevels[2][2] == 1:
+            if number_of_buildinglevels[1][2] == 1:
                 self.numbers_of_buildings_connected_to_stormw.append(self.numbers_of_greywatertanks_list[i])
             else:
                 self.numbers_of_buildings_connected_to_stormw.append('not connected to SWR')

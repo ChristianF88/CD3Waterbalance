@@ -39,9 +39,9 @@ class Clusterlevel:
             #adding collectors to runoff from catchment, overflowraintank, greywater, additional demand (from raintanks), raintank storage check
             #and one street for each cluster (as a catchment)
             Buildings = Buildinglevel()
-            for n in range(clusterbuildingvec[i][3]):
+            for n in range(clusterbuildingvec[i][2]):
                 
-                Buildings.writeconnections(clusterbuildingvec[i][:3])
+                Buildings.writeconnections(clusterbuildingvec[i][:2])
                 
                 # adds catchment as a street
                 self.street_strings=[]
@@ -71,7 +71,7 @@ class Clusterlevel:
                         exec 'self.runoffstrings += string'+str(o)
                     self.runoff_coll_strings.append(self.runoffstrings)
                 #writes collector number in list that knows number of inports for later reference
-                Global_counters.number_of_collectors_ports_list.append([Global_counters.number_of_collectors, clusterbuildingvec[i][0]+1])
+                Global_counters.number_of_collectors_ports_list.append([Global_counters.number_of_collectors, len(clusterbuildingvec[i][0])+1])
                 #writes collector number in list that knows connection for later reference
                 self.runoff_coll_list.append(Global_counters.number_of_collectors)
                 Global_meaning_list.collectors.append(['Collector_'+str(Global_counters.number_of_collectors), 'collects Runoff from Catchments including Street on Clusterlevel', 'Cluster '+str(n+i), 'connected to Catchments '+str(Buildings.numbers_of_catchments_list)+'and the street catchment '+str(Global_counters.number_of_catchments-1)])
@@ -114,7 +114,7 @@ class Clusterlevel:
                         exec 'self.greywaterstrings += string'+str(o)
                     self.greywater_coll_strings.append(self.greywaterstrings)
                 #writes collector number in list that knows number of inports for later reference
-                Global_counters.number_of_collectors_ports_list.append([Global_counters.number_of_collectors, clusterbuildingvec[i][0]])
+                Global_counters.number_of_collectors_ports_list.append([Global_counters.number_of_collectors, len(clusterbuildingvec[i][0])])
                 #writes collector number in list that knows connection for later reference                
                 if Buildings.numbers_of_buildings_contributing_gw_list[0] == "not_contributing to gw <type 'int'>" or Buildings.numbers_of_buildings_contributing_gw_list[0] == "not_contributing to gw <type 'list'>": 
                     self.greywater_to_sewer_coll_list.append(Global_counters.number_of_collectors)
@@ -139,7 +139,7 @@ class Clusterlevel:
                         exec 'self.overflowstrings += string'+str(o)
                     self.overflow_coll_strings.append(self.overflowstrings)
                 #writes collector number in list that knows number of inports for later reference
-                Global_counters.number_of_collectors_ports_list.append([Global_counters.number_of_collectors, clusterbuildingvec[i][0]])
+                Global_counters.number_of_collectors_ports_list.append([Global_counters.number_of_collectors, len(clusterbuildingvec[i][0])])
                 #writes collector number in list that knows connection for later reference
                 self.overflow_coll_list.append(Global_counters.number_of_collectors)
                 Global_meaning_list.collectors.append(['Collector_'+str(Global_counters.number_of_collectors), 'collects Overflow from Raintanks on Cluster Level'])
@@ -159,7 +159,7 @@ class Clusterlevel:
                         exec 'self.raintankstoragestrings += string'+str(o)
                     self.raintankstorage_coll_strings.append(self.raintankstoragestrings)
                 #writes collector number in list that knows number of inports for later reference
-                Global_counters.number_of_collectors_ports_list.append([Global_counters.number_of_collectors, clusterbuildingvec[i][0]])
+                Global_counters.number_of_collectors_ports_list.append([Global_counters.number_of_collectors, len(clusterbuildingvec[i][0])])
                 #writes collector number in list that knows connection for later reference
                 self.raintankstorage_coll_list.append(Global_counters.number_of_collectors)
                 Global_meaning_list.collectors.append(['Collector_'+str(Global_counters.number_of_collectors), 'collects Current_Volume from Raintanks on Cluster Level'])
@@ -185,7 +185,7 @@ class Clusterlevel:
                         exec 'self.additionaldemandstrings += string'+str(o)
                     self.additionaldemand_coll_strings.append(self.additionaldemandstrings)
                 #writes collector number in list that knows number of inports for later reference
-                Global_counters.number_of_collectors_ports_list.append([Global_counters.number_of_collectors, clusterbuildingvec[i][0]])
+                Global_counters.number_of_collectors_ports_list.append([Global_counters.number_of_collectors, len(clusterbuildingvec[i][0])])
                 #writes collector number in list that knows connection for later reference
                 if Buildings.numbers_of_buildings_using_gw_list[0] == 'not using gw':
                     if Buildings.numbers_of_buildings_connected_to_stormw[0] == 'not connected to SWR':
