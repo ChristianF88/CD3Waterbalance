@@ -8,7 +8,7 @@ Created on Wed Dec 03 11:37:18 2014
 from Greywaterreservoirlevel import Greywaterreservoirlevel
 from Global_counters import Global_counters
 from Global_meaning_list import Global_meaning_list
-
+#Global_counters = Global_counters.Instance()
 
 class Stormwaterreservoirlevel:
     def __init__(self):
@@ -24,6 +24,7 @@ class Stormwaterreservoirlevel:
         self.greywater_to_sewer_coll_list = []   
         self.raintankstorage_coll_list = []
         self.numbers_of_large_gwr = []
+        self.numbers_builidng_catchments = []
         
     def writeconnections(self, stormvec):
         
@@ -44,11 +45,12 @@ class Stormwaterreservoirlevel:
         
         it consists out of Greywaterreservoirlevelvector and the last digit means that a Stormwaterreservoir is present (1 = is present) or not (0 = not present)
         '''
-        Greytanklevel = Greywaterreservoirlevel()
+        
         for i in range(len(stormvec)):
-            
+            Greytanklevel = Greywaterreservoirlevel()
             Greytanklevel.writeconnections(stormvec[i][:-1])
             
+            #transfering lists
             for q in range(len(Greytanklevel.greywater_to_sewer_coll_list)):
                 self.greywater_to_sewer_coll_list.append(Greytanklevel.greywater_to_sewer_coll_list[q])
             for q in range(len(Greytanklevel.raintankstorage_coll_list)):
@@ -56,13 +58,24 @@ class Stormwaterreservoirlevel:
             for q in range(len(Greytanklevel.numbers_of_large_gwr)):
                 self.numbers_of_large_gwr.append(Greytanklevel.numbers_of_large_gwr[q])
             
+            
+                
+            for m in range(len(Greytanklevel.runoff_overflow_coll_list_to_swd)):
+                self.runoff_overflow_to_stormwaterdrain_coll_list.append(Greytanklevel.runoff_overflow_coll_list_to_swd[m])
+            for m in range(len(Greytanklevel.additionaldemand_from_pwr_coll_list)):
+                self.additionaldemand_from_pwr_coll_list.append(Greytanklevel.additionaldemand_from_pwr_coll_list[m])
+            
+            #transfers numbers of building - catchments to this level
+            for num in range(len(Greytanklevel.numbers_builidng_catchments)):
+                self.numbers_builidng_catchments.append(Greytanklevel.numbers_builidng_catchments[num])
+            
             if stormvec[i][-1] == 1:
                 
                 #adds collector for stormwaterreservoir inflow
                 self.swr_inflow_coll_strings=[]
-                for m in range(len(Greytanklevel.runoff_overflow_coll_list)):
+                for m in range(len(Greytanklevel.runoff_overflow_coll_list_to_swr)):
                     string1='\t\t\t<connection id="'+str(Global_counters.number_of_connections)+'">\n' 
-                    string2='\t\t\t\t<source node="Collector_'+str(Greytanklevel.runoff_overflow_coll_list[m])+'" port="Outport"/>\n' 
+                    string2='\t\t\t\t<source node="Collector_'+str(Greytanklevel.runoff_overflow_coll_list_to_swr[m])+'" port="Outport"/>\n' 
                     string3='\t\t\t\t<sink node="Collector_'+str(Global_counters.number_of_collectors)+'" port="Inport_'+str(m+1)+'"/>\n' 
                     string4='\t\t\t</connection>\n' 
                     Global_counters.number_of_connections += 1
@@ -72,12 +85,11 @@ class Stormwaterreservoirlevel:
                         exec 'self.swrinflowcollstrings += string'+str(o)
                     self.swr_inflow_coll_strings.append(self.swrinflowcollstrings)
                 #writes collector number in list that knows number of inports for later reference
-                Global_counters.number_of_collectors_ports_list.append([Global_counters.number_of_collectors, len(Greytanklevel.runoff_overflow_coll_list)])
+                Global_counters.number_of_collectors_ports_list.append([Global_counters.number_of_collectors, len(Greytanklevel.runoff_overflow_coll_list_to_swr)])
                 #writes collector number in list that knows connection for later reference
                 self.swr_inflow_coll_list.append(Global_counters.number_of_collectors)
                 Global_meaning_list.collectors.append(['Collector_'+str(Global_counters.number_of_collectors), 'collects Runoff and Overflow Collectors from Clusterlevel as Stormwaterreservoir Inflow'])
                 Global_counters.number_of_collectors += 1
-                    
                     
                 #adds collector for additional demand (Greywaterreservoirs) needed from Stormwaterreservoir
                 self.swr_outflow_coll_strings=[]
@@ -95,25 +107,30 @@ class Stormwaterreservoirlevel:
                         self.swr_outflow_coll_strings.append(self.additionaldemandofgwtcollstrings)
                 else: 
                     n=-1
-                            
-                for m in range(len(Greytanklevel.additionaldemand_from_swr_coll_list)):
-                    string1='\t\t\t<connection id="'+str(Global_counters.number_of_connections)+'">\n' 
-                    string2='\t\t\t\t<source node="Collector_'+str(Greytanklevel.additionaldemand_from_swr_coll_list[m])+'" port="Outport"/>\n' 
-                    string3='\t\t\t\t<sink node="Collector_'+str(Global_counters.number_of_collectors)+'" port="Inport_'+str(m+n+2)+'"/>\n' 
-                    string4='\t\t\t</connection>\n' 
-                    Global_counters.number_of_connections += 1
-                    #writes all string in one and puts it in list
-                    self.swroutflowcollstrings = ''
-                    for o in range(5)[1:]:
-                        exec 'self.swroutflowcollstrings += string'+str(o)
-                    self.swr_outflow_coll_strings.append(self.swroutflowcollstrings)  
                 
-                #writes collector number in list that knows number of inports for later reference
-                Global_counters.number_of_collectors_ports_list.append([Global_counters.number_of_collectors, m+n+2 ])
-                #writes collector number in list that knows connection for later reference
-                self.swr_outflow_coll_list.append(Global_counters.number_of_collectors)
-                Global_meaning_list.collectors.append(['Collector_'+str(Global_counters.number_of_collectors), 'collects Additional Demand (Greywaterreservoirs) needed from Stormwaterreservoir'])
-                Global_counters.number_of_collectors += 1
+                if Greytanklevel.additionaldemand_from_swr_coll_list != []:
+                    for m in range(len(Greytanklevel.additionaldemand_from_swr_coll_list)):
+                        string1='\t\t\t<connection id="'+str(Global_counters.number_of_connections)+'">\n' 
+                        string2='\t\t\t\t<source node="Collector_'+str(Greytanklevel.additionaldemand_from_swr_coll_list[m])+'" port="Outport"/>\n' 
+                        string3='\t\t\t\t<sink node="Collector_'+str(Global_counters.number_of_collectors)+'" port="Inport_'+str(m+n+2)+'"/>\n' 
+                        string4='\t\t\t</connection>\n' 
+                        Global_counters.number_of_connections += 1
+                        #writes all string in one and puts it in list
+                        self.swroutflowcollstrings = ''
+                        for o in range(5)[1:]:
+                            exec 'self.swroutflowcollstrings += string'+str(o)
+                        self.swr_outflow_coll_strings.append(self.swroutflowcollstrings)  
+                else:
+                    m=-1
+                if m == -1 and n == -1:
+                    pass
+                else:   
+                    #writes collector number in list that knows number of inports for later reference
+                    Global_counters.number_of_collectors_ports_list.append([Global_counters.number_of_collectors, m+n+2 ])
+                    #writes collector number in list that knows connection for later reference
+                    self.swr_outflow_coll_list.append(Global_counters.number_of_collectors)
+                    Global_meaning_list.collectors.append(['Collector_'+str(Global_counters.number_of_collectors), 'collects Additional Demand (Greywaterreservoirs) needed from Stormwaterreservoir'])
+                    Global_counters.number_of_collectors += 1
                 
                 
                 #adds Stormwaterreservoir
@@ -140,18 +157,13 @@ class Stormwaterreservoirlevel:
                 self.numbers_of_large_swr.append(Global_counters.number_of_stormwaterreservoirs)
                 Global_counters.number_of_stormwaterreservoirs += 1
                 
-                #demand of Building not conneted to SWR
-                for m in range(len(Greytanklevel.additionaldemand_from_pwr_coll_list)):
-                    self.additionaldemand_from_pwr_coll_list.append(Greytanklevel.additionaldemand_from_pwr_coll_list[m])
-                    
+    
+
             else:
-                
+                #if there's no stormwaterreservoir but the demand was created the demand will be passed on
                 for m in range(len(Greytanklevel.additionaldemand_from_swr_coll_list)):
                     self.additionaldemand_from_pwr_coll_list.append(Greytanklevel.additionaldemand_from_swr_coll_list[m])
-                for m in range(len(Greytanklevel.runoff_overflow_coll_list)):
-                    self.runoff_overflow_to_stormwaterdrain_coll_list.append(Greytanklevel.runoff_overflow_coll_list[m])
-                for m in range(len(Greytanklevel.additionaldemand_from_pwr_coll_list)):
-                    self.additionaldemand_from_pwr_coll_list.append(Greytanklevel.additionaldemand_from_pwr_coll_list[m])
+
                 if Greytanklevel.numbers_of_large_gwr != []:
                     for m in range(len(Greytanklevel.numbers_of_large_gwr)):
                         self.only_GWR.append(Greytanklevel.numbers_of_large_gwr[m])

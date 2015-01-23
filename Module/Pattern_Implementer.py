@@ -55,32 +55,37 @@ class Pattern_Impl(pycd3.Node):
         #print type(start)
         #print start.to_datetime()
         #print date2num(datetime.strptime(str(start.to_datetime()),"%Y-%m-%d %H:%M:%S"))
-    
-        #creating gauss curve with the expectation value self.zenith and the sundown marks the value where the evapotr. is almost 0.0
-        self.deviation = (self.sundown - self.zenith)/3./24.      
-        self.xtime=arange(0,1.0-dt/24./3600.,dt/24./3600.)
-        self.gauss_curve = 1/(self.deviation*np.sqrt(2*pi))*np.exp(-1/2.*((self.xtime-self.zenith/24.)/self.deviation)**2)
-        #creating factor for implementation of pattern
-        self.factor =self.gauss_curve/mean(self.gauss_curve)
-        #pattern in [time,factor] configuration
-        self.pattern=asarray([self.xtime,self.factor]).transpose().tolist()
-        self.pattern.append([1.0, self.pattern[0][1]])        
-        # getting the starting time of simulation
-        self.time = date2num(datetime.strptime(str(start.to_datetime()),"%Y-%m-%d %H:%M:%S"))
+        if dt <=3600:
+            #creating gauss curve with the expectation value self.zenith and the sundown marks the value where the evapotr. is almost 0.0
+            self.deviation = (self.sundown - self.zenith)/3./24.      
+            self.xtime=arange(0,1.0-dt/24./3600.,dt/24./3600.)
+            self.gauss_curve = 1/(self.deviation*np.sqrt(2*pi))*np.exp(-1/2.*((self.xtime-self.zenith/24.)/self.deviation)**2)
+            #creating factor for implementation of pattern
+            self.factor =self.gauss_curve/mean(self.gauss_curve)
+            #pattern in [time,factor] configuration
+            self.pattern=asarray([self.xtime,self.factor]).transpose().tolist()
+            self.pattern.append([1.0, self.pattern[0][1]])        
+            # getting the starting time of simulation
+            self.time = date2num(datetime.strptime(str(start.to_datetime()),"%Y-%m-%d %H:%M:%S"))
+        else:
+            pass
+        
         return True
         
     def f(self, current, dt):
-        
-        #looks for the right factor and mulitplies it with value at a certain point of time
-        if self.time - floor(self.time) == 1.0:
-            self.output[0]=self.input[0]*self.pattern[-1][1]  
+        if dt <=3600:
+            #looks for the right factor and mulitplies it with value at a certain point of time
+            if self.time - floor(self.time) == 1.0:
+                self.output[0]=self.input[0]*self.pattern[-1][1]  
+            else:
+                count_i = 0
+                while (self.time - floor(self.time) > self.pattern[count_i][0]):
+                    count_i+=1
+                self.output[0]=self.input[0]*self.pattern[count_i][1]
+                
+            self.time+=dt/24./3600.
         else:
-            count_i = 0
-            while (self.time - floor(self.time) > self.pattern[count_i][0]):
-                count_i+=1
-            self.output[0]=self.input[0]*self.pattern[count_i][1]
-            
-        self.time+=dt/24./3600.
+            self.output[0] = self.input[0]
         return dt
     
     def getClassName(self):

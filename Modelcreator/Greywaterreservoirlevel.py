@@ -8,7 +8,7 @@ Created on Wed Dec 03 11:37:18 2014
 from Global_counters import Global_counters
 from Clusterlevel import Clusterlevel
 from Global_meaning_list import Global_meaning_list
-#this class adds Greywatertanks to certain clusters
+#Global_counters = Global_counters.Instance()
 
 class Greywaterreservoirlevel:
     def __init__(self):
@@ -20,97 +20,94 @@ class Greywaterreservoirlevel:
         self.additionaldemand_from_pwr_coll_list = []
         self.greywater_to_sewer_coll_list = []
         self.numbers_of_large_gwr = []
-        self.runoff_overflow_coll_list = []
+        self.runoff_overflow_coll_list_to_swr = []
+        self.runoff_overflow_coll_list_to_swd = []
         self.raintankstorage_coll_list = []
+        self.numbers_builidng_catchments = []
         
     def writeconnections(self, greyvec):
         #runs clusterclass
-        Cluster = Clusterlevel()        
+          
+        clusterlen= 0
         for i in range(len(greyvec)):
-            
+                       
+            Cluster = Clusterlevel() 
+            if i == 0:
+                pass
+            else:
+                clusterlen += len(greyvec[i-1][:-1])
+                
             Cluster.writeconnections(greyvec[i][:-1])
-                
+
             #transfers collector lists of runoff and overflow to greywatertanklevel
-            for m in range(Cluster.number_of_clusters):
-                self.runoff_overflow_coll_list.append(Cluster.runoff_coll_list[m])
-                self.runoff_overflow_coll_list.append(Cluster.overflow_coll_list[m])
+            for m in range(len(Cluster.runoff_coll_list_to_swd)):
+                self.runoff_overflow_coll_list_to_swd.append(Cluster.runoff_coll_list_to_swd[m])
+            for m in range(len(Cluster.runoff_coll_list_to_swr)):
+                self.runoff_overflow_coll_list_to_swr.append(Cluster.runoff_coll_list_to_swr[m])
+            for m in range(len(Cluster.overflow_coll_list_to_swr)):
+                self.runoff_overflow_coll_list_to_swr.append(Cluster.overflow_coll_list_to_swr[m])
+            for m in range(len(Cluster.overflow_coll_list_to_swd)):
+                self.runoff_overflow_coll_list_to_swd.append(Cluster.overflow_coll_list_to_swd[m])
+            for m in range(len(Cluster.raintankstorage_coll_list)):
                 self.raintankstorage_coll_list.append(Cluster.raintankstorage_coll_list[m])    
+            for m in range(len(Cluster.additionaldemand_from_swr_coll_list)):
+                self.additionaldemand_from_swr_coll_list.append(Cluster.additionaldemand_from_swr_coll_list[m])
+            for m in range(len(Cluster.additionaldemand_from_pwr_coll_list)):
+                self.additionaldemand_from_pwr_coll_list.append(Cluster.additionaldemand_from_pwr_coll_list[m])
+
                 
-                
-            if greyvec[i][-1] == 1:
+            #transfers numbers of building - catchments to this level
+            for num in range(len(Cluster.numbers_builidng_catchments)):
+                self.numbers_builidng_catchments.append(Cluster.numbers_builidng_catchments[num])
+            for m in range(len(Cluster.greywater_to_sewer_coll_list)):
+                self.greywater_to_sewer_coll_list.append(Cluster.greywater_to_sewer_coll_list[m])
                     
+                    
+            if greyvec[i][-1] == 1:
+                
                 # adds collector for additional demand from gwr
                 self.additionaldemand_coll_strings=[]
-                additional_demand_from_gw_listcounter = 0
-                coll_used_from_gw_inportcounter = 1
-                counter_pwr = 0
-                counter_swr = 0
-                for m in range(Cluster.number_of_clusters):
+                for m in range(len(Cluster.additionaldemand_from_gwr_coll_list)):
                     #if cluster is connected to greywaterreservoir
-                    if Cluster.decision_gwr_swr_pwr[m] == 'gwr':
-                        string1='\t\t\t<connection id="'+str(Global_counters.number_of_connections)+'">\n' 
-                        string2='\t\t\t\t<source node="Collector_'+str(Cluster.additionaldemand_from_gwr_coll_list[additional_demand_from_gw_listcounter])+'" port="Outport"/>\n' 
-                        string3='\t\t\t\t<sink node="Collector_'+str(Global_counters.number_of_collectors)+'" port="Inport_'+str(coll_used_from_gw_inportcounter)+'"/>\n' 
-                        string4='\t\t\t</connection>\n' 
-                        additional_demand_from_gw_listcounter += 1
-                        Global_counters.number_of_connections += 1
-                        coll_used_from_gw_inportcounter += 1
-                        #writes all string in one and puts it in list
-                        self.additionaldemandcollstrings = ''
-                        for o in range(5)[1:]:
-                            exec 'self.additionaldemandcollstrings += string'+str(o)
-                        
-                        self.additionaldemand_coll_strings.append(self.additionaldemandcollstrings)
-                        
-                    else:
-                        #if cluster is only connected to swr
-                        if Cluster.decision_gwr_swr_pwr[m] == 'swr':                                
-                            self.additionaldemand_from_swr_coll_list.append(Cluster.additionaldemand_from_swr_coll_list[counter_swr])
-                            counter_swr += 1
-                        #if cluster is not connected to gwr or swr
-                        else:                            
-                            self.additionaldemand_from_pwr_coll_list.append(Cluster.additionaldemand_from_pwr_coll_list[counter_pwr])
-                            counter_pwr += 1
-                     
+                    string1='\t\t\t<connection id="'+str(Global_counters.number_of_connections)+'">\n' 
+                    string2='\t\t\t\t<source node="Collector_'+str(Cluster.additionaldemand_from_gwr_coll_list[m])+'" port="Outport"/>\n' 
+                    string3='\t\t\t\t<sink node="Collector_'+str(Global_counters.number_of_collectors)+'" port="Inport_'+str(m+1)+'"/>\n' 
+                    string4='\t\t\t</connection>\n' 
+                    #writes all string in one and puts it in list
+                    self.additionaldemandcollstrings = ''
+                    for o in range(5)[1:]:
+                        exec 'self.additionaldemandcollstrings += string'+str(o)
+                    self.additionaldemand_coll_strings.append(self.additionaldemandcollstrings)
                 #writes collector number in list that knows number of inports for later reference
-                Global_counters.number_of_collectors_ports_list.append([Global_counters.number_of_collectors, coll_used_from_gw_inportcounter])
+                Global_counters.number_of_collectors_ports_list.append([Global_counters.number_of_collectors, m+1])
                 #writes collector number in list that knows connection for later reference
                 self.additionaldemand_from_gw_coll_list.append(Global_counters.number_of_collectors)
-                Global_meaning_list.collectors.append(['Collector_'+str(Global_counters.number_of_collectors), 'collects Current_Volume Greywaterreservoirs'])
+                Global_meaning_list.collectors.append(['Collector_'+str(Global_counters.number_of_collectors), 'collects Additional from Clusterlevels and gives it to Greywaterreservoirs'])
                 Global_counters.number_of_collectors += 1
-                    
                     
                     
                 # adds collector for gwr inflow
                 self.gwr_inflow_strings = []
-                gwr_inflow_listcounter = 0
-                gwr_inflow_inportcounter = 1
-                counter_sewer = 0
-                for m in range(Cluster.number_of_clusters):
-                    if Cluster.decision_sewer_gwr[m] == 'gwr':
-                        string1='\t\t\t<connection id="'+str(Global_counters.number_of_connections)+'">\n' 
-                        string2='\t\t\t\t<source node="Collector_'+str(Cluster.greywater_to_reservoir_coll_list[gwr_inflow_listcounter])+'" port="Outport"/>\n' 
-                        string3='\t\t\t\t<sink node="Collector_'+str(Global_counters.number_of_collectors)+'" port="Inport_'+str(gwr_inflow_inportcounter)+'"/>\n' 
-                        string4='\t\t\t</connection>\n' 
-                        gwr_inflow_listcounter += 1
-                        Global_counters.number_of_connections += 1
-                        gwr_inflow_inportcounter += 1
-                        #writes all string in one and puts it in list
-                        self.gwrinflowstring = ''
-                        for o in range(5)[1:]:
-                            exec 'self.gwrinflowstring += string'+str(o)
-                        self.gwr_inflow_strings.append(self.gwrinflowstring)
-                        
-                    else:
-                        self.greywater_to_sewer_coll_list.append(Cluster.greywater_to_sewer_coll_list[counter_sewer])
-                        counter_sewer += 1
-    
-                #writes collector number in list that knows number of inports for later reference
-                Global_counters.number_of_collectors_ports_list.append([Global_counters.number_of_collectors, gwr_inflow_inportcounter])
-                #writes collector number in list that knows connection for later reference
-                self.gw_inflow_coll_list.append(Global_counters.number_of_collectors)
-                Global_meaning_list.collectors.append(['Collector_'+str(Global_counters.number_of_collectors), 'collects Greywater Collectors from Clusterlevel for Greywaterreservoirs'])
-                Global_counters.number_of_collectors += 1
+                for m in range(len(Cluster.greywater_to_reservoir_coll_list)):
+                    string1='\t\t\t<connection id="'+str(Global_counters.number_of_connections)+'">\n' 
+                    string2='\t\t\t\t<source node="Collector_'+str(Cluster.greywater_to_reservoir_coll_list[m])+'" port="Outport"/>\n' 
+                    string3='\t\t\t\t<sink node="Collector_'+str(Global_counters.number_of_collectors)+'" port="Inport_'+str(m+1)+'"/>\n' 
+                    string4='\t\t\t</connection>\n' 
+                    Global_counters.number_of_connections += 1
+                    #writes all string in one and puts it in list
+                    self.gwrinflowstring = ''
+                    for o in range(5)[1:]:
+                        exec 'self.gwrinflowstring += string'+str(o)
+                    self.gwr_inflow_strings.append(self.gwrinflowstring)
+                if Cluster.greywater_to_reservoir_coll_list == []:
+                    pass
+                else:
+                    #writes collector number in list that knows number of inports for later reference
+                    Global_counters.number_of_collectors_ports_list.append([Global_counters.number_of_collectors, m+1])
+                    #writes collector number in list that knows connection for later reference
+                    self.gw_inflow_coll_list.append(Global_counters.number_of_collectors)
+                    Global_meaning_list.collectors.append(['Collector_'+str(Global_counters.number_of_collectors), 'collects Greywater Collectors from Clusterlevel for Greywaterreservoirs'])
+                    Global_counters.number_of_collectors += 1
                     
                     
                 #adds Greywaterreservoir
@@ -140,18 +137,12 @@ class Greywaterreservoirlevel:
                 
             #transfers lists from clusterlevel to greywaterreservoirlevel if there's no gwr 
             else:
-                counter_pwr = 0
-                counter_swr = 0
-                for m in range(Cluster.number_of_clusters):
-                    if Cluster.decision_gwr_swr_pwr[m] == 'swr':                                
-                        self.additionaldemand_from_swr_coll_list.append(Cluster.additionaldemand_from_swr_coll_list[counter_swr])
-                        counter_swr += 1
-                            
-                    else:                            
-                        self.additionaldemand_from_pwr_coll_list.append(Cluster.additionaldemand_from_pwr_coll_list[counter_pwr])
-                        counter_pwr += 1
+                pass
+
+                
+
                         
-                    self.greywater_to_sewer_coll_list.append(Cluster.greywater_to_sewer_coll_list[m])
+                    
                 
 
                 

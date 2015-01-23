@@ -27,6 +27,7 @@ class TheHoleLot:
         self.total_area = 0.0
         self.wettingloss = 0.0
         self.depressionloss = 0.0
+        
         return
         
     #killing the cd3 process (if necessary) and deleting old ouput .txt files
@@ -39,6 +40,7 @@ class TheHoleLot:
     
     #executing programm
     def runcd3(self,cd3path = 'C:\Program Files (x86)\CityDrain3\\bin\cd3.exe', filename = 'C:\Users\Acer\Documents\GitHub\CD3Waterbalance\simulationwithpatterns\outputfiles\Test.xml'):
+            print "Starting and running City Drain!"
             cd3 = r'"""'+cd3path+'"   '+filename+'""'         
             p = subprocess.Popen(cd3, shell=True)
             p.wait()
@@ -105,9 +107,6 @@ class TheHoleLot:
             if self.Outputvector[0][i] == 'Rain_Model':
                 for n in range(len(self.Outputvector))[1:]:
                     self.Outputvector[n][i]=float(self.Outputvector[n][i])/1000*self.total_area
-            if self.Outputvector[0][i] == 'Indoor_Demand':
-                for n in range(len(self.Outputvector))[1:]:
-                    self.Outputvector[n][i]=float(self.Outputvector[n][i])/1000*(float(self.Outputvector[2][0])-float(self.Outputvector[1][0]))*24
         self.Outputvector=np.asarray(self.Outputvector)
         print 'Outputvector has been created'       
         return 
@@ -307,22 +306,20 @@ class TheHoleLot:
     
     
     #Possible Input: Outdoor_Demand, Indoor_Demand, all (plots everthing), all filenames (without endings)
-    def Plotter(self,limx=[0,365], limy=[0,1], toplot=['Rain_Model', 'Stormwaterdrain', 'Evapo_Model', 'effective_rain','Indoor_Demand','Outdoor_Demand'] ):
+    def Plotter(self,size=[12,10],limx=[0,365], limy=[0,1], toplot=['Rain_Model', 'Stormwaterdrain', 'Evapo_Model', 'effective_rain','Indoor_Demand','Outdoor_Demand'] ):
+        self.listtoplot = []
         Vector1 = self.Rainevapovector
         Vector2 = self.Outputvector
-        #liste der zu plottenden sachen erzeugen
-        global listtoplot
-        listtoplot=[]
         for i in range(len(toplot)):
             #searching vector headers for inputstrings, writes in plotting list
             if toplot[i] in Vector1[0]:
                 for n in range(len(Vector1[0])):
                     if toplot[i]==Vector1[0][n]:
-                        listtoplot.append([Vector1[:,0], Vector1[:,n]])                       
+                        self.listtoplot.append([Vector1[:,0], Vector1[:,n]])                       
             elif toplot[i] in Vector2[0]:
                 for n in range(len(Vector2[0])):
                     if toplot[i]==Vector2[0][n]:
-                        listtoplot.append([Vector2[:,0], Vector2[:,n]])                        
+                        self.listtoplot.append([Vector2[:,0], Vector2[:,n]])                        
             elif toplot[i] == 'Outdoor_Demand':
                 allheaders=Vector1.tolist()[0]+Vector2.tolist()[0]
                 for n in range(len(allheaders)):
@@ -342,7 +339,7 @@ class TheHoleLot:
                             storageOD[n] += float(variable[n][i])
                 storageOD=storageOD.tolist()
                 storageOD[0]='Outdoor_Demand'
-                listtoplot.append([variable[:,0], storageOD])
+                self.listtoplot.append([variable[:,0], storageOD])
                 
                 #while time inbetween 2 days sum up and append
                 outdoordemandsum=0.0
@@ -365,27 +362,27 @@ class TheHoleLot:
                 
             elif toplot[i] == 'all':
                 for n in range(len(Vector1[0]))[1:]:
-                    listtoplot.append([Vector1[:,0], Vector1[:,n]])                      
+                    self.listtoplot.append([Vector1[:,0], Vector1[:,n]])                      
                 for n in range(len(Vector2[0]))[1:]:
-                    listtoplot.append([Vector2[:,0], Vector2[:,n]])                      
+                    self.listtoplot.append([Vector2[:,0], Vector2[:,n]])                      
                     
             elif toplot[i] == 'effective_rain':
                 if len(Vector1[0])==len(effective_rain):
-                    listtoplot.append([Vector1[:,0], effective_rain])
+                    self.listtoplot.append([Vector1[:,0], effective_rain])
                 else:
-                    listtoplot.append([Vector2[:,0], effective_rain])
+                    self.listtoplot.append([Vector2[:,0], effective_rain])
     
                         
             else:
                 print 'Error: Wrong input name!'
         #LEGEND!!!save pic if wanted
-        pl.figure(figsize=(12, 6), dpi=80)
+        pl.figure(figsize=(size[0], size[1]), dpi=80)
         pl.xlim(float(Vector1[1][0])+float(limx[0]), float(Vector1[1][0]) + float(limx[1]))
         pl.ylim(float(limy[0]), float(limy[1]))
         lines = ["-","--","-.",":"]
         linecycler = cycle(lines)
-        for i in range(len(listtoplot)):
-            exec 'pl.plot(asarray(listtoplot['+str(i)+'])[0][1:],asarray(listtoplot['+str(i)+'])[1][1:], linewidth=2.5, linestyle = next(linecycler), label=listtoplot['+str(i)+'][1][0])'
+        for i in range(len(self.listtoplot)):
+            exec 'pl.plot(asarray(self.listtoplot['+str(i)+'])[0][1:],asarray(self.listtoplot['+str(i)+'])[1][1:], linewidth=2.5, linestyle = next(linecycler), label=self.listtoplot['+str(i)+'][1][0])'
         pl.legend(loc='best')
         pl.title('Model In - and Output', fontsize=20)
         pl.xlabel('Time [d]')

@@ -54,14 +54,14 @@ class Building(pycd3.Node):
         self.addOutPort("Potable_Demand", self.pot_w)
         self.addOutPort("Non_Potable_Demand", self.nonpot_w)
         self.addInPort("Outdoor_Demand", self.outdoor_demand)
-        self.addInPort("Bathtub_[l/h]", self.bath_tub)
-        self.addInPort("Shower_[l/h]", self.shower)
-        self.addInPort("Toilet_[l/h]", self.toilet)
-        self.addInPort("Kitchen_Tap_[l/h]", self.kitchen_tap)
-        self.addInPort("Handbasin_Tap_[l/h]", self.handbasin_tap)
-        self.addInPort("Washing_Machine_[l/h]", self.washing_machine)
-        self.addInPort("Dishwasher_[l/h]", self.dishwasher)
-        self.addInPort("Evapcooler_[l/h]", self.evapcooler)   
+        self.addInPort("Bathtub", self.bath_tub)
+        self.addInPort("Shower", self.shower)
+        self.addInPort("Toilet", self.toilet)
+        self.addInPort("Kitchen_Tap", self.kitchen_tap)
+        self.addInPort("Handbasin_Tap", self.handbasin_tap)
+        self.addInPort("Washing_Machine", self.washing_machine)
+        self.addInPort("Dishwasher", self.dishwasher)
+        self.addInPort("Evapcooler", self.evapcooler)   
         
         print "init node"
         
@@ -73,10 +73,10 @@ class Building(pycd3.Node):
         
     def f(self, current, dt):
         
-        self.pot_w[0] = (self.bath_tub[0]+self.shower[0]+self.kitchen_tap[0]+self.handbasin_tap[0]+self.dishwasher[0]+self.washing_machine[0] + self.evapcooler[0])/3600/1000*dt
-        self.nonpot_w[0] = (self.toilet[0])/3600/1000*dt+self.outdoor_demand[0]
-        self.black_w[0] = (self.kitchen_tap[0]+self.toilet[0])/3600/1000*dt
-        self.grey_w[0] = (self.bath_tub[0]+self.shower[0]+self.handbasin_tap[0]+self.washing_machine[0]+self.dishwasher[0] + self.evapcooler[0])/3600/1000*dt
+        self.pot_w[0] = (self.bath_tub[0]+self.shower[0]+self.kitchen_tap[0]+self.handbasin_tap[0]+self.dishwasher[0]+self.washing_machine[0] + self.evapcooler[0])
+        self.nonpot_w[0] = (self.toilet[0])+self.outdoor_demand[0]
+        self.black_w[0] = (self.kitchen_tap[0]+self.toilet[0])
+        self.grey_w[0] = (self.bath_tub[0]+self.shower[0]+self.handbasin_tap[0]+self.washing_machine[0]+self.dishwasher[0] + self.evapcooler[0])
 
         return dt
     

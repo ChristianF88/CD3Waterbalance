@@ -55,6 +55,10 @@ class Catchment_w_Routing(pycd3.Node):
         self.addOutPort("Outdoor_Demand", self.outdoor_use)
         self.addOutPort("Outdoor_Demand_Check", self.outdoor_use_check)
         
+        #Catchment with Routing or without
+        self.select_model = pycd3.String("without")
+        self.addParameter("Catchment_with_or_without_Routing_(with_or_without)", self.select_model)        
+        
         #Catchment area + fraction info of pervious and impervious parts
         self.area_property = pycd3.Double(1000)
         self.addParameter("Catchment_Area_[m^2]", self.area_property)
@@ -130,34 +134,40 @@ class Catchment_w_Routing(pycd3.Node):
         self.temp_cap = self.Horton_initial_cap/3600.*dt
         self.temp_cap_2 = self.Horton_initial_cap/3600.*dt
         
-        #calculating the K values for a single subreach
-        self.muskingum_K_single_subreach_coll = (self.rain_runtime_coll/self.amount_subareas)
-        self.muskingum_K_single_subreach_runoff = (self.rain_runtime_runoff/self.amount_subareas)
-        self.muskingum_K_single_subreach_runoff_perv = (self.rain_runtime_runoff_perv/self.amount_subareas)
-        
-        #calculating the Muskingum coefficients
-        self.C_coll_x=(dt/2-self.muskingum_K_single_subreach_coll*self.muskingum_coll_X)/(dt/2+self.muskingum_K_single_subreach_coll*(1-self.muskingum_coll_X))
-        self.C_coll_y=(1/(dt/2+self.muskingum_K_single_subreach_coll*(1-self.muskingum_coll_X)))
-        self.C_runoff_x=(dt/2-self.muskingum_K_single_subreach_runoff*self.muskingum_runoff_X)/(dt/2+self.muskingum_K_single_subreach_runoff*(1-self.muskingum_runoff_X))
-        self.C_runoff_y=(1/(dt/2+self.muskingum_K_single_subreach_runoff*(1-self.muskingum_runoff_X)))
-        self.C_runoff_perv_x=(dt/2-self.muskingum_K_single_subreach_runoff_perv*self.muskingum_runoff_perv_X)/(dt/2+self.muskingum_K_single_subreach_runoff_perv*(1-self.muskingum_runoff_perv_X))
-        self.C_runoff_perv_y=(1/(dt/2+self.muskingum_K_single_subreach_runoff_perv*(1-self.muskingum_runoff_perv_X)))
-        
-        #preparing the storage coefficients for the stored Volume in each subreach
-        self.Q_i_coll_storage_1 = []
-        self.Q_i_coll_storage_2 = []
-        self.Q_i_runoff_storage_1 = []
-        self.Q_i_runoff_storage_2 = []
-        self.Q_i_runoff_perv_storage_1 = []
-        self.Q_i_runoff_perv_storage_2 = []
-        for i in range(self.amount_subareas):
-            self.Q_i_coll_storage_1.append(0)
-            self.Q_i_coll_storage_2.append(0)
-            self.Q_i_runoff_storage_1.append(0)
-            self.Q_i_runoff_storage_2.append(0)
-            self.Q_i_runoff_perv_storage_1.append(0)
-            self.Q_i_runoff_perv_storage_2.append(0)
-        
+        #switches between Muskingum Model and a simple Catchment model excluding routing
+        if self.select_model == "with":
+            #calculating the K values for a single subreach
+            self.muskingum_K_single_subreach_coll = (self.rain_runtime_coll/self.amount_subareas)
+            self.muskingum_K_single_subreach_runoff = (self.rain_runtime_runoff/self.amount_subareas)
+            self.muskingum_K_single_subreach_runoff_perv = (self.rain_runtime_runoff_perv/self.amount_subareas)
+            
+            #calculating the Muskingum coefficients
+            self.C_coll_x=(dt/2-self.muskingum_K_single_subreach_coll*self.muskingum_coll_X)/(dt/2+self.muskingum_K_single_subreach_coll*(1-self.muskingum_coll_X))
+            self.C_coll_y=(1/(dt/2+self.muskingum_K_single_subreach_coll*(1-self.muskingum_coll_X)))
+            self.C_runoff_x=(dt/2-self.muskingum_K_single_subreach_runoff*self.muskingum_runoff_X)/(dt/2+self.muskingum_K_single_subreach_runoff*(1-self.muskingum_runoff_X))
+            self.C_runoff_y=(1/(dt/2+self.muskingum_K_single_subreach_runoff*(1-self.muskingum_runoff_X)))
+            self.C_runoff_perv_x=(dt/2-self.muskingum_K_single_subreach_runoff_perv*self.muskingum_runoff_perv_X)/(dt/2+self.muskingum_K_single_subreach_runoff_perv*(1-self.muskingum_runoff_perv_X))
+            self.C_runoff_perv_y=(1/(dt/2+self.muskingum_K_single_subreach_runoff_perv*(1-self.muskingum_runoff_perv_X)))
+            
+            #preparing the storage coefficients for the stored Volume in each subreach
+            self.Q_i_coll_storage_1 = []
+            self.Q_i_coll_storage_2 = []
+            self.Q_i_runoff_storage_1 = []
+            self.Q_i_runoff_storage_2 = []
+            self.Q_i_runoff_perv_storage_1 = []
+            self.Q_i_runoff_perv_storage_2 = []
+            for i in range(self.amount_subareas):
+                self.Q_i_coll_storage_1.append(0)
+                self.Q_i_coll_storage_2.append(0)
+                self.Q_i_runoff_storage_1.append(0)
+                self.Q_i_runoff_storage_2.append(0)
+                self.Q_i_runoff_perv_storage_1.append(0)
+                self.Q_i_runoff_perv_storage_2.append(0)
+        elif self.select_model == "without":
+            pass
+        else:
+            print "Model selection not valid!"
+            
         return True
         
     def f(self, current, dt):
@@ -314,42 +324,51 @@ class Catchment_w_Routing(pycd3.Node):
         
         # returning the possible inflitration [m³/dt]
         self.possible_infiltr[0]=self.possible_infiltr_raw*self.area_property*self.perv_area
-
-        #preparing the flow array 
-        self.Q_coll_i = []
-        self.Q_runoff_i = []
-        self.Q_runoff_perv_i = []
-        for i in range(self.amount_subareas):
-            self.Q_coll_i.append(0)
-            self.Q_runoff_i.append(0)
-            self.Q_runoff_perv_i.append(0)
-            
-            #calculating the flow in for each subreach
-            if i==0:
-               self.Q_coll_i[i]=(self.collected_w_raw/self.amount_subareas)*self.C_coll_x+self.Q_i_coll_storage_2[i]*self.C_coll_y
-               self.Q_i_coll_storage_2[i]=self.Q_coll_i[i]*(1-self.C_coll_x)*dt+self.Q_i_coll_storage_1[i]*(1-self.C_coll_y*dt)
-               self.Q_i_coll_storage_1[i]=self.Q_i_coll_storage_2[i]
-               self.Q_runoff_i[i]=(self.inflow[0]+self.runoff_raw/self.amount_subareas)*self.C_runoff_x+self.Q_i_runoff_storage_2[i]*self.C_runoff_y
-               self.Q_i_runoff_storage_2[i]=self.Q_runoff_i[i]*(1-self.C_runoff_x)*dt+self.Q_i_runoff_storage_1[i]*(1-self.C_runoff_y*dt)
-               self.Q_i_runoff_storage_1[i]=self.Q_i_runoff_storage_2[i]
-               self.Q_runoff_perv_i[i]=(self.runoff_perv_raw/self.amount_subareas)*self.C_runoff_perv_x+self.Q_i_runoff_perv_storage_2[i]*self.C_runoff_perv_y
-               self.Q_i_runoff_perv_storage_2[i]=self.Q_runoff_perv_i[i]*(1-self.C_runoff_perv_x)*dt+self.Q_i_runoff_perv_storage_1[i]*(1-self.C_runoff_perv_y*dt)
-               self.Q_i_runoff_perv_storage_1[i]=self.Q_i_runoff_perv_storage_2[i]
-            else:
-                self.Q_coll_i[i]=(self.Q_coll_i[i-1]+self.collected_w_raw/self.amount_subareas)*self.C_coll_x+self.Q_i_coll_storage_2[i]*self.C_coll_y
-                self.Q_i_coll_storage_2[i]=self.Q_coll_i[i]*(1-self.C_coll_x)*dt+self.Q_i_coll_storage_1[i]*(1-self.C_coll_y*dt)
-                self.Q_i_coll_storage_1[i]=self.Q_i_coll_storage_2[i]
-                self.Q_runoff_i[i]=(self.Q_runoff_i[i-1]+self.runoff_raw/self.amount_subareas)*self.C_runoff_x+self.Q_i_runoff_storage_2[i]*self.C_runoff_y
-                self.Q_i_runoff_storage_2[i]=self.Q_runoff_i[i]*(1-self.C_runoff_x)*dt+self.Q_i_runoff_storage_1[i]*(1-self.C_runoff_y*dt)
-                self.Q_i_runoff_storage_1[i]=self.Q_i_runoff_storage_2[i]
-                self.Q_runoff_perv_i[i]=(self.Q_runoff_perv_i[i-1]+self.runoff_perv_raw/self.amount_subareas)*self.C_runoff_perv_x+self.Q_i_runoff_perv_storage_2[i]*self.C_runoff_perv_y
-                self.Q_i_runoff_perv_storage_2[i]=self.Q_runoff_perv_i[i]*(1-self.C_runoff_perv_x)*dt+self.Q_i_runoff_perv_storage_1[i]*(1-self.C_runoff_perv_y*dt)
-                self.Q_i_runoff_perv_storage_1[i]=self.Q_i_runoff_perv_storage_2[i]
         
-        #outflow of catchment
-        self.collected_w[0]=self.Q_coll_i[-1]  
-        self.runoff[0] = (self.Q_runoff_perv_i[-1]+self.Q_runoff_i[-1])
-         
+        #switches between Muskingum Model and a simple Catchment model excluding routing
+        if self.select_model == "with":
+            #preparing the flow array 
+            self.Q_coll_i = []
+            self.Q_runoff_i = []
+            self.Q_runoff_perv_i = []
+            for i in range(self.amount_subareas):
+                self.Q_coll_i.append(0)
+                self.Q_runoff_i.append(0)
+                self.Q_runoff_perv_i.append(0)
+                
+                #calculating the flow in for each subreach
+                if i==0:
+                   self.Q_coll_i[i]=(self.collected_w_raw/self.amount_subareas)*self.C_coll_x+self.Q_i_coll_storage_2[i]*self.C_coll_y
+                   self.Q_i_coll_storage_2[i]=self.Q_coll_i[i]*(1-self.C_coll_x)*dt+self.Q_i_coll_storage_1[i]*(1-self.C_coll_y*dt)
+                   self.Q_i_coll_storage_1[i]=self.Q_i_coll_storage_2[i]
+                   self.Q_runoff_i[i]=(self.inflow[0]+self.runoff_raw/self.amount_subareas)*self.C_runoff_x+self.Q_i_runoff_storage_2[i]*self.C_runoff_y
+                   self.Q_i_runoff_storage_2[i]=self.Q_runoff_i[i]*(1-self.C_runoff_x)*dt+self.Q_i_runoff_storage_1[i]*(1-self.C_runoff_y*dt)
+                   self.Q_i_runoff_storage_1[i]=self.Q_i_runoff_storage_2[i]
+                   self.Q_runoff_perv_i[i]=(self.runoff_perv_raw/self.amount_subareas)*self.C_runoff_perv_x+self.Q_i_runoff_perv_storage_2[i]*self.C_runoff_perv_y
+                   self.Q_i_runoff_perv_storage_2[i]=self.Q_runoff_perv_i[i]*(1-self.C_runoff_perv_x)*dt+self.Q_i_runoff_perv_storage_1[i]*(1-self.C_runoff_perv_y*dt)
+                   self.Q_i_runoff_perv_storage_1[i]=self.Q_i_runoff_perv_storage_2[i]
+                else:
+                    self.Q_coll_i[i]=(self.Q_coll_i[i-1]+self.collected_w_raw/self.amount_subareas)*self.C_coll_x+self.Q_i_coll_storage_2[i]*self.C_coll_y
+                    self.Q_i_coll_storage_2[i]=self.Q_coll_i[i]*(1-self.C_coll_x)*dt+self.Q_i_coll_storage_1[i]*(1-self.C_coll_y*dt)
+                    self.Q_i_coll_storage_1[i]=self.Q_i_coll_storage_2[i]
+                    self.Q_runoff_i[i]=(self.Q_runoff_i[i-1]+self.runoff_raw/self.amount_subareas)*self.C_runoff_x+self.Q_i_runoff_storage_2[i]*self.C_runoff_y
+                    self.Q_i_runoff_storage_2[i]=self.Q_runoff_i[i]*(1-self.C_runoff_x)*dt+self.Q_i_runoff_storage_1[i]*(1-self.C_runoff_y*dt)
+                    self.Q_i_runoff_storage_1[i]=self.Q_i_runoff_storage_2[i]
+                    self.Q_runoff_perv_i[i]=(self.Q_runoff_perv_i[i-1]+self.runoff_perv_raw/self.amount_subareas)*self.C_runoff_perv_x+self.Q_i_runoff_perv_storage_2[i]*self.C_runoff_perv_y
+                    self.Q_i_runoff_perv_storage_2[i]=self.Q_runoff_perv_i[i]*(1-self.C_runoff_perv_x)*dt+self.Q_i_runoff_perv_storage_1[i]*(1-self.C_runoff_perv_y*dt)
+                    self.Q_i_runoff_perv_storage_1[i]=self.Q_i_runoff_perv_storage_2[i]
+            
+            #outflow of catchment
+            self.collected_w[0]=self.Q_coll_i[-1]  
+            self.runoff[0] = (self.Q_runoff_perv_i[-1]+self.Q_runoff_i[-1])
+            
+        elif self.select_model == "without":
+            
+            self.collected_w[0] = self.collected_w_raw
+            self.runoff[0] = self.inflow[0]+self.runoff_raw + self.runoff_perv_raw
+            
+        else:
+            print "Model selection not valid!"
         
         return dt
     

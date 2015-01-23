@@ -5,8 +5,9 @@ Created on Mon Dec 01 15:11:56 2014
 @author: Acer
 """
 
-
 class Global_counters:
+
+        
     number_of_buildings = 0
     number_of_connections = 0
     number_of_greywatertanks = 0     
@@ -25,4 +26,8 @@ class Global_counters:
     number_of_collectors_ports_list = []
     number_of_distributors_ports_list = []
     numbers_names_of_fileouts_list = []
+        
+
     
+
+

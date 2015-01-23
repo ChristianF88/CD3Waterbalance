@@ -4,7 +4,8 @@ Created on Mon Jan 05 12:16:56 2015
 
 @author: Acer
 """
-
+import sys
+sys.path.append('C:\Users\Acer\Documents\GitHub\CD3Waterbalance\Modelcreator')
 from Need_to_have_modelinput import Need_to_have_modelinput
 from Simulation_basic_setup import Simulation_basic_setup
 from Catchmentsetup import Catchmentsetup
@@ -21,26 +22,30 @@ from Demandmodelsetup import Demandmodelsetup
 from Stormwaterreservoirsetup import Stormwaterreservoirsetup
 from Supplylevel import Supplylevel
 from Global_counters import Global_counters
+#Global_counters = Global_counters.Instance()
 
 
 Supplylevel = Supplylevel()
-
-    
+  
 
 class XML_Creator():
     
     def __init__(self):
+         
         self.Allstrings = []
         self.Nodelist = []
         self.Connectionlist = []
         self.Basicslist = []
         return
         
-
+     
+    
     def WriteConnections(self, supplyvec):
     
         ''' Creating Connections, Supplyvector necessary (explanation in the XML-Creator.md on Github in the doc folder) '''
-
+        
+        
+        
         Supplylevel.writeconnections(supplyvec)
         
         return
@@ -66,7 +71,7 @@ class XML_Creator():
         
         Setupheader = Simulation_basic_setup(Simulationsetupvec[0], Simulationsetupvec[1], Simulationsetupvec[2], Simulationsetupvec[3])
         Needtohaveinputs = Need_to_have_modelinput(Needtohaveinputsvec[0], Needtohaveinputsvec[1], Needtohaveinputsvec[2], Needtohaveinputsvec[3])
-        Catchments = Catchmentsetup(Global_counters.number_of_catchments ,0, Decay_Constant =1.9, Catchment_Area = 100, Fraktion_of_Impervious_Area_to_Reservoir_iAR= 0.4, Fraktion_of_Impervious_Area_to_Stormwater_Drain_iASD = 0.3, Fraktion_of_Pervious_Area_pA = 0.3, Number_of_Subareas = 1, Initial_Infiltration_Capacity = 0.6, Final_Infiltration_Capacity = 0.21, Depression_Loss = 1.5, Wetting_Loss = 0.4, Outdoor_Demand_Weighing_Factor = 0.5, Runoff_Runtime_iAR = 400, Runoff_Runtime_iASD = 500, Runoff_Runtime_pA = 700, Weighting_Coefficient_iAR = 0.04, Weighting_Coefficient_iASD = 0.05, Weighting_Coefficient_pA = 0.06)
+        Catchments = Catchmentsetup(Global_counters.number_of_catchments ,0, Decay_Constant =1.9, Catchment_Area = 100, Fraktion_of_Impervious_Area_to_Reservoir_iAR= 0.4, Fraktion_of_Impervious_Area_to_Stormwater_Drain_iASD = 0.3, Fraktion_of_Pervious_Area_pA = 0.3, Number_of_Subareas = 1, Initial_Infiltration_Capacity = 0.6, Final_Infiltration_Capacity = 0.21, Depression_Loss = 1.5, Wetting_Loss = 0.4, Outdoor_Demand_Weighing_Factor = 0.5, Runoff_Runtime_iAR = 400, Runoff_Runtime_iASD = 500, Runoff_Runtime_pA = 700, Weighting_Coefficient_iAR = 0.04, Weighting_Coefficient_iASD = 0.05, Weighting_Coefficient_pA = 0.06,Catchment_with_or_without_Routing_with_or_without = "without")
         Catchments.Setandwrite_attributes(Global_counters.number_of_catchments,0,Catchattrvec)
         Buildings = Buildingsetup(Global_counters.number_of_buildings,0)
         Stormwaterdrain =  Stormwaterdrainsetup(Global_counters.number_of_stormwaterpipes,0)
@@ -84,7 +89,7 @@ class XML_Creator():
         Fileoutsneedtohave.Setandwrite_attributes(Global_counters.number_of_fileouts,0,Fileoutattrvec)
         Distributors = Distributorsetup(Global_counters.number_of_distributors,0,Number_of_Outports = 2)
         Distributors.Setandwrite_attributes(Global_counters.number_of_distributors,0,Distributorattrvec)
-        Demandmodels = Demandmodelsetup(Global_counters.number_of_demandmodels,0,Number_of_Commercial_Units = [4], Number_of_Residential_Units=[4])
+        Demandmodels = Demandmodelsetup(Global_counters.number_of_demandmodels,0,Commercial_Units = [4], Residential_Units=[4], Select_Model_Simple_Model_or_Complex_Model = "Simple_Model" )
         Demandmodels.Setandwrite_attributes(Global_counters.number_of_demandmodels,0,Demandmodelattrvec)
         
         #writes header and need to have nodes in a list
@@ -156,12 +161,13 @@ class XML_Creator():
                     Fileout_numbers_names.append([Global_counters.number_of_fileouts, Connection_Name_List[i][1]])
                     Global_counters.numbers_names_of_fileouts_list.append([Global_counters.number_of_fileouts,Connection_Name_List[i][1]])
                     self.Connectionlist.append(string1+string2+string3+string4)
-                    Global_counters.number_of_fileouts += 1 
+                    
                 else:
                     pass
+            Global_counters.number_of_fileouts += 1 
         Fileoutattrvec = []
-        for i in range(len(Fileout_numbers_names)):
-            Fileoutattrvec.append(Fileout_numbers_names[i][1])
+        for i in range(len(Connection_Name_List)):
+            Fileoutattrvec.append(Connection_Name_List[i][1])
         AddedFileouts = Fileoutsetup(len(Connection_Name_List), Fileout_numbers_names[0][0], out_file_name = 'Test.txt')        
         AddedFileouts.Setandwrite_attributes(len(Connection_Name_List), Fileout_numbers_names[0][0], Fileoutattrvec)
         

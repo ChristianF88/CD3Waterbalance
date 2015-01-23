@@ -8,7 +8,7 @@ Created on Mon Dec 01 15:11:56 2014
 
 
 from Global_counters import Global_counters
-
+#Global_counters = Global_counters.Instance()
 
 #The Buildinglevel consistis out of 3 connections and 3 blocks Catchment - Household - Raintank
 class Buildinglevel:
@@ -26,49 +26,50 @@ class Buildinglevel:
     def writeconnections(self, number_of_buildinglevels):
         """
         number_of_buildinglevels = [number of buildings,[greywatertankvector],[contributing to ..., getting GW from GWR, connected to stormwaterreservoir]]
-        number_of_buildinglevels = [5,[0,1,0,1,1],[1,0,1]]
-        number_of_buildinglevels = [5 buldings,[first b. no gwt, second yes, third no, 4th and 5th yes], [all five contibute to GWR, non gets Water from it, connected to stormwaterreservoir]]        
+        number_of_buildinglevels = [[0,1,0,1,1],[1,0,1]]
+        number_of_buildinglevels = [[first b. no gwt, second yes, third no, 4th and 5th yes], [all five contibute to GWR, non gets Water from it, connected to stormwaterreservoir]]        
         """
+        
         #writing strings for each Buildinglevel 
         for i in range(len(number_of_buildinglevels[0])):
             string13='\t\t\t<connection id="'+str(Global_counters.number_of_connections)+'">\n'
-            string14='\t\t\t\t<source node="Demand_Model_'+str(Global_counters.number_of_demandmodels)+'" port="Outport_Bathtub_[l/h]"/>\n'
-            string15='\t\t\t\t<sink node="Building_'+str(Global_counters.number_of_buildings)+'" port="Bathtub_[l/h]"/>\n'
+            string14='\t\t\t\t<source node="Demand_Model_'+str(Global_counters.number_of_demandmodels)+'" port="Outport_Bathtub"/>\n'
+            string15='\t\t\t\t<sink node="Building_'+str(Global_counters.number_of_buildings)+'" port="Bathtub"/>\n'
             string16='\t\t\t</connection>\n'
             Global_counters.number_of_connections += 1
             string17='\t\t\t<connection id="'+str(Global_counters.number_of_connections)+'">\n'
-            string18='\t\t\t\t<source node="Demand_Model_'+str(Global_counters.number_of_demandmodels)+'" port="Outport_Shower_[l/h]"/>\n'
-            string19='\t\t\t\t<sink node="Building_'+str(Global_counters.number_of_buildings)+'" port="Shower_[l/h]"/>\n'
+            string18='\t\t\t\t<source node="Demand_Model_'+str(Global_counters.number_of_demandmodels)+'" port="Outport_Shower"/>\n'
+            string19='\t\t\t\t<sink node="Building_'+str(Global_counters.number_of_buildings)+'" port="Shower"/>\n'
             string20='\t\t\t</connection>\n'
             Global_counters.number_of_connections += 1
             string21='\t\t\t<connection id="'+str(Global_counters.number_of_connections)+'">\n'
-            string22='\t\t\t\t<source node="Demand_Model_'+str(Global_counters.number_of_demandmodels)+'" port="Outport_Toilet_[l/h]"/>\n'
-            string23='\t\t\t\t<sink node="Building_'+str(Global_counters.number_of_buildings)+'" port="Toilet_[l/h]"/>\n'
+            string22='\t\t\t\t<source node="Demand_Model_'+str(Global_counters.number_of_demandmodels)+'" port="Outport_Toilet"/>\n'
+            string23='\t\t\t\t<sink node="Building_'+str(Global_counters.number_of_buildings)+'" port="Toilet"/>\n'
             string24='\t\t\t</connection>\n'
             Global_counters.number_of_connections += 1
             string25='\t\t\t<connection id="'+str(Global_counters.number_of_connections)+'">\n'
-            string26='\t\t\t\t<source node="Demand_Model_'+str(Global_counters.number_of_demandmodels)+'" port="Outport_Kitchen_Tap_[l/h]"/>\n'
-            string27='\t\t\t\t<sink node="Building_'+str(Global_counters.number_of_buildings)+'" port="Kitchen_Tap_[l/h]"/>\n'
+            string26='\t\t\t\t<source node="Demand_Model_'+str(Global_counters.number_of_demandmodels)+'" port="Outport_Kitchen_Tap"/>\n'
+            string27='\t\t\t\t<sink node="Building_'+str(Global_counters.number_of_buildings)+'" port="Kitchen_Tap"/>\n'
             string28='\t\t\t</connection>\n'
             Global_counters.number_of_connections += 1
             string29='\t\t\t<connection id="'+str(Global_counters.number_of_connections)+'">\n'
-            string30='\t\t\t\t<source node="Demand_Model_'+str(Global_counters.number_of_demandmodels)+'" port="Outport_Washing_Machine_[l/h]"/>\n'
-            string31='\t\t\t\t<sink node="Building_'+str(Global_counters.number_of_buildings)+'" port="Washing_Machine_[l/h]"/>\n'
+            string30='\t\t\t\t<source node="Demand_Model_'+str(Global_counters.number_of_demandmodels)+'" port="Outport_Washing_Machine"/>\n'
+            string31='\t\t\t\t<sink node="Building_'+str(Global_counters.number_of_buildings)+'" port="Washing_Machine"/>\n'
             string32='\t\t\t</connection>\n'
             Global_counters.number_of_connections += 1
             string33='\t\t\t<connection id="'+str(Global_counters.number_of_connections)+'">\n'
-            string34='\t\t\t\t<source node="Demand_Model_'+str(Global_counters.number_of_demandmodels)+'" port="Outport_Dishwasher_[l/h]"/>\n'
-            string35='\t\t\t\t<sink node="Building_'+str(Global_counters.number_of_buildings)+'" port="Dishwasher_[l/h]"/>\n'
+            string34='\t\t\t\t<source node="Demand_Model_'+str(Global_counters.number_of_demandmodels)+'" port="Outport_Dishwasher"/>\n'
+            string35='\t\t\t\t<sink node="Building_'+str(Global_counters.number_of_buildings)+'" port="Dishwasher"/>\n'
             string36='\t\t\t</connection>\n'
             Global_counters.number_of_connections += 1
             string37='\t\t\t<connection id="'+str(Global_counters.number_of_connections)+'">\n'
-            string38='\t\t\t\t<source node="Demand_Model_'+str(Global_counters.number_of_demandmodels)+'" port="Outport_Handbasin_Tap_[l/h]"/>\n'
-            string39='\t\t\t\t<sink node="Building_'+str(Global_counters.number_of_buildings)+'" port="Handbasin_Tap_[l/h]"/>\n'
+            string38='\t\t\t\t<source node="Demand_Model_'+str(Global_counters.number_of_demandmodels)+'" port="Outport_Handbasin_Tap"/>\n'
+            string39='\t\t\t\t<sink node="Building_'+str(Global_counters.number_of_buildings)+'" port="Handbasin_Tap"/>\n'
             string40='\t\t\t</connection>\n'
             Global_counters.number_of_connections += 1
             string41='\t\t\t<connection id="'+str(Global_counters.number_of_connections)+'">\n'
-            string42='\t\t\t\t<source node="Demand_Model_'+str(Global_counters.number_of_demandmodels)+'" port="Outport_Evapcooler_[l/h]"/>\n'
-            string43='\t\t\t\t<sink node="Building_'+str(Global_counters.number_of_buildings)+'" port="Evapcooler_[l/h]"/>\n'
+            string42='\t\t\t\t<source node="Demand_Model_'+str(Global_counters.number_of_demandmodels)+'" port="Outport_Evapcooler"/>\n'
+            string43='\t\t\t\t<sink node="Building_'+str(Global_counters.number_of_buildings)+'" port="Evapcooler"/>\n'
             string44='\t\t\t</connection>\n'
             Global_counters.number_of_connections += 1
             string1='\t\t\t<connection id="'+str(Global_counters.number_of_connections)+'">\n'
@@ -114,11 +115,11 @@ class Buildinglevel:
             #writes string in list  
             self.Buildinglevel_connection_list.append(self.demandmodel_building_bathtub)
             self.Buildinglevel_connection_list.append(self.demandmodel_building_kitchen_tap)
-            self.Buildinglevel_connection_list.append(self.demandmodel_building_handbasin_tap)
             self.Buildinglevel_connection_list.append(self.demandmodel_building_toilet)
             self.Buildinglevel_connection_list.append(self.demandmodel_building_shower)
             self.Buildinglevel_connection_list.append(self.demandmodel_building_washing_machine)
             self.Buildinglevel_connection_list.append(self.demandmodel_building_dishwasher)
+            self.Buildinglevel_connection_list.append(self.demandmodel_building_handbasin_tap)
             self.Buildinglevel_connection_list.append(self.demandmodel_building_evapcooler)
             self.Buildinglevel_connection_list.append(self.catchment_raintank)
             self.Buildinglevel_connection_list.append(self.catchment_building)

@@ -20,6 +20,7 @@ import Catchment_with_Routing
 import Greywatertank
 import Demand_Model
 import Stormwaterreservoir
+import GardenWateringModel
 
 class NodeFactory(pycd3.INodeFactory):
     def __init__(self, node):

@@ -37,6 +37,7 @@ class Catchmentsetup:
             self.Catchmentattributelist[i-starting_value_i][str('Catchment_'+str(i))]["Weighting_Coefficient_iAR"] = attributevector[i-starting_value_i][14]
             self.Catchmentattributelist[i-starting_value_i][str('Catchment_'+str(i))]["Weighting_Coefficient_iASD"] = attributevector[i-starting_value_i][15]
             self.Catchmentattributelist[i-starting_value_i][str('Catchment_'+str(i))]["Weighting_Coefficient_pA"] = attributevector[i-starting_value_i][16]
+            self.Catchmentattributelist[i-starting_value_i][str('Catchment_'+str(i))]["Catchment_with_or_without_Routing_(with_or_without)"] = attributevector[i-starting_value_i][17]
         
         for i in range(numberofCatchments+starting_value_i)[starting_value_i:]:
             exec '''self.line1='\\t\\t\\t<node id="Catchment_w_Routing_'+str(i)+'" class="Catchment_w_Routing"> \\n' '''
@@ -57,10 +58,11 @@ class Catchmentsetup:
             exec '''self.line16='\\t\\t\\t\\t<parameter name="Runoff_Runtime_pA_[s]" type="double" value="'+str(self.Catchmentattributelist[i-starting_value_i][str('Catchment_'+str(i))]["Runoff_Runtime_pA"])+'"/> \\n ' '''
             exec '''self.line17='\\t\\t\\t\\t<parameter name="Runoff_Runtime_iASD_[s]" type="double" value="'+str(self.Catchmentattributelist[i-starting_value_i][str('Catchment_'+str(i))]["Runoff_Runtime_iASD"])+'"/> \\n ' '''
             exec '''self.line18='\\t\\t\\t\\t<parameter name="Outdoor_Demand_Weighing_Factor_[-]" type="double" value="'+str(self.Catchmentattributelist[i-starting_value_i][str('Catchment_'+str(i))]["Outdoor_Demand_Weighing_Factor"])+'"/> \\n ' '''
-            exec '''self.line19='\\t\\t\\t</node> \\n ' '''        
+            exec '''self.line19='\\t\\t\\t\\t<parameter name="Catchment_with_or_without_Routing_(with_or_without)" type="string" value="'+str(self.Catchmentattributelist[i-starting_value_i][str('Catchment_'+str(i))]["Catchment_with_or_without_Routing_(with_or_without)"])+'"/> \\n ' '''            
+            exec '''self.line20='\\t\\t\\t</node> \\n ' '''        
             
             alllines = ''
-            for n in range(19):
+            for n in range(20):
                 exec 'alllines += self.line'+str(n+1)
             self.Catchmentnodelist.append(alllines)
 

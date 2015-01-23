@@ -83,23 +83,22 @@ class Greywatertank(pycd3.Node):
         if self.current_volume >= self.storage_v:
             self.Additional_Demand[0] = 0.0
             self.current_volume = self.storage_v
-            self.check_storage[0] = self.current_volume
             self.wastewater[0] = self.greywaterin[0]*(1-self.myyield)
             self.greywateroverflow[0] = self.greywaterin[0]*self.myyield - self.greywaterout[0] - self.rest
         else:    
+            
             if self.current_volume >= 0:
                 self.Additional_Demand[0] = 0.0
-                self.check_storage[0] = self.current_volume
                 self.wastewater[0] = self.greywaterin[0]*(1-self.myyield)
             
             else:
                 self.Additional_Demand[0] = self.greywaterout[0] - self.greywaterin[0]*self.myyield -self.rest2
                 self.current_volume = 0.0
-                self.check_storage[0] = self.current_volume
                 self.wastewater[0] = self.greywaterin[0]*(1-self.myyield) 
        
             self.greywateroverflow[0] = 0.0
-      
+        self.check_storage[0] = self.current_volume
+        
         return dt
     
     def getClassName(self):
