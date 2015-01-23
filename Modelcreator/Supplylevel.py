@@ -439,6 +439,28 @@ class Supplylevel:
         Global_counters.number_of_fileouts += 1
         
         '''
+        adds collector for gardenwateringmodel storage
+        '''
+        self.check_garden_strings = []
+        for q in range(Global_counters.number_of_gardenwateringmodules):
+            string1='\t\t\t<connection id="'+str(Global_counters.number_of_connections)+'">\n' 
+            string2='\t\t\t\t<source node="GardenWateringModel_'+str(q)+'" port="Check_Storage"/>\n' 
+            string3='\t\t\t\t<sink node="Collector_'+str(Global_counters.number_of_collectors)+'" port="Inport_'+str(q+1)+'"/>\n' 
+            string4='\t\t\t</connection>\n' 
+            Global_counters.number_of_connections += 1
+            #writes all string in one and puts it in list
+            self.checkgardensstrings = ''
+            for o in range(5)[1:]:
+                exec 'self.checkgardensstrings += string'+str(o)
+            self.check_garden_strings.append(self.checkgardensstrings)
+             
+        #writes collector number in list that knows number of inports for later reference
+        Global_counters.number_of_collectors_ports_list.append([Global_counters.number_of_collectors, Global_counters.number_of_gardenwateringmodules])
+        Global_meaning_list.collectors.append(['Collector_'+str(Global_counters.number_of_collectors), 'collects Gardenwateringstorage (for non watered demand at last time step)'])
+        self.need_to_have_filout_list.append([Global_counters.number_of_collectors, 'Gardenwateringstorage'])
+        Global_counters.number_of_collectors += 1        
+        
+        '''
         adds collector for storagelevel of greywatertanks
         '''
         self.check_greytanks_strings = []
@@ -806,6 +828,8 @@ class Supplylevel:
             self.Supplylevel_list.append(self.Supplylevel_loop_list[m])
         for m in range(len(self.modelinput_strings)):
             self.Supplylevel_list.append(self.modelinput_strings[m])  
+        for m in range(len(self.check_garden_strings)):
+            self.Supplylevel_list.append(self.check_garden_strings[m])    
         for m in range(len(self.check_greytanks_strings)):
             self.Supplylevel_list.append(self.check_greytanks_strings[m])
         for m in range(len(self.check_stormtanks_strings)):

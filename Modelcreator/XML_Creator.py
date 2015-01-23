@@ -8,6 +8,7 @@ import sys
 sys.path.append('C:\Users\Acer\Documents\GitHub\CD3Waterbalance\Modelcreator')
 from Need_to_have_modelinput import Need_to_have_modelinput
 from Simulation_basic_setup import Simulation_basic_setup
+from Gardenwateringsetup import Gardenwateringsetup
 from Catchmentsetup import Catchmentsetup
 from Buildingsetup import Buildingsetup
 from Stormwaterdrainsetup import Stormwaterdrainsetup
@@ -52,7 +53,7 @@ class XML_Creator():
         
         
         
-    def WriteNodes(self, Catchattrvec, Greywaterattrvec, Stormwaterresattrvec, Rainwaterattrvec, Demandmodelattrvec, Simulationsetupvec, Needtohaveinputsvec):
+    def WriteNodes(self, Catchattrvec, Greywaterattrvec, Stormwaterresattrvec, Rainwaterattrvec, Demandmodelattrvec, Simulationsetupvec, Needtohaveinputsvec, Gardenwaterattrvec):
 
         Collectorattrvec = []
         for i in range(len(Global_counters.number_of_collectors_ports_list)):
@@ -91,6 +92,8 @@ class XML_Creator():
         Distributors.Setandwrite_attributes(Global_counters.number_of_distributors,0,Distributorattrvec)
         Demandmodels = Demandmodelsetup(Global_counters.number_of_demandmodels,0,Commercial_Units = [4], Residential_Units=[4], Select_Model_Simple_Model_or_Complex_Model = "Simple_Model" )
         Demandmodels.Setandwrite_attributes(Global_counters.number_of_demandmodels,0,Demandmodelattrvec)
+        Gardenwat = Gardenwateringsetup(Global_counters.number_of_gardenwateringmodules,0,Average_Watering_Frequency=7, Deviation_of_Frequency=2, Maximal_Watering_Flow_Rate=22, Smart_Watering_Start_Time_End_Time =[18,6], Watering_Method_Normal_Watering_or_Smart_Watering = "Normal_Watering")
+        Gardenwat.Setandwrite_attributes(Global_counters.number_of_gardenwateringmodules,0,Gardenwaterattrvec)
         
         #writes header and need to have nodes in a list
         for i in range(len(Setupheader.Simulationsetupstring)):
@@ -123,7 +126,9 @@ class XML_Creator():
             self.Nodelist.append(Distributors.Distributornodelist[i])    
         for i in range(len(Demandmodels.Demand_Modelnodelist)):
             self.Nodelist.append(Demandmodels.Demand_Modelnodelist[i])
-        
+        for i in range(len(Gardenwat.Gardenmodulenodelist)):
+            self.Nodelist.append(Gardenwat.Gardenmodulenodelist[i])
+            
         #writing all connections in one list
         for i in range(len(Supplylevel.Supplylevel_list)):
             self.Connectionlist.append(Supplylevel.Supplylevel_list[i])   

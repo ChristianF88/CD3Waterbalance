@@ -79,8 +79,13 @@ class Buildinglevel:
             Global_counters.number_of_connections += 1
             string5='\t\t\t<connection id="'+str(Global_counters.number_of_connections)+'">\n'
             string6='\t\t\t\t<source node="Catchment_w_Routing_'+str(Global_counters.number_of_catchments)+'" port="Outdoor_Demand"/>\n'
-            string7='\t\t\t\t<sink node="Building_'+str(Global_counters.number_of_buildings)+'" port="Outdoor_Demand"/>\n'
+            string7='\t\t\t\t<sink node="GardenWateringModel_'+str(Global_counters.number_of_gardenwateringmodules)+'" port="Outdoor_Demand_In"/>\n'
             string8='\t\t\t</connection>\n'
+            Global_counters.number_of_connections += 1
+            string45='\t\t\t<connection id="'+str(Global_counters.number_of_connections)+'">\n'
+            string46='\t\t\t\t<source node="GardenWateringModel_'+str(Global_counters.number_of_gardenwateringmodules)+'" port="Outdoor_Demand_Out"/>\n'
+            string47='\t\t\t\t<sink node="Building_'+str(Global_counters.number_of_buildings)+'" port="Outdoor_Demand"/>\n'
+            string48='\t\t\t</connection>\n'
             Global_counters.number_of_connections += 1
             string9='\t\t\t<connection id="'+str(Global_counters.number_of_connections)+'">\n'
             string10='\t\t\t\t<source node="Building_'+str(Global_counters.number_of_buildings)+'" port="Non_Potable_Demand"/>\n'
@@ -100,6 +105,7 @@ class Buildinglevel:
             self.demandmodel_building_dishwasher = ''
             self.demandmodel_building_handbasin_tap = ''
             self.demandmodel_building_evapcooler = ''
+            self.gardenwatering = ''
             for m in range(4):
                 exec 'self.catchment_raintank += string'+str(m+1)
                 exec 'self.catchment_building += string'+str(m+5)
@@ -112,6 +118,7 @@ class Buildinglevel:
                 exec 'self.demandmodel_building_washing_machine += string'+str(m+29)
                 exec 'self.demandmodel_building_dishwasher += string'+str(m+33)
                 exec 'self.demandmodel_building_evapcooler += string'+str(m+41)
+                exec 'self.gardenwatering += string'+str(m+45)
             #writes string in list  
             self.Buildinglevel_connection_list.append(self.demandmodel_building_bathtub)
             self.Buildinglevel_connection_list.append(self.demandmodel_building_kitchen_tap)
@@ -123,6 +130,7 @@ class Buildinglevel:
             self.Buildinglevel_connection_list.append(self.demandmodel_building_evapcooler)
             self.Buildinglevel_connection_list.append(self.catchment_raintank)
             self.Buildinglevel_connection_list.append(self.catchment_building)
+            self.Buildinglevel_connection_list.append(self.gardenwatering)
             self.Buildinglevel_connection_list.append(self.building_raintank)
             
             #adds number of blocks to list
@@ -184,6 +192,6 @@ class Buildinglevel:
             Global_counters.number_of_buildings += 1
             Global_counters.number_of_catchments += 1
             Global_counters.number_of_demandmodels += 1
-            
+            Global_counters.number_of_gardenwateringmodules += 1
             
             

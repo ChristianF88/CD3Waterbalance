@@ -20,22 +20,22 @@ Basic features:
 
 | Output  | Type  |  Unit  |
 | :------------ |:---------------:| :-----:|
-|    Outport Bathtub   | Time Series |  [l/h]
-| Outport Shower |   Time Series  |  [l/h]   |
-|   Outport Kitchen Tap | Time Series |  [l/h]|
-|   Outport Handbasin Tap | Time Series |  [l/h]|
-|    Outport Toilet  |    Time Series     |  [l/h]  |
-| Outport Dishwasher |   Time Series  |  [l/h]   |
-|   Outport Evapcooler | Time Series |  [l/h]|
-| Outport Washing Machine |   Time Series  |  [l/h]   |
-|    Outport Check Bathtub   | Time Series |  [l/h] |
-| Outport Check Shower |   Time Series  |  [l/h]   |
-|   Outport Check Kitchen Tap | Time Series |  [l/h] |
-|   Outport Check Handbasin Tap | Time Series |  [l/h] |
-|    Outport Check Toilet  |    Time Series     |  [l/h]  |
-| Outport Check Dishwasher |   Time Series  |  [l/h]   |
-| Outport Check Washing Machine |   Time Series  |  [l/h]   |
-| Outport Check Evapcooler |   Time Series  |  [l/h]   |
+|    Outport Bathtub   | Time Series |  [m³/dt]
+| Outport Shower |   Time Series  |  [m³/dt]   |
+|   Outport Kitchen Tap | Time Series |  [m³/dt]|
+|   Outport Handbasin Tap | Time Series |  [m³/dt]|
+|    Outport Toilet  |    Time Series     |  [m³/dt]  |
+| Outport Dishwasher |   Time Series  |  [m³/dt]   |
+|   Outport Evapcooler | Time Series |  [m³/dt]|
+| Outport Washing Machine |   Time Series  |  [m³/dt]   |
+|    Outport Check Bathtub   | Time Series |  [m³/dt] |
+| Outport Check Shower |   Time Series  |  [m³/dt]   |
+|   Outport Check Kitchen Tap | Time Series |  [m³/dt] |
+|   Outport Check Handbasin Tap | Time Series |  [m³/dt] |
+|    Outport Check Toilet  |    Time Series     |  [m³/dt]  |
+| Outport Check Dishwasher |   Time Series  |  [m³/dt]   |
+| Outport Check Washing Machine |   Time Series  |  [m³/dt]   |
+| Outport Check Evapcooler |   Time Series  |  [m³/dt]   |
 
 
 

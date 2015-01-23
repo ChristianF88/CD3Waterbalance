@@ -13,15 +13,15 @@ Basic features:
 
 | Input  | Type  |  Unit  |
 | :------------ |:---------------:| :-----:|	
-| Outdoor Demand      | Time Series | [m/dt] |
-| 	Bathtub | Time Series  |   [l/h] |
-| Shower      | Time Series | [l/h] |
-| 	Toilet | Time Series  |   [l/h] |
-| Kitchen Tap      | Time Series | [l/h] |
-| Handbasin Tap      | Time Series | [l/h] |
-| 	Washing Machine | Time Series  |   [l/h] |
-| 	Dishwasher  | Time Series  |   [l/h] |
-| 	Evapcooler  | Time Series  |   [l/h] |
+| Outdoor Demand      | Time Series | [m³/dt] |
+| 	Bathtub | Time Series  |   [m³/dt] |
+| Shower      | Time Series | [m³/dt] |
+| 	Toilet | Time Series  |   [m³/dt] |
+| Kitchen Tap      | Time Series | [m³/dt] |
+| Handbasin Tap      | Time Series | [m³/dt] |
+| 	Washing Machine | Time Series  |   [m³/dt] |
+| 	Dishwasher  | Time Series  |   [m³/dt] |
+| 	Evapcooler  | Time Series  |   [m³/dt] |
 
 # 
 
