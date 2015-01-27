@@ -10,6 +10,7 @@ Basic features:
       - Greywaterreservoir Level
       - Stormwaterreservoir Level
       - Supply Level
+	  
  - basic and selective flowmeter implemetation
  # 
  - ...
@@ -23,9 +24,11 @@ Basic features:
 | :------------ |:---------------:|:---------------:|  	
 | Supplyvector      | Connectionlist | - |
 | Catchment Attributevector | Nodelist |  Catchment  |
-| Greywatertank Attributevector | Nodelist | Greywatertank   |
-| Stormwaterreservoir Attributevector | Nodelist | Stormwaterreservoir   |   
-| Rainwatertank Attributevector | Nodelist | Rainwatertank   |
+| Greywater Tank Attributevector | Nodelist | Greywater Tank   |
+| Greywater Reservoir Attributevector | Nodelist | Greywater Reservoir   |
+| Stormwater Reservoir Attributevector | Nodelist | Stormwater Reservoir   |   
+| Rainwater Tank Attributevector | Nodelist | Rainwater Tank   |
+| Garden Watering Attributevector | Nodelist | Garden Watering Module   |
 | Building Demand Attributevector | Nodelist | Demand Model  |  
 
 
@@ -180,15 +183,16 @@ To set the Catchments features this vectors ist used.
         Weighting Coefficient pA = [-]
 		Selected Model = [string]
         
+		
 For more detailed information regarding the input, output, etc. please check the
-[Catchment Description File](https://github.com/ChristianF88/CD3Waterbalance/blob/master/doc/catchment.md)
+[Catchment Description File](https://github.com/ChristianF88/CD3Waterbalance/blob/master/doc/CityDrain%20Building%20Blocks/Catchment%20Addon.md)
 
 
 <br>
 
-> ### Greywatertank Attributevector
+> ### Greywater Tank Attributevector
 
-This vector is responsible for setting the Greywatertanks/Greywaterreservoirs properties.
+This vector is responsible for setting the Greywatertanks properties.
 
 	Greywatertank Attributevector = [Greywatertankvector_0, Greywatertankvector_1, ..., Greywatertankvector_n]
     
@@ -199,12 +203,33 @@ This vector is responsible for setting the Greywatertanks/Greywaterreservoirs pr
         Yield of Treatment = [-]
         Storage Volume = [m^3]
 
+		
 For more detailed information regarding the input, output, etc. please check the
-[Greywatertank Description File](https://github.com/ChristianF88/CD3Waterbalance/blob/master/doc/greywatertank.md)
+[Greywatertank Description File](https://github.com/ChristianF88/CD3Waterbalance/blob/master/doc/CityDrain%20Building%20Blocks/Greywater%20Tank%20Addon.md)
 
 <br>
 
-> ### Stormwaterreservoir Attributevector
+
+> ### Greywater Reservoir Attributevector
+
+This vector is responsible for setting the Greywaterreservoirs properties.
+
+	Greywaterreservoir Attributevector = [Greywaterreservoirvector_0, Greywaterreservoirvector_1, ..., Greywaterreservoirvector_n]
+    
+    Greywaterreservoirvector =[Yield of Treatment, Storage Volume]
+    
+    Units:
+    	
+        Yield of Treatment = [-]
+        Storage Volume = [m^3]
+
+		
+For more detailed information regarding the input, output, etc. please check the
+[Greywaterreservoir Description File](https://github.com/ChristianF88/CD3Waterbalance/blob/master/doc/CityDrain%20Building%20Blocks/Greywater%20Reservoir%20Addon.md)
+
+<br>
+
+> ### Stormwater Reservoir Attributevector
 
 This vector is responsible for setting the Stormwaterreservoirs properties.
 
@@ -217,13 +242,14 @@ This vector is responsible for setting the Stormwaterreservoirs properties.
         Yield of Treatment = [-]
         Storage Volume = [m^3]
 
+		
 For more detailed information regarding the input, output, etc. please check the
-[Stormwaterreservoirs Description File](https://github.com/ChristianF88/CD3Waterbalance/blob/master/doc/stormwaterreservoir.md)
+[Stormwaterreservoirs Description File](https://github.com/ChristianF88/CD3Waterbalance/blob/master/doc/CityDrain%20Building%20Blocks/Stormwater%20Reservoir%20Addon.md)
 
 
 <br>
 
-> ### Rainwatertank Attributevector
+> ### Rainwater Tank Attributevector
 
 This vector contains the properties of all raintanks.
 
@@ -235,11 +261,41 @@ This vector contains the properties of all raintanks.
     
     	Storage Volume = [m^3]
     
+	
 For more detailed information regarding the input, output, etc. please check the
-[Rainwatertank Description File](https://github.com/ChristianF88/CD3Waterbalance/blob/master/doc/raintank.md)
+[Rainwatertank Description File](https://github.com/ChristianF88/CD3Waterbalance/blob/master/doc/CityDrain%20Building%20Blocks/Rainwater%20Tank%20Addon.md)
 
 
 <br>
+
+
+> ### Garden Watering Attributevector
+
+This vector contains the properties of all Garden Watering Modules.
+
+	Garden Watering Attributevector = [Gardenwateringvector_0, Gardenwateringvector_1, ..., Gardenwateringvector_n]
+    
+    Gardenwateringvector =[Average Watering Frequency, Deviation of Frequency, Maximal Watering Flow Rate, Smart Watering Start Time End Time, Watering Method]
+	
+    Units:
+    
+    	Average Watering Frequency = [d]
+		Deviation of Frequency = [d]
+		Maximal Watering Flow Rate = [L/min] 
+		Smart Watering Start Time End Time = [hh,hh] 
+		Watering Method = [String]
+		
+	For example:
+		
+		Garden Watering Attributevector = [[7,2,22,[18,6],"Smart Watering"],[14,5,18,[20,4],"Normal Watering"]]
+    
+	
+For more detailed information regarding the input, output, etc. please check the
+[Garden Watering Module Description File](https://github.com/ChristianF88/CD3Waterbalance/blob/master/doc/CityDrain%20Building%20Blocks/Garden%20Watering%20Addon.md)
+
+
+<br>
+
 
 > ### Building Demand Attributevector
 
@@ -248,7 +304,7 @@ A Buildings Water Demand depends on the number of units it consits out of. Furth
 	Building Demand Attributevector = [Buildingdemandvector_0, Buildingdemandvector_1, ..., Buildingdemandvector_n]
     
     Buildingdemandvector = [[number of people in residential unit 1, number of people in residential unit 2, ..., number of people in residential unit n],
-    						[number of people in commercial unit 1, number of people in commercial unit 2, ..., number of people in commercial unit n]]
+    						[number of people in commercial unit 1, number of people in commercial unit 2, ..., number of people in commercial unit n], Select Model]
 	
     
     length(Buildingdemandvector[0]) = number of residential units in building
@@ -258,10 +314,12 @@ A Buildings Water Demand depends on the number of units it consits out of. Furth
     Buildingdemandvector[0][i] = number of people in residential unit i
     
     Buildingdemandvector[1][i] = number of people in commercial unit i
+	
+	Select Model = [String]
     
     For example:
     
-    	Building Demand Attributevector = [[[4,5,2],[2]], [[6],[0]]]
+    	Building Demand Attributevector = [[[4,5,2],[2], 'Stochastic Model'], [[6],[0],'Stochastic Model']]
         
         The vector decribes 2 buildings. The first building consists out of 4 units. 3 residential and 1 commercial units.
         The first residential unit has 4 people living in it, the second one has 5 occupants and 2 people live in the 3rd 
@@ -270,7 +328,7 @@ A Buildings Water Demand depends on the number of units it consits out of. Furth
     
 
 For more detailed information regarding the input, output, etc. please check the
-[Demand Model Description File](https://github.com/ChristianF88/CD3Waterbalance/blob/master/doc/demandmodel.md)
+[Demand Model Description File](https://github.com/ChristianF88/CD3Waterbalance/blob/master/doc/CityDrain%20Building%20Blocks/Demand%20Model%20Addon.md)
 
 
 <br>
@@ -297,7 +355,7 @@ City Drain 3 need some basic information regarding the Simulation Setup.
 
 > ### Needtohaveinputs Vector
 
-This vector takes care of the input information for both [File Readers](https://github.com/ChristianF88/CD3Waterbalance/blob/master/doc/file_reader.md) and the [Pattern Implementer](https://github.com/ChristianF88/CD3Waterbalance/blob/master/doc/pattern_implementer.md). 
+This vector takes care of the input information for both [File Readers](https://github.com/ChristianF88/CD3Waterbalance/blob/master/doc/CityDrain%20Building%20Blocks/File%20Reader%20Addon.md) and the [Pattern Implementer](https://github.com/ChristianF88/CD3Waterbalance/blob/master/doc/CityDrain%20Building%20Blocks/Pattern%20Implementer%20Addon.md). 
 
 	Needtohaveinputs Vector = [Path of Rain File, Path of Evapotranspiration File, average Time of when the Sun is at its Zenith, average Time of Sundown]
     
