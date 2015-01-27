@@ -38,7 +38,7 @@ Basic features:
 
 ## Description 
 
-This Block uses the from the [Demand Model Addon]() generated indoor demands and the outdoor demand given by the [Catchment Block]() and [Garden Watering Block]() to estimate the Water needed by the Building as well as the waste water produced. 
+This Block uses the from the [Demand Model Addon](CD3Waterbalance/doc/CityDrain Building Blocks/Demand Model Addon.md) generated indoor demands and the outdoor demand given by the [Catchment Block](CD3Waterbalance/doc/CityDrain Building Blocks/Catchment Addon.md) and [Garden Watering Block](CD3Waterbalance/doc/CityDrain Building Blocks/Garden Watering Addon.md) to estimate the Water needed by the Building as well as the waste water produced. 
 
 The individual stream are calculated by simple balances:
 

@@ -7,7 +7,7 @@ Basic features:
  - differentiation between collected run-off and rainwater adding to the storm water drainage system can be made
  - infiltration rates estimated via _Horton Equation_
  - Catchment can be divided in Subareas, thus simulating a row of connected Catchments
- - generates the Outdoor Water Demand of connected [Building Block]()
+ - generates the Outdoor Water Demand of connected [Building Block](CD3Waterbalance/doc/CityDrain Building Blocks/Building Addon.md)
  - additional Inflows can be implemented
  - optional simplified model approach for large simulation time steps
  
