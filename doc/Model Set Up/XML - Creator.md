@@ -157,7 +157,7 @@ To set the Catchments features this vectors ist used.
     				   Fraktion of Impervious Area to Stormwater Drain iASD, Fraktion of Pervious Area pA,
                        Initial Infiltration Capacity, Final Infiltration Capacity, Depression Loss, Wetting Loss,
                        Outdoor Demand Weighing Factor, Runoff Runtime iAR, Runoff Runtime iASD, Runoff Runtime pA,
-                       Weighting Coefficient iAR, Weighting Coefficient iASD, Weighting Coefficient pA]
+                       Weighting Coefficient iAR, Weighting Coefficient iASD, Weighting Coefficient pA, Selected Model]
                        
 	Units:
     	
@@ -178,6 +178,7 @@ To set the Catchments features this vectors ist used.
         Weighting Coefficient iAR = [-]
         Weighting Coefficient iASD = [-]
         Weighting Coefficient pA = [-]
+		Selected Model = [string]
         
 For more detailed information regarding the input, output, etc. please check the
 [Catchment Description File](https://github.com/ChristianF88/CD3Waterbalance/blob/master/doc/catchment.md)
