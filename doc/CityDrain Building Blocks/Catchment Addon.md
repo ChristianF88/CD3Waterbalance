@@ -1,14 +1,15 @@
-# Catchment
+# Catchment Addon
 
 Basic features:
 
- - simulates the interaction between rain, evapotranspiration and pervious, as well as impervious area
+ - simulates the interaction between Rain, Evapotranspiration and pervious, as well as impervious area
  - produces dynamic flow using the _Muskingum Method_
  - differentiation between collected run-off and rainwater adding to the storm water drainage system can be made
  - infiltration rates estimated via _Horton Equation_
- - catchment can be divided in subareas
- - estimates outdoor use of connected Households
- - additional inflows can be implemented
+ - Catchment can be divided in Subareas, thus simulating a row of connected Catchments
+ - generates the Outdoor Water Demand of connected [Building Block]()
+ - additional Inflows can be implemented
+ - optional simplified model approach for large simulation time steps
  
 <br>
 
@@ -33,7 +34,8 @@ Basic features:
 | Number of Subareas |   Constant  |  [-]   |
 | Wetting Loss |   Constant  |  [mm]   |
 | Depression Loss |   Constant  |  [mm]   |
-| Outdoor_Demand_Weighing_Factor |   Constant  |  [-]   |
+| Outdoor Demand Weighing Factor |   Constant  |  [-]   |
+| Catchment with or without Routing |   String  |  'with' _or_ 'without'   |
 
 # 
 
@@ -58,29 +60,31 @@ Basic features:
 
 |Flow  | Type  |  Unit  |
 | :------------ |:---------------:| :-----:|
-| Possible Infiltration  |   time series  |  [m³/dt]   |
-| Actual Infiltration |   time series  |  [m³/dt]  |
-| Runoff |   time series  |  [m³/dt]  |
-| Collected Water|   time series  | [m³/dt]   |
-| Outdoor Demand |   time series  |  [m³/dt]  |
-| Outdoor Demand Check |   time series  |  [m³/dt]  |
+| Possible Infiltration  |   Time Series  |  [m³/dt]   |
+| Actual Infiltration |   Time Series  |  [m³/dt]  |
+| Runoff |   Time Series  |  [m³/dt]  |
+| Collected Water|  Time Series  | [m³/dt]   |
+| Outdoor Demand |  Time Series |  [m³/dt]  |
+| Outdoor Demand Check |  Time Series  |  [m³/dt]  |
 
 <br>
 
 ## Description 
 
 
-The Block is solving the general water balance equation for each time step.
+The Block is solving the general water balance equation for each time step. 
 
 >![alt text](https://raw.githubusercontent.com/ChristianF88/CD3Waterbalance/master/doc/Formulas/water%20balance%20equation.png?raw=true)
 
-Runoff _R_ is being produced by rain and other inflows e.g. from another Catchment. It can either be discharged into the stormwater drainage system or partly be collected in a reservoir. The Quantities of Water being diverted to either system can be regulated with the input parameters `Fraction of Impervious Area to Reservoir` and `Fraction of Impervious Area to Stormwater Drain`. Runoff contributing to discharged stormwater can also be produced on the pervious Area, if the rain intensity is higher than the infiltration rate.
+Runoff _R_ is being produced by rain and other inflows e.g. from another catchment. It can either be discharged into the stormwater drainage system or partly be collected in a reservoir. The quantities of water being diverted to either system can be regulated with the input parameters `Fraction of Impervious Area to Reservoir` and `Fraction of Impervious Area to Stormwater Drain`. Runoff contributing to discharged stormwater can also be produced on the pervious area, if the rain intensity is higher than the infiltration rate.
 
 Long and short term storage _S_ has been taken under consideration. Long term storage is represented by soil infiltration and initial losses. Infiltration has been implemented using the _Horton Method_. Initial losses from floor depressions and wetting are to be set as constants (`Wetting Loss`, `Depression Loss`). For flow routing, representing short term storage, the _Muskingum Method_ was used. 
 
-The outdoor water demand of a Household connected to a catchment is being considered originating mainly from garden watering. Therefore it's estimated via the relation between evapotranspiration _ET_ and rain _P_. If precipitation is higher than or equal to evapotranspiration there's no demand. For evaportranspiration being greater, the outdoor water demand is equal to their difference.
+The outdoor water demand of a building connected to a catchment is being considered originating mainly from garden watering. Therefore it's estimated via the relation between evapotranspiration _ET_ and rain _P_. If precipitation is higher than or equal to evapotranspiration there's no demand. For evaportranspiration being greater, the outdoor water demand is equal to their difference.
 
 The discharged water volumes are dependant on the catchment area. For the sake of simplicity catchments are considered squares. Their dimensions need to be specified (`Catchment Width`, `Catchment Length`). 
+
+Depending on the chosen catchment type (with or without routing) the Muskingum Method will be used or not.
 
 <br>
 
@@ -164,5 +168,4 @@ Used formulas:
 
 ## Recommended Improvements
 
-- add additional outdoor use (washing car, swimming pool,...)
-- create dynamics for garden use
+ - implement alternative routing method like linear storage.

@@ -44,12 +44,12 @@ class Demand_Model (pycd3.Node):
         pycd3.Node.__init__(self)
         
         #Inports
-        self.number_residential_units = pycd3.String("")
+        self.number_residential_units = pycd3.String("[5]")
         self.addParameter("Residential_Vector", self.number_residential_units)
-        self.number_commercial_units = pycd3.String("")
+        self.number_commercial_units = pycd3.String("[0]")
         self.addParameter("Commercial_Vector", self.number_commercial_units)
         
-        self.model_selected = pycd3.String("")
+        self.model_selected = pycd3.String("Simple_Model")
         self.addParameter("Select_Model_(Simple_Model_or_Stochastic_Model)", self.model_selected)        
         
         #Outports to connect to Household
@@ -88,12 +88,12 @@ class Demand_Model (pycd3.Node):
         self.CheckEvap_Cooler=pycd3.Flow()
         self.addOutPort("Outport_Check_Evapcooler",self.CheckEvap_Cooler)
         
-        print "init node"
+#        print "init node"
         
     def init(self, start, stop, dt):
-        print start
-        print stop
-        print dt
+#        print start
+#        print stop
+#        print dt
         
         #converting inputstrings to lists
         self.number_residential_units = str(self.number_residential_units)[1:-1].split(',')
@@ -798,7 +798,7 @@ class Demand_Model (pycd3.Node):
         return dt
     
     def getClassName(self):
-        print "getClassName"
+#        print "getClassName"
         return "Demand_Model"
 
 #def register(nr):

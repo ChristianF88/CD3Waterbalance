@@ -1,8 +1,8 @@
-# Building
+# Building Addon
 
 Basic features:
 
- - simulates household water demand by combining indoor and outdoor demand
+ - simulates a Buildings water demand 
  - differs between black water and grey water as well as potable and non potable water
  
 <br>
@@ -38,7 +38,7 @@ Basic features:
 
 ## Description 
 
-This Block uses the implemented indoor demand time series and the outdoor demand given by the catchment block to estimate the Water needed by the household as well as the waste water produced. Furthermore the block distinguishes between potable and non potable water demand as well as between produced grey water and black water.
+This Block uses the from the [Demand Model Addon]() generated indoor demands and the outdoor demand given by the [Catchment Block]() and [Garden Watering Block]() to estimate the Water needed by the Building as well as the waste water produced. 
 
 The individual stream are calculated by simple balances:
 

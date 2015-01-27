@@ -1,6 +1,4 @@
-
-
-# Greywatertank
+# Greywater Tank Addon
 
 Basic features:
 
@@ -36,7 +34,8 @@ Basic features:
 
 ## Description 
 
-This module collects Greywater. The stored volume depends on the yield of treatment specified. 1 - yield of treatment gives the part of Greywater that is equivalent to the Wastewater produced by the treatment process. If the tanks/reservoirs specified volume is exceeded inflowing water is given to the Greywater Overflow, thereby being added to the Sewer.
+This module collects Greywater. The stored volume depends on the yield of treatment specified. (1 - yield of treatment) gives the part of Greywater that is equivalent to the Wastewater produced by the treatment process. 
+If the tanks/reservoirs specified volume is exceeded inflowing water is given to the Greywater Overflow, thereby being added to the Sewer.
 
 
 <br>

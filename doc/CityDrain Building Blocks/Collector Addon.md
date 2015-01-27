@@ -1,4 +1,4 @@
-# Collector
+# Collector Addon
 
 Basic features:
 
@@ -30,9 +30,14 @@ Basic features:
 ## Description 
 
 The Block creates the desired number of Inports. All the Inflows are being added up and the sum is being given to the outport.
+The given Outflow for each time step is being calculated as follows:
+
+Outflow (dt) = Inflow_1 (dt) + Inflow_2 (dt) + ... + Inflow_n (dt)
 
 
 <br>
 
 ##Recommended Improvements
+
+ - optional: reprogram block with faster algorithm
 

@@ -1,11 +1,12 @@
 
 
-# Rainwatertank
+# Rainwater Tank Addon
 
 Basic features:
 
  - simulates simple storage unit for Rainwater
  - storage size can be specified
+ - if the storage size is set to zero, the model will run as if there was no rainwatertank
  
 <br>
 

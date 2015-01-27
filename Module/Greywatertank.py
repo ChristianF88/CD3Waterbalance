@@ -40,7 +40,7 @@ class Greywatertank(pycd3.Node):
         self.greywateroverflow = pycd3.Flow()
         
         #dir (self.inf)
-        print "init node"
+#        print "init node"
         self.addInPort("Greywater_In", self.greywaterin)
         self.addInPort("Greywater_Out", self.greywaterout)
         self.addOutPort("Current_Volume",self.check_storage)
@@ -56,9 +56,9 @@ class Greywatertank(pycd3.Node):
         self.rest2 = 0.0
      
     def init(self, start, stop, dt):
-        print start
-        print stop
-        print dt
+#        print start
+#        print stop
+#        print dt
         return True
         
     def f(self, current, dt):

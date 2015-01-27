@@ -44,7 +44,7 @@ class Catchment_w_Routing(pycd3.Node):
         self.outdoor_use_check = pycd3.Flow()
         
         #dir (self.inf)
-        print "init node"
+#        print "init node"
         self.addInPort("Rain", self.rain)
         self.addInPort("Evapotranspiration", self.evapo)
         self.addInPort("Inflow", self.inflow)
@@ -125,9 +125,9 @@ class Catchment_w_Routing(pycd3.Node):
         self.runoff_perv_raw=0.0
 
     def init(self, start, stop, dt):
-        print start
-        print stop
-        print dt
+#        print start
+#        print stop
+#        print dt
         
         #starting values for Horton model
         self.possible_infiltr_raw = self.Horton_initial_cap/3600.*dt

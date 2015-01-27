@@ -21,6 +21,7 @@ from Collectorsetup import Collectorsetup
 from Distributorsetup import Distributorsetup
 from Demandmodelsetup import Demandmodelsetup
 from Stormwaterreservoirsetup import Stormwaterreservoirsetup
+from Greywaterreservoirsetup import Greywaterreservoirsetup
 from Supplylevel import Supplylevel
 from Global_counters import Global_counters
 #Global_counters = Global_counters.Instance()
@@ -53,7 +54,7 @@ class XML_Creator():
         
         
         
-    def WriteNodes(self, Catchattrvec, Greywaterattrvec, Stormwaterresattrvec, Rainwaterattrvec, Demandmodelattrvec, Simulationsetupvec, Needtohaveinputsvec, Gardenwaterattrvec):
+    def WriteNodes(self, Catchattrvec, Greywaterattrvec, Stormwaterresattrvec , Rainwaterattrvec, Demandmodelattrvec, Greywaterresattrvec, Simulationsetupvec, Needtohaveinputsvec, Gardenwaterattrvec):
 
         Collectorattrvec = []
         for i in range(len(Global_counters.number_of_collectors_ports_list)):
@@ -94,6 +95,8 @@ class XML_Creator():
         Demandmodels.Setandwrite_attributes(Global_counters.number_of_demandmodels,0,Demandmodelattrvec)
         Gardenwat = Gardenwateringsetup(Global_counters.number_of_gardenwateringmodules,0,Average_Watering_Frequency=7, Deviation_of_Frequency=2, Maximal_Watering_Flow_Rate=22, Smart_Watering_Start_Time_End_Time =[18,6], Watering_Method_Normal_Watering_or_Smart_Watering = "Normal_Watering")
         Gardenwat.Setandwrite_attributes(Global_counters.number_of_gardenwateringmodules,0,Gardenwaterattrvec)
+        Greywaterreservoir = Greywaterreservoirsetup(Global_counters.number_of_greywaterreservoirs,0,Yield_of_Treatment = 0.9, Storage_Volume = 15.0)
+        Greywaterreservoir.Setandwrite_attributes(Global_counters.number_of_greywaterreservoirs,0,Greywaterresattrvec)
         
         #writes header and need to have nodes in a list
         for i in range(len(Setupheader.Simulationsetupstring)):
@@ -128,6 +131,8 @@ class XML_Creator():
             self.Nodelist.append(Demandmodels.Demand_Modelnodelist[i])
         for i in range(len(Gardenwat.Gardenmodulenodelist)):
             self.Nodelist.append(Gardenwat.Gardenmodulenodelist[i])
+        for i in range(len(Greywaterreservoir.Greywaterresnodelist)):
+            self.Nodelist.append(Greywaterreservoir.Greywaterresnodelist[i])    
             
         #writing all connections in one list
         for i in range(len(Supplylevel.Supplylevel_list)):

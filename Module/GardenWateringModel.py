@@ -37,7 +37,7 @@ from math import ceil,floor
 
 class GardenWateringModel(pycd3.Node):
     def __init__(self):
-        print "init start hh"
+#        print "init start hh"
         pycd3.Node.__init__(self)
         
         self.inport = pycd3.Flow()
@@ -61,12 +61,12 @@ class GardenWateringModel(pycd3.Node):
         '''
         self.smart_watering_time: 0h not valid, has got to 24 h, start time smaller 24!
         '''
-        print "init node"
+#        print "init node"
         
     def init(self, start, stop, dt):
-        print start
-        print stop
-        print dt
+#        print start
+#        print stop
+#        print dt
         
         #converting inputstrings to lists
         self.smart_watering_time = str(self.smart_watering_time)[1:-1].split(',')
@@ -76,8 +76,6 @@ class GardenWateringModel(pycd3.Node):
         self.DemandStorage = 0.0
         self.average_watering_frequency_building = abs(random.gauss(self.average, self.deviation))
         self.to_add = self.average_watering_frequency_building
-        print "before "+str(self.average_watering_frequency_building)
-        print random.randrange(ceil(self.average_watering_frequency_building))
         self.average_watering_frequency_building =self.average_watering_frequency_building - random.randrange(ceil(self.average_watering_frequency_building))
         
         if self.watering_method == "Smart_Watering":

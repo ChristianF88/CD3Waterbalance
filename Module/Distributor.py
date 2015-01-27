@@ -37,10 +37,10 @@ class Distributor(pycd3.Node):
         self.addParameter("Number_of_Outports", self.numberof_out_ports)            
         
     def init(self, start, stop, dt):
-        print start
-        print stop
-        print dt
-        print "init node"
+#        print start
+#        print stop
+#        print dt
+#        print "init node"
         
         self.addInPort("Inport", self.inflow)
 
@@ -58,7 +58,7 @@ class Distributor(pycd3.Node):
         return dt
     
     def getClassName(self):
-        print "getClassName"
+#        print "getClassName"
         return "Distributor"
 
 #def register(nr):

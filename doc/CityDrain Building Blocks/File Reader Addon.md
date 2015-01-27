@@ -1,4 +1,4 @@
-# File Reader
+# File Reader Addon
 
 Basic features:
 

@@ -39,7 +39,7 @@ class Pattern_Impl(pycd3.Node):
         pycd3.Node.__init__(self)
         self.input = pycd3.Flow()
         self.output = pycd3.Flow()
-        print "init node"
+#        print "init node"
         self.addInPort("Inport", self.input)
         self.addOutPort("Outport", self.output)
         
@@ -49,9 +49,9 @@ class Pattern_Impl(pycd3.Node):
         self.addParameter("Sundown_[0-23h]", self.sundown)
         
     def init(self, start, stop, dt):
-        print start
-        print stop
-        print dt
+#        print start
+#        print stop
+#        print dt
         #print type(start)
         #print start.to_datetime()
         #print date2num(datetime.strptime(str(start.to_datetime()),"%Y-%m-%d %H:%M:%S"))

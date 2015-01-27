@@ -35,7 +35,7 @@ class Stormwaterdrain(pycd3.Node):
         self.inport = pycd3.Flow()
         self.discharged_V = pycd3.Flow()
         #dir (self.inf)
-        print "init node"
+#        print "init node"
         self.addInPort("Runoff", self.inport)
         self.addOutPort("Discharged_Volume", self.discharged_V)
         
@@ -45,9 +45,9 @@ class Stormwaterdrain(pycd3.Node):
         #self.addInPort("in", self.inf)
         
     def init(self, start, stop, dt):
-        print start
-        print stop
-        print dt
+#        print start
+#        print stop
+#        print dt
         return True
         
     def f(self, current, dt):

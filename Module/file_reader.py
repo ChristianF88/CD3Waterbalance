@@ -43,7 +43,7 @@ class File_Reader (pycd3.Node):
         self.decision = pycd3.String("H")
         self.out = pycd3.Flow()
         
-        print "init node"
+#        print "init node"
         self.addParameter("", self.inflow)
         self.addParameter("Type_H_for_height_[mm]_or_F_for_flow_[l/h]", self.decision)
         self.addOutPort("Outport", self.out)
@@ -58,9 +58,9 @@ class File_Reader (pycd3.Node):
         
         
     def init(self, start, stop, dt):
-        print start
-        print stop
-        print dt
+#        print start
+#        print stop
+#        print dt
         
         #reading the file
         csv_file = open(str(self.inflow), "r")       
@@ -70,9 +70,9 @@ class File_Reader (pycd3.Node):
         #getting the files time step and setting the models starting time
         self.dt_read = abs(date2num(datetime.strptime(self.mylist[1][0]+" "+ self.mylist[1][1],"%d.%m.%Y %H:%M:%S")) - date2num(datetime.strptime(self.mylist[0][0]+" "+ self.mylist[0][1],"%d.%m.%Y %H:%M:%S")))
         self.growing_t = date2num(datetime.strptime(self.mylist[0][0]+" "+ self.mylist[0][1],"%d.%m.%Y %H:%M:%S"))
-        print [date2num(datetime.strptime(str(start.to_datetime()),"%Y-%m-%d %H:%M:%S")),self.growing_t ]
+        #print [date2num(datetime.strptime(str(start.to_datetime()),"%Y-%m-%d %H:%M:%S")),self.growing_t ]
         #printing the files time step
-        print 'The files time step is ' + str(int(around(self.dt_read*24*3600))) +' seconds.'
+        #print 'The files time step is ' + str(int(around(self.dt_read*24*3600))) +' seconds.'
         
         return True
         
@@ -256,7 +256,7 @@ class File_Reader (pycd3.Node):
         return dt
     
     def getClassName(self):
-        print "getClassName"
+#        print "getClassName"
         return "File_Reader"
 
 #def register(nr):

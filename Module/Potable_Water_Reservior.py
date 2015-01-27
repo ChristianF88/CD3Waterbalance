@@ -37,15 +37,15 @@ class Potable_Water_Reservoir(pycd3.Node):
         self.nonpot_w = pycd3.Flow()
         self.demand = pycd3.Flow()
         #dir (self.inf)
-        print "init node"
+#        print "init node"
         self.addInPort("Potable_Water_Demand", self.pot_w)
         self.addInPort("Non_Potable_Water_Demand", self.nonpot_w)
         self.addOutPort("Demand", self.demand)
          
     def init(self, start, stop, dt):
-        print start
-        print stop
-        print dt
+#        print start
+#        print stop
+#        print dt
         return True
         
     def f(self, current, dt):
@@ -57,7 +57,7 @@ class Potable_Water_Reservoir(pycd3.Node):
         return dt
     
     def getClassName(self):
-        print "getClassName"
+#        print "getClassName"
         return "Potable_Water_Reservoir"
 
 #def register(nr):

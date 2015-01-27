@@ -478,10 +478,32 @@ class Supplylevel:
              
         #writes collector number in list that knows number of inports for later reference
         Global_counters.number_of_collectors_ports_list.append([Global_counters.number_of_collectors, Global_counters.number_of_greywatertanks])
-        Global_meaning_list.collectors.append(['Collector_'+str(Global_counters.number_of_collectors), 'collects Current_Volume of Greywatertanks/reservoirs (for checking levels)'])
+        Global_meaning_list.collectors.append(['Collector_'+str(Global_counters.number_of_collectors), 'collects Current_Volume of Greywatertanks (for checking levels)'])
         self.need_to_have_filout_list.append([Global_counters.number_of_collectors, 'Greywatertanklevels'])
         Global_counters.number_of_collectors += 1
-
+        
+        '''
+        adds collector for storagelevel of greywaterreservoirs
+        '''
+        self.check_greyres_strings = []
+        for q in range(Global_counters.number_of_greywaterreservoirs):
+            string1='\t\t\t<connection id="'+str(Global_counters.number_of_connections)+'">\n' 
+            string2='\t\t\t\t<source node="Greywaterreservoir_'+str(q)+'" port="Current_Volume"/>\n' 
+            string3='\t\t\t\t<sink node="Collector_'+str(Global_counters.number_of_collectors)+'" port="Inport_'+str(q+1)+'"/>\n' 
+            string4='\t\t\t</connection>\n' 
+            Global_counters.number_of_connections += 1
+            #writes all string in one and puts it in list
+            self.checkgreyresstrings = ''
+            for o in range(5)[1:]:
+                exec 'self.checkgreyresstrings += string'+str(o)
+            self.check_greyres_strings.append(self.checkgreyresstrings)
+             
+        #writes collector number in list that knows number of inports for later reference
+        Global_counters.number_of_collectors_ports_list.append([Global_counters.number_of_collectors, Global_counters.number_of_greywaterreservoirs])
+        Global_meaning_list.collectors.append(['Collector_'+str(Global_counters.number_of_collectors), 'collects Current_Volume of Greywaterreservoirs (for checking levels)'])
+        self.need_to_have_filout_list.append([Global_counters.number_of_collectors, 'Greywaterreservoirlevels'])
+        Global_counters.number_of_collectors += 1        
+        
         '''
         adds collector for storagelevel of stormwatertanks
         '''
@@ -832,6 +854,8 @@ class Supplylevel:
             self.Supplylevel_list.append(self.check_garden_strings[m])    
         for m in range(len(self.check_greytanks_strings)):
             self.Supplylevel_list.append(self.check_greytanks_strings[m])
+        for m in range(len(self.check_greyres_strings)):
+            self.Supplylevel_list.append(self.check_greyres_strings[m])    
         for m in range(len(self.check_stormtanks_strings)):
             self.Supplylevel_list.append(self.check_stormtanks_strings[m])
         for m in range(len(self.check_raintanks_strings)):

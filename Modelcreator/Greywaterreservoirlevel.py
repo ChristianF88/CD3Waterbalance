@@ -115,12 +115,12 @@ class Greywaterreservoirlevel:
                 self.gwr_out_strings = []
                 string1='\t\t\t<connection id="'+str(Global_counters.number_of_connections)+'">\n' 
                 string2='\t\t\t\t<source node="Collector_'+str(self.additionaldemand_from_gw_coll_list[0])+'" port="Outport"/>\n' 
-                string3='\t\t\t\t<sink node="Greywatertank_'+str(Global_counters.number_of_greywatertanks)+'" port="Greywater_Out"/>\n' 
+                string3='\t\t\t\t<sink node="Greywaterreservoir_'+str(Global_counters.number_of_greywaterreservoirs)+'" port="Greywater_Out"/>\n' 
                 string4='\t\t\t</connection>\n' 
                 Global_counters.number_of_connections += 1
                 string5='\t\t\t<connection id="'+str(Global_counters.number_of_connections)+'">\n' 
                 string6='\t\t\t\t<source node="Collector_'+str(self.gw_inflow_coll_list[0])+'" port="Outport"/>\n' 
-                string7='\t\t\t\t<sink node="Greywatertank_'+str(Global_counters.number_of_greywatertanks)+'" port="Greywater_In"/>\n' 
+                string7='\t\t\t\t<sink node="Greywaterreservoir_'+str(Global_counters.number_of_greywaterreservoirs)+'" port="Greywater_In"/>\n' 
                 string8='\t\t\t</connection>\n' 
                 Global_counters.number_of_connections += 1
                 #writes all string in one and puts it in list
@@ -132,8 +132,8 @@ class Greywaterreservoirlevel:
                 self.gwr_in_strings.append(self.gwrinstring)
                 self.gwr_out_strings.append(self.gwroutstring)
                 
-                self.numbers_of_large_gwr.append(Global_counters.number_of_greywatertanks)
-                Global_counters.number_of_greywatertanks += 1
+                self.numbers_of_large_gwr.append(Global_counters.number_of_greywaterreservoirs)
+                Global_counters.number_of_greywaterreservoirs += 1
                 
             #transfers lists from clusterlevel to greywaterreservoirlevel if there's no gwr 
             else:

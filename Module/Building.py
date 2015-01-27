@@ -31,7 +31,7 @@ import pycd3
 
 class Building(pycd3.Node):
     def __init__(self):
-        print "init start hh"
+#        print "init start hh"
         pycd3.Node.__init__(self)
         
         self.black_w = pycd3.Flow()
@@ -62,13 +62,13 @@ class Building(pycd3.Node):
         self.addInPort("Washing_Machine", self.washing_machine)
         self.addInPort("Dishwasher", self.dishwasher)
         self.addInPort("Evapcooler", self.evapcooler)   
-        
-        print "init node"
+#        
+#        print "init node"
         
     def init(self, start, stop, dt):
-        print start
-        print stop
-        print dt
+#        print start
+#        print stop
+#        print dt
         return True
         
     def f(self, current, dt):

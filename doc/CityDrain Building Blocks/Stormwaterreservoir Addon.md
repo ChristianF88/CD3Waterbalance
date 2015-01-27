@@ -1,6 +1,6 @@
 
 
-# Stormwaterreservoir
+# Stormwaterreservoir Addon
 
 Basic features:
 

@@ -1,4 +1,4 @@
-# Pattern Implementer
+# Pattern Implementer Addon
 
 Basic features:
 

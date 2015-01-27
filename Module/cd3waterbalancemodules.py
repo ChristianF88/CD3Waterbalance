@@ -21,26 +21,27 @@ import Greywatertank
 import Demand_Model
 import Stormwaterreservoir
 import GardenWateringModel
+import Greywaterreservoir
 
 class NodeFactory(pycd3.INodeFactory):
     def __init__(self, node):
         pycd3.INodeFactory.__init__(self)
         self.node = node
-        print "NodeFactory.__init__"
+#        print "NodeFactory.__init__"
         
     def getNodeName(self):
-        print "NodeFactory.getName"
+#        print "NodeFactory.getName"
         return self.node.__name__
         
     def createNode(self):
-        print "NodeFactory.createNode"
+#        print "NodeFactory.createNode"
         n = self.node()
         n.__disown__()
-        print "NodeFactory.disowned"
+#        print "NodeFactory.disowned"
         return n
         
     def getSource(self):
-        print "NodeFactory.getSource"
+#        print "NodeFactory.getSource"
         return "cd3waterbalancemodules.py"
 
 

@@ -1,4 +1,4 @@
-# Distributor
+# Distributor Addon
 
 Basic features:
 
@@ -33,8 +33,14 @@ Basic features:
 The Block creates the desired number of outports. The Inflow is then set to all the Outflows.
 Its not being split up. 100 % of it goes to every outport.
 
+Outflow_1 (dt) = Inflow (dt)
+
+Outflow_2 (dt) = Inflow (dt)
+
+...
+ 
+Outflow_n (dt) = Inflow (dt)
 
 <br>
 
 ##Recommended Improvements
-

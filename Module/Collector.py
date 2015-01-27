@@ -37,10 +37,10 @@ class Collector(pycd3.Node):
         self.addParameter("Number_of_Inports", self.numberof_in_ports)            
         
     def init(self, start, stop, dt):
-        print start
-        print stop
-        print dt
-        print "init node"
+#        print start
+#        print stop
+#        print dt
+#        print "init node"
         
         for i in range(self.numberof_in_ports):
             exec 'self.Inport'+str(i+1)+'=pycd3.Flow()'
@@ -62,7 +62,7 @@ class Collector(pycd3.Node):
         return dt
     
     def getClassName(self):
-        print "getClassName"
+#        print "getClassName"
         return "Collector"
 
 #def register(nr):
