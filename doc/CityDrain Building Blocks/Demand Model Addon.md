@@ -59,7 +59,7 @@ vector n+1 = [demand 12 pm [l/h], demand 1 am [l/h], demand 2 am [l/h], ..., dem
 
 A demand vector used for the calculations in CD3 consists out of two vectors given out by the stochastic model:
 
-vector - day n = [demand 1 am [l/h] (vector n), demand 2 am [l/h] (vector n), ..., demand 11 pm [l/h] (vector n), demand 12 pm [l/h] (vector n+1)]
+vector - day n = [demand 1 am [l/h]-(vector n), demand 2 am [l/h]-(vector n), ..., demand 11 pm [l/h]-(vector n), demand 12 pm [l/h]-(vector n+1)]
 
 
 Depending on the simulations time step the vectors time increment is being modified.

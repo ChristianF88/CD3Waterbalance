@@ -2,7 +2,7 @@
 
 Basic features:
 
- - collects the by the [Catchment Addon](CD3Waterbalance/doc/CityDrain Building Blocks/Catchment Addon.md) generated outdoor demands and creates events where the water is being used
+ - collects the by the [Catchment Addon](https://github.com/ChristianF88/CD3Waterbalance/blob/master/doc/CityDrain%20Building%20Blocks/Catchment%20Addon.md) generated outdoor demands and creates events where the water is being used
  - different watering behaviours can be selected
  - a maximal flow rate for the watering events can be specified
  - creates a more realistic watering behaviour by using a normal distribution 
