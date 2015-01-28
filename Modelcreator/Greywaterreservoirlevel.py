@@ -64,7 +64,7 @@ class Greywaterreservoirlevel:
                     
                     
             if greyvec[i][-1] == 1:
-                
+
                 # adds collector for additional demand from gwr
                 self.additionaldemand_coll_strings=[]
                 for m in range(len(Cluster.additionaldemand_from_gwr_coll_list)):
@@ -135,7 +135,12 @@ class Greywaterreservoirlevel:
                 self.numbers_of_large_gwr.append(Global_counters.number_of_greywaterreservoirs)
                 Global_counters.number_of_greywaterreservoirs += 1
                 
-            #transfers lists from clusterlevel to greywaterreservoirlevel if there's no gwr 
+#            elif greyvec[i][-1] == 2:
+            
+            
+            
+            
+            
             else:
                 pass
 

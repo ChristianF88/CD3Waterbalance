@@ -212,9 +212,14 @@ class TheHoleLot:
         SewerStormwInfiltr = 0.0
         PWRonly = 0.0
         OutdoorD = 0.0
+         
         #Speicher
         for i in range(len(totalstorage)):
-            totalstoragescalar += float(totalstorage[i][-1])
+            print totalstorage[i][0]
+            if totalstorage[i][0] == 'Gardenwateringstorage':
+                totalstoragescalar -= float(totalstorage[i][-1])
+            else:
+                totalstoragescalar += float(totalstorage[i][-1])
         #Potable_Water_Demand/Sewer,Infiltr.,Stormwater
         for i in range(len(outputISSP)):
             if outputISSP[i][0] == 'Potable_Water_Demand':

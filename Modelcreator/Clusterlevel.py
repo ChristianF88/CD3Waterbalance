@@ -177,7 +177,7 @@ class Clusterlevel:
                 Global_meaning_list.collectors.append(['Collector_'+str(Global_counters.number_of_collectors), 'collects Current_Volume from Raintanks on Cluster Level'])
                 Global_counters.number_of_collectors +=1
                 
-                
+               
 
                 # adds collector for additionaldemand of Raintanks or Greywatertanks
                 self.additionaldemand_coll_strings=[]

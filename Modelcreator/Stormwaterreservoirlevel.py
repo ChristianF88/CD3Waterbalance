@@ -96,7 +96,7 @@ class Stormwaterreservoirlevel:
                 if Greytanklevel.numbers_of_large_gwr != []:
                     for n in range(len(Greytanklevel.numbers_of_large_gwr)):
                         string1='\t\t\t<connection id="'+str(Global_counters.number_of_connections)+'">\n' 
-                        string2='\t\t\t\t<source node="Greywatertank_'+str(Greytanklevel.numbers_of_large_gwr[n])+'" port="Additional_Demand"/>\n' 
+                        string2='\t\t\t\t<source node="Greywaterreservoir_'+str(Greytanklevel.numbers_of_large_gwr[n])+'" port="Additional_Demand"/>\n' 
                         string3='\t\t\t\t<sink node="Collector_'+str(Global_counters.number_of_collectors)+'" port="Inport_'+str(n+1)+'"/>\n' 
                         string4='\t\t\t</connection>\n' 
                         Global_counters.number_of_connections += 1
