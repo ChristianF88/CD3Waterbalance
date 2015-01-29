@@ -16,12 +16,12 @@ The folder _City Drain Building Blocks_  contains all addons programmed. Dependi
 |[Distributor Addon](https://github.com/ChristianF88/CD3Waterbalance/blob/master/doc/CityDrain%20Building%20Blocks/Distributor%20Addon.md)| splits up one signal into many signals |
 |[File Reader Addon](https://github.com/ChristianF88/CD3Waterbalance/blob/master/doc/CityDrain%20Building%20Blocks/File%20Reader%20Addon.md)| reads data out of a file (ixx, csv or txt) and passes it on |
 |[Garden Watering Addon](https://github.com/ChristianF88/CD3Waterbalance/blob/master/doc/CityDrain%20Building%20Blocks/Garden%20Watering%20Addon.md)| generates garden watering events |
-|[Greywater Reservoir Addon](https://github.com/ChristianF88/CD3Waterbalance/blob/master/doc/CityDrain%20Building%20Blocks/Greywater%20Reservoir%20Addon.md)| stores greywater for nonpotabel demand |
-|[Greywater Tank Addon](https://github.com/ChristianF88/CD3Waterbalance/blob/master/doc/CityDrain%20Building%20Blocks/Greywater%20Tank%20Addon.md)| stores greywater for nonpotabel demand |
+|[Greywater Reservoir Addon](https://github.com/ChristianF88/CD3Waterbalance/blob/master/doc/CityDrain%20Building%20Blocks/Greywater%20Reservoir%20Addon.md)| stores greywater for nonpotable demand |
+|[Greywater Tank Addon](https://github.com/ChristianF88/CD3Waterbalance/blob/master/doc/CityDrain%20Building%20Blocks/Greywater%20Tank%20Addon.md)| stores greywater for nonpotable demand |
 |[Pattern Implementer Addon](https://github.com/ChristianF88/CD3Waterbalance/blob/master/doc/CityDrain%20Building%20Blocks/Pattern%20Implementer%20Addon.md)| creates a evapotranspiration pattern from constant data |
-| [Rainwater Tank Addon](https://github.com/ChristianF88/CD3Waterbalance/blob/master/doc/CityDrain%20Building%20Blocks/Rainwater%20Tank%20Addon.md)| stores rainwater for nonpotabel demand |
+| [Rainwater Tank Addon](https://github.com/ChristianF88/CD3Waterbalance/blob/master/doc/CityDrain%20Building%20Blocks/Rainwater%20Tank%20Addon.md)| stores rainwater for nonpotable demand |
 | [Sewer, Stromdrain, Potable Water Reservoir Addon](https://github.com/ChristianF88/CD3Waterbalance/blob/master/doc/CityDrain%20Building%20Blocks/Sewer%2C%20Stormdrain%20and%20Potable%20Water%20Reservoir%20Addon.md.md)| end of the line modules that state where water ends up |
-|[Stormwater Reservoir Addon](https://github.com/ChristianF88/CD3Waterbalance/blob/master/doc/CityDrain%20Building%20Blocks/Stormwaterreservoir%20Addon.md)| stores stormwater for nonpotabel demand |
+|[Stormwater Reservoir Addon](https://github.com/ChristianF88/CD3Waterbalance/blob/master/doc/CityDrain%20Building%20Blocks/Stormwaterreservoir%20Addon.md)| stores stormwater for nonpotable demand |
 
 <br> 
 

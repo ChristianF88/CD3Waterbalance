@@ -38,7 +38,7 @@ This City Drain module acts like a storage unit, only emptying (creating a water
 
 A watering events flow rate is limited by the flow rate of the tap used. The input value Maximal Watering Flow Rate takes this limiting factor into account. Furthermore 2 possible watering behaviours were considered. The 'Normal Watering' mode creates events for multiples of the sampled watering frequency, regardless whether the event will take place during the day when the sun is high or any other time. The 'Smart Watering' mode creates events for multiples of the sampled watering frequency too, but forced the start of watering to be inbetween the given Smart Watering Time (eg. [18,4]).
 
-Attention: The Smart Watering Time must start before 12 pm and end the next morning. 12 pm equals 24 hours not! 0 hours.
+Attention: The Smart Watering Time must start before 12 am and end the next morning. 12 am equals 24 hours not! 0 hours.
 
 <br>
 

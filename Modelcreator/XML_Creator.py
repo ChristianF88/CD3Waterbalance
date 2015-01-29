@@ -24,16 +24,14 @@ from Stormwaterreservoirsetup import Stormwaterreservoirsetup
 from Greywaterreservoirsetup import Greywaterreservoirsetup
 from Supplylevel import Supplylevel
 from Global_counters import Global_counters
-#Global_counters = Global_counters.Instance()
-
-
-Supplylevel = Supplylevel()
+Global_counters = Global_counters.Instance()
+Supplylevel = Supplylevel.Instance()
   
 
 class XML_Creator():
     
     def __init__(self):
-         
+        
         self.Allstrings = []
         self.Nodelist = []
         self.Connectionlist = []
@@ -45,8 +43,6 @@ class XML_Creator():
     def WriteConnections(self, supplyvec):
     
         ''' Creating Connections, Supplyvector necessary (explanation in the XML-Creator.md on Github in the doc folder) '''
-        
-        
         
         Supplylevel.writeconnections(supplyvec)
         
@@ -217,7 +213,7 @@ class XML_Creator():
         for i in range(len(self.Allstrings)):
             outFile.write( self.Allstrings[i])
         outFile.close()
-        
+        print str(len(self.Connectionlist))+' Connections have been created!'
         print 'The xml file has been created and saved!'        
         
         return 

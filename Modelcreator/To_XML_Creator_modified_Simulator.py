@@ -302,7 +302,7 @@ class TheHoleLot:
         print 'Outdoor_Demand: '+str(OutdoorD)+' m^3'
         print 'Rain minus all Losses: '+str(rainminusevapolosses)+' m^3'
         print 'SewerStormwInfiltr: '+str(-1*SewerStormwInfiltr)+' m^3'
-        print 'Still stored in tanks: ' +str(totalstoragescalar)+' m^3'
+        print 'Still stored in tanks: ' +str(totalstoragescalar)+' m^3 - negativ values are caused by the garden watering module'
         print 'Absolut Error of entire balance: '+str(PWRonly-OutdoorD-totalstoragescalar+rainminusevapolosses+SewerStormwInfiltr)+' m^3'
         print 'Realtive Error of entire balance: '+str(100*(PWRonly-OutdoorD+rainminusevapolosses+SewerStormwInfiltr-totalstoragescalar)*2/(PWRonly+totalstoragescalar+OutdoorD+onlyrain+onlyevapo+(rainminusevapo-rainminusevapolosses)-SewerStormwInfiltr))+' %'
         
