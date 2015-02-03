@@ -19,9 +19,9 @@ CREATING THE XML
 Supplyvec and Attributevecs explanation in the XML-Creator.md on Github in the doc folder 
 '''
 
-supplyvec= [[[[[[1,1],[1,0,0],1],[[0,0],[0,1,0],1],0],[[[1,1],[1,0,1],1],[[0,0],[0,1,1],1],2],1],[[[[1,1],[0,0,1],1],[[0,0],[0,0,1],1],2],[[[1,1],[0,0,1],1],[[0,0],[0,0,1],1],0],2]],[[[[[1,1],[1,0,0],1],[[0,0],[0,1,0],1],0],[[[1,1],[1,0,1],1],[[0,0],[0,1,1],1],2],1],[[[[1,1],[0,0,1],1],[[0,0],[0,0,1],1],2],[[[1,1],[0,0,1],1],[[0,0],[0,0,1],1],0],2]]]
-Catchattrvec=[[1,1.9,800,0.4,0.2,0.4,0.6,0.21,1.5,0.4,0.5,400,500,700,0.04,0.05,0.06,'without'],[1,1.9,800,0.4,0.2,0.4,0.6,0.21,1.5,0.4,0.5,400,500,700,0.04,0.05,0.06,'without'],[1,1.8,10000,0,0.5,0.5,0.6,0.21,1.5,0.4,0.5,380,510,710,0.04,0.05,0.06,'without']]*16
-Demandmodelattrvec =[[[5,6,5],[5], "Simple_Model"],[[5,6,5],[5], "Simple_Model"]]*16
+supplyvec= [[[[[[1,1],[1,1,1],1],[[0,0],[1,1,1],1],1],[[[1,1],[1,0,0],1],[[0,0],[0,1,0],1],1],2]]]
+Catchattrvec=[[1,1.9,800,0.4,0.2,0.4,0.6,0.21,1.5,0.4,0.5,400,500,700,0.04,0.05,0.06,'without'],[1,1.9,800,0.4,0.2,0.4,0.6,0.21,1.5,0.4,0.5,400,500,700,0.04,0.05,0.06,'without'],[1,1.8,10000,0,0.5,0.5,0.6,0.21,1.5,0.4,0.5,380,510,710,0.04,0.05,0.06,'without']]*4
+Demandmodelattrvec =[[[5,6,5],[5], "Simple_Model"],[[5,6,5],[5], "Simple_Model"]]*4
 
 #for i in range(len(Demandmodelattrvec)):
 #    Demandmodelattrvec[i][-1]="Stochastic_Model"
@@ -56,8 +56,8 @@ def XML():
     #safe the xml file
     CreateXML.SaveXML('C:\Users\Acer\Documents\GitHub\CD3Waterbalance\simulationwithpatterns\outputfiles\Garden.xml')
     
-#    for i in range(len(Global_meaning_list.collectors)):
-#        print Global_meaning_list.collectors[i]
+    for i in range(len(Global_meaning_list.collectors)):
+        print Global_meaning_list.collectors[i]
         
     return
 
@@ -73,7 +73,7 @@ def Simulator():
     Simulator.getoutputdata('C:\Users\Acer\Documents\GitHub\CD3Waterbalance\simulationwithpatterns\outputfiles')
     Simulator.getinputdata('C:\Users\Acer\Documents\GitHub\CD3Waterbalance\simulationwithpatterns\inputfiles')
     Simulator.Balance(['Greywatertanklevels', 'Greywaterreservoirlevels',  'Rainwatertanklevels', 'Stormwaterreservoirlevels','Gardenwateringstorage'], ['Evapo_Model', 'Rain_Model'], ['Actual_Infiltration', 'Potable_Water_Demand', 'Sewer', 'Stormwaterdrain'])
-    Simulator.Plotter([20,8],[0,365], [0,8], [ 'Greywatertanklevels', 'Greywaterreservoirlevels',  'Rainwatertanklevels', 'Stormwaterreservoirlevels'])
+#    Simulator.Plotter([20,8],[0,365], [0,8], [ 'Greywatertanklevels', 'Greywaterreservoirlevels',  'Rainwatertanklevels', 'Stormwaterreservoirlevels'])
     
     return
 

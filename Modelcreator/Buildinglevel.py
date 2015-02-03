@@ -22,6 +22,7 @@ class Buildinglevel:
         self.numbers_of_buildings_contributing_gw_list = []
         self.numbers_of_buildings_using_gw_list = []
         self.numbers_of_buildings_connected_to_stormw = []
+        self.numbers_of_catchments_list = []
 
     def writeconnections(self, number_of_buildinglevels):
         '''
@@ -133,7 +134,7 @@ class Buildinglevel:
             
             #adds number of blocks to list
             self.numbers_of_buildings_list.append(Global_counters.number_of_buildings)
-
+            self.numbers_of_catchments_list.append(Global_counters.number_of_catchments)
             #adds Greywatertanks
             if number_of_buildinglevels[0][i] == 1:
                 string37='\t\t\t<connection id="'+str(Global_counters.number_of_connections)+'">\n'

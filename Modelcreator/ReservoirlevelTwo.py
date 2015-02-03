@@ -87,12 +87,10 @@ class ReservoirlevelTwo:
             self.gwr_out_still_not_connected = Listupdate(Cluster.additionaldemand_from_gwr_coll_list[self.len_additionaldemand_from_gwr_coll_list_before:],Reslevel1.additionaldemand_from_gwr_coll_list_already_connected[self.len_additionaldemand_from_gwr_coll_list_already_connected_before:])
             self.swr_in_still_not_connected = Listupdate(Cluster.runoff_overflow_coll_list_to_swr[self.len_runoff_overflow_coll_list_to_swr_before:],Reslevel1.runoff_overflow_coll_list_to_swr_already_connected[self.len_runoff_overflow_coll_list_to_swr_already_connected_before:])
             self.swr_out_still_not_connected = Listupdate(Cluster.additionaldemand_from_swr_coll_list[self.len_additionaldemand_from_swr_coll_list_before:],Reslevel1.additionaldemand_from_swr_coll_list_already_connected[self.len_additionaldemand_from_swr_coll_list_already_connected_before:])
-
-            
-                        
-
+           
             if stormvec[i][-1] == 1:
-
+                               
+                
                 self.additionaldemand_from_gw_coll_list = []
                 self.gw_inflow_coll_list = []
                 # adds collector for additional demand from gwr
@@ -114,15 +112,16 @@ class ReservoirlevelTwo:
                     m=-1
                     
                 if Reslevel1.numbers_of_large_swr_level1[self.len_numbers_of_large_swr_level1_before:] != []:
-                    counter_1 = 1
+                    counter_1 = 0
                     for n in range(len(Reslevel1.numbers_of_large_swr_level1))[self.len_numbers_of_large_swr_level1_before:]:
                         #if cluster is connected to greywaterreservoir
+                        counter_1 += 1
                         string1='\t\t\t<connection id="'+str(Global_counters.number_of_connections)+'">\n' 
                         string2='\t\t\t\t<source node="Stormwaterreservoir_'+str(Reslevel1.numbers_of_large_swr_level1[n])+'" port="Additional_Demand"/>\n' 
                         string3='\t\t\t\t<sink node="Collector_'+str(Global_counters.number_of_collectors)+'" port="Inport_'+str(counter_1+m+1)+'"/>\n' 
                         string4='\t\t\t</connection>\n' 
                         Global_counters.number_of_connections += 1
-                        counter_1 += 1
+                        
                         #writes all string in one and puts it in list
                         self.additionaldemandcollstrings = ''
                         for o in range(5)[1:]:
@@ -132,15 +131,16 @@ class ReservoirlevelTwo:
                     counter_1 = 0    
                     
                 if Reslevel1.numbers_of_large_gwr_level1[self.len_numbers_of_large_gwr_level1_before:] != []:
-                    counter_2 = 1
+                    counter_2 = 0
                     for mn in range(len(Reslevel1.numbers_of_large_gwr_level1))[self.len_numbers_of_large_gwr_level1_before:]:
                         #if cluster is connected to greywaterreservoir
+                        counter_2 += 1
                         string1='\t\t\t<connection id="'+str(Global_counters.number_of_connections)+'">\n' 
                         string2='\t\t\t\t<source node="Greywaterreservoir_'+str(Reslevel1.numbers_of_large_gwr_level1[mn])+'" port="Additional_Demand"/>\n' 
                         string3='\t\t\t\t<sink node="Collector_'+str(Global_counters.number_of_collectors)+'" port="Inport_'+str(counter_1+counter_2+m+1)+'"/>\n' 
                         string4='\t\t\t</connection>\n' 
                         Global_counters.number_of_connections += 1
-                        counter_2 += 1
+                        
                         #writes all string in one and puts it in list
                         self.additionaldemandcollstrings = ''
                         for o in range(5)[1:]:
@@ -211,6 +211,11 @@ class ReservoirlevelTwo:
                 
             elif stormvec[i][-1] == 2:
                 
+                print 'in '+str(self.swr_in_still_not_connected)
+                print 'out '+str(self.swr_out_still_not_connected)
+                print Reslevel1.numbers_of_large_gwr_level1
+                print 'GWR' +str(Reslevel1.numbers_of_large_gwr_level1[self.len_numbers_of_large_gwr_level1_before:])
+                
                 self.swr_inflow_coll_list = []
                 self.swr_outflow_coll_list = []
                 
@@ -256,15 +261,16 @@ class ReservoirlevelTwo:
                     m=-1
                     
                 if Reslevel1.numbers_of_large_swr_level1[self.len_numbers_of_large_swr_level1_before:] != []:
-                    counter_1 = 1
+                    counter_1 = 0
                     for n in range(len(Reslevel1.numbers_of_large_swr_level1))[self.len_numbers_of_large_swr_level1_before:]:
                         #if cluster is connected to greywaterreservoir
+                        counter_1 += 1
                         string1='\t\t\t<connection id="'+str(Global_counters.number_of_connections)+'">\n' 
                         string2='\t\t\t\t<source node="Stormwaterreservoir_'+str(Reslevel1.numbers_of_large_swr_level1[n])+'" port="Additional_Demand"/>\n' 
                         string3='\t\t\t\t<sink node="Collector_'+str(Global_counters.number_of_collectors)+'" port="Inport_'+str(counter_1+m+1)+'"/>\n' 
                         string4='\t\t\t</connection>\n' 
                         Global_counters.number_of_connections += 1
-                        counter_1 += 1
+                        
                         #writes all string in one and puts it in list
                         self.additionaldemandcollstrings = ''
                         for o in range(5)[1:]:
@@ -274,15 +280,16 @@ class ReservoirlevelTwo:
                     counter_1 = 0    
                     
                 if Reslevel1.numbers_of_large_gwr_level1[self.len_numbers_of_large_gwr_level1_before:] != []:
-                    counter_2 = 1
+                    counter_2 = 0
                     for mn in range(len(Reslevel1.numbers_of_large_gwr_level1))[self.len_numbers_of_large_gwr_level1_before:]:
                         #if cluster is connected to greywaterreservoir
+                        counter_2 += 1
                         string1='\t\t\t<connection id="'+str(Global_counters.number_of_connections)+'">\n' 
                         string2='\t\t\t\t<source node="Greywaterreservoir_'+str(Reslevel1.numbers_of_large_gwr_level1[mn])+'" port="Additional_Demand"/>\n' 
                         string3='\t\t\t\t<sink node="Collector_'+str(Global_counters.number_of_collectors)+'" port="Inport_'+str(m+counter_1+counter_2+1)+'"/>\n' 
                         string4='\t\t\t</connection>\n' 
                         Global_counters.number_of_connections += 1
-                        counter_2 += 1                        
+                                                
                         #writes all string in one and puts it in list
                         self.additionaldemandcollstrings = ''
                         for o in range(5)[1:]:
@@ -331,12 +338,19 @@ class ReservoirlevelTwo:
             
             
             else:
-                self.additional_demand_swr = Reslevel1.numbers_of_large_swr_level1
-                self.additional_demand_gwr = Reslevel1.numbers_of_large_gwr_level1
-
+                if Reslevel1.numbers_of_large_swr_level1[self.len_numbers_of_large_swr_level1_before:] != []:
+                    for m in range(len(Reslevel1.numbers_of_large_swr_level1))[self.len_numbers_of_large_swr_level1_before:]:
+                        self.additional_demand_swr.append( Reslevel1.numbers_of_large_swr_level1[m])
+                else:
+                    pass
+                if Reslevel1.numbers_of_large_gwr_level1[self.len_numbers_of_large_gwr_level1_before:] != []:
+                    for m in range(len(Reslevel1.numbers_of_large_gwr_level1))[self.len_numbers_of_large_gwr_level1_before:]:
+                        self.additional_demand_gwr.append( Reslevel1.numbers_of_large_gwr_level1[m])
+                else:
+                    pass
             
             
-            
+   
 
                 
             for m in range(len(Reslevel1.ReservoirlevelOne_list))[self.len_resone_list_before:]:    
