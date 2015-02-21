@@ -47,15 +47,20 @@ class ReservoirlevelOne:
             #indexes for only connecting new blocks
             self.len_additionaldemand_from_gwr_and_swr_coll_list_before = self.len_additionaldemand_from_gwr_and_swr_coll_list
             self.len_additionaldemand_from_gwr_and_swr_coll_list = len(Cluster.additionaldemand_from_gwr_and_swr_coll_list)
-            
+            #indexes for only connecting new blocks
+            self.len_additionaldemand_from_gwr_coll_list_before = self.len_additionaldemand_from_gwr_coll_list
+            self.len_additionaldemand_from_gwr_coll_list = len(Cluster.additionaldemand_from_gwr_coll_list)
+            self.len_greywater_to_reservoir_coll_list_before = self.len_greywater_to_reservoir_coll_list
+            self.len_greywater_to_reservoir_coll_list = len(Cluster.greywater_to_reservoir_coll_list)
+            #indexes for only connecting new blocks
+            self.len_runoff_overflow_coll_list_to_swr_before = self.len_runoff_overflow_coll_list_to_swr
+            self.len_runoff_overflow_coll_list_to_swr =len(Cluster.runoff_overflow_coll_list_to_swr)
+            self.len_additionaldemand_from_swr_coll_list_before = self.len_additionaldemand_from_swr_coll_list
+            self.len_additionaldemand_from_swr_coll_list = len(Cluster.additionaldemand_from_swr_coll_list)
 
          
             if greyvec[i][-1] == 1:
-                #indexes for only connecting new blocks
-                self.len_additionaldemand_from_gwr_coll_list_before = self.len_additionaldemand_from_gwr_coll_list
-                self.len_additionaldemand_from_gwr_coll_list = len(Cluster.additionaldemand_from_gwr_coll_list)
-                self.len_greywater_to_reservoir_coll_list_before = self.len_greywater_to_reservoir_coll_list
-                self.len_greywater_to_reservoir_coll_list = len(Cluster.greywater_to_reservoir_coll_list)
+                
                             
                 self.additionaldemand_from_gw_coll_list = []
                 self.gw_inflow_coll_list = []
@@ -81,7 +86,7 @@ class ReservoirlevelOne:
                             exec 'self.additionaldemandcollstrings += string'+str(o)
                         self.additionaldemand_coll_strings.append(self.additionaldemandcollstrings)
                         self.additionaldemand_from_gwr_coll_list_already_connected.append(Cluster.additionaldemand_from_gwr_coll_list[m])
-                
+                print "GWR and SWR "+str(Cluster.additionaldemand_from_gwr_and_swr_coll_list)        
                 if Cluster.additionaldemand_from_gwr_and_swr_coll_list[self.len_additionaldemand_from_gwr_and_swr_coll_list_before:] == []:
                     counter_2 = 0
                 else: 
@@ -123,7 +128,6 @@ class ReservoirlevelOne:
                         string3='\t\t\t\t<sink node="Collector_'+str(Global_counters.number_of_collectors)+'" port="Inport_'+str(counter_1)+'"/>\n' 
                         string4='\t\t\t</connection>\n' 
                         Global_counters.number_of_connections += 1
-                        
                         #writes all string in one and puts it in list
                         self.gwrinflowstring = ''
                         for o in range(5)[1:]:
@@ -169,12 +173,8 @@ class ReservoirlevelOne:
                 
             elif greyvec[i][-1] == 2:
                 
-                #indexes for only connecting new blocks
-                self.len_runoff_overflow_coll_list_to_swr_before = self.len_runoff_overflow_coll_list_to_swr
-                self.len_runoff_overflow_coll_list_to_swr =len(Cluster.runoff_overflow_coll_list_to_swr)
-                self.len_additionaldemand_from_swr_coll_list_before = self.len_additionaldemand_from_swr_coll_list
-                self.len_additionaldemand_from_swr_coll_list = len(Cluster.additionaldemand_from_swr_coll_list)
-                
+#                print Cluster.runoff_overflow_coll_list_to_swr
+#                print Cluster.runoff_overflow_coll_list_to_swr[self.len_runoff_overflow_coll_list_to_swr_before:]
                 
                 self.swr_inflow_coll_list = []
                 self.swr_outflow_coll_list = []
@@ -227,7 +227,7 @@ class ReservoirlevelOne:
                         self.additionaldemand_from_swr_coll_list_already_connected.append(Cluster.additionaldemand_from_swr_coll_list[m])
                 else:
                     counter_1 = 0
-
+                print "GWR and SWR "+str(Cluster.additionaldemand_from_gwr_and_swr_coll_list)  
                 if Cluster.additionaldemand_from_gwr_and_swr_coll_list[self.len_additionaldemand_from_gwr_and_swr_coll_list_before:] == []:
                     counter_2 = 0
                 else:

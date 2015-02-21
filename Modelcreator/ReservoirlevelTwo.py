@@ -87,6 +87,14 @@ class ReservoirlevelTwo:
             self.gwr_out_still_not_connected = Listupdate(Cluster.additionaldemand_from_gwr_coll_list[self.len_additionaldemand_from_gwr_coll_list_before:],Reslevel1.additionaldemand_from_gwr_coll_list_already_connected[self.len_additionaldemand_from_gwr_coll_list_already_connected_before:])
             self.swr_in_still_not_connected = Listupdate(Cluster.runoff_overflow_coll_list_to_swr[self.len_runoff_overflow_coll_list_to_swr_before:],Reslevel1.runoff_overflow_coll_list_to_swr_already_connected[self.len_runoff_overflow_coll_list_to_swr_already_connected_before:])
             self.swr_out_still_not_connected = Listupdate(Cluster.additionaldemand_from_swr_coll_list[self.len_additionaldemand_from_swr_coll_list_before:],Reslevel1.additionaldemand_from_swr_coll_list_already_connected[self.len_additionaldemand_from_swr_coll_list_already_connected_before:])
+            
+            print "GWR in need to be connected"+str(Cluster.greywater_to_reservoir_coll_list)
+            print "GWR in connected"+str(Reslevel1.greywater_to_reservoir_coll_list_already_connected)            
+            print "GWR in still need to be connected"+str(self.gwr_in_still_not_connected)     
+            print "GWR out need to be connected"+str(Cluster.additionaldemand_from_gwr_coll_list)
+            print "GWR out connected"+str(Reslevel1.additionaldemand_from_gwr_coll_list_already_connected)            
+            print "GWR out still need to be connected"+str(self.gwr_out_still_not_connected)
+            
            
             if stormvec[i][-1] == 1:
                                
@@ -210,12 +218,7 @@ class ReservoirlevelTwo:
                 Global_counters.number_of_greywaterreservoirs += 1
                 
             elif stormvec[i][-1] == 2:
-                
-                print 'in '+str(self.swr_in_still_not_connected)
-                print 'out '+str(self.swr_out_still_not_connected)
-                print Reslevel1.numbers_of_large_gwr_level1
-                print 'GWR' +str(Reslevel1.numbers_of_large_gwr_level1[self.len_numbers_of_large_gwr_level1_before:])
-                
+                                
                 self.swr_inflow_coll_list = []
                 self.swr_outflow_coll_list = []
                 

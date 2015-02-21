@@ -160,14 +160,15 @@ class Clusterlevel:
                 #writes collector number in list that knows number of inports for later reference
                 Global_counters.number_of_collectors_ports_list.append([Global_counters.number_of_collectors, len(clusterbuildingvec[i][0])])
                 #writes collector number in list that knows connection for later reference
-                print Buildings.numbers_of_buildings_connected_to_stormw[-1]
-                if Buildings.numbers_of_buildings_connected_to_stormw[-1] != "not connected to SWR <type 'int'>" and Buildings.numbers_of_buildings_connected_to_stormw[0] != "not connected to SWR <type 'list'>" :
+                
+                if Buildings.numbers_of_buildings_connected_to_stormw[-1] != "not connected to SWR <type 'int'>" and Buildings.numbers_of_buildings_connected_to_stormw[-1] != "not connected to SWR <type 'list'>" :
                     self.runoff_overflow_coll_list_to_swr.append(Global_counters.number_of_collectors)
                     Global_meaning_list.collectors.append(['Collector_'+str(Global_counters.number_of_collectors), 'collects Overflow from Raintanks to Stormwaterreservoir on Cluster Level: '+str(len(clusterbuildingvec[i][0]))+' Inports']) 
-                
+                    print "Runoff and Overflow to SWR "+str(self.runoff_overflow_coll_list_to_swr)
                 else:
                     self.runoff_overflow_coll_list_to_swd.append(Global_counters.number_of_collectors)
                     Global_meaning_list.collectors.append(['Collector_'+str(Global_counters.number_of_collectors), 'collects Overflow from Raintanks to Stormwaterdrain on Cluster Level: '+str(len(clusterbuildingvec[i][0]))+' Inports'])   
+                    print "Runoff and Overflow to SWD "+str(self.runoff_overflow_coll_list_to_swd)
                 Global_counters.number_of_collectors +=1
                 
                 # adds collector for checking stored volume Raintanks on a cluster level
@@ -235,7 +236,7 @@ class Clusterlevel:
                     else:
                         self.additionaldemand_from_gwr_and_swr_coll_list.append(Global_counters.number_of_collectors)
                         self.decision_gwr_swr_pwr.append('gwr+swr')
-
+                #print self.decision_gwr_swr_pwr
                 #print self.additionaldemand_from_swr_coll_list
                 Global_meaning_list.collectors.append(['Collector_'+str(Global_counters.number_of_collectors), 'collects Additional Demand from Greywatertanks or Raintanks on Cluster Level: '+str(len(clusterbuildingvec[i][0]))+' Inports'])
                 Global_counters.number_of_collectors +=1

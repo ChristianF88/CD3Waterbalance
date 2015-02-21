@@ -142,38 +142,74 @@ class XML_Creator():
             print self.Connectionlist[i] 
         return
     
-    
+#    Connection_Name_List = [['Inport', "Raintank_0", "Collected_Water"],['Outport', "Raintank_0", "Current_Volume"]]
     
     def Additional_Fileouts(self, Connection_Name_List):
-        ''' Function to add additional Fileouts '''
+        ''' Function to add additional Fileouts
+            [["Inport" or "Outport", "Raintank_0", "Current_Volume","Name of txt file"],...]'''
         Fileout_numbers_names = []
         for i in range(len(Connection_Name_List)):
-            searchstring = '<connection id="'+str(Connection_Name_List[i][0])+'">'
-            for u in range(len(self.Connectionlist)):
-                if searchstring in self.Connectionlist[u]:
-                    #changing old connection
-                    start_cut = self.Connectionlist[u].index('<sink')
-                    stop_cut = self.Connectionlist[u].index('/>\n\t\t\t</connection>\n')+2
-                    sink_new_connection = self.Connectionlist[u][start_cut:stop_cut]
-                    self.Connectionlist[u] = self.Connectionlist[u].replace(self.Connectionlist[u][start_cut:stop_cut],'<sink node="FileOut_'+str(Global_counters.number_of_fileouts)+'" port="in"/>')
+            
+            if Connection_Name_List[i][0] == 'Inport':
+            
+                for u in range(len(self.Connectionlist)):
+    
+                    searchstring = '\t\t\t<connection id="'+str(u)+'">\n\t\t\t\t<source node="'+str(self.Connectionlist[u][self.Connectionlist[u].find('<source node="')+14:self.Connectionlist[u].find('" port=')])+'" port="'+str(self.Connectionlist[u][self.Connectionlist[u].find('" port=')+8:self.Connectionlist[u].find('"/>\n\t\t\t\t<sink')])+'"/>\n\t\t\t\t<sink node="'+str(Connection_Name_List[i][1])+'" port="'+str(Connection_Name_List[i][2])+'"/>\n\t\t\t</connection>\n'
+
+                    if searchstring in self.Connectionlist[u]:
+                        #changing old connection
+                        start_cut = self.Connectionlist[u].index('<sink')
+                        stop_cut = self.Connectionlist[u].index('/>\n\t\t\t</connection>\n')+2
+                        sink_new_connection = self.Connectionlist[u][start_cut:stop_cut]
+                        self.Connectionlist[u] = self.Connectionlist[u].replace(self.Connectionlist[u][start_cut:stop_cut],'<sink node="FileOut_'+str(Global_counters.number_of_fileouts)+'" port="in"/>')
+                        
+                        #inserting new connection
+                        string1='\t\t\t<connection id="'+str(Global_counters.number_of_connections)+'">\n' 
+                        string2='\t\t\t\t<source node="FileOut_'+str(Global_counters.number_of_fileouts)+'" port="out"/>\n' 
+                        string3='\t\t\t\t'+sink_new_connection+'\n' 
+                        string4='\t\t\t</connection>\n'
+                        Global_counters.number_of_connections += 1
+                        
+                        Fileout_numbers_names.append([Global_counters.number_of_fileouts, Connection_Name_List[i][1]])
+                        Global_counters.numbers_names_of_fileouts_list.append([Global_counters.number_of_fileouts,Connection_Name_List[i][1]])
+                        self.Connectionlist.append(string1+string2+string3+string4)
+                        
+                    else:
+                        pass
                     
-                    #inserting new connection
-                    string1='\t\t\t<connection id="'+str(Global_counters.number_of_connections)+'">\n' 
-                    string2='\t\t\t\t<source node="FileOut_'+str(Global_counters.number_of_fileouts)+'" port="out"/>\n' 
-                    string3='\t\t\t\t'+sink_new_connection+'\n' 
-                    string4='\t\t\t</connection>\n'
-                    Global_counters.number_of_connections += 1
+            elif Connection_Name_List[i][0] == 'Outport':
+                for u in range(len(self.Connectionlist)):
                     
-                    Fileout_numbers_names.append([Global_counters.number_of_fileouts, Connection_Name_List[i][1]])
-                    Global_counters.numbers_names_of_fileouts_list.append([Global_counters.number_of_fileouts,Connection_Name_List[i][1]])
-                    self.Connectionlist.append(string1+string2+string3+string4)
+                    searchstring = '\t\t\t<connection id="'+str(u)+'">\n\t\t\t\t<source node="'+str(Connection_Name_List[i][1])+'" port="'+str(Connection_Name_List[i][2])+'"/>\n\t\t\t\t<sink node="'+str(self.Connectionlist[u][self.Connectionlist[u].find('<sink node="')+12:self.Connectionlist[u].find('" port=',80)])+'" port="'+str(self.Connectionlist[u][self.Connectionlist[u].find('" port=',80)+8:self.Connectionlist[u].find('"/>', self.Connectionlist[u].find('" port=',80)+8)])+'"/>\n\t\t\t</connection>\n'
                     
-                else:
-                    pass
+                    if searchstring in self.Connectionlist[u]:
+                         
+                        #changing old connection
+                        start_cut = self.Connectionlist[u].index('<sink')
+                        stop_cut = self.Connectionlist[u].index('/>\n\t\t\t</connection>\n')+2
+                        sink_new_connection = self.Connectionlist[u][start_cut:stop_cut]
+                        self.Connectionlist[u] = self.Connectionlist[u].replace(self.Connectionlist[u][start_cut:stop_cut],'<sink node="FileOut_'+str(Global_counters.number_of_fileouts)+'" port="in"/>')
+                        
+                        #inserting new connection
+                        string1='\t\t\t<connection id="'+str(Global_counters.number_of_connections)+'">\n' 
+                        string2='\t\t\t\t<source node="FileOut_'+str(Global_counters.number_of_fileouts)+'" port="out"/>\n' 
+                        string3='\t\t\t\t'+sink_new_connection+'\n' 
+                        string4='\t\t\t</connection>\n'
+                        Global_counters.number_of_connections += 1
+                        
+                        Fileout_numbers_names.append([Global_counters.number_of_fileouts, Connection_Name_List[i][1]])
+                        Global_counters.numbers_names_of_fileouts_list.append([Global_counters.number_of_fileouts,Connection_Name_List[i][1]])
+                        self.Connectionlist.append(string1+string2+string3+string4)
+                        
+                    else:
+                        pass
+            
+            else:
+                print "Wrong Input!!"
             Global_counters.number_of_fileouts += 1 
         Fileoutattrvec = []
         for i in range(len(Connection_Name_List)):
-            Fileoutattrvec.append(Connection_Name_List[i][1])
+            Fileoutattrvec.append(Connection_Name_List[i][3])
         AddedFileouts = Fileoutsetup(len(Connection_Name_List), Fileout_numbers_names[0][0], out_file_name = 'Test.txt')        
         AddedFileouts.Setandwrite_attributes(len(Connection_Name_List), Fileout_numbers_names[0][0], Fileoutattrvec)
         

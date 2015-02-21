@@ -108,6 +108,8 @@ class TheHoleLot:
                 for n in range(len(self.Outputvector))[1:]:
                     self.Outputvector[n][i]=float(self.Outputvector[n][i])/1000*self.total_area
         self.Outputvector=np.asarray(self.Outputvector)
+        print '\n'
+        print"______________________________________________________________________________________________________"
         print 'Outputvector has been created'       
         return 
     
@@ -215,7 +217,7 @@ class TheHoleLot:
          
         #Speicher
         for i in range(len(totalstorage)):
-            print totalstorage[i][0]
+            
             if totalstorage[i][0] == 'Gardenwateringstorage':
                 totalstoragescalar -= float(totalstorage[i][-1])
             else:
@@ -305,6 +307,7 @@ class TheHoleLot:
         print 'Still stored in tanks: ' +str(totalstoragescalar)+' m^3 -> negativ values are caused by the garden watering module'
         print 'Absolut Error of entire balance: '+str(PWRonly-OutdoorD-totalstoragescalar+rainminusevapolosses+SewerStormwInfiltr)+' m^3'
         print 'Realtive Error of entire balance: '+str(100*(PWRonly-OutdoorD+rainminusevapolosses+SewerStormwInfiltr-totalstoragescalar)*2/(PWRonly+totalstoragescalar+OutdoorD+onlyrain+onlyevapo+(rainminusevapo-rainminusevapolosses)-SewerStormwInfiltr))+' %'
+        print"______________________________________________________________________________________________________"
         
         return 
     
@@ -399,7 +402,7 @@ class TheHoleLot:
                                                  num2date(float(Vector1[1][0]) + float(limx[1])).strftime("%d.%m.%Y %H:%M:%S")])
         return
 
-
+    
 
 
 
