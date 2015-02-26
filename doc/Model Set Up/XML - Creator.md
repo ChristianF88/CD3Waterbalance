@@ -1,3 +1,4 @@
+
 # XML - Creator
 
 Basic features:
@@ -7,8 +8,8 @@ Basic features:
 
       - Building Level
       -	Cluster Level
-      - Greywaterreservoir Level
-      - Stormwaterreservoir Level
+      - ReservoirlevelOne
+      - ReservoirlevelTwo
       - Supply Level
 	  
  - basic and selective flowmeter implemetation
@@ -43,7 +44,7 @@ Basic features:
 
 | Model Outputs  | Part of XML created  | Class created | 
 | :------------ |:---------------:| 	:---------------:|
-| Fileout Connection Name List      | Nodelist, Connectionlist | Fileout  |
+| Fileout  Name List      | Nodelist, Connectionlist | Fileout  |
 
 <br>
 
@@ -76,66 +77,63 @@ The Clustervector contains the following information:
 
 # 
 
-Looking at the next higher level, the Greywaterreservoirvector needs to have the following setup:
+Looking at the next higher level, the ReservoirlevelOne - vector needs to have the following setup:
 
-	[[Clustervector_0, Clustervector_1, ..., Clustervector_a, Greywaterreservoir_0 existent (0 = No, 1 = Yes)], ..., 
-    [Clustervector_b, Clustervector_b+1, ..., Clustervector_c, Greywaterreservoir_n existent (0 = No, 1 = Yes)]] 
+	[[Clustervector_0, Clustervector_1, ..., Clustervector_a, Reservoir_0 existent (0 = No, 1 = Greywaterreservoir, 2 = Stormwaterreservoir)], ..., 
+    [Clustervector_b, Clustervector_b+1, ..., Clustervector_c, Reservoir_n existent (0 = No, 1 = Greywaterreservoir, 2 = Stormwaterreservoir)]] 
     
     =
     
-    [Greywaterreservoirarea _0, ..., Greywaterreservoirarea _n]
+    [ReservoirlevelOnearea _0, ..., ReservoirlevelOnearea _n]
     
     
     For example: 
     
-    	Greywaterreservoirvector = 
+    	ReservoirlevelOnevector = 
         [[[[1,0,1,1,1,1],[1,0,0],1], [[1,0,0,0,1,0,1],[1,1,0],1], [[0,1],[0,0,0],5], 1], 
-         [[[1,0,1,1],[0,0,0],1], [[1,0,0],[0,0,0],7], [[0,1,0,1,1,0,1,0,1],[0,0,0],1], 0]]
+         [[[1,0,1,1],[0,0,0],1], [[1,0,0],[0,0,0],7], [[0,1,0,1,1,0,1,0,1],[0,0,0],1], 0],
+         [[[1,0,1,1,0],[0,0,1],10], 2]]
          
-        The vector decribes 2 areas. The first one consists out of 3 Clustervector. The 7 clusters 
+        The vector decribes 3 areas. The first one consists out of 3 Clustervectors. The 7 clusters 
         (5 clusters of the third configuration) are connected to a Greywaterreservoir. The first cluster contributes to the 
         Greywaterreservoirs inflow. The second cluster contributes to the inflow and uses the reservoirs outflow. 
         The last 5 clusters are not connected to the reservoir.
         There's no Greywaterreservoir available for the second Area. Hence none of the clusters is contributing or using
-        Greywater from a reservoir.
+        Greywater from a reservoir. 
+        While the third Area is consists out of 10 Clusters, which are connected to a Stormwaterreservoir.
         
 # 
 
-The next scale of implementation is the Stormwaterreservoirlevel. Its inputvector has the following structure:
+The next scale of implementation is the ReservoirlevelTwo. Its inputvector has the following structure:
 
-	[[Greywaterreservoirvector_0, Greywaterreservoirvector_1, ..., Greywaterreservoirvector_a, Stormwaterreservoir_0 existent (0 = No, 1 = Yes)], ..., 
-    [Greywaterreservoirvector_b, Greywaterreservoirvector_b+1, ..., Greywaterreservoirvector_c, Stormwaterreservoir_n existent (0 = No, 1 = Yes)]]
+	[[ReservoirlevelOnevector_0, ReservoirlevelOnevector_1, ..., ReservoirlevelOnevector_a, Reservoir_m existent (0 = No, 1 = Greywaterreservoir, 2 = Stormwaterreservoir)], ..., 
+    [ReservoirlevelOnevector_b, ReservoirlevelOnevector_b+1, ..., ReservoirlevelOnevector_c, Reservoir_z existent (0 = No, 1 = Greywaterreservoir, 2 = Stormwaterreservoir)]]
     
     =
     
-    [Stormwaterreservoirarea _0, ..., Stormwaterreservoirarea _n]
+    [ReservoirlevelTwoarea _0, ..., ReservoirlevelTwoarea _n]
     
     
     For example:
     	
-        Stormwaterreservoirvector = 
+        ReservoirlevelTwovector = 
         [[[[[1,0,1,0,0,0],[0,0,1],1],[[1,1,0,1],[1,1,1],1],[[0,1],[1,1,1],1],1], 
-          [[[1,0,0],[0,0,1],1],[[0,0,0,0,0],[0,0,1],1],[[0,1],[0,0,1],1],0],1]]
+          [[[1,0,0],[0,0,1],1],[[0,0,0,0,0],[0,0,1],1],[[0,1],[0,0,1],1],0],2]]
           
         This example vector depicts one area only. The digit one at the vectors last position states that a Stormwaterreservoir
-        is in place. It's connected to two Greywaterlevel subareas. The Clustervectors contain the "connection 
+        is in place. It's connected to two ReservoirlevelOne subareas. The Clustervectors contain the "connection 
         information" (see above).
         
         Attention!!
-        Is a cluster using treated Greywater from a reservoir and a Stormwaterreservoir is present too, then the cluster 
-        will be connected to that one too! The Clustervector needs to look like this:
         
-        [[...],[0,1,1],y] or [[...],[1,1,1],y]
-        
-        [[[[[0,1],[0,1,0],1],1],1]] is no  valid configuration!!
         
 
 #  
 
 Finally the Supplyvector can be explained:
 
-	[[Stormwaterreservoirvector_0, Stormwaterreservoirvector_1, ...Stormwaterreservoirvector_a], ...,
-     [Stormwaterreservoirvector_0, Stormwaterreservoirvector_1, ...Stormwaterreservoirvector_b]]
+	[[ReservoirlevelTwovector_0, ReservoirlevelTwovector_1, ...ReservoirlevelTwovector_a], ...,
+     [ReservoirlevelTwovector_0, ReservoirlevelTwovector_1, ...ReservoirlevelTwovector_b]]
      
      =
      
@@ -148,8 +146,6 @@ Finally the Supplyvector can be explained:
         
 <br>
 
-## PROBLEM
-EINZUGSGEBIETE GREYWATERRESEVOIR AND STORMWATERRESERVOIR
 
 > ### Catchment Attributevector
 
@@ -376,20 +372,19 @@ This vector takes care of the input information for both [File Readers](https://
 		
 <br>
 
-> ### Fileout Connection Name List
+> ### Fileout Name List
 
 A City Drain Fileout is a built in block that creates a txt - file during the simulation. This file contains all quantity and quality information for every single time step simulated.
-To be able to check any flow in detail, Fileouts can be inserted at any position desired. To insert Fileouts the XML - Creator must be run at first. 
-Once the connection list has been generated, the numbers of the connections that are supposed to be checked, as well as the corresponding names, have to be written into the 
-_Fileout Connection Name List_. After running the XML - Creator again the Model will be set up with the desired Fileouts.
+To be able to check any flow in detail, Fileouts can be inserted at any position desired. 
+After running the XML - Creator the Model will be set up with the desired Fileouts.
 
 	Fileout Connection Name List = [Fileoutvector_0, Fileoutvector_1, ..., Fileoutvector_n]
     
-    Fileoutvector = [Number of Connection, Name of created Txt - File]
-
+    Fileoutvector = ["Inport" or "Outport", Name of Model Block, Name of Port, Name of txt File]
+    
     For example:
     
-    	Fileoutvector = [[407, 'Rain_Model.txt'],[435, 'Evapo_Model.txt']]
+    	Fileoutvector = [["Inport", "Raintank_0", "Collected_Water", "RaintankInflow.txt"],["Outport", "Raintank_0", "Current_Volume", "StorageCurve.txt"]]
  
 
 <br>
@@ -424,36 +419,54 @@ Figure 2: Cluster Setup
 
 <br>
 
-> ### Greywaterreservoir Level
+> ### ReservoirlevelOne
 
 # 
 
-Any number of Clusters desired make up one Greywaterreservoirlevel. A Greywaterreservoir is optional. If implemented the level will add one Collector for adding inflow and one Collector for adding demand of nonpotable water (outflow) to the reservoir. The Collectors summarize all inflow and outflow signals from the lower level. Figure 3 illustrates the system created by the XML Creator.
+Any number of Clusters desired make up one ReservoirlevelOne. A Stormwaterreservoir or Greywaterreservoir can be added. If implemented the level will add one Collector for adding inflow and one Collector for adding demand of nonpotable water (outflow) to the choosen reservoir. The Collectors summarize all inflow and outflow signals from the lower level. Figure 3 illustrates the system created by the XML Creator.
 
 # 
-Figure 3: Greywaterreservoir Complex
-![alt text](https://raw.githubusercontent.com/ChristianF88/CD3Waterbalance/master/doc/Level%20shematics/Greywaterreservoirlevel.png)
+Figure 3: ReservoirlevelOne Complex
+![alt text](https://raw.githubusercontent.com/ChristianF88/CD3Waterbalance/master/doc/Level%20shematics/ReservoirlevelOne.png)
 
 <br>
 
-> ### Stormwaterreservoir Level
-
-#
-
-Alike the before described scale of impementation (Figure 3) the Stormwaterreservoir-Levels reservoir is a optional feature (Figure 4). It consists out of Greywaterreservoir Levels. If the choosen to include, 2 Collectors will be added additionally. Analogous to Greywaterres.-Level the first Collector will reach down into the Clusterlevel and summarize all runoff and Raintank overflow as input into the Stormwaterreservoir whilst the other Collector collects all additional demand from either the Clusterlevels or Greywaterreservoirs.
+> ### ReservoirlevelTwo
 
 # 
 
-Figure 4: Stormwaterreservoir Complex
-![alt text](https://raw.githubusercontent.com/ChristianF88/CD3Waterbalance/master/doc/Level%20shematics/Stormwaterreservoirlevelpng.png)
+Alike the before described scale of impementation (Figure 3) the ReservoirlevelTwos reservoirs are a optional feature (Figure 4). It consists out of ReservoirlevelTwovectors. If the choosen to include, 2 Collectors will be added additionally. Analogous to Grethe beofre described level the first Collector will reach down into the Clusterlevel and summarize all runoff and Raintank overflow as input into the Stormwaterreservoir or collect all Greywater (produced by buildings and overflowing from Greywatertanks) as inflow for a Greywaterreservoir. Whilst the other Collector collects all additional demand from either the Clusterlevels or Reservoirs from the Res.levelOne.
+
+# 
+
+Figure 4: ReservoirlevelTwo Complex
+![alt text](https://raw.githubusercontent.com/ChristianF88/CD3Waterbalance/master/doc/Level%20shematics/ReservoirlevelTwo.png)
 
 <br>
+
+Attention:
+
+If two Stormwaterreservoirs or two Greywaterreservoirs are being used in the same flow path. The Inflow to the second Reservoir is being used from the Clusters not connected yet! 
+
+For Example:
+		
+        Vec = [[[[1],[0,0,1],1],0],[[[0],[0,0,1],1],2],2]
+        
+        The first ReservoirlevelOne vector is connected to a Stormwaterreservoir as the Clustervector states. 
+        Still there's no Reservoir in the first Res.levelOne.The second Res.levelOnevector also states that
+        its only cluster is connected to a Stormwaterreservoir and a Reservoir is in place. 
+        That means the ReservoirlevelTwos Stormwaterreservoir will get its inflow from the the first Res.levelOne vector 
+        (because it is not connected yet). It's inflow will be the Clusters Runoff and Raintankoverflow.
+        It's outflow is the additional demand from that cluster as well as the additional demand from the Stormwaterreservoir
+        from the second Res.levelTwo.
+
+# 
 
 > ### Supply Level
 
 # 
 
-Containing numerous Stormwaterreservoir Complexes (Figure 4) this level is the topmoste scale. The Supply Level is able to set up more the one Supply Complex. To each Complex 4 Collectors, a Potable Water Reservoir, a Stormwaterdrain and a Sewer will be added. Figure 5 shows each Collectors function.
+Containing numerous ReservoirlevelTwo Complexes (Figure 4) this level is the topmoste scale. The Supply Level is able to set up more the one Supply Complex. To each Complex 4 Collectors, a Potable Water Reservoir, a Stormwaterdrain and a Sewer will be added. Figure 5 shows each Collectors function.
 
 # 
 Figure 5: Supply Complex
@@ -481,13 +494,3 @@ Figure 7: Adding Fileouts
 
 
 
-
-
-## Recommended Improvements:
- - enabling cluster to only use greywaterres. although stormwaterres. is present
- - being able to switch Stormwater and Greywaterreservoir
- - import Inflows to Catchments
- - give a more detailed spacial description of which levels are under other levels
-
-
-        
