@@ -396,7 +396,7 @@ After running the XML - Creator the Model will be set up with the desired Fileou
 
 # 
 
-This level represents the smallest scale of implementation. It consist out of 4 to 5 blocks, a Demandmodel, a Building, a Catchment, a Raintank and optional a Greywatertank, as illustrated in the shematic below (Figure 1). The Demandmodel creates the indoor demand of the Building block its connected to. The Catchment produces the Buildings outdoor demand, which is proportional to the water loss of the pervious area due to evapotranspiration. Depending on the water stream potable or nonpotable water will be used to meet the demand. Similarly the produced wastewater is differenciated between blackwater and greywater. The Raintanks inflowing water is being produced by the Catchment and the outflowing water equals the Buildings demand of nonpotable water. If there's not enough water in the Raintank to meet the Buildings demand the signal is passed on to the Greywatertank if present, alternativly it's passed on to a higher scale.
+This level represents the smallest scale of implementation. It consist out of 5 to 6 blocks, a Demandmodel, a Garden Watering model, a Building, a Catchment, a Raintank and optional a Greywatertank, as illustrated in the shematic below (Figure 1). The Demandmodel creates the indoor demand of the Building block its connected to. The Catchment produces the Buildings outdoor demand, which is proportional to the water loss of the pervious area due to evapotranspiration. Depending on the water stream potable or nonpotable water will be used to meet the demand. Similarly the produced wastewater is differenciated between blackwater and greywater. The Raintanks inflowing water is being produced by the Catchment and the outflowing water equals the Buildings demand of nonpotable water. If there's not enough water in the Raintank to meet the Buildings demand the signal is passed on to the Greywatertank if present, alternativly it's passed on to a higher scale.
 
 If a Building without Raintank is supposed to simulated simply set the tanks volume to zero.
 
@@ -435,7 +435,7 @@ Figure 3: ReservoirlevelOne Complex
 
 # 
 
-Alike the before described scale of impementation (Figure 3) the ReservoirlevelTwos reservoirs are a optional feature (Figure 4). It consists out of ReservoirlevelTwovectors. If the choosen to include, 2 Collectors will be added additionally. Analogous to Grethe beofre described level the first Collector will reach down into the Clusterlevel and summarize all runoff and Raintank overflow as input into the Stormwaterreservoir or collect all Greywater (produced by buildings and overflowing from Greywatertanks) as inflow for a Greywaterreservoir. Whilst the other Collector collects all additional demand from either the Clusterlevels or Reservoirs from the Res.levelOne.
+Alike the before described scale of implementation (Figure 3) the ReservoirlevelTwos reservoirs are a optional feature (Figure 4). It consists out of ReservoirlevelOne vectors. If the choosen to include, 2 Collectors will be added additionally. Analogous to the before described level the first Collector will reach down into the Clusterlevel and summarize all runoff and Raintank overflow as input into the Stormwaterreservoir or collect all Greywater (produced by buildings and overflowing from Greywatertanks) as inflow for a Greywaterreservoir. Whilst the other Collector collects all additional demand from either the Clusterlevels or Reservoirs from the Res.levelOne.
 
 # 
 
@@ -466,7 +466,7 @@ For Example:
 
 # 
 
-Containing numerous ReservoirlevelTwo Complexes (Figure 4) this level is the topmoste scale. The Supply Level is able to set up more the one Supply Complex. To each Complex 4 Collectors, a Potable Water Reservoir, a Stormwaterdrain and a Sewer will be added. Figure 5 shows each Collectors function.
+Containing numerous ReservoirlevelTwo Complexes (Figure 4) this level is the topmost scale. The Supply Level is able to set up more than one Supply Complex. To each Complex 4 Collectors, a Potable Water Reservoir, a Stormwaterdrain and a Sewer will be added. Figure 5 shows each Collectors function.
 
 # 
 Figure 5: Supply Complex
@@ -476,7 +476,7 @@ Figure 5: Supply Complex
 <br>
 
 The rain and evapotranspiration files are being distributed to all Catchments, no distinction between the different Supply Complexes is being made. Before being passed on to the Catchments the evapotranspiration data is modified by the Pattern Implementer to depict a more realistic evapotranspiration curve. 
-Also the for checking the models accuracy still unconnected building block outports will be summarized b Collectors. Figure 6 outlines the number of Collectors added and their role in detail.
+For checking the models accuracy still unconnected model block outports will be summarized b Collectors. Figure 6 outlines the number of Collectors added and their role in detail.
 
 
 # 

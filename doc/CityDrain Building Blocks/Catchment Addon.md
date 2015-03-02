@@ -82,7 +82,7 @@ Long and short term storage _S_ has been taken under consideration. Long term st
 
 The outdoor water demand of a building connected to a catchment is being considered originating mainly from garden watering. Therefore it's estimated via the relation between evapotranspiration _ET_ and rain _P_. If precipitation is higher than or equal to evapotranspiration there's no demand. For evaportranspiration being greater, the outdoor water demand is equal to their difference.
 
-The discharged water volumes are dependant on the catchment area. For the sake of simplicity catchments are considered squares. Their dimensions need to be specified (`Catchment Width`, `Catchment Length`). 
+The discharged water volumes are dependant on the catchment area. For the sake of simplicity catchments are considered squares. Their area need to be specified (`Catchment Area`). 
 
 Depending on the chosen catchment type (with or without routing) the Muskingum Method will be used or not.
 
