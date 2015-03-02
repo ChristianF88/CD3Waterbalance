@@ -86,7 +86,7 @@ class ReservoirlevelOne:
                             exec 'self.additionaldemandcollstrings += string'+str(o)
                         self.additionaldemand_coll_strings.append(self.additionaldemandcollstrings)
                         self.additionaldemand_from_gwr_coll_list_already_connected.append(Cluster.additionaldemand_from_gwr_coll_list[m])
-                print "GWR and SWR "+str(Cluster.additionaldemand_from_gwr_and_swr_coll_list)        
+                
                 if Cluster.additionaldemand_from_gwr_and_swr_coll_list[self.len_additionaldemand_from_gwr_and_swr_coll_list_before:] == []:
                     counter_2 = 0
                 else: 
@@ -227,7 +227,7 @@ class ReservoirlevelOne:
                         self.additionaldemand_from_swr_coll_list_already_connected.append(Cluster.additionaldemand_from_swr_coll_list[m])
                 else:
                     counter_1 = 0
-                print "GWR and SWR "+str(Cluster.additionaldemand_from_gwr_and_swr_coll_list)  
+                 
                 if Cluster.additionaldemand_from_gwr_and_swr_coll_list[self.len_additionaldemand_from_gwr_and_swr_coll_list_before:] == []:
                     counter_2 = 0
                 else:
