@@ -176,7 +176,6 @@ class XML_Creator():
                         self.Connectionlist.append(string1+string2+string3+string4)
                         
                     else:
-                        print "Not in there"
                         pass
                     
             elif Connection_Name_List[i][0] == 'Outport':

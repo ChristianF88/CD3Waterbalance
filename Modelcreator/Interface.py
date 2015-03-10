@@ -13,21 +13,14 @@ from To_XML_Creator_modified_Simulator import TheHoleLot
 from Global_meaning_list import Global_meaning_list
 Global_counters = Global_counters.Instance()
 
-'''#SWOP TANKS!FILEOUT INSERT BY MODULE AND OUTPORT!CHECK CLUSTERNUMBER,CHECK GREYWATERRESERVOIR'''
 '''
 CREATING THE XML
 Supplyvec and Attributevecs explanation in the XML-Creator.md on Github in the doc folder 
 '''
 
-supplyvec= [[[[[[0],[0,0,0],1],0],0]], [[[[[1],[0,0,1],1],0],2]]]
-Catchattrvec=[[1,1.9,800,0.4,0.2,0.4,0.6,0.21,1.5,0.4,0.5,400,500,700,0.04,0.05,0.06,'with'],[1,1.8,10000,0,0.5,0.5,0.6,0.21,1.5,0.4,0.5,380,510,710,0.04,0.05,0.06,'with'],[1,1.9,800,0.4,0.2,0.4,0.6,0.21,1.5,0.4,0.5,400,500,700,0.04,0.05,0.06,'with'],[1,1.8,10000,0,0.5,0.5,0.6,0.21,1.5,0.4,0.5,380,510,710,0.04,0.05,0.06,'with']]
-
-
-Demandmodelattrvec =[[[5],[5], "Simple_Model"]]*2
-
-#for i in range(len(Demandmodelattrvec)):
-#    Demandmodelattrvec[i][-1]="Stochastic_Model"
-#print Demandmodelattrvec
+supplyvec= [[[[[[0,1],[0,1,1],1],[[1,1,1],[1,1,0],1],1],2]]]
+Catchattrvec=[[1,1.9,800,0.4,0.2,0.4,0.6,0.21,1.5,0.4,0.5,400,500,700,0.04,0.05,0.06,'without'],[1,1.9,800,0.4,0.2,0.4,0.6,0.21,1.5,0.4,0.5,400,500,700,0.04,0.05,0.06,'without'],[1,1.8,10000,0,0.5,0.5,0.6,0.21,1.5,0.4,0.5,380,510,710,0.04,0.05,0.06,'without'],[1,1.9,800,0.4,0.2,0.4,0.6,0.21,1.5,0.4,0.5,400,500,700,0.04,0.05,0.06,'without'],[1,1.9,800,0.4,0.2,0.4,0.6,0.21,1.5,0.4,0.5,400,500,700,0.04,0.05,0.06,'without'],[1,1.9,800,0.4,0.2,0.4,0.6,0.21,1.5,0.4,0.5,400,500,700,0.04,0.05,0.06,'without'],[1,1.8,10000,0,0.5,0.5,0.6,0.21,1.5,0.4,0.5,380,510,710,0.04,0.05,0.06,'without']]
+Demandmodelattrvec =[[[5,40],[5], "Simple_Model"]]*5
 
 def XML():
     
@@ -41,10 +34,10 @@ def XML():
     Greywaterresattrvec = [[0.9,15]]*(Global_counters.number_of_greywaterreservoirs) 
     Greywaterattrvec = [[1,5]]*(Global_counters.number_of_greywatertanks) 
     Stormwaterresattrvec = [[0.9,15]]*(Global_counters.number_of_stormwaterreservoirs)
-    Rainwaterattrvec = [[0],[5]]*(Global_counters.number_of_raintanks)
+    Rainwaterattrvec = [[5]]*(Global_counters.number_of_raintanks)
     #Demandmodelattrvec = [[[10],[0], "Simple_Model"]]*Global_counters.number_of_demandmodels                      
     Gardenwaterattrvec = [[7,2,22,[18,6],"Smart_Watering"]]*Global_counters.number_of_gardenwateringmodules
-    Simulationsetupvec = ["2000-Jan-01 00:00:00", "2001-Jan-01 00:00:00", "360", "C:/Users/Acer/Documents/GitHub/CD3Waterbalance/Module/cd3waterbalancemodules.py"]
+    Simulationsetupvec = ["2000-Jan-01 00:00:00", "2001-Jan-01 00:00:00", "3600", "C:/Users/Acer/Documents/GitHub/CD3Waterbalance/Module/cd3waterbalancemodules.py"]
     Needtohaveinputsvec = ["C:/Users/Acer/Documents/GitHub/CD3Waterbalance/simulationwithpatterns/inputfiles/rain.ixx", "C:/Users/Acer/Documents/GitHub/CD3Waterbalance/simulationwithpatterns/inputfiles/evapo.ixx", "13", "20.5"]
     CreateXML.WriteNodes(Catchattrvec, Greywaterattrvec, Stormwaterresattrvec, Rainwaterattrvec, Demandmodelattrvec, Greywaterresattrvec, Simulationsetupvec, Needtohaveinputsvec,Gardenwaterattrvec)
     
@@ -52,8 +45,8 @@ def XML():
 #    CreateXML.PrintConnections()
     
     #insert Fileouts()
-    Fileout_Connection_Name_List = [['Outport', "Potable_Water_Reservoir_0", "Demand","Trinkwasserverbrauch_1.txt"],['Outport', "Potable_Water_Reservoir_1", "Demand","Trinkwasserverbrauch_2.txt"]]
-    CreateXML.Additional_Fileouts(Fileout_Connection_Name_List) 
+#    Fileout_Connection_Name_List = [['Inport', "Stormwaterreservoir_0", "Stormwater_In","StormwaterInflow.txt"]]
+#    CreateXML.Additional_Fileouts(Fileout_Connection_Name_List) 
     
     #safe the xml file
     CreateXML.SaveXML('C:\Users\Acer\Documents\GitHub\CD3Waterbalance\simulationwithpatterns\outputfiles\Garden.xml')
@@ -76,7 +69,7 @@ def Simulator():
     Simulator.getoutputdata('C:\Users\Acer\Documents\GitHub\CD3Waterbalance\simulationwithpatterns\outputfiles')
     Simulator.getinputdata('C:\Users\Acer\Documents\GitHub\CD3Waterbalance\simulationwithpatterns\inputfiles')
     Simulator.Balance(['Greywatertanklevels', 'Greywaterreservoirlevels',  'Rainwatertanklevels', 'Stormwaterreservoirlevels','Gardenwateringstorage'], ['Evapo_Model', 'Rain_Model'], ['Actual_Infiltration', 'Potable_Water_Demand', 'Sewer', 'Stormwaterdrain'])
-    Simulator.Plotter([20,8],[0,10], [0,8], [ 'effective_rain', 'Rainwatertanklevels','Greywatertanklevels', 'Greywaterreservoirlevels', 'Stormwaterreservoirlevels','Trinkwasserverbrauch_1','Trinkwasserverbrauch_2'])
+    Simulator.Plotter([20,8],[0,155], [0,20], [ 'Rainwatertanklevels','Greywatertanklevels', 'Greywaterreservoirlevels', 'Stormwaterreservoirlevels' ]) #, 'Rainwatertanklevels','Greywatertanklevels', 'Greywaterreservoirlevels', 'Stormwaterreservoirlevels'
     
     return
 
