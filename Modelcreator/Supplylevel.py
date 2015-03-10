@@ -877,7 +877,7 @@ class Supplylevel:
         for q in range(Global_counters.number_of_potablwaterreservoirs):
             string1='\t\t\t<connection id="'+str(Global_counters.number_of_connections)+'">\n' 
             string2='\t\t\t\t<source node="Potable_Water_Reservoir_'+str(q)+'" port="Demand"/>\n' 
-            string3='\t\t\t\t<sink node="Collector_'+str(Global_counters.number_of_collectors)+'" port="Inport_'+str(q+1)+'"/> \n ' 
+            string3='\t\t\t\t<sink node="Collector_'+str(Global_counters.number_of_collectors)+'" port="Inport_'+str(q+1)+'"/>\n' 
             string4='\t\t\t</connection>\n' 
             Global_counters.number_of_connections += 1
             #writes all string in one and puts it in list

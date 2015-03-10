@@ -157,6 +157,7 @@ class XML_Creator():
                     searchstring = '\t\t\t<connection id="'+str(u)+'">\n\t\t\t\t<source node="'+str(self.Connectionlist[u][self.Connectionlist[u].find('<source node="')+14:self.Connectionlist[u].find('" port=')])+'" port="'+str(self.Connectionlist[u][self.Connectionlist[u].find('" port=')+8:self.Connectionlist[u].find('"/>\n\t\t\t\t<sink')])+'"/>\n\t\t\t\t<sink node="'+str(Connection_Name_List[i][1])+'" port="'+str(Connection_Name_List[i][2])+'"/>\n\t\t\t</connection>\n'
 
                     if searchstring in self.Connectionlist[u]:
+                        
                         #changing old connection
                         start_cut = self.Connectionlist[u].index('<sink')
                         stop_cut = self.Connectionlist[u].index('/>\n\t\t\t</connection>\n')+2
@@ -175,13 +176,14 @@ class XML_Creator():
                         self.Connectionlist.append(string1+string2+string3+string4)
                         
                     else:
+                        print "Not in there"
                         pass
                     
             elif Connection_Name_List[i][0] == 'Outport':
                 for u in range(len(self.Connectionlist)):
                     
                     searchstring = '\t\t\t<connection id="'+str(u)+'">\n\t\t\t\t<source node="'+str(Connection_Name_List[i][1])+'" port="'+str(Connection_Name_List[i][2])+'"/>\n\t\t\t\t<sink node="'+str(self.Connectionlist[u][self.Connectionlist[u].find('<sink node="')+12:self.Connectionlist[u].find('" port=',80)])+'" port="'+str(self.Connectionlist[u][self.Connectionlist[u].find('" port=',80)+8:self.Connectionlist[u].find('"/>', self.Connectionlist[u].find('" port=',80)+8)])+'"/>\n\t\t\t</connection>\n'
-                    
+
                     if searchstring in self.Connectionlist[u]:
                          
                         #changing old connection
@@ -203,7 +205,7 @@ class XML_Creator():
                         
                     else:
                         pass
-            
+                        
             else:
                 print "Wrong Input!!"
             Global_counters.number_of_fileouts += 1 
