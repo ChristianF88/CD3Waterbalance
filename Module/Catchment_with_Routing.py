@@ -220,7 +220,7 @@ class Catchment_w_Routing(pycd3.Node):
                 self.rain_storage_imp = 0.0
             
             #calculating the possilbe infiltration rate the the Horton model in a state of "drying" (+ increasing the time step for the model)
-            self.temp_cap = self.Horton_final_cap/3600.*dt + (self.temp_cap_2 - self.Horton_final_cap/3600.*dt) * math.exp(-1*self.Horton_decay_constant * dt / 60. * self.continuous_rain_time/self.k)
+            self.temp_cap = self.Horton_final_cap/3600.*dt + (self.temp_cap_2 - self.Horton_final_cap/3600.*dt) * math.exp(-1*self.Horton_decay_constant * dt / (60.*6.) * self.continuous_rain_time/self.k)
             self.possible_infiltr_raw = self.Horton_initial_cap/3600.*dt - (self.Horton_initial_cap/3600.*dt - self.temp_cap) * math.exp(-1*self.Horton_decay_constant * dt / 60. * self.continuous_rain_time_2/self.k)
             self.continuous_rain_time_2 += 1.0
            
