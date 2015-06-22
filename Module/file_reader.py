@@ -78,17 +78,23 @@ class File_Reader (pycd3.Node):
         
     def f(self, current, dt):
         
-        #The set time step is equal to the one of the file
-        if float(repr(self.dt_read)[:11]) == float(repr(dt/24./3600.)[:11]):
+        
             
-            self.row_to_get += 1
-            self.out[0] = float(self.mylist[int(0+self.row_to_get)][2])
             
         #There's a difference between the interpolation or extrapolating of a absolute value and a value refering to time. 'F' explesses a fLow rate...
         if str(self.decision)=='F':
             
+            #The set time step is equal to the one of the file
+            if float(repr(self.dt_read)[:11]) == float(repr(dt/24./3600.)[:11]):
+            
+                self.row_to_get += 1
+                self.out[0] = float(self.mylist[int(0+self.row_to_get)][2])
+
+            
+                        
+            
             #The set time step is smaller than the files
-            if float(repr(self.dt_read)[:11]) > float(repr(dt/24./3600.)[:11]):
+            elif float(repr(self.dt_read)[:11]) > float(repr(dt/24./3600.)[:11]):
             
                 self.growing_t += dt/24./3600.
                 
@@ -167,8 +173,17 @@ class File_Reader (pycd3.Node):
         #There's a difference between the interpolation or extrapolating of a absolute value and a value refering to time. 'V' explesses a volume...           
         elif str(self.decision)=='H':
             
+            #The set time step is equal to the one of the file
+            if float(repr(self.dt_read)[:11]) == float(repr(dt/24./3600.)[:11]):
+            
+                self.row_to_get += 1
+                self.out[0] = float(self.mylist[int(0+self.row_to_get)][2])
+
+       
+            
             #The set time step is smaller than the files
-            if float(repr(self.dt_read)[:11]) > float(repr(dt/24./3600.)[:11]):
+            elif float(repr(self.dt_read)[:11]) > float(repr(dt/24./3600.)[:11]):
+                
             
                 #initial time step and interpolation
                 if self.row_to_get == 0:

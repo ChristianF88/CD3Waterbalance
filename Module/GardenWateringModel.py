@@ -42,6 +42,7 @@ class GardenWateringModel(pycd3.Node):
         
         self.inport = pycd3.Flow()
         self.outport = pycd3.Flow()
+        self.soilinfiltration = pycd3.Flow()
         self.currentOutdoorDemand = pycd3.Flow()
         self.average = pycd3.Double(7)
         self.deviation = pycd3.Double(2)
@@ -51,6 +52,7 @@ class GardenWateringModel(pycd3.Node):
         
         self.addInPort("Outdoor_Demand_In", self.inport)   
         self.addOutPort("Outdoor_Demand_Out", self.outport)
+        self.addOutPort("Soil_Storage_Watering", self.soilinfiltration)
         self.addOutPort("Check_Storage", self.currentOutdoorDemand)
         self.addParameter("Watering_Method_(Normal_Watering_or_Smart_Watering)", self.watering_method)
         self.addParameter("Smart_Watering_Start_Time_End_Time_[hh,hh]", self.smart_watering_time)
@@ -131,6 +133,7 @@ class GardenWateringModel(pycd3.Node):
             self.watering = 0.0
 
         self.outport[0] = self.watering
+        self.soilinfiltration[0]=self.outport[0]
         self.currentOutdoorDemand[0]= self.DemandStorage
         self.time += dt/3600./24.
         

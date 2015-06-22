@@ -49,9 +49,9 @@ class TheHoleLot:
     #Catchmentattributevec from XML_Creator (see XML-Creator.md)
     def Fractioncalculator(self,Catchmentattributevector):
             for i in range(len(Catchmentattributevector)):
-                self.Fractioncalculatorvec.append([Catchmentattributevector[i][2],Catchmentattributevector[i][5],Catchmentattributevector[i][3],Catchmentattributevector[i][4]])
-                self.wettingloss += Catchmentattributevector[i][9]
-                self.depressionloss += Catchmentattributevector[i][8]
+                self.Fractioncalculatorvec.append([Catchmentattributevector[i][1],Catchmentattributevector[i][4],Catchmentattributevector[i][2],Catchmentattributevector[i][3]])
+                self.wettingloss += Catchmentattributevector[i][8]
+                self.depressionloss += Catchmentattributevector[i][7]
             self.wettingloss = self.wettingloss/(i+1)
             self.depressionloss = self.depressionloss/(i+1)
             area_fractions1_0 = 0.0

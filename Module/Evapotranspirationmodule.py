@@ -34,15 +34,19 @@ from numpy import arange, mean, asarray, pi, size
 #        print "NodeFactory.getSource"
 #        return "Addons.py"
 
-class Pattern_Impl(pycd3.Node):
+class Evapotranspirationmodule(pycd3.Node):
     def __init__(self):
         pycd3.Node.__init__(self)
         self.input = pycd3.Flow()
         self.output = pycd3.Flow()
+        self.evapfactor = pycd3.Flow()
+        self.outport = pycd3.Flow()
 #        print "init node"
         self.addInPort("Inport", self.input)
         self.addOutPort("Outport", self.output)
-        
+        self.addOutPort("Outport_Check_without_Factor", self.outport)
+        self.addInPort("Evapotranspiration_Factor",self.evapfactor)
+        ##Potenzielle Evapotranspiration berechnen oder eingeben, kommunikation mit Soilstorage
         self.zenith = pycd3.Double(13)
         self.addParameter("Sun_Zenith_[0-23h]", self.zenith)
         self.sundown = pycd3.Double(20.5)
@@ -55,7 +59,7 @@ class Pattern_Impl(pycd3.Node):
         #print type(start)
         #print start.to_datetime()
         #print date2num(datetime.strptime(str(start.to_datetime()),"%Y-%m-%d %H:%M:%S"))
-        if dt <=3600:
+        if dt <=3600*24:
             #creating gauss curve with the expectation value self.zenith and the sundown marks the value where the evapotr. is almost 0.0
             self.deviation = (self.sundown - self.zenith)/3./24.      
             self.xtime=arange(0,1.0-dt/24./3600.,dt/24./3600.)
@@ -69,28 +73,32 @@ class Pattern_Impl(pycd3.Node):
             self.time = date2num(datetime.strptime(str(start.to_datetime()),"%Y-%m-%d %H:%M:%S"))
         else:
             pass
-        
+        self.evapfac = 1
         return True
         
     def f(self, current, dt):
-        if dt <=3600:
+        if dt <=3600*24:
             #looks for the right factor and mulitplies it with value at a certain point of time
             if self.time - floor(self.time) == 1.0:
-                self.output[0]=self.input[0]*self.pattern[-1][1]  
+                self.output[0]=self.input[0]*self.pattern[-1][1]  * self.evapfac
+                self.outport[0] = self.input[0]*self.pattern[-1][1]
             else:
                 count_i = 0
                 while (self.time - floor(self.time) > self.pattern[count_i][0]):
                     count_i+=1
-                self.output[0]=self.input[0]*self.pattern[count_i][1]
+                self.output[0]=self.input[0]*self.pattern[count_i][1]* self.evapfac
+                self.outport[0] = self.input[0]*self.pattern[count_i][1]
                 
             self.time+=dt/24./3600.
         else:
-            self.output[0] = self.input[0]
+            self.output[0] = self.input[0]* self.evapfac
+            self.outport[0] = self.input[0]
+        self.evapfac=self.evapfactor[0]
         return dt
     
     def getClassName(self):
         #print "getClassName"
-        return "Pattern_Impl"
+        return "Evapotranspirationmodule"
 
 #def register(nr):
 #    for c in pycd3.Node.__subclasses__():
