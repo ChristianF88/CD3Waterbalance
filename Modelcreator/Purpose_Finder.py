@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 """
-Created on Tue Jan 06 12:27:02 2015
+Created on Tue Jun 23 13:46:53 2015
 
-@author: Acer
+@author: Gerhard
 """
 
 from Global_meaning_list import Global_meaning_list

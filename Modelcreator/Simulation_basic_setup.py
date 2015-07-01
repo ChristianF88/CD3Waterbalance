@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 """
-Created on Mon Dec 01 12:01:01 2014
+Created on Tue Jun 23 13:46:53 2015
 
-@author: Acer
+@author: Gerhard
 """
 
 #EXAMPLE: [startdate, stopdate] = ['2000-Jan-01 00:00:00', '2001-Jan-01 00:00:00']

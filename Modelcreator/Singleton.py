@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 """
-Created on Thu Jan 29 11:27:15 2015
+Created on Tue Jun 23 13:46:53 2015
 
-@author: Acer
+@author: Gerhard
 """
 
 class Singleton:

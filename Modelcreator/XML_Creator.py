@@ -1,9 +1,11 @@
 # -*- coding: utf-8 -*-
 """
-Created on Mon Jan 05 12:16:56 2015
+Created on Tue Jun 23 13:46:53 2015
 
-@author: Acer
+@author: Gerhard
 """
+
+
 import sys
 sys.path.append('C:\Users\Acer\Documents\GitHub\CD3Waterbalance\Modelcreator')
 from Need_to_have_modelinput import Need_to_have_modelinput
@@ -22,6 +24,7 @@ from Distributorsetup import Distributorsetup
 from Demandmodelsetup import Demandmodelsetup
 from Stormwaterreservoirsetup import Stormwaterreservoirsetup
 from Greywaterreservoirsetup import Greywaterreservoirsetup
+from Soilstoragesetup import Soilstoragesetup
 from Supplylevel import Supplylevel
 from Global_counters import Global_counters
 Global_counters = Global_counters.Instance()
@@ -50,7 +53,7 @@ class XML_Creator():
         
         
         
-    def WriteNodes(self, Catchattrvec, Greywaterattrvec, Stormwaterresattrvec , Rainwaterattrvec, Demandmodelattrvec, Greywaterresattrvec, Simulationsetupvec, Needtohaveinputsvec, Gardenwaterattrvec):
+    def WriteNodes(self, Catchattrvec, Greywaterattrvec, Stormwaterresattrvec , Rainwaterattrvec, Demandmodelattrvec, Greywaterresattrvec, Simulationsetupvec, Needtohaveinputsvec, Gardenwaterattrvec, Soilattrvec):
 
         Collectorattrvec = []
         for i in range(len(Global_counters.number_of_collectors_ports_list)):
@@ -69,8 +72,10 @@ class XML_Creator():
         
         Setupheader = Simulation_basic_setup(Simulationsetupvec[0], Simulationsetupvec[1], Simulationsetupvec[2], Simulationsetupvec[3])
         Needtohaveinputs = Need_to_have_modelinput(Needtohaveinputsvec[0], Needtohaveinputsvec[1], Needtohaveinputsvec[2], Needtohaveinputsvec[3])
-        Catchments = Catchmentsetup(Global_counters.number_of_catchments ,0, Decay_Constant =1.9, Catchment_Area = 100, Fraktion_of_Impervious_Area_to_Reservoir_iAR= 0.4, Fraktion_of_Impervious_Area_to_Stormwater_Drain_iASD = 0.3, Fraktion_of_Pervious_Area_pA = 0.3, Number_of_Subareas = 1, Initial_Infiltration_Capacity = 0.6, Final_Infiltration_Capacity = 0.21, Depression_Loss = 1.5, Wetting_Loss = 0.4, Outdoor_Demand_Weighing_Factor = 0.5, Runoff_Runtime_iAR = 400, Runoff_Runtime_iASD = 500, Runoff_Runtime_pA = 700, Weighting_Coefficient_iAR = 0.04, Weighting_Coefficient_iASD = 0.05, Weighting_Coefficient_pA = 0.06,Catchment_with_or_without_Routing_with_or_without = "without")
+        Catchments = Catchmentsetup(Global_counters.number_of_catchments ,0, Decay_Constant =1.9, Catchment_Area = 100, Fraktion_of_Impervious_Area_to_Reservoir_iAR= 0.4, Fraktion_of_Impervious_Area_to_Stormwater_Drain_iASD = 0.3, Fraktion_of_Pervious_Area_pA = 0.3, Initial_Infiltration_Capacity = 0.6, Final_Infiltration_Capacity = 0.21, Depression_Loss = 1.5, Wetting_Loss = 0.4, Outdoor_Demand_Weighing_Factor = 0.5, RLinear_Storage_Factor_Impervious_Area_to_Stormwater_Drain_K = 1000, Linear_Storage_Factor_Pervious_Area_K = 1000, Linear_Storage_Factor_Impervious_Area_to_Reservoir_K = 1000, Catchment_with_or_without_Routing_with_or_without = "without")
         Catchments.Setandwrite_attributes(Global_counters.number_of_catchments,0,Catchattrvec)
+        Soilstorage = Soilstoragesetup(Global_counters.number_of_soilstorages ,0, Depth_Of_Soil = 1, Initial_Water_Content = 0.3, Residual_Water_Content = 0.01, Saturation_Water_Content = 0.4, Hydraulic_Conductivity_Saturated_Conditions = 0.2, Total_Area = 1000000, Van_Genuchten_Parameter_Alpha = 0.08, Van_Genuchten_Parameter_n = 1.3)
+        Soilstorage.Setandwrite_attributes(Global_counters.number_of_soilstorages ,0,Soilattrvec)
         Buildings = Buildingsetup(Global_counters.number_of_buildings,0)
         Stormwaterdrain =  Stormwaterdrainsetup(Global_counters.number_of_stormwaterpipes,0)
         Sewers =  Sewer2setup(Global_counters.number_of_sewers,0)
@@ -100,9 +105,11 @@ class XML_Creator():
         for i in range(len(Needtohaveinputs.Modelinputnodesstring)):
             self.Basicslist.append(Needtohaveinputs.Modelinputnodesstring[i])
         
-        #wiritng all nodes in one list
+        #wiritng all nodes in one list Soilstorage
         for i in range(len(Catchments.Catchmentnodelist)):
             self.Nodelist.append(Catchments.Catchmentnodelist[i])
+        for i in range(len(Soilstorage.Soilstoragenodelist)):
+            self.Nodelist.append(Soilstorage.Soilstoragenodelist[i])
         for i in range(len(Buildings.Buildingnodelist)):
             self.Nodelist.append(Buildings.Buildingnodelist[i])
         for i in range(len(Stormwaterdrain.Stormwaterpipenodelist)):

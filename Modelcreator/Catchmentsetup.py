@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 """
-Created on Wed Nov 12 14:59:00 2014
+Created on Tue Jun 23 13:46:53 2015
 
-@author: Acer
+@author: Gerhard
 """
 
 

@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 """
-Created on Thu Oct 02 08:41:08 2014
+Created on Tue Jun 23 13:46:53 2015
 
-@author: Acer
+@author: Gerhard
 """
 
 import sys
@@ -50,7 +50,7 @@ class Catchment_w_Routing(pycd3.Node):
         self.addInPort("Evapotranspiration", self.evapo)
         self.addInPort("Inflow", self.inflow)
         self.addOutPort("Possible_Infiltration", self.possible_infiltr)
-        self.addOutPort("Actual_Infiltration", self.actual_infiltr)
+        self.addOutPort("To_Soilstorage", self.actual_infiltr)
         self.addOutPort("Runoff", self.runoff)
         self.addOutPort("Collected_Water", self.collected_w)
         self.addOutPort("Outdoor_Demand", self.outdoor_use)

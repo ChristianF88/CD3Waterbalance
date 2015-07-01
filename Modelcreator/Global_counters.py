@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 """
-Created on Mon Dec 01 15:11:56 2014
+Created on Tue Jun 23 13:46:53 2015
 
-@author: Acer
+@author: Gerhard
 """
 from Singleton import Singleton
 
@@ -23,12 +23,13 @@ class Global_counters(object):
         self.number_of_demandmodels = 0
         self.number_of_stormwaterreservoirs = 0
         self.number_of_filereaders = 0
-        self.number_of_patternimplementers = 0
+        self.number_of_evapotranspirationmodules = 0
         self.number_of_fileouts = 0
         self.number_of_gardenwateringmodules = 0
         self.number_of_greywaterreservoirs = 0
         self.number_of_clusters = 0
         self.numbers_of_buildinglevels_created = 0
+        self.number_of_soilstorages = 0
         self.number_of_collectors_ports_list = []
         self.number_of_distributors_ports_list = []
         self.numbers_names_of_fileouts_list = []

@@ -1,9 +1,11 @@
 # -*- coding: utf-8 -*-
 """
-Created on Tue Dec 02 11:20:04 2014
+Created on Tue Jun 23 13:46:53 2015
 
-@author: Acer
+@author: Gerhard
 """
+
+
 from ReservoirlevelTwo import ReservoirlevelTwo
 from Global_counters import Global_counters
 from Global_meaning_list import Global_meaning_list
@@ -393,7 +395,7 @@ class Supplylevel:
             
    
         '''    
-        connecting filereader (rain) and pattern implementer (evapo) to all Catchments (including catchment streets)
+        connecting filereader (rain) and evapotranspirationmodule (evapo) to all Catchments (including catchment streets)
         '''
         self.modelinput_strings = []
         #filereader - fileout connection
@@ -440,10 +442,10 @@ class Supplylevel:
         Global_counters.number_of_distributors += 1
         Global_counters.number_of_fileouts += 1
         
-        #filereader - pattern_implementer connection
+        #filereader - evapotranspirationmodule connection
         string1='\t\t\t<connection id="'+str(Global_counters.number_of_connections)+'">\n' 
         string2='\t\t\t\t<source node="File_Reader_'+str(Global_counters.number_of_filereaders)+'" port="Outport"/>\n' 
-        string3='\t\t\t\t<sink node="Pattern_Impl_'+str(Global_counters.number_of_patternimplementers)+'" port="Inport"/>\n' 
+        string3='\t\t\t\t<sink node="Evapotranspirationmodule_'+str(Global_counters.number_of_evapotranspirationmodules)+'" port="Inport"/>\n' 
         string4='\t\t\t</connection>\n' 
         Global_counters.number_of_connections += 1
         #writes all string in one and puts it in list
@@ -453,9 +455,9 @@ class Supplylevel:
         self.modelinput_strings.append(self.modelinputstrings)
         
         
-        #pattern_implementer - fileout connection
+        #evapotranspirationmodule - fileout connection
         string1='\t\t\t<connection id="'+str(Global_counters.number_of_connections)+'">\n' 
-        string2='\t\t\t\t<source node="Pattern_Impl_'+str(Global_counters.number_of_patternimplementers)+'" port="Outport"/>\n' 
+        string2='\t\t\t\t<source node="Evapotranspirationmodule_'+str(Global_counters.number_of_evapotranspirationmodules)+'" port="Outport"/>\n' 
         string3='\t\t\t\t<sink node="FileOut_'+str(Global_counters.number_of_fileouts)+'" port="in"/>\n' 
         string4='\t\t\t</connection>\n' 
         Global_counters.number_of_connections += 1
@@ -493,7 +495,7 @@ class Supplylevel:
         #writes collector number in list that knows number of inports for later reference
         Global_counters.numbers_names_of_fileouts_list.append([Global_counters.number_of_fileouts, 'Evapo_Model.txt'])
         Global_counters.number_of_distributors_ports_list.append([Global_counters.number_of_distributors, Global_counters.number_of_catchments])
-        Global_counters.number_of_patternimplementers += 1
+        Global_counters.number_of_evapotranspirationmodules += 1
         Global_counters.number_of_distributors += 1
         Global_counters.number_of_filereaders += 1
         Global_counters.number_of_fileouts += 1
@@ -619,12 +621,12 @@ class Supplylevel:
         Global_counters.number_of_collectors += 1
         
         '''
-        adds collector for infiltration of catchments
+        adds collector for infiltration/Evapotranspiration of Catchments of catchments
         '''
         self.check_infiltration_strings = []
         for q in range(Global_counters.number_of_catchments):
             string1='\t\t\t<connection id="'+str(Global_counters.number_of_connections)+'">\n' 
-            string2='\t\t\t\t<source node="Catchment_w_Routing_'+str(q)+'" port="Actual_Infiltration"/>\n' 
+            string2='\t\t\t\t<source node="Catchment_w_Routing_'+str(q)+'" port="To_Soilstorage"/>\n' 
             string3='\t\t\t\t<sink node="Collector_'+str(Global_counters.number_of_collectors)+'" port="Inport_'+str(q+1)+'"/>\n' 
             string4='\t\t\t</connection>\n' 
             Global_counters.number_of_connections += 1
@@ -633,13 +635,50 @@ class Supplylevel:
             for o in range(5)[1:]:
                 exec 'self.checkinfiltrationstrings += string'+str(o)
             self.check_infiltration_strings.append(self.checkinfiltrationstrings)
-             
+            
+        string1='\t\t\t<connection id="'+str(Global_counters.number_of_connections)+'">\n' 
+        string2='\t\t\t\t<source node="Collector_'+str(Global_counters.number_of_collectors)+'" port="Outport"/>\n' 
+        string3='\t\t\t\t<sink node="Soilstorage_'+str(Global_counters.number_of_soilstorages)+'" port="Infiltration/Evapotranspiration"/>\n' 
+        string4='\t\t\t</connection>\n'
+        Global_counters.number_of_connections += 1
+        self.check_infiltration_strings.append(string1+string2+string3+string4)        
+        
         #writes collector number in list that knows number of inports for later reference
         Global_counters.number_of_collectors_ports_list.append([Global_counters.number_of_collectors, Global_counters.number_of_catchments])
-        Global_meaning_list.collectors.append(['Collector_'+str(Global_counters.number_of_collectors), 'collects Actual Infiltration of all Catchments: '+str(Global_counters.number_of_catchments)+' Inports'])
-        self.need_to_have_filout_list.append([Global_counters.number_of_collectors, 'Actual_Infiltration'])
+        Global_meaning_list.collectors.append(['Collector_'+str(Global_counters.number_of_collectors), 'collects Infiltration/Evapotr of all Catchments: '+str(Global_counters.number_of_catchments)+' Inports'])
         Global_counters.number_of_collectors += 1
-
+        
+        '''
+        adds collector for gardenwateringmodel Watering of Soil
+        '''
+        self.check_garden_soil_strings = []
+        for q in range(Global_counters.number_of_gardenwateringmodules):
+            string1='\t\t\t<connection id="'+str(Global_counters.number_of_connections)+'">\n' 
+            string2='\t\t\t\t<source node="GardenWateringModel_'+str(q)+'" port="Soilstorage_Watering"/>\n' 
+            string3='\t\t\t\t<sink node="Collector_'+str(Global_counters.number_of_collectors)+'" port="Inport_'+str(q+1)+'"/>\n' 
+            string4='\t\t\t</connection>\n' 
+            Global_counters.number_of_connections += 1
+            #writes all string in one and puts it in list
+            self.checkgardensstrings = ''
+            for o in range(5)[1:]:
+                exec 'self.checkgardensstrings += string'+str(o)
+            self.check_garden_soil_strings.append(self.checkgardensstrings)
+        
+        string1='\t\t\t<connection id="'+str(Global_counters.number_of_connections)+'">\n' 
+        string2='\t\t\t\t<source node="Collector_'+str(Global_counters.number_of_collectors)+'" port="Outport"/>\n' 
+        string3='\t\t\t\t<sink node="Soilstorage_'+str(Global_counters.number_of_soilstorages)+'" port="Garden_Watering"/>\n' 
+        string4='\t\t\t</connection>\n'        
+        Global_counters.number_of_connections += 1
+        self.check_garden_soil_strings.append(string1+string2+string3+string4)
+        
+        #writes collector number in list that knows number of inports for later reference
+        Global_counters.number_of_collectors_ports_list.append([Global_counters.number_of_collectors, Global_counters.number_of_gardenwateringmodules])
+        Global_meaning_list.collectors.append(['Collector_'+str(Global_counters.number_of_collectors), 'collects Gardenwateringstorage (for non watered demand at last time step): '+str(Global_counters.number_of_gardenwateringmodules)+' Inports'])
+        Global_counters.number_of_collectors += 1         
+        Global_counters.number_of_soilstorages += 1
+        
+        
+        
         '''
         adds collector for checking outdoordemand
         '''
@@ -911,8 +950,15 @@ class Supplylevel:
             Global_counters.numbers_names_of_fileouts_list.append([Global_counters.number_of_fileouts, str(self.need_to_have_filout_list[q][1])+'.txt'])
             Global_counters.number_of_fileouts += 1
         
-        
-        
+        #adds fileout to Soilstorage
+        string1='\t\t\t<connection id="'+str(Global_counters.number_of_connections)+'">\n' 
+        string2='\t\t\t\t<source node="Soilstorage_'+str(Global_counters.number_of_soilstorages-1)+'" port="Soilstorage_Check"/>\n' 
+        string3='\t\t\t\t<sink node="FileOut_'+str(Global_counters.number_of_fileouts)+'" port="in"/>\n' 
+        string4='\t\t\t</connection>\n' 
+        Global_counters.number_of_connections += 1
+        self.fileout_strings.append(string1+string2+string3+string4)
+        Global_counters.numbers_names_of_fileouts_list.append([Global_counters.number_of_fileouts, 'Soilstorage.txt'])
+        Global_counters.number_of_fileouts += 1
         
         
         for m in range(len(self.Supplylevel_loop_list)):
@@ -940,6 +986,8 @@ class Supplylevel:
             self.Supplylevel_list.append(self.check_raintanks_strings[m])
         for m in range(len(self.check_infiltration_strings)):
             self.Supplylevel_list.append(self.check_infiltration_strings[m])
+        for m in range(len(self.check_garden_soil_strings)):
+            self.Supplylevel_list.append(self.check_garden_soil_strings[m])    
         for m in range(len(self.check_outdoordemand_strings)):
             self.Supplylevel_list.append(self.check_outdoordemand_strings[m])
         for m in range(len(self.check_demandmodel_bath_strings)):

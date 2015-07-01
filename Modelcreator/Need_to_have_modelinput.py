@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 """
-Created on Mon Dec 01 11:51:39 2014
+Created on Tue Jun 23 13:46:53 2015
 
-@author: Acer
+@author: Gerhard
 """
 
 
@@ -24,7 +24,7 @@ class Need_to_have_modelinput:
          self.string3="""/>
                 <parameter name="Type_H_for_height_[mm]_or_F_for_flow_[l/h]" type="string" value="H"/>
             </node>
-            <node id="Pattern_Impl_0" class="Pattern_Impl">
+            <node id="Evapotranspirationmodule_0" class="Evapotranspirationmodule">
                 <parameter name="Sun_Zenith_[0-23h]" type="double" value="""
          self.string4="""/>
                 <parameter name="Sundown_[0-23h]" type="double" value="""

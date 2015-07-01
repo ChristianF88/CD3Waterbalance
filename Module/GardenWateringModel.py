@@ -1,9 +1,8 @@
-
 # -*- coding: utf-8 -*-
 """
-Created on Thu Oct 02 08:41:08 2014
+Created on Tue Jun 23 13:46:53 2015
 
-@author: Acer
+@author: Gerhard
 """
 
 import sys
@@ -52,7 +51,7 @@ class GardenWateringModel(pycd3.Node):
         
         self.addInPort("Outdoor_Demand_In", self.inport)   
         self.addOutPort("Outdoor_Demand_Out", self.outport)
-        self.addOutPort("Soil_Storage_Watering", self.soilinfiltration)
+        self.addOutPort("Soilstorage_Watering", self.soilinfiltration)
         self.addOutPort("Check_Storage", self.currentOutdoorDemand)
         self.addParameter("Watering_Method_(Normal_Watering_or_Smart_Watering)", self.watering_method)
         self.addParameter("Smart_Watering_Start_Time_End_Time_[hh,hh]", self.smart_watering_time)

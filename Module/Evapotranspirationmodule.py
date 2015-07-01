@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 """
-Created on Thu Oct 02 08:41:08 2014
+Created on Tue Jun 23 13:46:53 2015
 
-@author: Acer
+@author: Gerhard
 """
 
 import sys
@@ -39,13 +39,11 @@ class Evapotranspirationmodule(pycd3.Node):
         pycd3.Node.__init__(self)
         self.input = pycd3.Flow()
         self.output = pycd3.Flow()
-        self.evapfactor = pycd3.Flow()
-        self.outport = pycd3.Flow()
+
 #        print "init node"
         self.addInPort("Inport", self.input)
         self.addOutPort("Outport", self.output)
-        self.addOutPort("Outport_Check_without_Factor", self.outport)
-        self.addInPort("Evapotranspiration_Factor",self.evapfactor)
+
         ##Potenzielle Evapotranspiration berechnen oder eingeben, kommunikation mit Soilstorage
         self.zenith = pycd3.Double(13)
         self.addParameter("Sun_Zenith_[0-23h]", self.zenith)
@@ -73,27 +71,29 @@ class Evapotranspirationmodule(pycd3.Node):
             self.time = date2num(datetime.strptime(str(start.to_datetime()),"%Y-%m-%d %H:%M:%S"))
         else:
             pass
-        self.evapfac = 1
+
         return True
         
     def f(self, current, dt):
         if dt <=3600*24:
             #looks for the right factor and mulitplies it with value at a certain point of time
             if self.time - floor(self.time) == 1.0:
-                self.output[0]=self.input[0]*self.pattern[-1][1]  * self.evapfac
-                self.outport[0] = self.input[0]*self.pattern[-1][1]
+                self.output[0]=self.input[0]*self.pattern[-1][1]  
+
             else:
                 count_i = 0
                 while (self.time - floor(self.time) > self.pattern[count_i][0]):
                     count_i+=1
-                self.output[0]=self.input[0]*self.pattern[count_i][1]* self.evapfac
-                self.outport[0] = self.input[0]*self.pattern[count_i][1]
+                self.output[0]=self.input[0]*self.pattern[count_i][1]
+
                 
             self.time+=dt/24./3600.
         else:
-            self.output[0] = self.input[0]* self.evapfac
-            self.outport[0] = self.input[0]
-        self.evapfac=self.evapfactor[0]
+            self.output[0] = self.input[0]
+
+
+
+
         return dt
     
     def getClassName(self):
