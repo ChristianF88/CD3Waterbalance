@@ -45,7 +45,7 @@ def XML():
     #Demandmodelattrvec = [[[10],[0], "Simple_Model"]]*Global_counters.number_of_demandmodels                      
     Gardenwaterattrvec = [[7,2,22,[18,6],"Smart_Watering"]]*Global_counters.number_of_gardenwateringmodules
     Simulationsetupvec = ["2000-Jan-01 00:00:00", "2001-Jan-01 00:00:00", "3600", "C:/Users/Gerhard/Documents/GitHub/CD3Waterbalance/Module/cd3waterbalancemodules.py"]
-    Needtohaveinputsvec = ["C:/Users/Gerhard/Documents/GitHub/CD3Waterbalance/simulationwithpatterns/inputfiles/rain.ixx", "C:/Users/Gerhard/Documents/GitHub/CD3Waterbalance/simulationwithpatterns/inputfiles/evapo.ixx", "13", "20.5"]
+    Needtohaveinputsvec = ["C:/Users/Gerhard/Documents/NotGithub/simulationwithpatterns/inputfiles/rain.ixx", "C:/Users/Gerhard/Documents/GitHub/CD3Waterbalance/simulationwithpatterns/inputfiles/evapo.ixx", "13", "20.5"]
     CreateXML.WriteNodes(Catchattrvec, Greywaterattrvec, Stormwaterresattrvec, Rainwaterattrvec, Demandmodelattrvec, Greywaterresattrvec, Simulationsetupvec, Needtohaveinputsvec,Gardenwaterattrvec,Soilattrvec)
     
     #printing the Connectionlist to insert Fileouts
@@ -56,7 +56,7 @@ def XML():
 #    CreateXML.Additional_Fileouts(Fileout_Connection_Name_List) 
     
     #safe the xml file
-    CreateXML.SaveXML('C:\Users\Gerhard\Documents\GitHub\CD3Waterbalance\simulationwithpatterns\outputfiles\Garden.xml')
+    CreateXML.SaveXML('C:\Users\Gerhard\Documents\NotGithub\simulationwithpatterns\outputfiles\Garden.xml')
     
     #plot List of Collector Id's and there function
 #    for i in range(len(Global_meaning_list.collectors)):
@@ -70,11 +70,11 @@ RUNNING AND CHECKING THE XML
 
 def Simulator():
     Simulator = TheHoleLot()
-    Simulator.Deleter('C:\Users\Gerhard\Documents\GitHub\CD3Waterbalance\simulationwithpatterns\outputfiles')
-    Simulator.runcd3('C:\Program Files (x86)\CityDrain3\\bin\cd3.exe', 'C:\Users\Gerhard\Documents\GitHub\CD3Waterbalance\simulationwithpatterns\outputfiles\Garden.xml')
+    Simulator.Deleter('C:\Users\Gerhard\Documents\NotGithub\simulationwithpatterns\outputfiles')
+    Simulator.runcd3('C:\Program Files (x86)\CityDrain3\\bin\cd3.exe', 'C:\Users\Gerhard\Documents\NotGithub\simulationwithpatterns\outputfiles\Garden.xml')
 #    Simulator.Fractioncalculator(Catchattrvec)
-#    Simulator.getoutputdata('C:\Users\Gerhard\Documents\GitHub\CD3Waterbalance\simulationwithpatterns\outputfiles')
-#    Simulator.getinputdata('C:\Users\Gerhard\Documents\GitHub\CD3Waterbalance\simulationwithpatterns\inputfiles')
+#    Simulator.getoutputdata('C:\Users\Gerhard\Documents\NotGithub\simulationwithpatterns\outputfiles')
+#    Simulator.getinputdata('C:\Users\Gerhard\Documents\NotGithub\simulationwithpatterns\inputfiles')
 #    Simulator.Balance(['Greywatertanklevels', 'Greywaterreservoirlevels',  'Rainwatertanklevels', 'Stormwaterreservoirlevels','Gardenwateringstorage'], ['Evapo_Model', 'Rain_Model'], ['Actual_Infiltration', 'Potable_Water_Demand', 'Sewer', 'Stormwaterdrain'])
 #    Simulator.Plotter([20,8],[3,4], [0,3], [ 'Stormwaterdrain','Rainwatertanklevels','Greywatertanklevels', 'Greywaterreservoirlevels', 'Stormwaterreservoirlevels' ]) #, 'Rainwatertanklevels','Greywatertanklevels', 'Greywaterreservoirlevels', 'Stormwaterreservoirlevels'
     
