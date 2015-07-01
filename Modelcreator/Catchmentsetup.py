@@ -29,7 +29,7 @@ class Catchmentsetup:
             self.Catchmentattributelist[i-starting_value_i][str('Catchment_'+str(i))]["Final_Infiltration_Capacity"] = attributevector[i-starting_value_i][6]
             self.Catchmentattributelist[i-starting_value_i][str('Catchment_'+str(i))]["Depression_Loss"] = attributevector[i-starting_value_i][7]
             self.Catchmentattributelist[i-starting_value_i][str('Catchment_'+str(i))]["Wetting_Loss"] = attributevector[i-starting_value_i][8]
-            self.Catchmentattributelist[i-starting_value_i][str('Catchment_'+str(i))]["Outdoor_Demand_Weighing_Factor"] = attributevector[i-starting_value_i][9]
+            self.Catchmentattributelist[i-starting_value_i][str('Catchment_'+str(i))]["Average_Evaporationrate"] = attributevector[i-starting_value_i][9]
             self.Catchmentattributelist[i-starting_value_i][str('Catchment_'+str(i))]["Linear_Storage_Factor_Impervious_Area_to_Stormwater_Drain_K"] = attributevector[i-starting_value_i][10]
             self.Catchmentattributelist[i-starting_value_i][str('Catchment_'+str(i))]["Linear_Storage_Factor_Pervious_Area_K"] = attributevector[i-starting_value_i][11]
             self.Catchmentattributelist[i-starting_value_i][str('Catchment_'+str(i))]["Linear_Storage_Factor_Impervious_Area_to_Reservoir_K"] = attributevector[i-starting_value_i][12]
@@ -49,7 +49,7 @@ class Catchmentsetup:
             exec '''self.line11='\\t\\t\\t\\t<parameter name="Final_Infiltration_Capacity_[m/h]" type="double" value="'+str(self.Catchmentattributelist[i-starting_value_i][str('Catchment_'+str(i))]["Final_Infiltration_Capacity"])+'"/> \\n ' '''
             exec '''self.line12='\\t\\t\\t\\t<parameter name="Fraktion_of_Pervious_Area_pA_[-]" type="double" value="'+str(self.Catchmentattributelist[i-starting_value_i][str('Catchment_'+str(i))]["Fraktion_of_Pervious_Area_pA"])+'"/> \\n ' '''
             exec '''self.line13='\\t\\t\\t\\t<parameter name="Catchment_Area_[m^2]" type="double" value="'+str(self.Catchmentattributelist[i-starting_value_i][str('Catchment_'+str(i))]["Catchment_Area"])+'"/> \\n ' '''
-            exec '''self.line14='\\t\\t\\t\\t<parameter name="Outdoor_Demand_Weighing_Factor_[-]" type="double" value="'+str(self.Catchmentattributelist[i-starting_value_i][str('Catchment_'+str(i))]["Outdoor_Demand_Weighing_Factor"])+'"/> \\n ' '''
+            exec '''self.line14='\\t\\t\\t\\t<parameter name="Average_Evaporationrate_[mm/d]" type="double" value="'+str(self.Catchmentattributelist[i-starting_value_i][str('Catchment_'+str(i))]["Average_Evaporationrate"])+'"/> \\n ' '''
             exec '''self.line15='\\t\\t\\t\\t<parameter name="Catchment_with_or_without_Routing_(with_or_without)" type="string" value="'+str(self.Catchmentattributelist[i-starting_value_i][str('Catchment_'+str(i))]["Catchment_with_or_without_Routing_with_or_without"])+'"/> \\n ' '''            
             exec '''self.line16='\\t\\t\\t</node> \\n ' '''        
             

@@ -77,8 +77,8 @@ class Buildinglevel:
             string4='\t\t\t</connection>\n'
             Global_counters.number_of_connections += 1
             string5='\t\t\t<connection id="'+str(Global_counters.number_of_connections)+'">\n'
-            string6='\t\t\t\t<source node="Catchment_w_Routing_'+str(Global_counters.number_of_catchments)+'" port="Outdoor_Demand"/>\n'
-            string7='\t\t\t\t<sink node="GardenWateringModel_'+str(Global_counters.number_of_gardenwateringmodules)+'" port="Outdoor_Demand_In"/>\n'
+            string6='\t\t\t\t<source node="Catchment_w_Routing_'+str(Global_counters.number_of_catchments)+'" port="Gardensize"/>\n'
+            string7='\t\t\t\t<sink node="GardenWateringModel_'+str(Global_counters.number_of_gardenwateringmodules)+'" port="Gardensize"/>\n'
             string8='\t\t\t</connection>\n'
             Global_counters.number_of_connections += 1
             string45='\t\t\t<connection id="'+str(Global_counters.number_of_connections)+'">\n'

@@ -18,7 +18,6 @@ class Simulation_basic_setup:
     
          self.string1 = """<?xml version="1.0" encoding="UTF-8"?>
 <citydrain version="1.0">
-    <pluginpath path="nodes"/> 
     <pythonmodule module="""
          self.string2="""/>
     <pythonmodule module="""

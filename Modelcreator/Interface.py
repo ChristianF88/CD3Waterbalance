@@ -25,9 +25,9 @@ Supplyvec and Attributevecs explanation in the XML-Creator.md on Github in the d
 '''
 
 supplyvec= [[[[[[0,1],[0,1,1],1],[[1,1,1],[1,1,0],1],1],2]]]
-Catchattrvec=[[1.9,800,0.4,0.2,0.4,0.6,0.21,1.5,0.4,0.5,1000,1000,1000,'with'],[1.9,800,0.4,0.2,0.4,0.6,0.21,1.5,0.4,0.5,1000,1000,1000,'with'],[1.8,10000,0,0.5,0.5,0.6,0.21,1.5,0.4,0.5,1000,1000,1000,'with'],[1.9,800,0.4,0.2,0.4,0.6,0.21,1.5,0.4,0.5,1000,1000,1000,'with'],[1.9,800,0.4,0.2,0.4,0.6,0.21,1.5,0.4,0.5,1000,1000,1000,'with'],[1.9,800,0.4,0.2,0.4,0.6,0.21,1.5,0.4,0.5,1000,1000,1000,'with'],[1.8,10000,0,0.5,0.5,0.6,0.21,1.5,0.4,0.5,1000,1000,1000,'with']]
+Catchattrvec=[[1.9,800,0.4,0.2,0.4,0.6,0.21,1.5,0.4,1.5,1000,1000,1000,'with'],[1.9,800,0.4,0.2,0.4,0.6,0.21,1.5,0.4,1.5,1000,1000,1000,'with'],[1.8,10000,0,0.5,0.5,0.6,0.21,1.5,0.4,1.5,1000,1000,1000,'with'],[1.9,800,0.4,0.2,0.4,0.6,0.21,1.5,0.4,1.5,1000,1000,1000,'with'],[1.9,800,0.4,0.2,0.4,0.6,0.21,1.5,0.4,1.5,1000,1000,1000,'with'],[1.9,800,0.4,0.2,0.4,0.6,0.21,1.5,0.4,1.5,1000,1000,1000,'with'],[1.8,10000,0,0.5,0.5,0.6,0.21,1.5,0.4,1.5,1000,1000,1000,'with']]
 Demandmodelattrvec =[[[5,40],[5], "Simple_Model"]]*5
-Soilattrvec =[[1,0.3,0.01,0.4,0.2,totalarea(Catchattrvec),0.8,1.3]]
+Soilattrvec =[[1,0.18,0.01,0.4,2.0,totalarea(Catchattrvec),0.8,1.3,100,0.5]]
 
 def XML():
     
@@ -45,15 +45,15 @@ def XML():
     #Demandmodelattrvec = [[[10],[0], "Simple_Model"]]*Global_counters.number_of_demandmodels                      
     Gardenwaterattrvec = [[7,2,22,[18,6],"Smart_Watering"]]*Global_counters.number_of_gardenwateringmodules
     Simulationsetupvec = ["2000-Jan-01 00:00:00", "2001-Jan-01 00:00:00", "3600", "C:/Users/Gerhard/Documents/GitHub/CD3Waterbalance/Module/cd3waterbalancemodules.py"]
-    Needtohaveinputsvec = ["C:/Users/Gerhard/Documents/NotGithub/simulationwithpatterns/inputfiles/rain.ixx", "C:/Users/Gerhard/Documents/GitHub/CD3Waterbalance/simulationwithpatterns/inputfiles/evapo.ixx", "13", "20.5"]
+    Needtohaveinputsvec = ["C:/Users/Gerhard/Documents/NotGithub/simulationwithpatterns/inputfiles/rain.ixx", "C:/Users/Gerhard/Documents/NotGithub/simulationwithpatterns/inputfiles/evapo.ixx", "13", "20.5"]
     CreateXML.WriteNodes(Catchattrvec, Greywaterattrvec, Stormwaterresattrvec, Rainwaterattrvec, Demandmodelattrvec, Greywaterresattrvec, Simulationsetupvec, Needtohaveinputsvec,Gardenwaterattrvec,Soilattrvec)
     
     #printing the Connectionlist to insert Fileouts
 #    CreateXML.PrintConnections()
     
     #insert Fileouts()
-#    Fileout_Connection_Name_List = [['Inport', "Stormwaterreservoir_0", "Stormwater_In","StormwaterInflow.txt"]]
-#    CreateXML.Additional_Fileouts(Fileout_Connection_Name_List) 
+    Fileout_Connection_Name_List = [['End','Outport', "Soilstorage_0", "Check_Pore_Pressure","Porepressure.txt"]]
+    CreateXML.Additional_Fileouts(Fileout_Connection_Name_List) 
     
     #safe the xml file
     CreateXML.SaveXML('C:\Users\Gerhard\Documents\NotGithub\simulationwithpatterns\outputfiles\Garden.xml')
@@ -80,7 +80,7 @@ def Simulator():
     
     return
 
-#XML()
+XML()
 Simulator()
 
 ##Input description for Simulator!!!!!!
