@@ -185,7 +185,7 @@ class Buildinglevel:
             else:
                 self.numbers_of_buildings_connected_to_stormw.append('not connected to SWR '+str(type(self.numbers_of_greywatertanks_list[Global_counters.numbers_of_buildinglevels_created-1])))
 
-            
+
             #prepares blocknumbers for next loop-run
             Global_counters.number_of_raintanks += 1
             Global_counters.number_of_buildings += 1

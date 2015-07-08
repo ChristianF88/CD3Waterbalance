@@ -114,7 +114,7 @@ class ReservoirlevelOne:
                     self.additionaldemand_from_gw_coll_list.append(Global_counters.number_of_collectors)
                     Global_meaning_list.collectors.append(['Collector_'+str(Global_counters.number_of_collectors), 'collects Additional from Clusterlevels and gives it to Greywaterreservoir (Reslevel1): '+str(counter_1+counter_2)+' Inports'])
                     Global_counters.number_of_collectors += 1
-                    
+                
                 if Cluster.greywater_to_reservoir_coll_list[self.len_greywater_to_reservoir_coll_list_before:] == []:
                     counter_1 = 0
                 else:

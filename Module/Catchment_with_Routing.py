@@ -50,7 +50,7 @@ class Catchment_w_Routing(pycd3.Node):
 #        self.addInPort("Evapotranspiration", self.evapo)
         self.addInPort("Inflow", self.inflow)
         self.addOutPort("Possible_Infiltration", self.possible_infiltr)
-        self.addOutPort("To_Soilstorage", self.actual_infiltr)
+        self.addOutPort("Infiltration", self.actual_infiltr)
         self.addOutPort("Runoff", self.runoff)
         self.addOutPort("Collected_Water", self.collected_w)
         self.addOutPort("Gardensize", self.gardensize)
@@ -86,8 +86,8 @@ class Catchment_w_Routing(pycd3.Node):
         self.addParameter("Depression_Loss_[mm]", self.depression_loss)
         
         #default values for (scrip Prof. Krebs)
-        self.initial_loss = pycd3.Double(0.4)                                   
-        self.addParameter("Wetting_Loss_[mm]", self.initial_loss)
+        self.wetting_loss = pycd3.Double(0.4)                                   
+        self.addParameter("Wetting_Loss_[mm]", self.wetting_loss)
         
         #factor for calibrating outdoordemand
 #        self.outdoor_demand_coefficient = pycd3.Double(0.5)
@@ -211,10 +211,10 @@ class Catchment_w_Routing(pycd3.Node):
 
             #if the wetting loss and depression loss hasn't been overcome yet, there won't be any runoff from the impervious area
             #that contributes to stormwater
-            if self.rain_storage_imp - self.initial_loss - self.depression_loss <= 0.0:
+            if self.rain_storage_imp - self.wetting_loss - self.depression_loss <= 0.0:
                 
                 #if the wetting loss hasn't beem overcome there will be no flow...
-                if self.rain_storage_perv - self.initial_loss <= 0.0:
+                if self.rain_storage_perv - self.wetting_loss <= 0.0:
                 
                     self.collected_w_raw = 0.0
                     self.runoff_raw = 0.0
@@ -228,7 +228,7 @@ class Catchment_w_Routing(pycd3.Node):
                 
                     if self.possible_infiltr_raw * 1000. >= self.rain[0]:
                     
-                        self.collected_w_raw = (self.rain[0]) * self.imp_area_raintank * self.area_property / 1000.
+                        self.collected_w_raw = 0.0
                         self.actual_infiltr[0] = self.rain[0] / 1000. * self.perv_area * self.area_property
                         self.runoff_raw = 0.0
 
@@ -243,7 +243,7 @@ class Catchment_w_Routing(pycd3.Node):
 
                     
                     #saving the information that the initial wetting loss has been overcome
-                    self.rain_storage_perv = self.initial_loss + 0.000000000001
+                    self.rain_storage_perv = self.wetting_loss + 0.000000000001
             
             #once the wetting loss and depression loss has been overcome ther will be infiltration, water collection and runoff
             else:
@@ -268,8 +268,8 @@ class Catchment_w_Routing(pycd3.Node):
 
                  
                 #saving the information that the initial wetting loss and depression loss has been overcome 
-                self.rain_storage_perv = self.initial_loss + 0.000000000001
-                self.rain_storage_imp = self.initial_loss + self.depression_loss + 0.00000000000001
+                self.rain_storage_perv = self.wetting_loss + 0.000000000001
+                self.rain_storage_imp = self.wetting_loss + self.depression_loss + 0.00000000000001
         
         
         

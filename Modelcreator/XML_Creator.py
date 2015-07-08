@@ -74,7 +74,7 @@ class XML_Creator():
         Needtohaveinputs = Need_to_have_modelinput(Needtohaveinputsvec[0], Needtohaveinputsvec[1], Needtohaveinputsvec[2], Needtohaveinputsvec[3])
         Catchments = Catchmentsetup(Global_counters.number_of_catchments ,0, Decay_Constant =1.9, Catchment_Area = 100, Fraktion_of_Impervious_Area_to_Reservoir_iAR= 0.4, Fraktion_of_Impervious_Area_to_Stormwater_Drain_iASD = 0.3, Fraktion_of_Pervious_Area_pA = 0.3, Initial_Infiltration_Capacity = 0.6, Final_Infiltration_Capacity = 0.21, Depression_Loss = 1.5, Wetting_Loss = 0.4, Average_Evaporationrate = 1.4, RLinear_Storage_Factor_Impervious_Area_to_Stormwater_Drain_K = 1000, Linear_Storage_Factor_Pervious_Area_K = 1000, Linear_Storage_Factor_Impervious_Area_to_Reservoir_K = 1000, Catchment_with_or_without_Routing_with_or_without = "without")
         Catchments.Setandwrite_attributes(Global_counters.number_of_catchments,0,Catchattrvec)
-        Soilstorage = Soilstoragesetup(Global_counters.number_of_soilstorages ,0, Depth_Of_Soil = 1, Initial_Water_Content = 0.3, Residual_Water_Content = 0.01, Saturation_Water_Content = 0.4, Hydraulic_Conductivity_Saturated_Conditions = 0.2, Total_Area = 1000000, Van_Genuchten_Parameter_Alpha = 0.08, Van_Genuchten_Parameter_n = 1.3, Field_Capacity = 100, Outdoor_Demand_Actual_Evapotranspiration_Ratio = 0.8)
+        Soilstorage = Soilstoragesetup(Global_counters.number_of_soilstorages ,0, Depth_Of_Soil = 1, Initial_Water_Content = 0.3, Residual_Water_Content = 0.01, Saturation_Water_Content = 0.4, Hydraulic_Conductivity_Saturated_Conditions = 0.2, Total_Area = 1000000,Total_Pervious_Area = 400000, Van_Genuchten_Parameter_Alpha = 0.08, Van_Genuchten_Parameter_n = 1.3, Field_Capacity = 100, Outdoor_Demand_Actual_Evapotranspiration_Ratio = 0.8)
         Soilstorage.Setandwrite_attributes(Global_counters.number_of_soilstorages ,0,Soilattrvec)
         Buildings = Buildingsetup(Global_counters.number_of_buildings,0)
         Stormwaterdrain =  Stormwaterdrainsetup(Global_counters.number_of_stormwaterpipes,0)
@@ -191,7 +191,6 @@ class XML_Creator():
                     for u in range(len(self.Connectionlist)):
                         
                         searchstring = '\t\t\t<connection id="'+str(u)+'">\n\t\t\t\t<source node="'+str(Connection_Name_List[i][2])+'" port="'+str(Connection_Name_List[i][3])+'"/>\n\t\t\t\t<sink node="'+str(self.Connectionlist[u][self.Connectionlist[u].find('<sink node="')+12:self.Connectionlist[u].find('" port=',80)])+'" port="'+str(self.Connectionlist[u][self.Connectionlist[u].find('" port=',80)+8:self.Connectionlist[u].find('"/>', self.Connectionlist[u].find('" port=',80)+8)])+'"/>\n\t\t\t</connection>\n'
-                        print searchstring
                         if searchstring in self.Connectionlist[u]:
                              
                             #changing old connection

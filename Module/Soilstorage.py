@@ -55,7 +55,9 @@ class Soilstorage(pycd3.Node):
         self.addOutPort("Soilstorage_Check", self.storagecheck)
         
         self.total_area = pycd3.Double(1000)
-        self.addParameter("Total_Area_[m^2]", self.total_area)        
+        self.addParameter("Total_Area_[m^2]", self.total_area)    
+        self.total_perv_area = pycd3.Double(40.0)
+        self.addParameter("Total_Pervious_Area_[m^2]",self.total_perv_area)
         self.soildepth = pycd3.Double(1)
         self.addParameter("Depth_Of_Soil_[m]", self.soildepth)        
         self.Residualwatercontent = pycd3.Double(0.01)
@@ -121,8 +123,8 @@ class Soilstorage(pycd3.Node):
         
         #Infiltration(from Rain and Watering) - Inflow / Evapotranspiration - Outflow
         self.memory += self.Infiltration[0] #+ self.Watering[0]
-        self.memory -= self.actualevapo[0] * self.total_area
-        self.memory += self.actualevapo[0] * self.total_area * self.outdoor_demand_coefficient
+        self.memory -= self.actualevapo[0] * self.total_perv_area
+        self.memory += self.actualevapo[0] * self.total_perv_area * self.outdoor_demand_coefficient
         self.memory += self.inflow[0] 
 
         #Waterflow to lower layers
@@ -140,7 +142,7 @@ class Soilstorage(pycd3.Node):
         self.storagecheck[0] = self.memory
         self.porepressure[0] = waterpressure
         self.outdoordemand[0] = self.actualevapo[0] * self.outdoor_demand_coefficient 
-        self.outdoordemand_check[0] = self.outdoordemand[0]
+        self.outdoordemand_check[0] = self.outdoordemand[0] * self.total_perv_area
         return dt
         
     

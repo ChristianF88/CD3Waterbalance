@@ -60,18 +60,24 @@ class Clusterlevel:
                 
                 # adds catchment as a street
                 self.street_strings=[]
+                string5='\t\t\t<connection id="'+str(Global_counters.number_of_connections)+'">\n'
+                string6='\t\t\t\t<source node="Catchment_w_Routing_'+str(Global_counters.number_of_catchments)+'" port="Gardensize"/>\n'
+                string7='\t\t\t\t<sink node="GardenWateringModel_'+str(Global_counters.number_of_gardenwateringmodules)+'" port="Gardensize"/>\n'
+                string8='\t\t\t</connection>\n'
+                Global_counters.number_of_connections += 1
                 string1='\t\t\t<connection id="'+str(Global_counters.number_of_connections)+'">\n' 
                 string2='\t\t\t\t<source node="Catchment_w_Routing_'+str(Global_counters.number_of_catchments)+'" port="Runoff"/>\n' 
                 string3='\t\t\t\t<sink node="Collector_'+str(Global_counters.number_of_collectors)+'" port="Inport_1"/>\n' 
                 string4='\t\t\t</connection>\n' 
                 Global_counters.number_of_connections += 1
+                Global_counters.number_of_gardenwateringmodules += 1
                 Global_counters.number_of_catchments += 1
                 #writes all string in one and puts it in list
                 self.streetstrings = ''
                 for o in range(5)[1:]:
                     exec 'self.streetstrings += string'+str(o)
                 self.street_strings.append(self.streetstrings)
-    
+                self.street_strings.append(string5+string6+string7+string8)
                 # adds collector for runoff from catchment
                 self.runoff_coll_strings=[]
                 for m in range(len(Buildings.numbers_of_catchments_list))[self.index_numbers_of_catchments_list_before:]:
@@ -217,8 +223,14 @@ class Clusterlevel:
                     for o in range(5)[1:]:
                         exec 'self.additionaldemandstrings += string'+str(o)
                     self.additionaldemand_coll_strings.append(self.additionaldemandstrings)
+                string1='\t\t\t<connection id="'+str(Global_counters.number_of_connections)+'">\n' 
+                string2='\t\t\t\t<source node="GardenWateringModel_'+str(Global_counters.number_of_gardenwateringmodules - 1)+'" port="Outdoor_Demand_Out"/>\n' 
+                string3='\t\t\t\t<sink node="Collector_'+str(Global_counters.number_of_collectors)+'" port="Inport_'+str(counter_1+1)+'"/>\n' 
+                string4='\t\t\t</connection>\n'
+                Global_counters.number_of_connections += 1
+                self.additionaldemand_coll_strings.append(string1+string2+string3+string4)
                 #writes collector number in list that knows number of inports for later reference
-                Global_counters.number_of_collectors_ports_list.append([Global_counters.number_of_collectors, len(clusterbuildingvec[i][0])])
+                Global_counters.number_of_collectors_ports_list.append([Global_counters.number_of_collectors, len(clusterbuildingvec[i][0])+1])
                 #writes collector number in list that knows connection for later reference
                 if Buildings.numbers_of_buildings_using_gw_list[-1] == "not using gw <type 'list'>" or Buildings.numbers_of_buildings_using_gw_list[-1] == "not using gw <type 'int'>":
                     if Buildings.numbers_of_buildings_connected_to_stormw[-1] == "not connected to SWR <type 'int'>" or Buildings.numbers_of_buildings_connected_to_stormw[-1] == "not connected to SWR <type 'list'>":

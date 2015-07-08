@@ -13,21 +13,23 @@ from To_XML_Creator_modified_Simulator import TheHoleLot
 from Global_meaning_list import Global_meaning_list
 Global_counters = Global_counters.Instance()
 
-def totalarea(Catchmentattrvec):
+def Area_TotalAndPervious(Catchmentattrvec):
     total = 0
+    pervious = 0
     for i in range(len(Catchmentattrvec)):
         total += float(Catchmentattrvec[i][1])
-    return total
+        pervious += float(Catchmentattrvec[i][1])*float(Catchmentattrvec[i][4])
+    return total,pervious
 
 '''
 CREATING THE XML
 Supplyvec and Attributevecs explanation in the XML-Creator.md on Github in the doc folder 
 '''
 
-supplyvec= [[[[[[0,1],[0,1,1],1],[[1,1,1],[1,1,0],1],1],2]]]
-Catchattrvec=[[1.9,800,0.4,0.2,0.4,0.6,0.21,1.5,0.4,1.5,1000,1000,1000,'with'],[1.9,800,0.4,0.2,0.4,0.6,0.21,1.5,0.4,1.5,1000,1000,1000,'with'],[1.8,10000,0,0.5,0.5,0.6,0.21,1.5,0.4,1.5,1000,1000,1000,'with'],[1.9,800,0.4,0.2,0.4,0.6,0.21,1.5,0.4,1.5,1000,1000,1000,'with'],[1.9,800,0.4,0.2,0.4,0.6,0.21,1.5,0.4,1.5,1000,1000,1000,'with'],[1.9,800,0.4,0.2,0.4,0.6,0.21,1.5,0.4,1.5,1000,1000,1000,'with'],[1.8,10000,0,0.5,0.5,0.6,0.21,1.5,0.4,1.5,1000,1000,1000,'with']]
-Demandmodelattrvec =[[[5,40],[5], "Simple_Model"]]*5
-Soilattrvec =[[1,0.18,0.01,0.4,2.0,totalarea(Catchattrvec),0.8,1.3,100,0.5]]
+supplyvec= [[[[[[0,1],[1,1,1],20],1],2]]]
+Catchattrvec=[[1.9,8000,0.0,1.0,0.0,0.6,0.21,1.5,0.4,1.5,1000,1000,1000,'with'],[1.9,8000,0.0,1.0,0.0,0.6,0.21,1.5,0.4,1.5,1000,1000,1000,'with'],[1.8,1,0.0,1.0,0.0,0.6,0.21,1.5,0.4,1.5,1000,1000,1000,'with']]*20#,[1.9,800,0.2,0.5,0.3,0.6,0.21,1.5,0.4,1.5,1000,1000,1000,'with'],[1.9,800,0.3,0.5,0.2,0.6,0.21,1.5,0.4,1.5,1000,1000,1000,'with'],[1.9,800,0.6,0.2,0.2,0.6,0.21,1.5,0.4,1.5,1000,1000,1000,'with'],[1.8,10000,0,0.8,0.2,0.6,0.21,1.5,0.4,1.5,1000,1000,1000,'with']]
+Demandmodelattrvec =[[[5,40],[5], "Simple_Model"],[[5,40],[5], "Simple_Model"]]*20
+Soilattrvec =[[1,0.18,0.01,0.4,2.0,Area_TotalAndPervious(Catchattrvec)[0],Area_TotalAndPervious(Catchattrvec)[1],0.8,1.3,100,0.5]]
 
 def XML():
     
@@ -52,8 +54,8 @@ def XML():
 #    CreateXML.PrintConnections()
     
     #insert Fileouts()
-    Fileout_Connection_Name_List = [['End','Outport', "Soilstorage_0", "Check_Pore_Pressure","Porepressure.txt"]]
-    CreateXML.Additional_Fileouts(Fileout_Connection_Name_List) 
+#    Fileout_Connection_Name_List = [['End','Outport', "Soilstorage_0", "Check_Pore_Pressure","Porepressure.txt"],['Inbetween','Outport', "Soilstorage_0", "Outdoordemand","Outdoor_demand_to_buildings.txt"]]
+#    CreateXML.Additional_Fileouts(Fileout_Connection_Name_List) 
     
     #safe the xml file
     CreateXML.SaveXML('C:\Users\Gerhard\Documents\NotGithub\simulationwithpatterns\outputfiles\Garden.xml')
@@ -72,11 +74,11 @@ def Simulator():
     Simulator = TheHoleLot()
     Simulator.Deleter('C:\Users\Gerhard\Documents\NotGithub\simulationwithpatterns\outputfiles')
     Simulator.runcd3('C:\Program Files (x86)\CityDrain3\\bin\cd3.exe', 'C:\Users\Gerhard\Documents\NotGithub\simulationwithpatterns\outputfiles\Garden.xml')
-#    Simulator.Fractioncalculator(Catchattrvec)
-#    Simulator.getoutputdata('C:\Users\Gerhard\Documents\NotGithub\simulationwithpatterns\outputfiles')
-#    Simulator.getinputdata('C:\Users\Gerhard\Documents\NotGithub\simulationwithpatterns\inputfiles')
-#    Simulator.Balance(['Greywatertanklevels', 'Greywaterreservoirlevels',  'Rainwatertanklevels', 'Stormwaterreservoirlevels','Gardenwateringstorage'], ['Evapo_Model', 'Rain_Model'], ['Actual_Infiltration', 'Potable_Water_Demand', 'Sewer', 'Stormwaterdrain'])
-#    Simulator.Plotter([20,8],[3,4], [0,3], [ 'Stormwaterdrain','Rainwatertanklevels','Greywatertanklevels', 'Greywaterreservoirlevels', 'Stormwaterreservoirlevels' ]) #, 'Rainwatertanklevels','Greywatertanklevels', 'Greywaterreservoirlevels', 'Stormwaterreservoirlevels'
+    Simulator.Fractioncalculator(Catchattrvec)
+    Simulator.getoutputdata('C:\Users\Gerhard\Documents\NotGithub\simulationwithpatterns\outputfiles')
+    Simulator.getinputdata('C:\Users\Gerhard\Documents\NotGithub\simulationwithpatterns\inputfiles')
+    Simulator.Balance(['Greywatertanklevels', 'Greywaterreservoirlevels',  'Rainwatertanklevels', 'Stormwaterreservoirlevels','Gardenwateringstorage'], ['Evapo_Model', 'Rain_Model'], ['Infiltration', 'Potable_Water_Demand', 'Sewer', 'Stormwaterdrain'])
+    Simulator.Plotter([20,8],[3,4], [0,3], [ 'Stormwaterdrain'])#,'Rainwatertanklevels','Greywatertanklevels', 'Greywaterreservoirlevels', 'Stormwaterreservoirlevels' ]) #, 'Rainwatertanklevels','Greywatertanklevels', 'Greywaterreservoirlevels', 'Stormwaterreservoirlevels'
     
     return
 

@@ -57,12 +57,15 @@ class TheHoleLot:
             area_fractions1_0 = 0.0
             area_fractions1_1 = 0.0
             area_fractions1_2 = 0.0
+            self.drying_rate = 0.0
             for i in range(len(self.Fractioncalculatorvec)):
                 self.total_area += float(self.Fractioncalculatorvec[i][0])
                 area_fractions1_0 += float(self.Fractioncalculatorvec[i][0]*self.Fractioncalculatorvec[i][1])
                 area_fractions1_1 += float(self.Fractioncalculatorvec[i][0]*self.Fractioncalculatorvec[i][2])
                 area_fractions1_2 += float(self.Fractioncalculatorvec[i][0]*self.Fractioncalculatorvec[i][3])
-                
+                self.drying_rate += Catchmentattributevector[i][9]
+            
+            self.drying_rate = self.drying_rate/(i+1)
             self.area_fractions1=[area_fractions1_0/self.total_area, area_fractions1_1/self.total_area, area_fractions1_2/self.total_area]
             
             return    
@@ -157,7 +160,7 @@ class TheHoleLot:
         #Data=[Rainevapovector, Outputvector]
         Data = [self.Rainevapovector, self.Outputvector]
         colorred = "\033[01;31m{0}\033[00m"
-    
+        
         #evapotranspiration check
         #evap is the ixx files name thats the file readers input, Evapo_Model is the name specified in the XML Creator (Output Pattern Implementer)
         evapomodel = 0.0
@@ -206,7 +209,7 @@ class TheHoleLot:
                     inputER.append(Data[i][:,n])
                 elif Data[i][0][n] in outputISSPlist:
                     outputISSP.append(Data[i][:,n])
-                if str(repr(Data[i][0][n])[1:15]) == 'Outdoor_Demand':
+                if str(repr(Data[i][0][n])[1:14]) == 'Outdoordemand':
                     outputOD.append(Data[i][:,n])
             
         totalstoragescalar = 0.0
@@ -214,7 +217,8 @@ class TheHoleLot:
         SewerStormwInfiltr = 0.0
         PWRonly = 0.0
         OutdoorD = 0.0
-         
+        
+        
         #Speicher
         for i in range(len(totalstorage)):
             
@@ -229,57 +233,50 @@ class TheHoleLot:
                     PWRonly += float(outputISSP[i][n])
             else:
                 for n in range(len(outputISSP[0]))[1:]:
-                    SewerStormwInfiltr -= float(outputISSP[i][n])
+                    SewerStormwInfiltr += float(outputISSP[i][n])
         #OutdoorDemand
         for i in range(len(outputOD)):
             for n in range(len(outputOD[0]))[1:]:
                 OutdoorD += float(outputOD[i][n])
+            
         #Rain and Evapo inlcuding losses
         lossstorage_perv_impervreservoir = 0.0
         lossstorage_imperstormw = 0.0
         onlyrain=0.0
-        onlyevapo=0.0
-        rainminusevapo = 0.0
-        global effective_rain
-        effective_rain = ['effective_rain']
+        timestepl = round((float(Data[1][2][0])-float(Data[1][1][0]))*24*3600)
+        print timestepl
         for i in range(len(inputER[0]))[1:]:
-            if float(inputER[1][i]) > float(inputER[0][i]):
-                lossstorage_perv_impervreservoir += (float(inputER[1][i]) - float(inputER[0][i]))/self.total_area*1000
-                lossstorage_imperstormw += (float(inputER[1][i]) - float(inputER[0][i]))/self.total_area*1000
+            lossstorage_perv_impervreservoir += (float(inputER[1][i]))/self.total_area*1000
+            lossstorage_imperstormw += (float(inputER[1][i]))/self.total_area*1000
+            if float(inputER[1][i]) > 0.0:
                 if lossstorage_perv_impervreservoir > self.wettingloss:
-                    rainminusevapolosses += (float(inputER[1][i])-float(inputER[0][i]))*(self.area_fractions1[0]+self.area_fractions1[1])
-                    foreffectiverain1 = (float(inputER[1][i])-float(inputER[0][i]))*(self.area_fractions1[0]+self.area_fractions1[1])
+                    rainminusevapolosses += (float(inputER[1][i]))*(self.area_fractions1[0])
                     lossstorage_perv_impervreservoir = self.wettingloss
                 else:
-                    foreffectiverain1=0.0
+                    pass
                     
                 if lossstorage_imperstormw > self.depressionloss + self.wettingloss:
-                    rainminusevapolosses += (float(inputER[1][i])-float(inputER[0][i]))*self.area_fractions1[2]
-                    foreffectiverain2 = (float(inputER[1][i])-float(inputER[0][i]))*self.area_fractions1[2]
+                    rainminusevapolosses += (float(inputER[1][i]))*(self.area_fractions1[2]+self.area_fractions1[1])
                     lossstorage_imperstormw = self.depressionloss + self.wettingloss
                 else:
-                    foreffectiverain2=0.0
+                    pass
                     
-                #writing the effective rain height in a vector    
-                effective_rain.append(foreffectiverain1+foreffectiverain2)
                     
             else:
                     
-                #writing the effective rain height in a vector
-                effective_rain.append(0.0)
                 #simulation drying via evapotranspiration
-                if lossstorage_perv_impervreservoir > 0:
-                    lossstorage_perv_impervreservoir += (float(inputER[1][i]) - float(inputER[0][i]))/self.total_area*1000
-                    if lossstorage_perv_impervreservoir < 0:
+                if lossstorage_perv_impervreservoir > 0.0:
+                    lossstorage_perv_impervreservoir -= (float(self.drying_rate))*timestepl/24/3600
+                    if lossstorage_perv_impervreservoir < 0.0:
                         lossstorage_perv_impervreservoir = 0.0
                     else:
                         pass
                 else:
                     lossstorage_perv_impervreservoir =  0.0
                     
-                if lossstorage_imperstormw > 0:
-                    lossstorage_imperstormw += (float(inputER[1][i]) - float(inputER[0][i]))/self.total_area*1000
-                    if lossstorage_imperstormw < 0:
+                if lossstorage_imperstormw > 0.0:
+                    lossstorage_imperstormw -= (float(self.drying_rate))*timestepl/24/3600
+                    if lossstorage_imperstormw < 0.0:
                         lossstorage_imperstormw = 0.0
                     else:
                         pass
@@ -287,26 +284,22 @@ class TheHoleLot:
                     lossstorage_imperstormw =  0.0
            
             onlyrain += float(inputER[1][i])
-            if float(inputER[1][i]) >= float(inputER[0][i]):
-                onlyevapo += float(inputER[0][i])
-                rainminusevapo += (float(inputER[1][i])-float(inputER[0][i]))
-            else:
-                onlyevapo += float(inputER[1][i])
+        
         print 'Fraction of Pervious Area: '+str(self.area_fractions1[0])
         print 'Fraction of Impervious Area to Reservoir: '+str(self.area_fractions1[1])
         print 'Fraction of Impervious Area to Stormdrain: '+str(self.area_fractions1[2])
         print 'Wetting Loss: '+str( self.wettingloss)+' mm'
         print 'Depression Loss: '+str(self.depressionloss)+' mm'
-        print 'Total Rain: '+str(onlyrain) + ' = '+str(onlyevapo+rainminusevapo)+' m^3'
-        print 'Evaporated Rain: '+str(onlyevapo)+' m^3'
-        print 'Inital Losses only: '+str(rainminusevapo-rainminusevapolosses)+' m^3'
+        print 'Drying Rate: '+str(self.drying_rate)+' mm/d'
+        print 'Total Rain: '+str(onlyrain) + ' m^3'
+        print 'Inital Losses only: '+str(onlyrain-rainminusevapolosses)+' m^3'
         print 'Potable_Water_Demand: '+str(PWRonly)+' m^3'
-        print 'Outdoor_Demand: '+str(OutdoorD)+' m^3'
+        print 'Outdoordemand: '+str(OutdoorD)+' m^3'
         print 'Rain minus all Losses: '+str(rainminusevapolosses)+' m^3'
-        print 'SewerStormwInfiltr: '+str(-1*SewerStormwInfiltr)+' m^3'
+        print 'SewerStormwInfiltr: '+str(SewerStormwInfiltr)+' m^3'
         print 'Still stored in tanks: ' +str(totalstoragescalar)+' m^3 -> negativ values are caused by the garden watering module'
-        print 'Absolut Error of entire balance: '+str(PWRonly-OutdoorD-totalstoragescalar+rainminusevapolosses+SewerStormwInfiltr)+' m^3'
-        print 'Realtive Error of entire balance: '+str(100*(PWRonly-OutdoorD+rainminusevapolosses+SewerStormwInfiltr-totalstoragescalar)*2/(PWRonly+totalstoragescalar+OutdoorD+onlyrain+onlyevapo+(rainminusevapo-rainminusevapolosses)-SewerStormwInfiltr))+' %'
+        print 'Absolut Error of entire balance: '+str(PWRonly-OutdoorD-totalstoragescalar+rainminusevapolosses-SewerStormwInfiltr)+' m^3'
+        print 'Realtive Error of entire balance: '+str(100*(PWRonly-OutdoorD-totalstoragescalar+rainminusevapolosses-SewerStormwInfiltr)*2/(PWRonly+OutdoorD+totalstoragescalar+rainminusevapolosses+SewerStormwInfiltr))+' %'
         print"______________________________________________________________________________________________________"
         
         return 
@@ -314,7 +307,7 @@ class TheHoleLot:
     
     
     #Possible Input: Outdoor_Demand, Indoor_Demand, all (plots everthing), all filenames (without endings)
-    def Plotter(self,size=[12,10],limx=[0,365], limy=[0,1], toplot=['Rain_Model', 'Stormwaterdrain', 'Evapo_Model', 'effective_rain','Indoor_Demand','Outdoor_Demand'] ):
+    def Plotter(self,size=[12,10],limx=[0,365], limy=[0,1], toplot=['Rain_Model', 'Stormwaterdrain', 'Evapo_Model', 'effective_rain','Indoor_Demand','Outdoordemand'] ):
         self.listtoplot = []
         Vector1 = self.Rainevapovector
         Vector2 = self.Outputvector
@@ -328,7 +321,7 @@ class TheHoleLot:
                 for n in range(len(Vector2[0])):
                     if toplot[i]==Vector2[0][n]:
                         self.listtoplot.append([Vector2[:,0], Vector2[:,n]])                        
-            elif toplot[i] == 'Outdoor_Demand':
+            elif toplot[i] == 'Outdoordemand':
                 allheaders=Vector1.tolist()[0]+Vector2.tolist()[0]
                 for n in range(len(allheaders)):
                     if toplot[i]==repr(allheaders[n])[1:15]:
@@ -342,11 +335,11 @@ class TheHoleLot:
                 exec 'variable=Vector'+str(a)
                 storageOD=asarray([0.0 for m in range(len(variable))])
                 for i in range(len(variable[0])):
-                    if repr(variable[0][i])[1:15] == 'Outdoor_Demand':
+                    if repr(variable[0][i])[1:14] == 'Outdoordemand':
                         for n in range(len(variable))[1:]:
                             storageOD[n] += float(variable[n][i])
                 storageOD=storageOD.tolist()
-                storageOD[0]='Outdoor_Demand'
+                storageOD[0]='Outdoordemand'
                 self.listtoplot.append([variable[:,0], storageOD])
                 
                 #while time inbetween 2 days sum up and append
