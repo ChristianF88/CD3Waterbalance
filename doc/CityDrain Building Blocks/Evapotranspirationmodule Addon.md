@@ -1,8 +1,8 @@
-# Pattern Implementer Addon
+# Evapotranspirationmodule Addon
 
 Basic features:
 
- - uses Normal Distribution to create a more realistic Evapotranspiration Pattern from daily values 
+ - uses the constant input data normal distribution to create a more realistic potential evapotranspiration pattern from daily values 
 
  
 <br>

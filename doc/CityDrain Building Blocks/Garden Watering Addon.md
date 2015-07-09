@@ -2,7 +2,7 @@
 
 Basic features:
 
- - collects the by the [Catchment Addon](https://github.com/ChristianF88/CD3Waterbalance/blob/master/doc/CityDrain%20Building%20Blocks/Catchment%20Addon.md) generated outdoor demands and creates events where the water is being used
+ - collects the by the [Soilstorage Addon](https://github.com/ChristianF88/CD3Waterbalance/blob/master/doc/CityDrain%20Building%20Blocks/Catchment%20Addon.md) generated outdoor demands and creates events where the water is being used
  - different watering behaviours can be selected
  - a maximal flow rate for the watering events can be specified
  - creates a more realistic watering behaviour by using a normal distribution 
@@ -14,6 +14,7 @@ Basic features:
 | Input  | Type  |  Unit  |
 | :------------ |:---------------:| :-----:|	
 | Outdoor Demand In     | Time Series | [m³/dt] |
+| Gardensize     | Constant | [m²] |
 | 	Watering Method | String  |   'Normal Watering' _or_ 'Smart Watering' |
 | Smart Watering Time     | Vector(String) | [hh,hh] |
 | 	Maximal Watering Flow Rate | Constant  |   [L/min] |
