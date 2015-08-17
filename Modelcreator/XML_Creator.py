@@ -94,7 +94,7 @@ class XML_Creator():
         Distributors.Setandwrite_attributes(Global_counters.number_of_distributors,0,Distributorattrvec)
         Demandmodels = Demandmodelsetup(Global_counters.number_of_demandmodels,0,Commercial_Units = [4], Residential_Units=[4], Select_Model_Simple_Model_or_Complex_Model = "Simple_Model" )
         Demandmodels.Setandwrite_attributes(Global_counters.number_of_demandmodels,0,Demandmodelattrvec)
-        Gardenwat = Gardenwateringsetup(Global_counters.number_of_gardenwateringmodules,0,Average_Watering_Frequency=7, Deviation_of_Frequency=2, Maximal_Watering_Flow_Rate=22, Smart_Watering_Start_Time_End_Time =[18,6], Watering_Method_Normal_Watering_or_Smart_Watering = "Normal_Watering")
+        Gardenwat = Gardenwateringsetup(Global_counters.number_of_gardenwateringmodules,0,Switch = "Off",Average_Watering_Frequency=7, Deviation_of_Frequency=2, Maximal_Watering_Flow_Rate=22, Smart_Watering_Start_Time_End_Time =[18,6], Watering_Method_Normal_Watering_or_Smart_Watering = "Normal_Watering")
         Gardenwat.Setandwrite_attributes(Global_counters.number_of_gardenwateringmodules,0,Gardenwaterattrvec)
         Greywaterreservoir = Greywaterreservoirsetup(Global_counters.number_of_greywaterreservoirs,0,Yield_of_Treatment = 0.9, Storage_Volume = 15.0)
         Greywaterreservoir.Setandwrite_attributes(Global_counters.number_of_greywaterreservoirs,0,Greywaterresattrvec)

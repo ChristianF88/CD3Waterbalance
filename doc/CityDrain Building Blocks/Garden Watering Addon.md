@@ -14,12 +14,13 @@ Basic features:
 | Input  | Type  |  Unit  |
 | :------------ |:---------------:| :-----:|	
 | Outdoor Demand In     | Time Series | [m³/dt] |
-| Gardensize     | Constant | [m²] |
+| Gardensize     | Time Series (Constant) | [m²] |
 | 	Watering Method | String  |   'Normal Watering' _or_ 'Smart Watering' |
 | Smart Watering Time     | Vector(String) | [hh,hh] |
 | 	Maximal Watering Flow Rate | Constant  |   [L/min] |
 | Average Watering Frequency      | Constant | [d] |
 | Deviation of Frequency      | Constant | [d] |
+| 	Switch | String  |   'On' _or_ 'Off' |
 
 # 
 

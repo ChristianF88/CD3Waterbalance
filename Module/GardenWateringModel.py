@@ -48,6 +48,8 @@ class GardenWateringModel(pycd3.Node):
         self.tap_flow_rate = pycd3.Double(18)
         self.smart_watering_time = pycd3.String("[18,6]")
         self.watering_method = pycd3.String('Smart_Watering')
+        self.onoff = pycd3.String("Off")
+        
         
         self.addInPort("Gardensize", self.gardensize)
         self.addInPort("Outdoor_Demand_In", self.inport)   
@@ -58,50 +60,30 @@ class GardenWateringModel(pycd3.Node):
         self.addParameter("Maximal_Watering_Flow_Rate_[l/min]", self.tap_flow_rate)
         self.addParameter("Average_Watering_Frequency_[d]", self.average)   
         self.addParameter("Deviation_of_Frequency_[d]", self.deviation)
+        self.addParameter("Switch_(On_or_Off)", self.onoff)
         
         '''
         self.smart_watering_time: 0h not valid, has got to 24 h, start time smaller 24!
         '''
+        print '\n'+self.onoff
 #        print "init node"
         
     def init(self, start, stop, dt):
 #        print start
 #        print stop
 #        print dt
-        
-        #converting inputstrings to lists
-        self.smart_watering_time = str(self.smart_watering_time)[1:-1].split(',')
-        for i in range(len(self.smart_watering_time)):
-            self.smart_watering_time[i] = float(self.smart_watering_time[i])/24.
-        
-        self.DemandStorage = 0.0
-        self.average_watering_frequency_building = abs(random.gauss(self.average, self.deviation))
-        self.to_add = self.average_watering_frequency_building
-        self.average_watering_frequency_building =self.average_watering_frequency_building - random.randrange(ceil(self.average_watering_frequency_building))
-        
-        if self.watering_method == "Smart_Watering":
-            self.decimals = self.average_watering_frequency_building-floor(self.average_watering_frequency_building)
-            if self.decimals > self.smart_watering_time[0] or self.decimals < self.smart_watering_time[1] :
-                pass
-            else:
-                self.average_watering_frequency_building = floor(self.average_watering_frequency_building) + random.gauss(self.smart_watering_time[0], 1/24.)
-        elif self.watering_method == "Normal_Watering":
-            pass
-        else:
-            print "Non valid Watering Method!"        
-        
-        self.time = date2num(datetime.strptime(str(start.to_datetime()),"%Y-%m-%d %H:%M:%S")) - floor(date2num(datetime.strptime(str(start.to_datetime()),"%Y-%m-%d %H:%M:%S")))
-        self.watering_volume_per_dt = self.tap_flow_rate/1000/60*dt 
-        self.switch = 0
-        
-        return True
-        
-    def f(self, current, dt):
-        
-        self.DemandStorage += self.inport[0]*self.gardensize[0]
-        
-        if self.time >= self.average_watering_frequency_building:
-            self.average_watering_frequency_building += self.to_add
+        print '/n'+self.onoff
+        if self.onoff == "On":
+            #converting inputstrings to lists
+            self.smart_watering_time = str(self.smart_watering_time)[1:-1].split(',')
+            for i in range(len(self.smart_watering_time)):
+                self.smart_watering_time[i] = float(self.smart_watering_time[i])/24.
+            
+            self.DemandStorage = 0.0
+            self.average_watering_frequency_building = abs(random.gauss(self.average, self.deviation))
+            self.to_add = self.average_watering_frequency_building
+            self.average_watering_frequency_building =self.average_watering_frequency_building - random.randrange(ceil(self.average_watering_frequency_building))
+            
             if self.watering_method == "Smart_Watering":
                 self.decimals = self.average_watering_frequency_building-floor(self.average_watering_frequency_building)
                 if self.decimals > self.smart_watering_time[0] or self.decimals < self.smart_watering_time[1] :
@@ -111,30 +93,64 @@ class GardenWateringModel(pycd3.Node):
             elif self.watering_method == "Normal_Watering":
                 pass
             else:
-                print "Non valid Watering Method!"
-            self.switch = 1
-        else:
+                print "Non valid Watering Method!"        
+            
+            self.time = date2num(datetime.strptime(str(start.to_datetime()),"%Y-%m-%d %H:%M:%S")) - floor(date2num(datetime.strptime(str(start.to_datetime()),"%Y-%m-%d %H:%M:%S")))
+            self.watering_volume_per_dt = self.tap_flow_rate/1000/60*dt 
+            self.switch = 0
+        elif self.onoff == "Off":
             pass
-
-        if self.switch == 1:
-            if self.DemandStorage > self.watering_volume_per_dt:
-                self.DemandStorage -= self.watering_volume_per_dt
-                self.watering = self.watering_volume_per_dt
-            elif self.DemandStorage == self.watering_volume_per_dt:
-                self.DemandStorage -= self.watering_volume_per_dt
-                self.watering = self.watering_volume_per_dt
-                self.switch = 0
-            else:
-                self.watering = self.DemandStorage
-                self.DemandStorage = 0
-                self.switch = 0
         else:
-            self.watering = 0.0
-
-        self.outport[0] = self.watering
-        self.currentOutdoorDemand[0]= self.DemandStorage
-        self.time += dt/3600./24.
+            print 'Wrong Input in Gardenwateringmodule!!'
+            
+        return True
         
+    def f(self, current, dt):
+        if self.onoff == "On":
+            self.DemandStorage += self.inport[0]*self.gardensize[0]
+            
+            if self.time >= self.average_watering_frequency_building:
+                self.average_watering_frequency_building += self.to_add
+                if self.watering_method == "Smart_Watering":
+                    self.decimals = self.average_watering_frequency_building-floor(self.average_watering_frequency_building)
+                    if self.decimals > self.smart_watering_time[0] or self.decimals < self.smart_watering_time[1] :
+                        pass
+                    else:
+                        self.average_watering_frequency_building = floor(self.average_watering_frequency_building) + random.gauss(self.smart_watering_time[0], 1/24.)
+                elif self.watering_method == "Normal_Watering":
+                    pass
+                else:
+                    print "Non valid Watering Method!"
+                self.switch = 1
+            else:
+                pass
+    
+            if self.switch == 1:
+                if self.DemandStorage > self.watering_volume_per_dt:
+                    self.DemandStorage -= self.watering_volume_per_dt
+                    self.watering = self.watering_volume_per_dt
+                elif self.DemandStorage == self.watering_volume_per_dt:
+                    self.DemandStorage -= self.watering_volume_per_dt
+                    self.watering = self.watering_volume_per_dt
+                    self.switch = 0
+                else:
+                    self.watering = self.DemandStorage
+                    self.DemandStorage = 0
+                    self.switch = 0
+            else:
+                self.watering = 0.0
+    
+            self.outport[0] = self.watering
+            self.currentOutdoorDemand[0]= self.DemandStorage
+            self.time += dt/3600./24.
+            
+        elif self.onoff == "Off":
+            self.outport[0] = self.inport[0]*self.gardensize[0]
+            
+            self.currentOutdoorDemand[0] = self.outport[0]
+        else:
+            print 'Wrong Input in Gardenwateringmodule!!'
+            
         return dt
     
     def getClassName(self):

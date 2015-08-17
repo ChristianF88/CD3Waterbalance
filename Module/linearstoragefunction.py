@@ -13,7 +13,6 @@ t1=time.time()
 area = 1.
 dt = 1.
 K = 1.
-limit =0.0001
 #helpvec1 = numpy.random.rand(1,10000)[0]
 #helpvec2 = numpy.random.randint(2, size=10000)
 #rainvec = list(helpvec1*helpvec2)
@@ -24,7 +23,7 @@ dtlist=[]
 cut=0
 num=0
 flow=0
-def linearstorage(i,dt,K,area,limit,dtlist,rainvec):
+def linearstorage(i,dt,K,area,dtlist,rainvec):
     global num
     Qtlist=map(lambda x,y : (x*area/dt)*(numpy.exp((2*dt-y)/K)-numpy.exp(-y+dt/K)), rainvec[0:i+1], dtlist[0:i+1])
     global flow
@@ -34,7 +33,7 @@ def linearstorage(i,dt,K,area,limit,dtlist,rainvec):
 
 for i in range(len(rainvec)):
     dtlist.insert(0,i)
-    linearstorage(i,dt,K,area,limit,dtlist,rainvec)
+    linearstorage(i,dt,K,area,dtlist,rainvec)
     flowlist.append(flow)
 
 
@@ -44,15 +43,14 @@ t2=time.time()
 Qbefore = [0,0,0]
 def newway(i,dt,k,N,A):
     global Qbefore
-    print Qbefore
+
     Q = (Qbefore[i]+A/dt*N*(numpy.exp(dt/k)-1))*numpy.exp(-dt/k)
     Qbefore[i] = Q
     return Q , Qbefore[i]
     
 flowvector = []
 for i in range(len(rainvec)):
-    print type(newway(0,dt,K,rainvec[i],area)[0])
-    flowvector.append(newway(0,dt,K,rainvec[i],area))
+    flowvector.append(newway(0,dt,K,rainvec[i],area)[0])
 t3=time.time()
 
 
