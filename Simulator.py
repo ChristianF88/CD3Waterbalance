@@ -180,7 +180,7 @@ def Bilanz(Data, tocheck, wettingloss = 0.4, depressionloss=1.5, totalarea = tot
             evapoinput = 0.0
             for i in range(len(Data)):
                 for n in range(len(Data[i][0])):
-                    if Data[i][0][n] == 'evapo':
+                    if Data[i][0][n] == 'evap':
                         for m in range(len(Data[i][:,n]))[1:]:
                             evapoinput += float(Data[i][:,n][m])
                     elif Data[i][0][n] == 'evapo_model':

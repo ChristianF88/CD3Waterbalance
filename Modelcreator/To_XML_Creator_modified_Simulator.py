@@ -167,11 +167,11 @@ class TheHoleLot:
         evapoinput = 0.0
         for i in range(len(Data)):
             for n in range(len(Data[i][0])):
-                if Data[i][0][n] == 'evapo':
+                if Data[i][0][n] == 'evap':
                     for m in range(len(Data[i][:,n]))[1:]:
                         evapoinput += float(Data[i][:,n][m])
                 elif Data[i][0][n] == 'Evapo_Model':
-                    for m in range(len(Data[i][:,n]))[1:]:            
+                    for m in range(len(Data[i][:,n]))[1:]:
                         evapomodel += float(Data[i][:,n][m])
         ErrorFRPI=(1 - evapomodel/evapoinput) * 100
         print 'The difference of given and produced Evapotranspiraten calculated by the Pattern Implementer and Filereader due to rounding errors is '+ colorred.format(str(ErrorFRPI))+' %'

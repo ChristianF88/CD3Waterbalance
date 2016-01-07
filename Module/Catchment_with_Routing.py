@@ -272,10 +272,6 @@ class Catchment_w_Routing(pycd3.Node):
                 self.rain_storage_imp = self.wetting_loss + self.depression_loss + 0.00000000000001
         
         
-        
-        
-        
-        
         # returning the possible inflitration [m³/dt]
         self.possible_infiltr[0]=self.possible_infiltr_raw*self.area_property*self.perv_area
         
@@ -285,11 +281,19 @@ class Catchment_w_Routing(pycd3.Node):
             #preparing the flow array 
             def linearstorage(i,k,N_times_A): 
                 Q = (self.Qbefore[i]+N_times_A*(numpy.exp(dt/k)-1))*numpy.exp(-dt/k)
+                if Q <= 10**-15:
+                    Q = 0.0
+                else:
+                    pass
                 self.Qbefore[i] = Q
                 return Q , self.Qbefore[i]
 
-            self.collected_w[0] = linearstorage(0,self.linearstorage_imperv_res_K,self.collected_w_raw)[0]        
+            self.collected_w[0] = linearstorage(0,self.linearstorage_imperv_res_K,self.collected_w_raw)[0]      
             self.runoff[0] = linearstorage(1,self.linearstorage_imperv_storm_K,self.runoff_raw)[0] + linearstorage(2,self.linearstorage_perv_K,self.runoff_perv_raw)[0]
+            
+#            print 'coll :' + str(linearstorage(0,self.linearstorage_imperv_res_K,self.collected_w_raw)[0])
+#            print 'runoff 1 :' + str(linearstorage(1,self.linearstorage_imperv_storm_K,self.runoff_raw)[0])
+#            print 'runoff 2 :' + str(linearstorage(2,self.linearstorage_perv_K,self.runoff_perv_raw)[0])
 
         elif self.select_model == "without":
             

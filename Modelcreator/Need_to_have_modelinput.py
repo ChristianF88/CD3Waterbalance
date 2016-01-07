@@ -17,12 +17,10 @@ class Need_to_have_modelinput:
          self.string1="""           <node id="File_Reader_0" class="File_Reader">
                 <parameter name="" type="string" value="""
          self.string2="""/>
-                <parameter name="Type_H_for_height_[mm]_or_F_for_flow_[l/h]" type="string" value="H"/>
             </node>
             <node id="File_Reader_1" class="File_Reader">
                 <parameter name="" type="string" value="""
          self.string3="""/>
-                <parameter name="Type_H_for_height_[mm]_or_F_for_flow_[l/h]" type="string" value="H"/>
             </node>
             <node id="Evapotranspirationmodule_0" class="Evapotranspirationmodule">
                 <parameter name="Sun_Zenith_[0-23h]" type="double" value="""

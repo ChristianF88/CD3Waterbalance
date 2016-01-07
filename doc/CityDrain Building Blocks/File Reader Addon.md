@@ -13,7 +13,6 @@ Basic features:
 | Input  | Type  |  Unit  |
 | :------------ |:---------------:| :-----:|	
 | File      | Time Series (File) | [DD.MM.YYYY HH:MM:SS value(see below)] |
-| 	Filecontent | Letter  |  "H" for Height [ _any_ ] or "F" for Flow [ _any_ ] |
 
 # 
 
@@ -25,37 +24,11 @@ Basic features:
 
 ## Description 
 
-This file reader is able to adjust the files time step automatically to any needed for the simulation. Just select a file and set the models simulation time step as desired. The files time step length ought to be constant throughout the entire time span of simulation. By reference to the file, the set time step can either be larger, smaller or the same. Different time scales result in the necessity to calculate the corresponding values for each new point in time. The algorithms needed for the calculation of time related values (flow) differ from those needed for over time summed up values (height).
+This file reader is able to adjust the files time step automatically to any needed for the simulation. Just select a file and set the models simulation time step as desired. The files time step length ought to be constant throughout the entire time span of simulation. By reference to the file, the set time step can either be larger, smaller or the same. Different time scales result in the necessity to calculate the corresponding values for each new point in time. 
 
 <br>
 
-### Flow
 
-Linear interpolation was used to calculate the new values.
-
-# 
-
-Used formulas:
-
->![alt text](https://raw.githubusercontent.com/ChristianF88/CD3Waterbalance/master/doc/Formulas/file_reader_lin_interpolation_intervall.png?raw=true) 
-
->![alt text](https://raw.githubusercontent.com/ChristianF88/CD3Waterbalance/master/doc/Formulas/file_reader_lin_interpolation.png?raw=true) 
-
->![alt text](https://raw.githubusercontent.com/ChristianF88/CD3Waterbalance/master/doc/Formulas/file_reader_i.png?raw=true) ... time index [-] 
-
->![alt text](https://raw.githubusercontent.com/ChristianF88/CD3Waterbalance/master/doc/Formulas/file_reader_j.png?raw=true) ... time index [-] 
-
->![alt text](https://raw.githubusercontent.com/ChristianF88/CD3Waterbalance/master/doc/Formulas/file_reader_tf.png?raw=true) ... time from file [DD.MM.YYYY HH:MM:SS]
-
->![alt text](https://raw.githubusercontent.com/ChristianF88/CD3Waterbalance/master/doc/Formulas/file_reader_ts.png?raw=true) ... time from simulation [DD.MM.YYYY HH:MM:SS]
-
->![alt text](https://raw.githubusercontent.com/ChristianF88/CD3Waterbalance/master/doc/Formulas/file_reader_v_old.png?raw=true) ... value from file [l/h]
-
->![alt text](https://raw.githubusercontent.com/ChristianF88/CD3Waterbalance/master/doc/Formulas/file_reader_v_new.png?raw=true) ... value for simulation [l/h] 
-
-<br>
-
-### Height
 
 For the simulation time step being larger than the files, the heights between 2 time steps are being summed up. The other way around the height will be divided by a factor consisting of the time steps relation to one another.
 
@@ -119,6 +92,6 @@ Used formulas for
 
 <br>
 
-## Recommended Improvements
 
--	improve the flow calculations for large timesteps
+
+
