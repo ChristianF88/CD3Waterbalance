@@ -57,7 +57,7 @@ Used formulas for
 
 >![alt text](https://raw.githubusercontent.com/ChristianF88/CD3Waterbalance/master/doc/Formulas/file_reader_tf.png?raw=true) ... time from file [DD.MM.YYYY HH:MM:SS]
 
->![alt text](https://raw.githubusercontent.com/ChristianF88/CD3Waterbalance/master/doc/Formulas/file_reader_ts.png?raw=true) ... time from file [DD.MM.YYYY HH:MM:SS]
+>![alt text](https://raw.githubusercontent.com/ChristianF88/CD3Waterbalance/master/doc/Formulas/file_reader_ts.png?raw=true) ... time from simulation [DD.MM.YYYY HH:MM:SS]
 
 >![alt text](https://raw.githubusercontent.com/ChristianF88/CD3Waterbalance/master/doc/Formulas/file_reader_v_old.png?raw=true) ... value from file [mm]
 

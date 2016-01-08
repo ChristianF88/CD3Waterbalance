@@ -52,7 +52,7 @@ def XML():
     Rainwaterattrvec = Inputvectors[4]#[[5]]*(Global_counters.number_of_raintanks)
     #Demandmodelattrvec = [[[10],[0], "Simple_Model"]]*Global_counters.number_of_demandmodels                      
     Gardenwaterattrvec = [["Off",7,2,22,[18,6],"Smart_Watering"]]*Global_counters.number_of_gardenwateringmodules
-    Simulationsetupvec = ["2011-Feb-25 00:00:00", "2011-Dec-15 00:00:00", "3600", "C:/Users/Gerhard/Documents/GitHub/CD3Waterbalance/Module/cd3waterbalancemodules.py"]
+    Simulationsetupvec = ["2011-Apr-10 00:00:00", "2011-Apr-15 00:00:00", "360", "C:/Users/Gerhard/Documents/GitHub/CD3Waterbalance/Module/cd3waterbalancemodules.py"]
     Needtohaveinputsvec = ["D:/studium/Masterarbeit/Modelinput/rain.ixx", "D:/studium/Masterarbeit/Modelinput/evap.ixx", "13", "20.5"]
     CreateXML.WriteNodes(Catchattrvec, Greywaterattrvec, Stormwaterresattrvec, Rainwaterattrvec, Demandmodelattrvec, Greywaterresattrvec, Simulationsetupvec, Needtohaveinputsvec,Gardenwaterattrvec,Soilattrvec)
     

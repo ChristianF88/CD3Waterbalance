@@ -134,9 +134,9 @@ class File_Reader (pycd3.Node):
             if self.mydecimals == 0.0:
                 self.mydecimals = 1.0
             #calculating the need line of input-file
-            self.myline = (self.growing_t + dt/24./3600. - date2num(datetime.strptime(self.mylist[0+self.starting_index][0]+" "+ self.mylist[0+self.starting_index][1],"%d.%m.%Y %H:%M:%S"))) / self.dt_read
+            self.myline = (self.growing_t - date2num(datetime.strptime(self.mylist[0+self.starting_index][0]+" "+ self.mylist[0+self.starting_index][1],"%d.%m.%Y %H:%M:%S"))) / self.dt_read
         
-            if self.myline <= len(self.mylist)-1:
+            if ceil(self.myline) + self.starting_index  <= len(self.mylist)-1:
                 
                 #resets flow and gets indexes prepared
                 self.flow_int = 0.0
