@@ -73,7 +73,7 @@ class Soilstorage(pycd3.Node):
         self.seepagerate = pycd3.Double(0.22)
         self.addParameter("Hydraulic_Conductivity_(Saturated_Conditions)_[m/d]",self.seepagerate)
         
-        self.fieldcapacitiy = pycd3.Double(100.0)
+        self.fieldcapacitiy = pycd3.Double(-100.0)
         self.addParameter("Field_Capacity_[cm_Water_Column]",self.fieldcapacitiy)
         #factor for calibrating outdoordemand
         self.outdoor_demand_coefficient = pycd3.Double(0.8)
@@ -85,7 +85,7 @@ class Soilstorage(pycd3.Node):
 #        print stop
 #        print dt
 #        print "init node"
-          
+        self.fieldcapacitiy=-1*self.fieldcapacitiy
         self.memory = self.total_area*self.soildepth*self.initialwatercontent
         self.waterpressure2 = self.fieldcapacitiy*2
         

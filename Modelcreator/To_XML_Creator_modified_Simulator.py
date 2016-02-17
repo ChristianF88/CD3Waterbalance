@@ -266,7 +266,7 @@ class TheHoleLot:
                     
                 #simulation drying via evapotranspiration
                 if lossstorage_perv_impervreservoir > 0.0:
-                    lossstorage_perv_impervreservoir -= (float(self.drying_rate))*timestepl/24/3600
+                    lossstorage_perv_impervreservoir -= (float(3*self.drying_rate))*timestepl/24/3600
                     if lossstorage_perv_impervreservoir < 0.0:
                         lossstorage_perv_impervreservoir = 0.0
                     else:
@@ -275,7 +275,7 @@ class TheHoleLot:
                     lossstorage_perv_impervreservoir =  0.0
                     
                 if lossstorage_imperstormw > 0.0:
-                    lossstorage_imperstormw -= (float(self.drying_rate))*timestepl/24/3600
+                    lossstorage_imperstormw -= (float(3*self.drying_rate))*timestepl/24/3600
                     if lossstorage_imperstormw < 0.0:
                         lossstorage_imperstormw = 0.0
                     else:
@@ -290,7 +290,7 @@ class TheHoleLot:
         print 'Fraction of Impervious Area to Stormdrain: '+str(self.area_fractions1[2])
         print 'Wetting Loss: '+str( self.wettingloss)+' mm'
         print 'Depression Loss: '+str(self.depressionloss)+' mm'
-        print 'Drying Rate: '+str(self.drying_rate)+' mm/d'
+        print 'Drying Factor: '+str(self.drying_rate)
         print 'Total Rain: '+str(onlyrain) + ' m^3'
         print 'Inital Losses only: '+str(onlyrain-rainminusevapolosses)+' m^3'
         print 'Potable_Water_Demand: '+str(PWRonly)+' m^3'

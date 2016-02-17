@@ -37,7 +37,7 @@ class Catchment_w_Routing(pycd3.Node):
         self.rain = pycd3.Flow()
         self.collected_w = pycd3.Flow()
         self.runoff = pycd3.Flow()
-#        self.evapo = pycd3.Flow()
+        self.evapo = pycd3.Flow()
         self.possible_infiltr = pycd3.Flow()
         self.actual_infiltr = pycd3.Flow()
 #        self.outdoor_use = pycd3.Flow()
@@ -47,7 +47,7 @@ class Catchment_w_Routing(pycd3.Node):
         #dir (self.inf)
 #        print "init node"
         self.addInPort("Rain", self.rain)
-#        self.addInPort("Evapotranspiration", self.evapo)
+        self.addInPort("Evapotranspiration", self.evapo)
         self.addInPort("Inflow", self.inflow)
         self.addOutPort("Possible_Infiltration", self.possible_infiltr)
         self.addOutPort("Infiltration", self.actual_infiltr)
@@ -60,8 +60,8 @@ class Catchment_w_Routing(pycd3.Node):
         self.select_model = pycd3.String("without")
         self.addParameter("Catchment_with_or_without_Routing_(with_or_without)", self.select_model)        
         
-        self.dryrate = pycd3.Double(1.4)
-        self.addParameter("Average_Evaporationrate_[mm/d]", self.dryrate) 
+        self.dryrate = pycd3.Double(1)
+        self.addParameter("Drying_Factor_[-]", self.dryrate) 
         
         #Catchment area + fraction info of pervious and impervious parts
         self.area_property = pycd3.Double(1000)
@@ -172,7 +172,7 @@ class Catchment_w_Routing(pycd3.Node):
 
             #resetting the storage values as a simulation of the drying process respectively the continuous infitlration
             if self.rain_storage_perv > 0:
-                self.rain_storage_perv -= self.dryrate/24/3600*dt
+                self.rain_storage_perv -= (self.evapo[0]*self.dryrate)
                 if self.rain_storage_perv > 0:
                     pass
                 else:
@@ -181,7 +181,7 @@ class Catchment_w_Routing(pycd3.Node):
                 self.rain_storage_perv = 0.0
                                 
             if self.rain_storage_imp > 0:
-                self.rain_storage_imp -= self.dryrate/24/3600*dt
+                self.rain_storage_imp -= (self.evapo[0]*self.dryrate)
                 if self.rain_storage_imp > 0:
                     pass
                 else:
@@ -190,8 +190,8 @@ class Catchment_w_Routing(pycd3.Node):
                 self.rain_storage_imp = 0.0
             
             #calculating the possilbe infiltration rate the the Horton model in a state of "drying" (+ increasing the time step for the model)
-            self.temp_cap = self.Horton_final_cap/3600.*dt + (self.temp_cap_2 - self.Horton_final_cap/3600.*dt) * math.exp(-1*self.Horton_decay_constant * dt / (60.*6.) * self.continuous_rain_time/self.k)
-            self.possible_infiltr_raw = self.Horton_initial_cap/3600.*dt - (self.Horton_initial_cap/3600.*dt - self.temp_cap) * math.exp(-1*self.Horton_decay_constant * dt / 60. * self.continuous_rain_time_2/self.k)
+            self.temp_cap = self.Horton_final_cap/3600.*dt + (self.temp_cap_2 - self.Horton_final_cap/3600.*dt) * math.exp(-1*self.Horton_decay_constant * dt / (60.*1.) * self.continuous_rain_time/self.k)
+            self.possible_infiltr_raw = self.Horton_initial_cap/3600.*dt - (self.Horton_initial_cap/3600.*dt - self.temp_cap) * math.exp(-1*self.Horton_decay_constant * dt / (60.*6) * self.continuous_rain_time_2/self.k)
             self.continuous_rain_time_2 += 1.0
            
  
@@ -204,7 +204,7 @@ class Catchment_w_Routing(pycd3.Node):
             self.rain_storage_imp += self.rain[0]
             self.rain_storage_perv += self.rain[0]
             
-            self.temp_cap_2 = self.Horton_initial_cap/3600.*dt - (self.Horton_initial_cap/3600*dt - self.temp_cap) * math.exp(-1*self.Horton_decay_constant * dt / 60. * self.continuous_rain_time_2/self.k)
+            self.temp_cap_2 = self.Horton_initial_cap/3600.*dt - (self.Horton_initial_cap/3600*dt - self.temp_cap) * math.exp(-1*self.Horton_decay_constant * dt / (60.*6) * self.continuous_rain_time_2/self.k)
             self.possible_infiltr_raw = self.Horton_final_cap/3600.*dt + (self.temp_cap_2 - self.Horton_final_cap/3600.*dt) * math.exp(-1*self.Horton_decay_constant * dt / 60. * self.continuous_rain_time/self.k)
             self.continuous_rain_time += 1.0
             

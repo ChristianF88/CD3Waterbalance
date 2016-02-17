@@ -466,10 +466,22 @@ class Supplylevel:
         for o in range(5)[1:]:
             exec 'self.modelinputstrings += string'+str(o)
         self.modelinput_strings.append(self.modelinputstrings)
-        
-        #fileout - Soilstorage connection
+         
+        #fileout - Distr. connection
         string1='\t\t\t<connection id="'+str(Global_counters.number_of_connections)+'">\n' 
         string2='\t\t\t\t<source node="FileOut_'+str(Global_counters.number_of_fileouts)+'" port="out"/>\n' 
+        string3='\t\t\t\t<sink node="Distributor_'+str(Global_counters.number_of_distributors)+'" port="Inport"/>\n' 
+        string4='\t\t\t</connection>\n' 
+        Global_counters.number_of_connections += 1
+        #writes all string in one and puts it in list
+        self.modelinputstrings = ''
+        for o in range(5)[1:]:
+            exec 'self.modelinputstrings += string'+str(o)
+        self.modelinput_strings.append(self.modelinputstrings)
+        
+        #Distr. - Soilstorage and Catchments connection
+        string1='\t\t\t<connection id="'+str(Global_counters.number_of_connections)+'">\n' 
+        string2='\t\t\t\t<source node="Distributor_'+str(Global_counters.number_of_distributors)+'" port="Outport_1"/>\n' 
         string3='\t\t\t\t<sink node="Soilstorage_'+str(Global_counters.number_of_soilstorages)+'" port="Evapotranspiration"/>\n' 
         string4='\t\t\t</connection>\n' 
         Global_counters.number_of_connections += 1
@@ -478,6 +490,22 @@ class Supplylevel:
         for o in range(5)[1:]:
             exec 'self.modelinputstrings += string'+str(o)
         self.modelinput_strings.append(self.modelinputstrings)
+        
+        for q in range(Global_counters.number_of_catchments):
+            string1='\t\t\t<connection id="'+str(Global_counters.number_of_connections)+'">\n' 
+            string2='\t\t\t\t<source node="Distributor_'+str(Global_counters.number_of_distributors)+'" port="Outport_'+str(q+2)+'"/>\n' 
+            string3='\t\t\t\t<sink node="Catchment_w_Routing_'+str(q)+'" port="Evapotranspiration"/>\n' 
+            string4='\t\t\t</connection>\n' 
+            Global_counters.number_of_connections += 1
+            #writes all string in one and puts it in list
+            self.modelinputstrings = ''
+            for o in range(5)[1:]:
+                exec 'self.modelinputstrings += string'+str(o)
+            self.modelinput_strings.append(self.modelinputstrings)
+            
+        Global_counters.number_of_distributors_ports_list.append([Global_counters.number_of_distributors, Global_counters.number_of_catchments+1])
+        Global_counters.number_of_distributors += 1
+        
         
         #Soilstorage - Distributor connection
         string1='\t\t\t<connection id="'+str(Global_counters.number_of_connections)+'">\n' 

@@ -28,7 +28,7 @@ Basic features:
 | Fraction of Pervious Area (pA) |   Constant  |  [-]   |
 |   Fraction of Impervious Area to Reservoir (iAR)| Constant |  [-]
 |    Fraction of Impervious Area to Stormwater Drain (iASD)  |    Constant     |  [-]  |
-| Average Evaporation Rate |   Constant  |  [mm/d]   |
+| Evaporation Factor |   Constant  |  [-]   |
 | Wetting Loss |   Constant  |  [mm]   |
 | Depression Loss |   Constant  |  [mm]   |
 | Catchment with or without Routing |   String  |  'with' _or_ 'without'   |
