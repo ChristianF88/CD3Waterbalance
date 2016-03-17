@@ -757,17 +757,17 @@ class Demand_Model (pycd3.Node):
                 
             pass    
         elif self.model_selected == "Simple_Model":
-            
+            #https://www.yvw.com.au/yvw/groups/public/documents/document/yvw1004065.pdf
             #Outports for Checking Demand
             ratio_handbasin_divided_by_kitchen_and_handbasin_tap = 2.5 / (3 + 2.5)
             demand_bathtub_ld_and_capita = 2.
-            demand_shower_ld_and_capita = 34.
+            demand_shower_ld_and_capita = 35.
             demand_toilet_ld_and_capita = 19. 
-            demand_kitchentap_ld_and_capita = 21. * (1-ratio_handbasin_divided_by_kitchen_and_handbasin_tap)
-            demand_handbasintap_ld_and_capita = 21. * ratio_handbasin_divided_by_kitchen_and_handbasin_tap
-            demand_washingmachine_ld_and_capita = 22.
+            demand_kitchentap_ld_and_capita = 20. * (1-ratio_handbasin_divided_by_kitchen_and_handbasin_tap)
+            demand_handbasintap_ld_and_capita = 20. * ratio_handbasin_divided_by_kitchen_and_handbasin_tap
+            demand_washingmachine_ld_and_capita = 18.
             demand_dishwasher_ld_and_capita = 1.
-            demand_evapcooler_ld_and_capita = 0.
+            demand_evapcooler_ld_and_capita = 6.
             
             self.Bathtub[0] = demand_bathtub_ld_and_capita * self.number_people_res /3600/1000*dt/24
             self.Shower[0] = demand_shower_ld_and_capita * ( self.number_people_res + self.number_people_com ) /3600/1000*dt/24

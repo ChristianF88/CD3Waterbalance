@@ -18,6 +18,7 @@ Basic features:
 | Flow  | Type  |  Unit  |
 | :------------ |:---------------:| :-----:|	
 | Rain      | Time Series | [mm/dt] |
+| pot. Evapotranspiration      | Time Series | [mm/dt] |
 | Inflow | Time Series         |    [m³/dt] |
 
 # 

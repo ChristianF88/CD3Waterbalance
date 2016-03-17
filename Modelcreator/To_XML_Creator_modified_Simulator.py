@@ -165,6 +165,7 @@ class TheHoleLot:
         #evap is the ixx files name thats the file readers input, Evapo_Model is the name specified in the XML Creator (Output Pattern Implementer)
         evapomodel = 0.0
         evapoinput = 0.0
+        evapotanspirationmodel=[]
         for i in range(len(Data)):
             for n in range(len(Data[i][0])):
                 if Data[i][0][n] == 'evap':
@@ -173,6 +174,7 @@ class TheHoleLot:
                 elif Data[i][0][n] == 'Evapo_Model':
                     for m in range(len(Data[i][:,n]))[1:]:
                         evapomodel += float(Data[i][:,n][m])
+                        evapotanspirationmodel.append(float(Data[i][:,n][m]))
         ErrorFRPI=(1 - evapomodel/evapoinput) * 100
         print 'The difference of given and produced Evapotranspiraten calculated by the Pattern Implementer and Filereader due to rounding errors is '+ colorred.format(str(ErrorFRPI))+' %'
         
@@ -213,6 +215,7 @@ class TheHoleLot:
                     outputOD.append(Data[i][:,n])
             
         totalstoragescalar = 0.0
+        storagegwr = 0.0
         rainminusevapolosses = 0.0
         SewerStormwInfiltr = 0.0
         PWRonly = 0.0
@@ -223,7 +226,7 @@ class TheHoleLot:
         for i in range(len(totalstorage)):
             
             if totalstorage[i][0] == 'Gardenwateringstorage':
-                totalstoragescalar -= float(totalstorage[i][-1])
+                storagegwr -= float(totalstorage[i][-1])
             else:
                 totalstoragescalar += float(totalstorage[i][-1])
         #Potable_Water_Demand/Sewer,Infiltr.,Stormwater
@@ -240,51 +243,34 @@ class TheHoleLot:
                 OutdoorD += float(outputOD[i][n])
             
         #Rain and Evapo inlcuding losses
-        lossstorage_perv_impervreservoir = 0.0
-        lossstorage_imperstormw = 0.0
+        lossstorage = 0.0
+        lossmem=0.0
         onlyrain=0.0
         timestepl = round((float(Data[1][2][0])-float(Data[1][1][0]))*24*3600)
         print timestepl
         for i in range(len(inputER[0]))[1:]:
-            lossstorage_perv_impervreservoir += (float(inputER[1][i]))/self.total_area*1000
-            lossstorage_imperstormw += (float(inputER[1][i]))/self.total_area*1000
+            lossmem=lossstorage
+            lossstorage+= (float(inputER[1][i]))/self.total_area*1000
             if float(inputER[1][i]) > 0.0:
-                if lossstorage_perv_impervreservoir > self.wettingloss:
-                    rainminusevapolosses += (float(inputER[1][i]))*(self.area_fractions1[0])
-                    lossstorage_perv_impervreservoir = self.wettingloss
+                if lossstorage> self.depressionloss + self.wettingloss:
+                    difference= self.depressionloss + self.wettingloss - lossmem
+                    rainminusevapolosses += (float(inputER[1][i])) - difference*self.total_area/1000.
+                    lossstorage = self.depressionloss + self.wettingloss
                 else:
                     pass
-                    
-                if lossstorage_imperstormw > self.depressionloss + self.wettingloss:
-                    rainminusevapolosses += (float(inputER[1][i]))*(self.area_fractions1[2]+self.area_fractions1[1])
-                    lossstorage_imperstormw = self.depressionloss + self.wettingloss
-                else:
-                    pass
-                    
-                    
             else:
-                    
                 #simulation drying via evapotranspiration
-                if lossstorage_perv_impervreservoir > 0.0:
-                    lossstorage_perv_impervreservoir -= (float(3*self.drying_rate))*timestepl/24/3600
-                    if lossstorage_perv_impervreservoir < 0.0:
-                        lossstorage_perv_impervreservoir = 0.0
+                if lossstorage > 0.0:
+                    lossstorage -= (float(inputER[0][i])*self.drying_rate)/self.total_area*1000
+                    if lossstorage < 0.0:
+                        lossstorage = 0.0
                     else:
                         pass
                 else:
-                    lossstorage_perv_impervreservoir =  0.0
-                    
-                if lossstorage_imperstormw > 0.0:
-                    lossstorage_imperstormw -= (float(3*self.drying_rate))*timestepl/24/3600
-                    if lossstorage_imperstormw < 0.0:
-                        lossstorage_imperstormw = 0.0
-                    else:
-                        pass
-                else:
-                    lossstorage_imperstormw =  0.0
-           
+                    lossstorage =  0.0
+
             onlyrain += float(inputER[1][i])
-        
+            initiallosses=onlyrain-rainminusevapolosses
         print 'Fraction of Pervious Area: '+str(self.area_fractions1[0])
         print 'Fraction of Impervious Area to Reservoir: '+str(self.area_fractions1[1])
         print 'Fraction of Impervious Area to Stormdrain: '+str(self.area_fractions1[2])
@@ -298,8 +284,8 @@ class TheHoleLot:
         print 'Rain minus all Losses: '+str(rainminusevapolosses)+' m^3'
         print 'SewerStormwInfiltr: '+str(SewerStormwInfiltr)+' m^3'
         print 'Still stored in tanks: ' +str(totalstoragescalar)+' m^3 -> negativ values are caused by the garden watering module'
-        print 'Absolut Error of entire balance: '+str(PWRonly-OutdoorD-totalstoragescalar+rainminusevapolosses-SewerStormwInfiltr)+' m^3'
-        print 'Realtive Error of entire balance: '+str(100*(PWRonly-OutdoorD-totalstoragescalar+rainminusevapolosses-SewerStormwInfiltr)*2/(PWRonly+OutdoorD+totalstoragescalar+rainminusevapolosses+SewerStormwInfiltr))+' %'
+        print 'Absolut Error of entire balance: '+str(PWRonly-OutdoorD-totalstoragescalar+storagegwr+rainminusevapolosses-SewerStormwInfiltr)+' m^3'
+        print 'Realtive Error of entire balance: '+str(100*(PWRonly-OutdoorD-totalstoragescalar+storagegwr+onlyrain-initiallosses-SewerStormwInfiltr)*2/(PWRonly+OutdoorD+totalstoragescalar+onlyrain+initiallosses+SewerStormwInfiltr-storagegwr))+' %'
         print"______________________________________________________________________________________________________"
         
         return 

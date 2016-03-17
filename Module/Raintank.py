@@ -103,7 +103,7 @@ class Raintank(pycd3.Node):
                     
             
             self.check_storage[0] = self.current_volume
-
+        #self.check_storage[0] =self.collected_w[0]- self.overflow[0]
         #if self.collected_w[0]-self.non_pot_in[0] < 0:
         #    print [self.collected_w[0]-self.non_pot_in[0], self.current_volume]
         #else:

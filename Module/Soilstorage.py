@@ -68,7 +68,7 @@ class Soilstorage(pycd3.Node):
         self.addParameter("Van_Genuchten_Parameter_Alpha_[cm^-1]",self.alpha)
         self.n = pycd3.Double(1.3)
         self.addParameter("Van_Genuchten_Parameter_n_[-]",self.n)
-        self.initialwatercontent = pycd3.Double(0.18)
+        self.initialwatercontent = pycd3.Double(0.25)
         self.addParameter("Initial_Water_Content_[-]",self.initialwatercontent)
         self.seepagerate = pycd3.Double(0.22)
         self.addParameter("Hydraulic_Conductivity_(Saturated_Conditions)_[m/d]",self.seepagerate)
@@ -85,9 +85,16 @@ class Soilstorage(pycd3.Node):
 #        print stop
 #        print dt
 #        print "init node"
+        def InversVanGenuchten (Watercontent,Residualwatercontent,Saturationwatercontent,alpha,n):
+            if Watercontent>Saturationwatercontent:
+                raise ValueError("The Watercontent is greater than the Saturation Water Content! This is physically impossible, please check your Hydraulic Conductivitiy, initial Water Content and Outdoor Watering Ratio. If the problem keeps occuring its due to the infiltration capacity being smaller than the Hydraulic Conductivity for unsaturated conditions. Overdamming can not be simulated.")
+            else:
+                H=1/alpha*math.pow((math.pow(((Watercontent-Residualwatercontent)/(Saturationwatercontent-Residualwatercontent)),(n/(1-n)))-1),(1/n))
+            return H
+            
         self.fieldcapacitiy=-1*self.fieldcapacitiy
         self.memory = self.total_area*self.soildepth*self.initialwatercontent
-        self.waterpressure2 = self.fieldcapacitiy*2
+        self.waterpressure2 = InversVanGenuchten (self.initialwatercontent,self.Residualwatercontent,self.Saturationwatercontent,self.alpha,self.n)
         
         return True
         
@@ -95,7 +102,7 @@ class Soilstorage(pycd3.Node):
         
         def InversVanGenuchten (Watercontent,Residualwatercontent,Saturationwatercontent,alpha,n):
             if Watercontent>Saturationwatercontent:
-                H=-1
+                raise ValueError("The Watercontent is greater than the Saturation Water Content! This is physically impossible, please check your Hydraulic Conductivitiy, initial Water Content, Van Genuchten Parameter and Outdoor Watering Ratio. If the problem keeps occuring its due to the infiltration capacity being smaller than the Hydraulic Conductivity for unsaturated conditions. Overdamming can not be simulated.")
             else:
                 H=1/alpha*math.pow((math.pow(((Watercontent-Residualwatercontent)/(Saturationwatercontent-Residualwatercontent)),(n/(1-n)))-1),(1/n))
             return H
@@ -117,19 +124,29 @@ class Soilstorage(pycd3.Node):
             else:
                 factor = 0
             return factor
-        #print [self.waterpressure2 , 10**4.2, self.fieldcapacitiy*1]
-        
+            
+
         self.actualevapo[0] = Evapfactor(self.waterpressure2, 10**4.2, self.fieldcapacitiy*1)*self.evapotranspiration[0]/1000
         
         #Infiltration(from Rain and Watering) - Inflow / Evapotranspiration - Outflow
         self.memory += self.Infiltration[0] #+ self.Watering[0]
         self.memory -= self.actualevapo[0] * self.total_perv_area
-        self.memory += self.actualevapo[0] * self.total_perv_area * self.outdoor_demand_coefficient
+        
+        # garden watering only after the soil has dried out a bit after rain...
+        if self.waterpressure2<self.fieldcapacitiy:
+            out=0
+        else:
+            out=self.actualevapo[0] * self.total_perv_area * self.outdoor_demand_coefficient
+            self.memory += out
+        
         self.memory += self.inflow[0] 
 
-        #Waterflow to lower layers
-        tolowerlayer = VanGenuchtenConductivity (self.waterpressure2,self.alpha,self.n)*self.seepagerate/24/3600*dt*self.total_area
-        self.memory -=tolowerlayer
+        #Waterflow to lower layers only as long as flied capacity is reached and kapillar forces hold water in palce
+        tolowerlayer = VanGenuchtenConductivity (self.waterpressure2,self.alpha,self.n)*self.seepagerate/24/3600*dt*self.total_area*0.5
+        if self.waterpressure2<self.fieldcapacitiy:
+            self.memory -=tolowerlayer
+        else:
+            pass
         
         #new water content
         newwatercontent = self.memory/(self.total_area*self.soildepth)
@@ -140,9 +157,9 @@ class Soilstorage(pycd3.Node):
 
         #evapotranspiration factor
         self.storagecheck[0] = self.memory
-        self.porepressure[0] = waterpressure
-        self.outdoordemand[0] = self.actualevapo[0] * self.outdoor_demand_coefficient 
-        self.outdoordemand_check[0] = self.outdoordemand[0] * self.total_perv_area
+        self.porepressure[0] = -waterpressure
+        self.outdoordemand[0] = out/self.total_perv_area
+        self.outdoordemand_check[0] = out
         return dt
         
     

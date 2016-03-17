@@ -958,6 +958,16 @@ class Supplylevel:
         Global_counters.numbers_names_of_fileouts_list.append([Global_counters.number_of_fileouts, 'Soilstorage.txt'])
         Global_counters.number_of_fileouts += 1
         
+        #adds fileout to Soilstorage
+        string1='\t\t\t<connection id="'+str(Global_counters.number_of_connections)+'">\n' 
+        string2='\t\t\t\t<source node="Soilstorage_'+str(Global_counters.number_of_soilstorages-1)+'" port="Actual_Evapotranspiration"/>\n' 
+        string3='\t\t\t\t<sink node="FileOut_'+str(Global_counters.number_of_fileouts)+'" port="in"/>\n' 
+        string4='\t\t\t</connection>\n' 
+        Global_counters.number_of_connections += 1
+        self.fileout_strings.append(string1+string2+string3+string4)
+        Global_counters.numbers_names_of_fileouts_list.append([Global_counters.number_of_fileouts, 'Actual_Evapotranspiration.txt'])
+        Global_counters.number_of_fileouts += 1
+        
         #adds fileout to check Outdoordemand from Soilstorage
         string1='\t\t\t<connection id="'+str(Global_counters.number_of_connections)+'">\n' 
         string2='\t\t\t\t<source node="Soilstorage_'+str(Global_counters.number_of_soilstorages-1)+'" port="Outdoordemand_Check"/>\n' 

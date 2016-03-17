@@ -14,7 +14,7 @@ from Global_meaning_list import Global_meaning_list
 from VectorsSetup import DoIt
 Global_counters = Global_counters.Instance()
 
-
+import csv
 
 from desktopmagic.screengrab_win32 import (
 getDisplayRects, saveScreenToBmp, saveRectToBmp, getScreenAsImage,
@@ -47,14 +47,14 @@ Supplyvec and Attributevecs explanation in the XML-Creator.md on Github in the d
 '''
 
 
-ABC = DoIt()
-Inputvectors=ABC.GetAttributes()
-ABC.Pipelenlist
-
-supplyvec= Inputvectors[2]#[[[[[[0],[1,1,1],1000],1],2]]]
-Catchattrvec=Inputvectors[0]#[[1.9,800,0.0,1.0,0.0,0.6,0.21,1.5,0.4,1.5,1000,1000,1000,'with'],[1.9,8000,0.0,1.0,0.0,0.6,0.21,1.5,0.4,1.5,1000,1000,1000,'with']]*1000#,[1.9,800,0.0,1.0,0.0,0.6,0.21,1.5,0.4,1.5,1000,1000,1000,'with'],[1.9,800,0.0,1.0,0.0,0.6,0.21,1.5,0.4,1.5,1000,1000,1000,'with'],[1.9,800,0.0,1.0,0.0,0.6,0.21,1.5,0.4,1.5,1000,1000,1000,'with'],[1.9,800,0.0,1.0,0.0,0.6,0.21,1.5,0.4,1.5,1000,1000,1000,'with'],[1.9,800,0.0,1.0,0.0,0.6,0.21,1.5,0.4,1.5,1000,1000,1000,'with'],[1.9,800,0.0,1.0,0.0,0.6,0.21,1.5,0.4,1.5,1000,1000,1000,'with'],[1.9,800,0.0,1.0,0.0,0.6,0.21,1.5,0.4,1.5,1000,1000,1000,'with'],[1.9,800,0.0,1.0,0.0,0.6,0.21,1.5,0.4,1.5,1000,1000,1000,'with'],[1.9,800,0.0,1.0,0.0,0.6,0.21,1.5,0.4,1.5,1000,1000,1000,'with'],[1.9,800,0.0,1.0,0.0,0.6,0.21,1.5,0.4,1.5,1000,1000,1000,'with'],[1.8,10000,0.0,1.0,0.0,0.6,0.21,1.5,0.4,1.5,1000,1000,1000,'with']]*1   
-Demandmodelattrvec =Inputvectors[1]#[[[5,40],[0], "Simple_Model"]]*1000#,[[5,40],[0], "Simple_Model"],[[5,40],[0], "Simple_Model"],[[5,40],[0], "Simple_Model"],[[5,40],[0], "Simple_Model"],[[5,40],[0], "Simple_Model"],[[5,40],[0], "Simple_Model"],[[5,40],[0], "Simple_Model"],[[5,40],[0], "Simple_Model"],[[5,40],[0], "Simple_Model"],[[5,40],[0], "Simple_Model"],[[5,40],[0], "Simple_Model"]]*1
-Soilattrvec =[[1,0.15,0.03,0.39,1.0,Area_TotalAndPervious(Catchattrvec)[0],Area_TotalAndPervious(Catchattrvec)[1],0.078636,1.26415,-100,0.5]]
+#ABC = DoIt()
+#Inputvectors=ABC.GetAttributes()
+#ABC.Pipelenlist
+#
+#supplyvec= Inputvectors[2]#[[[[[[0],[1,1,1],1000],1],2]]]
+#Catchattrvec=Inputvectors[0]#[[1.9,800,0.0,1.0,0.0,0.6,0.21,1.5,0.4,1.5,1000,1000,1000,'with'],[1.9,8000,0.0,1.0,0.0,0.6,0.21,1.5,0.4,1.5,1000,1000,1000,'with']]*1000#,[1.9,800,0.0,1.0,0.0,0.6,0.21,1.5,0.4,1.5,1000,1000,1000,'with'],[1.9,800,0.0,1.0,0.0,0.6,0.21,1.5,0.4,1.5,1000,1000,1000,'with'],[1.9,800,0.0,1.0,0.0,0.6,0.21,1.5,0.4,1.5,1000,1000,1000,'with'],[1.9,800,0.0,1.0,0.0,0.6,0.21,1.5,0.4,1.5,1000,1000,1000,'with'],[1.9,800,0.0,1.0,0.0,0.6,0.21,1.5,0.4,1.5,1000,1000,1000,'with'],[1.9,800,0.0,1.0,0.0,0.6,0.21,1.5,0.4,1.5,1000,1000,1000,'with'],[1.9,800,0.0,1.0,0.0,0.6,0.21,1.5,0.4,1.5,1000,1000,1000,'with'],[1.9,800,0.0,1.0,0.0,0.6,0.21,1.5,0.4,1.5,1000,1000,1000,'with'],[1.9,800,0.0,1.0,0.0,0.6,0.21,1.5,0.4,1.5,1000,1000,1000,'with'],[1.9,800,0.0,1.0,0.0,0.6,0.21,1.5,0.4,1.5,1000,1000,1000,'with'],[1.8,10000,0.0,1.0,0.0,0.6,0.21,1.5,0.4,1.5,1000,1000,1000,'with']]*1   
+#Demandmodelattrvec =Inputvectors[1]#[[[5,40],[0], "Simple_Model"]]*1000#,[[5,40],[0], "Simple_Model"],[[5,40],[0], "Simple_Model"],[[5,40],[0], "Simple_Model"],[[5,40],[0], "Simple_Model"],[[5,40],[0], "Simple_Model"],[[5,40],[0], "Simple_Model"],[[5,40],[0], "Simple_Model"],[[5,40],[0], "Simple_Model"],[[5,40],[0], "Simple_Model"],[[5,40],[0], "Simple_Model"],[[5,40],[0], "Simple_Model"]]*1
+#Soilattrvec =[[1.5,0.15,0.03,0.39,1.0,Area_TotalAndPervious(Catchattrvec)[0],Area_TotalAndPervious(Catchattrvec)[1],0.078636,1.26415,-100,0.1]]
 
 def XML():
     
@@ -65,7 +65,7 @@ def XML():
     
     #creating Nodelist
     #Catchattrvec=[[1,1.9,800,0.4,0.2,0.4,0.6,0.21,1.5,0.4,0.5,400,500,700,0.04,0.05,0.06,'without']] *Global_counters.number_of_catchments     
-    Greywaterresattrvec = [[0.9,15]]*(Global_counters.number_of_greywaterreservoirs) 
+    Greywaterresattrvec = [[1,25000]]*(Global_counters.number_of_greywaterreservoirs) 
     Greywaterattrvec = Inputvectors[3]#[[1,5]]*(Global_counters.number_of_greywatertanks) 
     Stormwaterresattrvec = [[0.9,15]]*(Global_counters.number_of_stormwaterreservoirs)
     Rainwaterattrvec = Inputvectors[4]#[[5]]*(Global_counters.number_of_raintanks)
@@ -75,16 +75,16 @@ def XML():
     
     #["2011-Apr-09 00:00:00","2011-Apr-13 00:00:00"],["2011-Oct-28 00:00:00","2011-Oct-30 00:00:00"],["2011-Nov-09 00:00:00","2011-Nov-11 00:00:00"],["2011-Dec-10 00:00:00","2011-Dec-12 00:00:00"],["2011-Feb-25 00:00:00","2011-Dec-15 00:00:00"]
     
-    Simulationsetupvec = ["2011-Feb-25 00:00:00","2011-Dec-15 00:00:00", "360", "C:/Users/Gerhard/Documents/GitHub/CD3Waterbalance/Module/cd3waterbalancemodules.py"]
-    Needtohaveinputsvec = ["D:/studium/Masterarbeit/Modelinput/rain.ixx", "D:/studium/Masterarbeit/Modelinput/evap.ixx", "13", "20.5"]
+    Simulationsetupvec = ["2011-Feb-25 00:00:00","2011-Dec-15 00:00:00", "3600", "C:/Users/Gerhard/Documents/GitHub/CD3Waterbalance/Module/cd3waterbalancemodules.py"]
+    Needtohaveinputsvec = ["D:/studium/Masterarbeit/Modelinput/rain.ixx", "D:/studium/Masterarbeit/Modelinput/evap.ixx", "12.87", "18.94"]
     CreateXML.WriteNodes(Catchattrvec, Greywaterattrvec, Stormwaterresattrvec, Rainwaterattrvec, Demandmodelattrvec, Greywaterresattrvec, Simulationsetupvec, Needtohaveinputsvec,Gardenwaterattrvec,Soilattrvec)
     
     #printing the Connectionlist to insert Fileouts
 #    CreateXML.PrintConnections()
     
     #insert Fileouts()
-#    Fileout_Connection_Name_List = [['End','Outport', "Soilstorage_0", "Check_Pore_Pressure","Porepressure.txt"],['Inbetween','Outport', "Soilstorage_0", "Outdoordemand","Outdoor_demand_to_buildings.txt"]]
-#    CreateXML.Additional_Fileouts(Fileout_Connection_Name_List) 
+    Fileout_Connection_Name_List = [['Inbetween','Outport', "Collector_600", "Outport","GreywaterOut.txt"],['Inbetween','Outport', "Collector_601", "Outport","GreywaterIn.txt"]]
+    CreateXML.Additional_Fileouts(Fileout_Connection_Name_List) 
     
     #safe the xml file
     CreateXML.SaveXML('D:\studium\Masterarbeit\Modeloutput\Melbourne.xml')
@@ -95,6 +95,56 @@ def XML():
         
     return
 
+def AddFileouts():
+    txt = open("D:\studium\Masterarbeit\Modeloutput\Melbourne.xml", "r")  
+    data = csv.reader(txt, delimiter="\n")  
+    mylist = list(data)     
+    sizert=0
+    count=0
+    for i in range(489):
+        size=mylist[10277+3*i][0][-6:-3]
+        if size=='"0"':
+            size=0
+        elif size[-1] == '"' and size[0] != '"':
+            size=size[0:2]
+            count+=1
+        else:
+            count+=1
+        sizert+=float(size)
+    txt.close()
+#    fileout = ''' 			<node id="FileOut_12" class="FileOut"> 
+#				<parameter name="out_file_name" type="string" value="Raintanks.txt"/> 
+# 			</node> '''
+#    collector = ''' 			<node id="Collector_622" class="Collector"> 
+#				<parameter name="Number_of_Inports" type="int" value="489"/> 
+# 			</node> '''
+#    totalstring=fileout+"\n"+collector+"\n"
+#    for i in range(489):
+#        string1='\t\t\t<connection id="'+str(17247+i)+'">\n' 
+#        string2='\t\t\t\t<source node="Raintank_'+str(i)+'" port="Current_Volume"/>\n' 
+#        string3='\t\t\t\t<sink node="Collector_622" port="Inport_'+str(i+1)+'"/>\n' 
+#        string4='\t\t\t</connection>\n'
+#        collectorconnections = string1+string2+string3+string4
+#        totalstring+=collectorconnections
+#    
+#    string1='\t\t\t<connection id="'+str(17247+489)+'">\n' 
+#    string2='\t\t\t\t<source node="Collector_622" port="Outport"/>\n' 
+#    string3='\t\t\t\t<sink node="FileOut_12" port="in"/>\n' 
+#    string4='\t\t\t</connection>\n'
+#    final = string1+string2+string3+string4
+#    totalstring+=final
+#    lastfo='''			<connection id="17737">
+#				<source node="Greywaterreservoir_0" port="Current_Volume"/>
+#				<sink node="FileOut_13" port="in"/>
+#			</connection>'''
+#    totalstring+=lastfo
+#   
+#    txt2 = open("D:\studium\Masterarbeit\Modeloutput\Insert.xml", "r+")
+#    txt2.write(totalstring)
+#    txt2.close()
+    return [sizert, count/489.]
+
+
 '''
 RUNNING AND CHECKING THE XML
 '''
@@ -102,20 +152,27 @@ RUNNING AND CHECKING THE XML
 def Simulator():
     Simulator = TheHoleLot()
     #Simulator.Deleter('D:\studium\Masterarbeit\Modeloutput')
-    Simulator.runcd3('C:\Program Files (x86)\CityDrain3\\bin\cd3.exe', 'D:\studium\Masterarbeit\Modeloutput\Melbourne.xml')
-    Simulator.Fractioncalculator(Catchattrvec)
-    Simulator.getoutputdata('D:\studium\Masterarbeit\Modeloutput')
-    Simulator.getinputdata('D:\studium\Masterarbeit\Modelinput')
-    Simulator.Balance(['Greywatertanklevels', 'Greywaterreservoirlevels',  'Rainwatertanklevels', 'Stormwaterreservoirlevels','Gardenwateringstorage'], ['Evapo_Model', 'Rain_Model'], ['Infiltration', 'Potable_Water_Demand', 'Sewer', 'Stormwaterdrain'])
+    Simulator.runcd3('C:\Program Files (x86)\CityDrain3\\bin\cd3.exe', 'D:\studium\Masterarbeit\Modeloutput\Soil\Melbourne.xml')
+#    Simulator.Fractioncalculator(Catchattrvec)
+#    Simulator.getoutputdata('D:\studium\Masterarbeit\Modeloutput')
+#    Simulator.getinputdata('D:\studium\Masterarbeit\Modelinput')
+#    Simulator.Balance(['Greywatertanklevels', 'Greywaterreservoirlevels',  'Rainwatertanklevels', 'Stormwaterreservoirlevels','Gardenwateringstorage'], ['Evapo_Model', 'Rain_Model'], ['Infiltration', 'Potable_Water_Demand', 'Sewer', 'Stormwaterdrain'])
 #    Simulator.Plotter([20,8],[3,4], [0,3], [ 'Stormwaterdrain'])#,'Rainwatertanklevels','Greywatertanklevels', 'Greywaterreservoirlevels', 'Stormwaterreservoirlevels' ]) #, 'Rainwatertanklevels','Greywatertanklevels', 'Greywaterreservoirlevels', 'Stormwaterreservoirlevels'
 
     WriteVS()
     
     return
 
-XML()
-Simulator()
+#XML()
+#A = AddFileouts()
+#A
+Simulator() 
+
 #saveScreenToBmp('D:\studium\Masterarbeit\Modeloutput\screencapture.png')
+
+
+
+
 
 ##Input description for Simulator!!!!!!
 

@@ -98,7 +98,7 @@ class Greywaterreservoir(pycd3.Node):
        
             self.greywateroverflow[0] = 0.0
         self.check_storage[0] = self.current_volume
-        
+        #self.check_storage[0]=self.greywaterin[0]- self.greywateroverflow[0]
         return dt
     
     def getClassName(self):

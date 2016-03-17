@@ -46,8 +46,8 @@ The individual stream are calculated by simple balances:
 | :------------ |:---------------:| 
 |    Potable Water    | Bathtub + Shower + Kitchen Tap + Handbasin Tap + Washing Machine + Dishwasher + Evapcooler | 
 |    Non Potable Water   |    Toilet + Outdoor Demand     | 
-|    Black Water   | Toilet + Kitchen Tap |  
-|    Grey Water    |    Bathtub + Handbasin Tap + Shower + Tap + Washing Machine + Dishwasher + Evapcooler    | 
+|    Black Water   | Toilet + Kitchen Tap + Dishwasher |  
+|    Grey Water    |    Bathtub + Handbasin Tap + Shower + Tap + Washing Machine  + Evapcooler    | 
 
 
 <br>

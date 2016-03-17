@@ -106,8 +106,8 @@ class Catchment_w_Routing(pycd3.Node):
         self.rain_storage_imp = 0.0
         self.continuous_rain_time = 0.0
         self.continuous_rain_time_2 = 0.0                                        
-        self.rain_storage_perv = 0.0
-        
+        self.rain_storage = 0.0
+        self.rainstoragemen=0.0
         #variable to check Horten model 
         self.k=1
         
@@ -169,25 +169,18 @@ class Catchment_w_Routing(pycd3.Node):
             self.runoff_raw = 0.0
             self.actual_infiltr[0] = 0.0                             
             self.runoff_perv_raw = 0.0
-
+            
             #resetting the storage values as a simulation of the drying process respectively the continuous infitlration
-            if self.rain_storage_perv > 0:
-                self.rain_storage_perv -= (self.evapo[0]*self.dryrate)
-                if self.rain_storage_perv > 0:
+            if self.rain_storage > 0:
+                self.rain_storage -= (self.evapo[0]*self.dryrate)
+                if self.rain_storage > 0:
                     pass
                 else:
-                    self.rain_storage_perv = 0.0
+                    self.rain_storage = 0.0
             else:
-                self.rain_storage_perv = 0.0
+                self.rain_storage = 0.0
                                 
-            if self.rain_storage_imp > 0:
-                self.rain_storage_imp -= (self.evapo[0]*self.dryrate)
-                if self.rain_storage_imp > 0:
-                    pass
-                else:
-                    self.rain_storage_imp = 0.0
-            else:
-                self.rain_storage_imp = 0.0
+
             
             #calculating the possilbe infiltration rate the the Horton model in a state of "drying" (+ increasing the time step for the model)
             self.temp_cap = self.Horton_final_cap/3600.*dt + (self.temp_cap_2 - self.Horton_final_cap/3600.*dt) * math.exp(-1*self.Horton_decay_constant * dt / (60.*1.) * self.continuous_rain_time/self.k)
@@ -201,76 +194,51 @@ class Catchment_w_Routing(pycd3.Node):
             
             #calculating the current rain storage values to keep track of when the rain loss has been overcome,
             #as well as calculating the possilbe infiltration rate the the Horton model in a state of "wetting" (+ increasing the time step for the model)
-            self.rain_storage_imp += self.rain[0]
-            self.rain_storage_perv += self.rain[0]
+            self.rainstoragemen = self.rain_storage
+            self.rain_storage += self.rain[0]
             
             self.temp_cap_2 = self.Horton_initial_cap/3600.*dt - (self.Horton_initial_cap/3600*dt - self.temp_cap) * math.exp(-1*self.Horton_decay_constant * dt / (60.*6) * self.continuous_rain_time_2/self.k)
             self.possible_infiltr_raw = self.Horton_final_cap/3600.*dt + (self.temp_cap_2 - self.Horton_final_cap/3600.*dt) * math.exp(-1*self.Horton_decay_constant * dt / 60. * self.continuous_rain_time/self.k)
             self.continuous_rain_time += 1.0
             
 
-            #if the wetting loss and depression loss hasn't been overcome yet, there won't be any runoff from the impervious area
+            #if the wetting loss and depression loss haven't been overcome yet, there won't be any runoff from the impervious area
             #that contributes to stormwater
-            if self.rain_storage_imp - self.wetting_loss - self.depression_loss <= 0.0:
-                
-                #if the wetting loss hasn't beem overcome there will be no flow...
-                if self.rain_storage_perv - self.wetting_loss <= 0.0:
-                
-                    self.collected_w_raw = 0.0
-                    self.runoff_raw = 0.0
-                    self.actual_infiltr[0] =0.0
-
-                    self.runoff_perv_raw = 0.0
-                
-                #once the wetting loss has been overcome but the depression loss not yet infiltration starts, as well as water collection
-                #depending on the soil runoff might be produced if the infiltration rate is very slow
-                else:
-                
-                    if self.possible_infiltr_raw * 1000. >= self.rain[0]:
-                    
-                        self.collected_w_raw = 0.0
-                        self.actual_infiltr[0] = self.rain[0] / 1000. * self.perv_area * self.area_property
-                        self.runoff_raw = 0.0
-
-                        self.runoff_perv_raw = 0.0
-                
-                    else:
-                    
-                        self.collected_w_raw = (self.rain[0]) * self.imp_area_raintank * self.area_property / 1000.
-                        self.actual_infiltr[0] = self.possible_infiltr_raw * self.perv_area * self.area_property
-                        self.runoff_perv_raw = (self.rain[0] - self.possible_infiltr_raw * 1000.) / 1000. * self.perv_area * self.area_property
-                        self.runoff_raw = 0.0
-
-                    
-                    #saving the information that the initial wetting loss has been overcome
-                    self.rain_storage_perv = self.wetting_loss + 0.000000000001
+            if self.rain_storage - self.wetting_loss - self.depression_loss <= 0.0:
             
+                self.collected_w_raw = 0.0
+                self.runoff_raw = 0.0
+                self.actual_infiltr[0] =0.0
+                self.runoff_perv_raw = 0.0
+                
+                
             #once the wetting loss and depression loss has been overcome ther will be infiltration, water collection and runoff
             else:
                 
-               
+                self.difference = self.wetting_loss + self.depression_loss - self.rainstoragemen
+                
+                
                 #if more water can be infiltrated than rain is falling all rain will be infiltrated
-                if self.possible_infiltr_raw * 1000 >= self.rain[0]:
+                if self.possible_infiltr_raw * 1000 >= self.rain[0]-self.difference:
                     
-                    self.collected_w_raw = (self.rain[0]) * self.imp_area_raintank * self.area_property / 1000.
-                    self.actual_infiltr[0] = (self.rain[0]) / 1000. * self.perv_area * self.area_property
-                    self.runoff_raw  = (self.rain[0]) * self.imp_area_stormwater * self.area_property / 1000.
- 
+                    self.collected_w_raw = (self.rain[0]-self.difference) * self.imp_area_raintank * self.area_property / 1000.
+                    self.actual_infiltr[0] = (self.rain[0]-self.difference) / 1000. * self.perv_area * self.area_property
+                    self.runoff_raw  = (self.rain[0]-self.difference) * self.imp_area_stormwater * self.area_property / 1000.
                     self.runoff_perv_raw = 0.0
                     
                 #if less water can be infiltrated than rain is falling , the pervious fraction will produce runoff    
                 else:
-                    
-                    self.collected_w_raw = (self.rain[0]) * self.imp_area_raintank * self.area_property / 1000.
+                    perv=self.rain[0]-self.difference
+                    self.collected_w_raw = (self.rain[0]-self.difference) * self.imp_area_raintank * self.area_property / 1000.
                     self.actual_infiltr[0] = self.possible_infiltr_raw * self.perv_area * self.area_property
-                    self.runoff_perv_raw = (self.rain[0]  - self.possible_infiltr_raw * 1000.) / 1000. * self.perv_area * self.area_property
-                    self.runoff_raw  = (self.rain[0]) * self.imp_area_stormwater * self.area_property / 1000. 
+                    self.runoff_perv_raw = (perv  - self.possible_infiltr_raw * 1000.) / 1000. * self.perv_area * self.area_property
+                    self.runoff_raw  = (self.rain[0]-self.difference) * self.imp_area_stormwater * self.area_property / 1000. 
 
                  
                 #saving the information that the initial wetting loss and depression loss has been overcome 
-                self.rain_storage_perv = self.wetting_loss + 0.000000000001
-                self.rain_storage_imp = self.wetting_loss + self.depression_loss + 0.00000000000001
-        
+                self.rain_storage = self.wetting_loss + self.depression_loss + 0.000000000001
+
+              
         
         # returning the possible inflitration [m³/dt]
         self.possible_infiltr[0]=self.possible_infiltr_raw*self.area_property*self.perv_area

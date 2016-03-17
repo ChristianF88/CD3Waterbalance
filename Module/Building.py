@@ -72,11 +72,11 @@ class Building(pycd3.Node):
         return True
         
     def f(self, current, dt):
-        
+        #toilet = blackwater; dishwaser,kitchen handbasin = dark greywater
         self.pot_w[0] = (self.bath_tub[0]+self.shower[0]+self.kitchen_tap[0]+self.handbasin_tap[0]+self.dishwasher[0]+self.washing_machine[0] + self.evapcooler[0])
         self.nonpot_w[0] = (self.toilet[0])+self.outdoor_demand[0]
-        self.black_w[0] = (self.kitchen_tap[0]+self.toilet[0])
-        self.grey_w[0] = (self.bath_tub[0]+self.shower[0]+self.handbasin_tap[0]+self.washing_machine[0]+self.dishwasher[0] + self.evapcooler[0])
+        self.black_w[0] = (self.kitchen_tap[0]+self.toilet[0]+self.dishwasher[0])
+        self.grey_w[0] = (self.bath_tub[0]+self.shower[0]+self.handbasin_tap[0]+self.washing_machine[0] + self.evapcooler[0])
 
         return dt
     
