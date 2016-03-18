@@ -46,7 +46,7 @@ class Raintank(pycd3.Node):
         self.storage_v = pycd3.Double(20.0)
         self.addParameter("Storage_Volume_[m^3]", self.storage_v)
 
-        self.current_volume = self.storage_v/2.
+        self.current_volume = 0.0
         self.rest = 0.0
         self.rest2 = 0.0
         
