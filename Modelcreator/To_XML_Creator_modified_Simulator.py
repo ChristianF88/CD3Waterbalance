@@ -308,14 +308,15 @@ class TheHoleLot:
         print 'Sewer: '+str(sum(SewerV))+' m^3'
         print 'Stormwaterdrain: '+str(sum(SWD))+' m^3'
         print 'Infiltration: '+str(sum(I))+' m^3'
-        print 'Exfiltration: '+str(sum(EX)+' m^3'
+        print 'Exfiltration: '+str(sum(EX))+' m^3'
         print 'Actual Evapotranspiration: '+str(sum(AET))+' m^3'
         print 'Actual Evapotranspiration: '+str(sum(AET/self.total_perv_area*1000))+' mm'
         print 'Stored in Tanks: '+str(S1[-1]+S2[-1]+S3[-1]+S4[-1])+' m^3'
         print 'GardenWateringModule: '+str(GW[-1])+' m^3'
         print 'Soilstorage: '+str((SS[-1]-SS[0]))+' m^3'
-        print 'Initial Water Content '+str(self.soilwatercontent)
-        print 'Delta Water Content '+str((SS[-1]-SS[0])/(self.soildepth*self.total_area))
+        print 'Initial Water Content: '+str(self.soilwatercontent)
+        print 'Delta Water Content: '+str((SS[-1]-SS[0])/(self.soildepth*self.total_area))
+        print '(Inflow - Outflow)/Inflow = (Total Storage)/Inflow: '+str((In-Out)/In)+" = "+str((deltaS)/In)
         print 'Absolut Error of entire balance: '+str(In-Out-deltaS)+' m^3'
         print 'Realtive Error of entire balance: '+str(100*(In-Out-deltaS)*2/(In+Out+deltaS))+' %'
         print"______________________________________________________________________________________________________"
