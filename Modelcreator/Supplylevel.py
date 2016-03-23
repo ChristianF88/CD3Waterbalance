@@ -978,6 +978,15 @@ class Supplylevel:
         Global_counters.numbers_names_of_fileouts_list.append([Global_counters.number_of_fileouts, 'Outdoordemand.txt'])
         Global_counters.number_of_fileouts += 1
         
+        #adds fileout to check Outdoordemand from Soilstorage
+        string1='\t\t\t<connection id="'+str(Global_counters.number_of_connections)+'">\n' 
+        string2='\t\t\t\t<source node="Soilstorage_'+str(Global_counters.number_of_soilstorages-1)+'" port="Exfiltration"/>\n' 
+        string3='\t\t\t\t<sink node="FileOut_'+str(Global_counters.number_of_fileouts)+'" port="in"/>\n' 
+        string4='\t\t\t</connection>\n' 
+        Global_counters.number_of_connections += 1
+        self.fileout_strings.append(string1+string2+string3+string4)
+        Global_counters.numbers_names_of_fileouts_list.append([Global_counters.number_of_fileouts, 'Exfiltration.txt'])
+        Global_counters.number_of_fileouts += 1
         
         for m in range(len(self.Supplylevel_loop_list)):
             self.Supplylevel_list.append(self.Supplylevel_loop_list[m])

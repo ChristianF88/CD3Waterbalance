@@ -38,7 +38,7 @@ Basic features:
 |    Outdoordemand_Check  |    Time Series     |  [m³/dt]  |
 |    Check_Pore_Pressure  |    Time Series     |  [m³/dt]  |
 |    Soilstorage_Check  |    Time Series     |  [m³/dt]  |
-
+|    Exfiltration  |    Time Series     |  [m³/dt]  |
 
 
 <br>

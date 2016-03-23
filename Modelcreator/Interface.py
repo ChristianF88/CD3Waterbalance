@@ -46,15 +46,15 @@ CREATING THE XML
 Supplyvec and Attributevecs explanation in the XML-Creator.md on Github in the doc folder 
 '''
 
-
-ABC = DoIt()
-Inputvectors=ABC.GetAttributes()
-ABC.Pipelenlist
-
-supplyvec= Inputvectors[2]#[[[[[[0],[1,1,1],1000],1],2]]]
-Catchattrvec=Inputvectors[0]#[[1.9,800,0.0,1.0,0.0,0.6,0.21,1.5,0.4,1.5,1000,1000,1000,'with'],[1.9,8000,0.0,1.0,0.0,0.6,0.21,1.5,0.4,1.5,1000,1000,1000,'with']]*1000#,[1.9,800,0.0,1.0,0.0,0.6,0.21,1.5,0.4,1.5,1000,1000,1000,'with'],[1.9,800,0.0,1.0,0.0,0.6,0.21,1.5,0.4,1.5,1000,1000,1000,'with'],[1.9,800,0.0,1.0,0.0,0.6,0.21,1.5,0.4,1.5,1000,1000,1000,'with'],[1.9,800,0.0,1.0,0.0,0.6,0.21,1.5,0.4,1.5,1000,1000,1000,'with'],[1.9,800,0.0,1.0,0.0,0.6,0.21,1.5,0.4,1.5,1000,1000,1000,'with'],[1.9,800,0.0,1.0,0.0,0.6,0.21,1.5,0.4,1.5,1000,1000,1000,'with'],[1.9,800,0.0,1.0,0.0,0.6,0.21,1.5,0.4,1.5,1000,1000,1000,'with'],[1.9,800,0.0,1.0,0.0,0.6,0.21,1.5,0.4,1.5,1000,1000,1000,'with'],[1.9,800,0.0,1.0,0.0,0.6,0.21,1.5,0.4,1.5,1000,1000,1000,'with'],[1.9,800,0.0,1.0,0.0,0.6,0.21,1.5,0.4,1.5,1000,1000,1000,'with'],[1.8,10000,0.0,1.0,0.0,0.6,0.21,1.5,0.4,1.5,1000,1000,1000,'with']]*1   
-Demandmodelattrvec =Inputvectors[1]#[[[5,40],[0], "Simple_Model"]]*1000#,[[5,40],[0], "Simple_Model"],[[5,40],[0], "Simple_Model"],[[5,40],[0], "Simple_Model"],[[5,40],[0], "Simple_Model"],[[5,40],[0], "Simple_Model"],[[5,40],[0], "Simple_Model"],[[5,40],[0], "Simple_Model"],[[5,40],[0], "Simple_Model"],[[5,40],[0], "Simple_Model"],[[5,40],[0], "Simple_Model"],[[5,40],[0], "Simple_Model"]]*1
-Soilattrvec =[[1.5,0.15,0.03,0.39,1.0,Area_TotalAndPervious(Catchattrvec)[0],Area_TotalAndPervious(Catchattrvec)[1],0.078636,1.26415,-100,0.1]]
+#
+#ABC = DoIt()
+#Inputvectors=ABC.GetAttributes()
+#ABC.Pipelenlist
+#
+#supplyvec= Inputvectors[2]#[[[[[[0],[1,1,1],1000],1],2]]]
+#Catchattrvec=Inputvectors[0]#[[1.9,800,0.0,1.0,0.0,0.6,0.21,1.5,0.4,1.5,1000,1000,1000,'with'],[1.9,8000,0.0,1.0,0.0,0.6,0.21,1.5,0.4,1.5,1000,1000,1000,'with']]*1000#,[1.9,800,0.0,1.0,0.0,0.6,0.21,1.5,0.4,1.5,1000,1000,1000,'with'],[1.9,800,0.0,1.0,0.0,0.6,0.21,1.5,0.4,1.5,1000,1000,1000,'with'],[1.9,800,0.0,1.0,0.0,0.6,0.21,1.5,0.4,1.5,1000,1000,1000,'with'],[1.9,800,0.0,1.0,0.0,0.6,0.21,1.5,0.4,1.5,1000,1000,1000,'with'],[1.9,800,0.0,1.0,0.0,0.6,0.21,1.5,0.4,1.5,1000,1000,1000,'with'],[1.9,800,0.0,1.0,0.0,0.6,0.21,1.5,0.4,1.5,1000,1000,1000,'with'],[1.9,800,0.0,1.0,0.0,0.6,0.21,1.5,0.4,1.5,1000,1000,1000,'with'],[1.9,800,0.0,1.0,0.0,0.6,0.21,1.5,0.4,1.5,1000,1000,1000,'with'],[1.9,800,0.0,1.0,0.0,0.6,0.21,1.5,0.4,1.5,1000,1000,1000,'with'],[1.9,800,0.0,1.0,0.0,0.6,0.21,1.5,0.4,1.5,1000,1000,1000,'with'],[1.8,10000,0.0,1.0,0.0,0.6,0.21,1.5,0.4,1.5,1000,1000,1000,'with']]*1   
+#Demandmodelattrvec =Inputvectors[1]#[[[5,40],[0], "Simple_Model"]]*1000#,[[5,40],[0], "Simple_Model"],[[5,40],[0], "Simple_Model"],[[5,40],[0], "Simple_Model"],[[5,40],[0], "Simple_Model"],[[5,40],[0], "Simple_Model"],[[5,40],[0], "Simple_Model"],[[5,40],[0], "Simple_Model"],[[5,40],[0], "Simple_Model"],[[5,40],[0], "Simple_Model"],[[5,40],[0], "Simple_Model"],[[5,40],[0], "Simple_Model"]]*1
+#Soilattrvec =[[1.5,0.15,0.03,0.39,1.0,Area_TotalAndPervious(Catchattrvec)[0],Area_TotalAndPervious(Catchattrvec)[1],0.078636,1.26415,-100,0.1]]
 
 def XML():
     
@@ -95,6 +95,16 @@ def XML():
         
     return
 
+def stingi(size):
+    a=0
+    if size[:2]=='="':
+        a=float(size[2])
+    elif size[0] =='"':
+        a=float(size[1:3])
+    else:
+        a=float(size[0:3])
+    return a
+    
 def AddFileouts():
     txt = open("D:\studium\Masterarbeit\Modeloutput\Melbourne.xml", "r")  
     data = csv.reader(txt, delimiter="\n")  
@@ -102,46 +112,8 @@ def AddFileouts():
     sizert=0
     count=0
     for i in range(489):
-        size=mylist[10277+3*i][0][-6:-3]
-        if size=='"0"':
-            size=0
-        elif size[-1] == '"' and size[0] != '"':
-            size=size[0:2]
-            count+=1
-        else:
-            count+=1
-        sizert+=float(size)
-    txt.close()
-#    fileout = ''' 			<node id="FileOut_12" class="FileOut"> 
-#				<parameter name="out_file_name" type="string" value="Raintanks.txt"/> 
-# 			</node> '''
-#    collector = ''' 			<node id="Collector_622" class="Collector"> 
-#				<parameter name="Number_of_Inports" type="int" value="489"/> 
-# 			</node> '''
-#    totalstring=fileout+"\n"+collector+"\n"
-#    for i in range(489):
-#        string1='\t\t\t<connection id="'+str(17247+i)+'">\n' 
-#        string2='\t\t\t\t<source node="Raintank_'+str(i)+'" port="Current_Volume"/>\n' 
-#        string3='\t\t\t\t<sink node="Collector_622" port="Inport_'+str(i+1)+'"/>\n' 
-#        string4='\t\t\t</connection>\n'
-#        collectorconnections = string1+string2+string3+string4
-#        totalstring+=collectorconnections
-#    
-#    string1='\t\t\t<connection id="'+str(17247+489)+'">\n' 
-#    string2='\t\t\t\t<source node="Collector_622" port="Outport"/>\n' 
-#    string3='\t\t\t\t<sink node="FileOut_12" port="in"/>\n' 
-#    string4='\t\t\t</connection>\n'
-#    final = string1+string2+string3+string4
-#    totalstring+=final
-#    lastfo='''			<connection id="17737">
-#				<source node="Greywaterreservoir_0" port="Current_Volume"/>
-#				<sink node="FileOut_13" port="in"/>
-#			</connection>'''
-#    totalstring+=lastfo
-#   
-#    txt2 = open("D:\studium\Masterarbeit\Modeloutput\Insert.xml", "r+")
-#    txt2.write(totalstring)
-#    txt2.close()
+        size=mylist[10277+3*i][0][-7:-3]
+        sizert+=stingi(size)
     return [sizert, count/489.]
 
 
@@ -152,23 +124,21 @@ RUNNING AND CHECKING THE XML
 def Simulator():
     Simulator = TheHoleLot()
     #Simulator.Deleter('D:\studium\Masterarbeit\Modeloutput')
-    Simulator.runcd3('C:\Program Files (x86)\CityDrain3\\bin\cd3.exe', 'D:\studium\Masterarbeit\Modeloutput\Melbourne.xml')
-    Simulator.Fractioncalculator(Catchattrvec)
-    Simulator.getoutputdata('D:\studium\Masterarbeit\Modeloutput')
+#    Simulator.runcd3('C:\Program Files (x86)\CityDrain3\\bin\cd3.exe', 'D:\studium\Masterarbeit\Modeloutput\Harvesting\Melbourne2.xml')
+    Simulator.Fractioncalculator('D:\studium\Masterarbeit\Modeloutput\Harvesting\_100\Melbourne.xml')
+    Simulator.getoutputdata('D:\studium\Masterarbeit\Modeloutput\Harvesting\_100')
     Simulator.getinputdata('D:\studium\Masterarbeit\Modelinput')
-    Simulator.Balance(['Greywatertanklevels', 'Greywaterreservoirlevels',  'Rainwatertanklevels', 'Stormwaterreservoirlevels','Gardenwateringstorage'], ['Evapo_Model', 'Rain_Model'], ['Infiltration', 'Potable_Water_Demand', 'Sewer', 'Stormwaterdrain'])
-#    Simulator.Plotter([20,8],[3,4], [0,3], [ 'Stormwaterdrain'])#,'Rainwatertanklevels','Greywatertanklevels', 'Greywaterreservoirlevels', 'Stormwaterreservoirlevels' ]) #, 'Rainwatertanklevels','Greywatertanklevels', 'Greywaterreservoirlevels', 'Stormwaterreservoirlevels'
-
+    Simulator.Balance()
     WriteVS()
     
     return
 
-XML()
-A = AddFileouts()
-A
+#XML()
+
+
 Simulator() 
 
-#saveScreenToBmp('D:\studium\Masterarbeit\Modeloutput\screencapture.png')
+#saveScreenToBmp('D:\studium\Masterarbeit\Modeloutput\Harvesting\_60\screencapture.png')
 
 
 

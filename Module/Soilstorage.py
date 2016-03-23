@@ -43,6 +43,7 @@ class Soilstorage(pycd3.Node):
         self.outdoordemand = pycd3.Flow()
         self.outdoordemand_check = pycd3.Flow()
         self.actualevapo = pycd3.Flow()
+        self.exfiltration=pycd3.Flow()
         
         self.addInPort("Evapotranspiration", self.evapotranspiration)
         self.addOutPort("Actual_Evapotranspiration", self.actualevapo)
@@ -53,6 +54,7 @@ class Soilstorage(pycd3.Node):
         self.addInPort("Underground_Inflow", self.inflow)
         self.addOutPort("Check_Pore_Pressure",self.porepressure)
         self.addOutPort("Soilstorage_Check", self.storagecheck)
+        self.addOutPort("Exfiltration", self.exfiltration)
         
         self.total_area = pycd3.Double(1000)
         self.addParameter("Total_Area_[m^2]", self.total_area)    
@@ -126,7 +128,7 @@ class Soilstorage(pycd3.Node):
             return factor
             
 
-        self.actualevapo[0] = Evapfactor(self.waterpressure2, 10**4.2, self.fieldcapacitiy*1)*self.evapotranspiration[0]/1000
+        self.actualevapo[0] = Evapfactor(self.waterpressure2, 10**4.2, self.fieldcapacitiy*1)*self.evapotranspiration[0]/1000 * self.total_perv_area
         
         #Infiltration(from Rain and Watering) - Inflow / Evapotranspiration - Outflow
         self.memory += self.Infiltration[0] #+ self.Watering[0]
@@ -137,17 +139,16 @@ class Soilstorage(pycd3.Node):
             out=0
         else:
             out=self.actualevapo[0] * self.total_perv_area * self.outdoor_demand_coefficient
-            self.memory += out
+        self.memory += out
         
         self.memory += self.inflow[0] 
 
         #Waterflow to lower layers only as long as flied capacity is reached and kapillar forces hold water in palce
-        tolowerlayer = VanGenuchtenConductivity (self.waterpressure2,self.alpha,self.n)*self.seepagerate/24/3600*dt*self.total_area*0.5
         if self.waterpressure2<self.fieldcapacitiy:
-            self.memory -=tolowerlayer
+            tolowerlayer = VanGenuchtenConductivity (self.waterpressure2,self.alpha,self.n)*self.seepagerate/24/3600*dt*self.total_area*0.5
         else:
-            pass
-        
+            tolowerlayer=0
+        self.memory -=tolowerlayer
         #new water content
         newwatercontent = self.memory/(self.total_area*self.soildepth)
 
@@ -160,6 +161,7 @@ class Soilstorage(pycd3.Node):
         self.porepressure[0] = -waterpressure
         self.outdoordemand[0] = out/self.total_perv_area
         self.outdoordemand_check[0] = out
+        self.exfiltration[0]=tolowerlayer
         return dt
         
     

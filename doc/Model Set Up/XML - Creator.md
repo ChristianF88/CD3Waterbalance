@@ -149,21 +149,20 @@ Finally the Supplyvector can be explained:
 
 > ### Catchment Attributevector
 
-To set the Catchments features this vectors ist used.
+To set the Catchments features this vectors is used.
 
 	Catchment Attributevector = [Catchmentvector_0, Catchmentvector_1, ..., Catchmentvector_n]
     
     Each Catchmentvector contains the Catchments properties.
     
-    Catchmentvector = [Number of Subareas, Decay Constant, Catchment Area, Fraktion of Impervious Area to Reservoir iAR,
+    Catchmentvector = [Decay Constant, Catchment Area, Fraktion of Impervious Area to Reservoir iAR,
     				   Fraktion of Impervious Area to Stormwater Drain iASD, Fraktion of Pervious Area pA,
                        Initial Infiltration Capacity, Final Infiltration Capacity, Depression Loss, Wetting Loss,
-                       Outdoor Demand Weighing Factor, Runoff Runtime iAR, Runoff Runtime iASD, Runoff Runtime pA,
-                       Weighting Coefficient iAR, Weighting Coefficient iASD, Weighting Coefficient pA, Selected Model]
+                       Evaporation Factor,Linear Storage Factor Impervious Area to Stormwater Drain, Linear Storage Factor Pervious Area, 
+					   Linear Storage Factor Impervious Area to Reservoir , Selected Model]
                        
 	Units:
     	
-        Number of Subareas = [-]
 		Decay Constant = [1/min]
         Catchment Area = [m^2]
         Fraktion of Impervious Area to Reservoir iAR = [-]
@@ -173,18 +172,47 @@ To set the Catchments features this vectors ist used.
         Final Infiltration Capacity = [m/h]
         Depression Loss = [mm]
         Wetting Loss = [mm]
-        Outdoor Demand Weighing Factor = [-]
-        Runoff Runtime iAR = [s]
-        Runoff Runtime iASD = [s]
-        Runoff Runtime pA = [s]
-        Weighting Coefficient iAR = [-]
-        Weighting Coefficient iASD = [-]
-        Weighting Coefficient pA = [-]
+        Evaporation Factor = [-]
+        Linear Storage Factor Impervious Area to Stormwater Drain = [s]
+        Linear Storage Factor Pervious Area = [s]
+        Linear Storage Factor Impervious Area to Reservoir = [s]
 		Selected Model = [string]
         
 		
 For more detailed information regarding the input, output, etc. please check the
 [Catchment Description File](https://github.com/ChristianF88/CD3Waterbalance/blob/master/doc/CityDrain%20Building%20Blocks/Catchment%20Addon.md)
+
+
+<br>
+
+> ### Soilstorage Attributevector
+
+To set the Soilstorage features this vector is used.
+
+	Soilstorage Attributevector = [Soilstoragevector_0]
+    
+    Only one vector is necessary as only one storage module is implemented
+    
+    Soilstoragevector = [Depth of Soil, Initial Water Content, Residual Water Content, Saturation Water Content, Hydraulic Conductivity for Saturated Conditions, 
+							Total Area, Total Pervious Area, Van Genuchten Parameter Alpha, Van Genuchten Parameter n, Field Capacity, Outdoor Demand Actual Evapotranspiration Ratio]
+                       
+	Units:
+    	
+		Depth of Soil = [m]
+		Initial Water Content = [-]
+		Residual Water Content = [-]
+		Saturation Water Content = [-]
+		Hydraulic Conductivity for Saturated Conditions  = [m/d]
+		Total Area = [m^2]
+		Total Pervious Area = [m^2]
+		Van Genuchten Parameter Alpha = [1/cm]
+		Van Genuchten Parameter n = [-]
+		Field Capacity = [cmwc]
+		Outdoor Demand Actual Evapotranspiration Ratio = [-]
+        
+		
+For more detailed information regarding the input, output, etc. please check the
+[Soilstorage Description File](https://github.com/ChristianF88/CD3Waterbalance/blob/master/doc/CityDrain%20Building%20Blocks/Soilstorage%20Addon.md)
 
 
 <br>

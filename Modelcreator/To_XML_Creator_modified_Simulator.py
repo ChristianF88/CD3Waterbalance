@@ -25,6 +25,7 @@ class TheHoleLot:
         self.Fractioncalculatorvec = []
         self.Lossvector = []
         self.total_area = 0.0
+        self.total_perv_area=0.0
         self.wettingloss = 0.0
         self.depressionloss = 0.0
         
@@ -45,30 +46,74 @@ class TheHoleLot:
             p = subprocess.Popen(cd3, shell=True)
             p.wait()
             return
-        
-    #Catchmentattributevec from XML_Creator (see XML-Creator.md)
-    def Fractioncalculator(self,Catchmentattributevector):
-            for i in range(len(Catchmentattributevector)):
-                self.Fractioncalculatorvec.append([Catchmentattributevector[i][1],Catchmentattributevector[i][4],Catchmentattributevector[i][2],Catchmentattributevector[i][3]])
-                self.wettingloss += Catchmentattributevector[i][8]
-                self.depressionloss += Catchmentattributevector[i][7]
-            self.wettingloss = self.wettingloss/(i+1)
-            self.depressionloss = self.depressionloss/(i+1)
-            area_fractions1_0 = 0.0
-            area_fractions1_1 = 0.0
-            area_fractions1_2 = 0.0
-            self.drying_rate = 0.0
-            for i in range(len(self.Fractioncalculatorvec)):
-                self.total_area += float(self.Fractioncalculatorvec[i][0])
-                area_fractions1_0 += float(self.Fractioncalculatorvec[i][0]*self.Fractioncalculatorvec[i][1])
-                area_fractions1_1 += float(self.Fractioncalculatorvec[i][0]*self.Fractioncalculatorvec[i][2])
-                area_fractions1_2 += float(self.Fractioncalculatorvec[i][0]*self.Fractioncalculatorvec[i][3])
-                self.drying_rate += Catchmentattributevector[i][9]
-            
-            self.drying_rate = self.drying_rate/(i+1)
-            self.area_fractions1=[area_fractions1_0/self.total_area, area_fractions1_1/self.total_area, area_fractions1_2/self.total_area]
-            
-            return    
+    def Find(self,string):
+            num=''
+            for i in range(len(string)):
+                if string[i] !='"' and string[i] !='>' and string[i] !='/' and string[i] !='':
+                    num+=string[i]
+                else:
+                    pass
+            num=float(num)
+            return num
+    def Decide(self,arg1,arg2):
+            num=0.
+            if arg1 in arg2:
+                num=self.Find(arg2.split(arg1)[1])
+            else:
+                pass
+            return num
+    def Read(self,location, deli="\n"):
+            txt = open(location, "r")  
+            data = csv.reader(txt, delimiter=deli)  
+            mylist = list(data)
+            return mylist
+    def DEV(self,Liste,a,b):
+        value=0
+        try:
+            value=self.Decide('<parameter name="Catchment_Area_[m^2]" type="double" value="',Liste[a+b][0])
+        except IndexError:
+            pass
+        return value
+    #specify location xml file! reads catchment attributes 
+    def Fractioncalculator(self,location):
+        Liste=self.Read(location,"\n")
+        numofcatchments=0.
+        FIAR=0.
+        FISD=0.
+        FPA=0.
+        TA=0.
+        DF=0.
+        DL=0.
+        WL=0.
+        SWC=0.
+        SD=0.
+        for i in range(len(Liste)):
+            if 'class="Catchment_w_Routing">' in Liste[i][0]:
+                numofcatchments+=1.
+            else:
+                pass
+            FIAR1=self.Decide('<parameter name="Fraktion_of_Impervious_Area_to_Reservoir_iAR_[-]" type="double" value="',Liste[i][0])
+            FISD1=self.Decide('<parameter name="Fraktion_of_Impervious_Area_to_Stormwater_Drain_iASD_[-]" type="double" value="',Liste[i][0])
+            FPA1=self.Decide('<parameter name="Fraktion_of_Pervious_Area_pA_[-]" type="double" value="',Liste[i][0])
+            TA1=self.Decide('<parameter name="Catchment_Area_[m^2]" type="double" value="',Liste[i][0])
+            DF+=self.Decide('<parameter name="Drying_Factor_[-]" type="double" value="',Liste[i][0])
+            DL+=self.Decide('<parameter name="Depression_Loss_[mm]" type="double" value="',Liste[i][0])
+            WL+=self.Decide('<parameter name="Wetting_Loss_[mm]" type="double" value="',Liste[i][0])
+            SWC+=self.Decide('<parameter name="Initial_Water_Content_[-]" type="double" value="',Liste[i][0])
+            SD+=self.Decide('<parameter name="Depth_Of_Soil_[m]" type="double" value="',Liste[i][0])
+            FIAR+=FIAR1*self.DEV(Liste,i,11)
+            FISD+=FISD1*self.DEV(Liste,i,10)
+            FPA+=FPA1*self.DEV(Liste,i,1)
+            TA+=TA1
+        self.soilwatercontent=SWC
+        self.soildepth=SD
+        self.wettingloss = WL/numofcatchments
+        self.depressionloss = DL/numofcatchments 
+        self.drying_rate = DF/numofcatchments
+        self.total_area = TA
+        self.total_perv_area = FPA
+        self.area_fractions1=[FPA/TA,FIAR/TA,FISD/TA]
+        return    
     
     '''
     Evapo_Model, Rain_Model need to be the file names of the filereaders and pattern implemers output
@@ -89,6 +134,7 @@ class TheHoleLot:
                 alltogether.append(mylist)
                 names.append(file_names[i])
                 csv_file.close()
+ 
         #creating vector right size
         self.Outputvector=[['error']*(len(alltogether)+1) for m in range(len(alltogether[0]))]
         #writing header
@@ -151,117 +197,90 @@ class TheHoleLot:
         self.Rainevapovector = np.asarray(self.Rainevapovector)   
         print 'RainEvapovector have been created'
         return 
-        
+    def GETARRAY(self,liste,string):
+        date=[]
+        array=[]
+        a=0
+        for i in range(len(liste[0])):
+            if liste[0][i] == string:
+                a=i
+            else:
+                pass
+        for i in range(len(liste))[1:]:
+            date.append(float(liste[i][0]))
+            array.append(float(liste[i][a]))
+        #if storage files are not present
+        if a==0:
+            date=[0]
+            array=[0]
+        else:
+            pass
+        array=np.asarray(array)
+        return date,array
         #tocheck (all, Evapo, Rain, Indooruse, Outdoordemand?, System)
         #area_fractions = [perv, imperv_to_storage, imperv_to_stormw]
-    def Balance(self, totalstoragelist = ['Greywatertanklevels',  'Rainwatertanklevels', 'Stormwaterreservoirlevels'],
-               inputERlist = ['Evapo_Model', 'Rain_Model'], outputISSPlist = ['Actual_Infiltration', 'Potable_Water_Demand', 'Sewer', 'Stormwaterdrain']):
+    def Balance(self):
         #tocheck=['Evapo', 'Rain', 'System']
         #Data=[Rainevapovector, Outputvector]
         Data = [self.Rainevapovector, self.Outputvector]
         colorred = "\033[01;31m{0}\033[00m"
-        
+
         #evapotranspiration check
         #evap is the ixx files name thats the file readers input, Evapo_Model is the name specified in the XML Creator (Output Pattern Implementer)
-        evapomodel = 0.0
-        evapoinput = 0.0
-        evapotanspirationmodel=[]
-        for i in range(len(Data)):
-            for n in range(len(Data[i][0])):
-                if Data[i][0][n] == 'evap':
-                    for m in range(len(Data[i][:,n]))[1:]:
-                        evapoinput += float(Data[i][:,n][m])
-                elif Data[i][0][n] == 'Evapo_Model':
-                    for m in range(len(Data[i][:,n]))[1:]:
-                        evapomodel += float(Data[i][:,n][m])
-                        evapotanspirationmodel.append(float(Data[i][:,n][m]))
+        DETM,ETM=self.GETARRAY(self.Outputvector,'Evapo_Model')
+        DETI,ETI=self.GETARRAY(self.Rainevapovector,"evap")
+        evapomodel=sum(ETM)
+        evapoinput=sum(ETI)
         ErrorFRPI=(1 - evapomodel/evapoinput) * 100
         print 'The difference of given and produced Evapotranspiraten calculated by the Pattern Implementer and Filereader due to rounding errors is '+ colorred.format(str(ErrorFRPI))+' %'
         
         #rain check    
         #rain is the ixx files name thats the file readers input, Rain_Model is the name specified in the XML Creator (Output Filereader)
-        rainmodel = 0.0
-        raininput = 0.0
-        for i in range(len(Data)):
-            for n in range(len(Data[i][0])):
-                if Data[i][0][n] == 'rain':
-                    for m in range(len(Data[i][:,n]))[1:]:
-                        raininput += float(Data[i][:,n][m])
-                elif Data[i][0][n] == 'Rain_Model':
-                    for m in range(len(Data[i][:,n]))[1:]:            
-                        rainmodel += float(Data[i][:,n][m])
+        DRM,RM=self.GETARRAY(self.Outputvector,'Rain_Model')
+        DRI,RI=self.GETARRAY(self.Rainevapovector,"rain")
+        rainmodel = sum(RM)
+        raininput = sum(RI)
         ErrorFR=(1 - rainmodel/raininput) * 100
         print 'The difference of given and produced Rain calculated by the Filereader due to rounding errors is '+ colorred.format(str(ErrorFR))+' %'
-        #total system
-        #'''    
-        #Lists have to be in alphabetical order
-        #'''    
-         
-        #filenames in lists
-        totalstorage = []
-        inputER=[]
-        outputISSP = []
-        outputOD = []                               
+
+        
+              
+        DS1,S1=self.GETARRAY(self.Outputvector,"Rainwatertanklevels") 
+        DS2,S2=self.GETARRAY(self.Outputvector,"Greywaterreservoirlevels")
+        DS3,S3=self.GETARRAY(self.Outputvector,"Stormwaterreservoirlevels")
+        DS4,S4=self.GETARRAY(self.Outputvector,"Greywatertanklevels")
+        DSWD,SWD=self.GETARRAY(self.Outputvector,"Stormwaterdrain")
+        DSewerV,SewerV=self.GETARRAY(self.Outputvector,"Sewer")
+        DPWR,PWR=self.GETARRAY(self.Outputvector,"Potable_Water_Demand")
+        DODD,ODD=self.GETARRAY(self.Outputvector,"Outdoordemand")
+        DAET,AET=self.GETARRAY(self.Outputvector,"ET")
+        DEX,EX=self.GETARRAY(self.Outputvector,"ex")
+        DSS,SS=self.GETARRAY(self.Outputvector,"Soilstorage")
+        DGW,GW=self.GETARRAY(self.Outputvector,"Gardenwateringstorage")
+        DI,I=self.GETARRAY(self.Outputvector,"Infiltration")
+
             
-        for i in range(len(Data)):
-            for n in range(len(Data[i][0])):
-                if Data[i][0][n] in totalstoragelist:            
-                    totalstorage.append(Data[i][:,n])
-                elif Data[i][0][n] in inputERlist:
-                    inputER.append(Data[i][:,n])
-                elif Data[i][0][n] in outputISSPlist:
-                    outputISSP.append(Data[i][:,n])
-                if str(repr(Data[i][0][n])[1:14]) == 'Outdoordemand':
-                    outputOD.append(Data[i][:,n])
-            
-        totalstoragescalar = 0.0
-        storagegwr = 0.0
+        #Rain and Evapo inlcuding losses - calculates losses wit average wetting loss and depression loss
         rainminusevapolosses = 0.0
-        SewerStormwInfiltr = 0.0
-        PWRonly = 0.0
-        OutdoorD = 0.0
-        
-        
-        #Speicher
-        for i in range(len(totalstorage)):
-            
-            if totalstorage[i][0] == 'Gardenwateringstorage':
-                storagegwr -= float(totalstorage[i][-1])
-            else:
-                totalstoragescalar += float(totalstorage[i][-1])
-        #Potable_Water_Demand/Sewer,Infiltr.,Stormwater
-        for i in range(len(outputISSP)):
-            if outputISSP[i][0] == 'Potable_Water_Demand':
-                for n in range(len(outputISSP[0]))[1:]:
-                    PWRonly += float(outputISSP[i][n])
-            else:
-                for n in range(len(outputISSP[0]))[1:]:
-                    SewerStormwInfiltr += float(outputISSP[i][n])
-        #OutdoorDemand
-        for i in range(len(outputOD)):
-            for n in range(len(outputOD[0]))[1:]:
-                OutdoorD += float(outputOD[i][n])
-            
-        #Rain and Evapo inlcuding losses
         lossstorage = 0.0
         lossmem=0.0
         onlyrain=0.0
-        timestepl = round((float(Data[1][2][0])-float(Data[1][1][0]))*24*3600)
+        timestepl = round((float(self.Outputvector[2][0])-float(self.Outputvector[1][0]))*24*3600)
         print timestepl
-        for i in range(len(inputER[0]))[1:]:
+        for i in range(len(ETM))[1:]:
             lossmem=lossstorage
-            lossstorage+= (float(inputER[1][i]))/self.total_area*1000
-            if float(inputER[1][i]) > 0.0:
+            lossstorage+= RM[i]/self.total_area*1000
+            if RM[i] > 0.0:
                 if lossstorage> self.depressionloss + self.wettingloss:
                     difference= self.depressionloss + self.wettingloss - lossmem
-                    rainminusevapolosses += (float(inputER[1][i])) - difference*self.total_area/1000.
+                    rainminusevapolosses += RM[i]- difference*self.total_area/1000.
                     lossstorage = self.depressionloss + self.wettingloss
                 else:
                     pass
             else:
                 #simulation drying via evapotranspiration
                 if lossstorage > 0.0:
-                    lossstorage -= (float(inputER[0][i])*self.drying_rate)/self.total_area*1000
+                    lossstorage -= (ETM[i]*self.drying_rate)/self.total_area*1000
                     if lossstorage < 0.0:
                         lossstorage = 0.0
                     else:
@@ -269,8 +288,12 @@ class TheHoleLot:
                 else:
                     lossstorage =  0.0
 
-            onlyrain += float(inputER[1][i])
+            onlyrain += RM[i]
             initiallosses=onlyrain-rainminusevapolosses
+            
+        In=sum(PWR)+onlyrain+GW[-1]
+        Out=sum(SewerV)+sum(SWD)+sum(EX)+sum(AET)+initiallosses
+        deltaS=(S1[-1] -S1[0])+(S2[-1]-S2[0])+(S3[-1]-S3[0])+(S4[-1]-S4[0]) + (SS[-1]-SS[0])  
         print 'Fraction of Pervious Area: '+str(self.area_fractions1[0])
         print 'Fraction of Impervious Area to Reservoir: '+str(self.area_fractions1[1])
         print 'Fraction of Impervious Area to Stormdrain: '+str(self.area_fractions1[2])
@@ -279,13 +302,22 @@ class TheHoleLot:
         print 'Drying Factor: '+str(self.drying_rate)
         print 'Total Rain: '+str(onlyrain) + ' m^3'
         print 'Inital Losses only: '+str(onlyrain-rainminusevapolosses)+' m^3'
-        print 'Potable_Water_Demand: '+str(PWRonly)+' m^3'
-        print 'Outdoordemand: '+str(OutdoorD)+' m^3'
+        print 'Potable_Water_Demand: '+str(sum(PWR))+' m^3'
+        print 'Outdoordemand: '+str(sum(ODD))+' m^3'
         print 'Rain minus all Losses: '+str(rainminusevapolosses)+' m^3'
-        print 'SewerStormwInfiltr: '+str(SewerStormwInfiltr)+' m^3'
-        print 'Still stored in tanks: ' +str(totalstoragescalar)+' m^3 -> negativ values are caused by the garden watering module'
-        print 'Absolut Error of entire balance: '+str(PWRonly-OutdoorD-totalstoragescalar+storagegwr+rainminusevapolosses-SewerStormwInfiltr)+' m^3'
-        print 'Realtive Error of entire balance: '+str(100*(PWRonly-OutdoorD-totalstoragescalar+storagegwr+onlyrain-initiallosses-SewerStormwInfiltr)*2/(PWRonly+OutdoorD+totalstoragescalar+onlyrain+initiallosses+SewerStormwInfiltr-storagegwr))+' %'
+        print 'Sewer: '+str(sum(SewerV))+' m^3'
+        print 'Stormwaterdrain: '+str(sum(SWD))+' m^3'
+        print 'Infiltration: '+str(sum(I))+' m^3'
+        print 'Exfiltration: '+str(sum(EX)+' m^3'
+        print 'Actual Evapotranspiration: '+str(sum(AET))+' m^3'
+        print 'Actual Evapotranspiration: '+str(sum(AET/self.total_perv_area*1000))+' mm'
+        print 'Stored in Tanks: '+str(S1[-1]+S2[-1]+S3[-1]+S4[-1])+' m^3'
+        print 'GardenWateringModule: '+str(GW[-1])+' m^3'
+        print 'Soilstorage: '+str((SS[-1]-SS[0]))+' m^3'
+        print 'Initial Water Content '+str(self.soilwatercontent)
+        print 'Delta Water Content '+str((SS[-1]-SS[0])/(self.soildepth*self.total_area))
+        print 'Absolut Error of entire balance: '+str(In-Out-deltaS)+' m^3'
+        print 'Realtive Error of entire balance: '+str(100*(In-Out-deltaS)*2/(In+Out+deltaS))+' %'
         print"______________________________________________________________________________________________________"
         
         return 
